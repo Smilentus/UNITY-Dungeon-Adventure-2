@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a59123ccfb9b5e34c9816184170f13e9, type: 3}
+  m_Name: 1CooperThornSword
+  m_EditorClassIdentifier: 
+  takedSlot: 0
+  Type: 14
+  Icon: {fileID: 2800000, guid: e80a79632d9da9b409d650afbb164f21, type: 3}
+  Name: "\u041C\u0435\u0447 \u0441 \u0437\u0430\u043E\u0441\u0442\u0440\u0435\u043D\u0438\u044F\u043C\u0438"
+  Descr: 
+  WhereToFind: "\u0421\u043A\u0440\u0430\u0444\u0442\u0438\u0442\u044C; \u041A\u0443\u043F\u0438\u0442\u044C;"
+  Cost: 1600
+  ChanceToFind: 0
+  Damage: 25
+  Health: 0
+  Armor: 0
+  AttackSpeed: 1
+  Mana: 0
+  ExtraExp: 0
+  ExtraMoney: 0
+  equipBuffs: []
+  Stack: 0
+  MaxStack: 1
+  DropStack: 0
+  ItemID: Cooper_Thorn_Sword

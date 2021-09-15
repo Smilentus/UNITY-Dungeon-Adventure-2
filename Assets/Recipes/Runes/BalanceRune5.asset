@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b04e3faace6e24095144940ae663a7, type: 3}
+  m_Name: BalanceRune5
+  m_EditorClassIdentifier: 
+  Type: 5
+  recipeName: 
+  resultItem: {fileID: 11400000, guid: 03099a5039fbc6a48ba0acebeea90c38, type: 2}
+  resultStack: 1
+  neededItems:
+  - neededItem: {fileID: 11400000, guid: 4b7960c127424ad46830792ee09e9faf, type: 2}
+    neededStack: 10

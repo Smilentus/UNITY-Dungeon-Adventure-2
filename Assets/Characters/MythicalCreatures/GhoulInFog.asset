@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
+  m_Name: GhoulInFog
+  m_EditorClassIdentifier: 
+  Type: 70
+  Element: 0
+  Name: "\u041D\u0435\u0447\u0442\u043E \u0432 \u0442\u0443\u043C\u0430\u043D\u0435"
+  MaxHealth: 1200
+  Health: 1200
+  ArmorType: 0
+  Armor: 0
+  MaxMana: 100
+  Mana: 100
+  AttackType: 2
+  AttackSpeed: 5
+  Attack: 50
+  DodgeChance: 5
+  Exp: 1450
+  Gold: 250
+  DropItems: []
+  DropStack: 
+  CharacterImage: {fileID: 2800000, guid: 51f52d0816dba494d98f48cd2bd8edaf, type: 3}

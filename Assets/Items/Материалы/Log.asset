@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a59123ccfb9b5e34c9816184170f13e9, type: 3}
+  m_Name: Log
+  m_EditorClassIdentifier: 
+  takedSlot: 0
+  Type: 3
+  Icon: {fileID: 2800000, guid: 725c709a01eb07a468936e65732f39e6, type: 3}
+  Name: "\u0411\u0440\u0435\u0432\u043D\u043E"
+  Descr: "\u041F\u0440\u043E\u0441\u0442\u043E\u0435 \u0431\u0440\u0435\u0432\u043D\u043E. "
+  WhereToFind: "\u0412 \u043B\u044E\u0431\u043E\u043C \u043B\u0435\u0441\u0443 \u0441
+    \u0448\u0430\u043D\u0441\u043E\u043C 30% (\u0438\u0437 \u0432\u0441\u0435\u0445);
+    \u041D\u0430\u0440\u0443\u0431\u0438\u0442\u044C \u043D\u0430 \u043B\u0435\u0441\u043E\u043F\u0438\u043B\u043A\u0435
+    \u0432 \u0437\u0435\u043B\u0451\u043D\u043E\u043C \u043B\u0435\u0441\u0443; \u041A\u0443\u043F\u0438\u0442\u044C;"
+  Cost: 0
+  ChanceToFind: 30
+  Damage: 0
+  Health: 0
+  Armor: 0
+  AttackSpeed: 0
+  Mana: 0
+  ExtraExp: 0
+  ExtraMoney: 0
+  equipBuffs: []
+  Stack: 0
+  MaxStack: 999
+  DropStack: 0
+  ItemID: Log

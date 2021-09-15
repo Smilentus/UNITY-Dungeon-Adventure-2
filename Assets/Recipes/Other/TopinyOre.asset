@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b04e3faace6e24095144940ae663a7, type: 3}
+  m_Name: TopinyOre
+  m_EditorClassIdentifier: 
+  Type: 3
+  recipeName: 
+  resultItem: {fileID: 11400000, guid: e86e03857b351fe43a2b06e3fdea62b3, type: 2}
+  resultStack: 1
+  neededItems:
+  - neededItem: {fileID: 11400000, guid: 1dd0d5bc92aeadf44a8e8023149ff1b0, type: 2}
+    neededStack: 25
+  - neededItem: {fileID: 11400000, guid: 3e0c4fa1de97edf42a7e1e6d7b681e7c, type: 2}
+    neededStack: 25
+  - neededItem: {fileID: 11400000, guid: a8e10c052e0f8b441906e2b14f30bbe8, type: 2}
+    neededStack: 250
+  - neededItem: {fileID: 11400000, guid: b768ec043ee8eb3428ad75099ce3ad84, type: 2}
+    neededStack: 250

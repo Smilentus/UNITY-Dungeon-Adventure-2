@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
+  m_Name: Mimick
+  m_EditorClassIdentifier: 
+  Type: 39
+  Element: 0
+  Name: "\u041F\u043E\u0434\u0440\u0430\u0436\u0430\u0442\u0435\u043B\u044C"
+  MaxHealth: 20
+  Health: 20
+  ArmorType: 3
+  Armor: 10
+  MaxMana: 0
+  Mana: 0
+  AttackType: 2
+  AttackSpeed: 1
+  Attack: 10
+  DodgeChance: 0
+  Exp: 5
+  Gold: 100
+  DropItems:
+  - {fileID: 11400000, guid: 727dd39b9bc621647844eda969775b8e, type: 2}
+  DropStack: 01000000
+  CharacterImage: {fileID: 2800000, guid: 6e952e37ed7b41c4bade08f5a4a45a67, type: 3}

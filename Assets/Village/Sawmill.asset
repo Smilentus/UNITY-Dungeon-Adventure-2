@@ -1,0 +1,148 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759a03292db0c16458317820511528fe, type: 3}
+  m_Name: Sawmill
+  m_EditorClassIdentifier: 
+  vilPart: 5
+  currentLvl: 0
+  maxLvl: 10
+  defaultMaxLvl: 10
+  upgradeCost: 20000
+  defaultUpgradeCost: 20000
+  upgradeMulty: 9500
+  defaultUpgradeMulty: 9500
+  currentWorkers: 0
+  maxWorkers: 5
+  defaultMaxWorkers: 5
+  defaultWorkersUpgrade: 3
+  currentIncome: 100
+  defaultCurrentIncome: 100
+  defaultIncomeUpgrade: 25
+  currentPopularity: 5
+  defaultCurrentPopularity: 5
+  defaultPopularityUpgrade: 1
+  productResources:
+  - Name: 1
+    neededLvl: 1
+    resource:
+      neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 50
+  - Name: 3
+    neededLvl: 3
+    resource:
+      neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 200
+  - Name: 5
+    neededLvl: 5
+    resource:
+      neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 600
+  - Name: 7
+    neededLvl: 7
+    resource:
+      neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 2000
+  - Name: 10
+    neededLvl: 10
+    resource:
+      neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 5000
+  neededItemsToUpgrade:
+  - Name: 1
+    neededLvl: 0
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 25
+    - neededItem: {fileID: 11400000, guid: f40a01a8c13553f4ab3eb712c8b807df, type: 2}
+      neededStack: 10
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 50
+  - Name: 2
+    neededLvl: 1
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 50
+    - neededItem: {fileID: 11400000, guid: f40a01a8c13553f4ab3eb712c8b807df, type: 2}
+      neededStack: 20
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 100
+  - Name: 3
+    neededLvl: 2
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 75
+    - neededItem: {fileID: 11400000, guid: 1dd0d5bc92aeadf44a8e8023149ff1b0, type: 2}
+      neededStack: 30
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 150
+  - Name: 4
+    neededLvl: 3
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 100
+    - neededItem: {fileID: 11400000, guid: 1dd0d5bc92aeadf44a8e8023149ff1b0, type: 2}
+      neededStack: 40
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 200
+  - Name: 5
+    neededLvl: 4
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 125
+    - neededItem: {fileID: 11400000, guid: 3e0c4fa1de97edf42a7e1e6d7b681e7c, type: 2}
+      neededStack: 50
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 250
+  - Name: 6
+    neededLvl: 5
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 150
+    - neededItem: {fileID: 11400000, guid: 3e0c4fa1de97edf42a7e1e6d7b681e7c, type: 2}
+      neededStack: 60
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 300
+  - Name: 7
+    neededLvl: 6
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 175
+    - neededItem: {fileID: 11400000, guid: 159a9deeeaad26846aff460504b84260, type: 2}
+      neededStack: 70
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 350
+  - Name: 8
+    neededLvl: 7
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 200
+    - neededItem: {fileID: 11400000, guid: 159a9deeeaad26846aff460504b84260, type: 2}
+      neededStack: 80
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 400
+  - Name: 9
+    neededLvl: 8
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 225
+    - neededItem: {fileID: 11400000, guid: 159a9deeeaad26846aff460504b84260, type: 2}
+      neededStack: 90
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 450
+  - Name: 10
+    neededLvl: 9
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 250
+    - neededItem: {fileID: 11400000, guid: 89f6ba16e7fcc4e4c834da740650577a, type: 2}
+      neededStack: 100
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 500

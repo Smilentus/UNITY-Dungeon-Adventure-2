@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
+  m_Name: FireGolem
+  m_EditorClassIdentifier: 
+  Type: 4
+  Element: 3
+  Name: "\u041E\u0433\u043D\u0435\u043D\u043D\u044B\u0439 \u0433\u043E\u043B\u0435\u043C"
+  MaxHealth: 2000
+  Health: 2000
+  ArmorType: 0
+  Armor: 5
+  MaxMana: 0
+  Mana: 0
+  AttackType: 2
+  AttackSpeed: 3
+  Attack: 100
+  Exp: 3100
+  Gold: 500
+  DropItems: []
+  CharacterImage: {fileID: 2800000, guid: d1caa3dbfd6a86449b6d8725a89bbcbb, type: 3}
+  Helpers: []

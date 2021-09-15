@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fca0588bd3e9ed4d959aad25a04dc03, type: 3}
+  m_Name: CriticalChance
+  m_EditorClassIdentifier: 
+  neededLvl: 0
+  neededLvlMulty: 0
+  Type: 15
+  Name: "\u041A\u0430\u0440\u0430\u044E\u0449\u0438\u0439 \u0423\u0434\u0430\u0440"
+  Descr: "\u0423\u0432\u0435\u043B\u0438\u0447\u0438\u0432\u0430\u0435\u0442 \u0448\u0430\u043D\u0441
+    \u043A\u0440\u0438\u0442\u0438\u0447\u0435\u0441\u043A\u043E\u0433\u043E \u0443\u0434\u0430\u0440\u0430
+    \u043D\u0430 {skill:critchance}%"
+  Cost: 3
+  DefaultCost: 3
+  CostMulty: 2
+  CostChangeLvl: 2
+  defaultVariable: 1
+  currentVariable: 1
+  changableVariable: 1
+  Lvl: 0
+  isInfinity: 0
+  MaxLvl: 10
+  Icon: {fileID: 2800000, guid: 3e2372f8f23e43c4bb40ffa196e85945, type: 3}

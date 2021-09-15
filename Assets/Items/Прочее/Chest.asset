@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a59123ccfb9b5e34c9816184170f13e9, type: 3}
+  m_Name: Chest
+  m_EditorClassIdentifier: 
+  takedSlot: 0
+  Type: 2
+  Icon: {fileID: 2800000, guid: 4cc3cacac17210e40962aa673bf912ab, type: 3}
+  Name: "\u0421\u0443\u043D\u0434\u0443\u043A"
+  Descr: "\u0421\u043E\u0434\u0435\u0440\u0436\u0438\u0442 \u0432 \u0441\u0435\u0431\u0435
+    \u0440\u0430\u0437\u043B\u0438\u0447\u043D\u044B\u0435 \u0432\u0435\u0449\u0438.
+    \u042D\u0442\u043E \u043C\u043E\u0436\u0435\u0442 \u0431\u044B\u0442\u044C \u0447\u0442\u043E
+    \u0443\u0433\u043E\u0434\u043D\u043E!"
+  WhereToFind: "\u0412 \u043F\u043E\u0434\u0437\u0435\u043C\u0435\u043B\u044C\u0435
+    \u0441 \u0448\u0430\u043D\u0441\u043E\u043C 100% (\u0438\u0437 \u041C\u0438\u043C\u0438\u043A\u0430);
+    \u041A\u0443\u043F\u0438\u0442\u044C; \u0412 \u0448\u0430\u0445\u0442\u0430\u0445;"
+  Cost: 10
+  ChanceToFind: 100
+  Damage: 0
+  Health: 0
+  Armor: 0
+  AttackSpeed: 0
+  Mana: 0
+  equipBuffs: []
+  Stack: 0
+  MaxStack: 999
+  DropStack: 1
+  ItemID: Chest

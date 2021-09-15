@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
+  m_Name: BrokenWizard
+  m_EditorClassIdentifier: 
+  Type: 87
+  Element: 6
+  Name: "\u0425\u0440\u043E\u043C\u043E\u0439 \u043C\u0430\u0433"
+  MaxHealth: 200
+  Health: 200
+  HealthRegen: 1
+  ArmorType: 0
+  Armor: 0
+  MaxMana: 2500
+  Mana: 2500
+  Spells:
+  - currentSpell: 0
+    manaCost: 100
+    spellPower: 50
+    usePriority: 1
+  - currentSpell: 5
+    manaCost: 175
+    spellPower: 50
+    usePriority: 2
+  - currentSpell: 6
+    manaCost: 100
+    spellPower: 100
+    usePriority: 3
+  - currentSpell: 2
+    manaCost: 120
+    spellPower: 200
+    usePriority: 4
+  - currentSpell: 3
+    manaCost: 85
+    spellPower: 150
+    usePriority: 4
+  - currentSpell: 7
+    manaCost: 100
+    spellPower: 50
+    usePriority: 5
+  - currentSpell: 8
+    manaCost: 0
+    spellPower: 10
+    usePriority: 5
+  AttackType: 2
+  AttackSpeed: 5
+  Attack: 25
+  DodgeChance: 1
+  isStun: 0
+  Exp: 2000
+  Gold: 750
+  DropItems: []
+  CharacterImage: {fileID: 2800000, guid: 75370590cba9a2c42b3152b10dc042ef, type: 3}

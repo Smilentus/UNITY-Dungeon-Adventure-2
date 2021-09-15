@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
+  m_Name: HellTwoHound
+  m_EditorClassIdentifier: 
+  Type: 92
+  Element: 3
+  Name: "\u0414\u0432\u0443\u0433\u043B\u0430\u0432\u0430\u044F \u0433\u043E\u043D\u0447\u0430\u044F"
+  MaxHealth: 2500
+  Health: 2500
+  ArmorType: 2
+  Armor: 15
+  MaxMana: 125
+  Mana: 125
+  AttackType: 3
+  AttackSpeed: 3
+  Attack: 250
+  DodgeChance: 20
+  Exp: 3000
+  Gold: 350
+  DropItems: []
+  DropStack: 
+  CharacterImage: {fileID: 2800000, guid: 3e8c59b149b0da749b1b5fba1a426a85, type: 3}

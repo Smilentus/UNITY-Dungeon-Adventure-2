@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
+  m_Name: Fire Elemental
+  m_EditorClassIdentifier: 
+  Type: 22
+  Element: 3
+  Name: "\u042D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u043B\u044C \u041E\u0433\u043D\u044F"
+  MaxHealth: 250000
+  Health: 250000
+  ArmorType: 1
+  Armor: 100
+  MaxMana: 2500
+  Mana: 2500
+  AttackType: 4
+  AttackSpeed: 10
+  Attack: 15000
+  DodgeChance: 15
+  Exp: 750000
+  Gold: 1250000
+  DropItems: []
+  DropStack: 
+  CharacterImage: {fileID: 2800000, guid: 3da63d2afd0fae84b895f38e8d8eb98e, type: 3}
+  Helpers: []

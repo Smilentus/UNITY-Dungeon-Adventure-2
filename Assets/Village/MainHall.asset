@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759a03292db0c16458317820511528fe, type: 3}
+  m_Name: MainHall
+  m_EditorClassIdentifier: 
+  vilPart: 2
+  currentLvl: 0
+  maxLvl: 10
+  defaultMaxLvl: 10
+  upgradeCost: 25000
+  defaultUpgradeCost: 25000
+  upgradeMulty: 11000
+  defaultUpgradeMulty: 11000
+  currentWorkers: 0
+  maxWorkers: 7
+  defaultMaxWorkers: 7
+  defaultWorkersUpgrade: 1
+  currentIncome: 2000
+  defaultCurrentIncome: 2000
+  defaultIncomeUpgrade: 500
+  currentPopularity: 0
+  defaultCurrentPopularity: 0
+  defaultPopularityUpgrade: 1
+  productResources: []
+  neededItemsToUpgrade:
+  - Name: 1
+    neededLvl: 0
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 50
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 120
+  - Name: 2
+    neededLvl: 1
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 100
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 240
+  - Name: 3
+    neededLvl: 2
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 200
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 480
+  - Name: 4
+    neededLvl: 3
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 400
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 960
+  - Name: 5
+    neededLvl: 4
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 500
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 1000
+  - Name: 6
+    neededLvl: 5
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 600
+    - neededItem: {fileID: 11400000, guid: f40a01a8c13553f4ab3eb712c8b807df, type: 2}
+      neededStack: 60
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 1200
+  - Name: 7
+    neededLvl: 6
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 700
+    - neededItem: {fileID: 11400000, guid: f40a01a8c13553f4ab3eb712c8b807df, type: 2}
+      neededStack: 120
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 1400
+  - Name: 8
+    neededLvl: 7
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 800
+    - neededItem: {fileID: 11400000, guid: f40a01a8c13553f4ab3eb712c8b807df, type: 2}
+      neededStack: 180
+    - neededItem: {fileID: 11400000, guid: 3e0c4fa1de97edf42a7e1e6d7b681e7c, type: 2}
+      neededStack: 75
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 1600
+  - Name: 9
+    neededLvl: 8
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 900
+    - neededItem: {fileID: 11400000, guid: f40a01a8c13553f4ab3eb712c8b807df, type: 2}
+      neededStack: 240
+    - neededItem: {fileID: 11400000, guid: 3e0c4fa1de97edf42a7e1e6d7b681e7c, type: 2}
+      neededStack: 150
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 1800
+  - Name: 10
+    neededLvl: 9
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 1000
+    - neededItem: {fileID: 11400000, guid: f40a01a8c13553f4ab3eb712c8b807df, type: 2}
+      neededStack: 300
+    - neededItem: {fileID: 11400000, guid: 3e0c4fa1de97edf42a7e1e6d7b681e7c, type: 2}
+      neededStack: 225
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 2000

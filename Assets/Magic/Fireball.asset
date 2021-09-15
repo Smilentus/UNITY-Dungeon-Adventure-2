@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10be957f9d5c2ed4b9b51376610cf184, type: 3}
+  m_Name: Fireball
+  m_EditorClassIdentifier: 
+  MagicIcon: {fileID: 2800000, guid: be6136cae06b1a842a5620ce9c627178, type: 3}
+  Name: "\u041E\u0433\u043D\u0435\u043D\u043D\u044B\u0439 \u0448\u0430\u0440"
+  magicType: 3
+  actionVar: 45
+  actionVarDefault: 45
+  cooldownTimeMax: 8
+  cooldownTimeMaxDefault: 8
+  currentCooldown: 1
+  canUseMagic: 1

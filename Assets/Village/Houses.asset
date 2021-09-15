@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 759a03292db0c16458317820511528fe, type: 3}
+  m_Name: Houses
+  m_EditorClassIdentifier: 
+  vilPart: 1
+  currentLvl: 0
+  maxLvl: 10
+  defaultMaxLvl: 10
+  upgradeCost: 3500
+  defaultUpgradeCost: 3500
+  upgradeMulty: 2750
+  defaultUpgradeMulty: 2750
+  currentWorkers: 0
+  maxWorkers: 0
+  defaultMaxWorkers: 0
+  defaultWorkersUpgrade: 0
+  currentIncome: 250
+  defaultCurrentIncome: 250
+  defaultIncomeUpgrade: 50
+  currentPopularity: 5
+  defaultCurrentPopularity: 5
+  defaultPopularityUpgrade: 1
+  productResources: []
+  neededItemsToUpgrade:
+  - Name: 1
+    neededLvl: 0
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 10
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 200
+  - Name: 2
+    neededLvl: 1
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 20
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 400
+  - Name: 3
+    neededLvl: 2
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 30
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 600
+  - Name: 4
+    neededLvl: 3
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 40
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 800
+  - Name: 5
+    neededLvl: 4
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 50
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 1000
+  - Name: 6
+    neededLvl: 5
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 60
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 1200
+  - Name: 7
+    neededLvl: 6
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 70
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 1400
+  - Name: 8
+    neededLvl: 7
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 80
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 1600
+  - Name: 9
+    neededLvl: 8
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 90
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 1800
+  - Name: 10
+    neededLvl: 9
+    neededItems:
+    - neededItem: {fileID: 11400000, guid: 87e0b2feb414daf4db4fce47672d9e2f, type: 2}
+      neededStack: 100
+    - neededItem: {fileID: 11400000, guid: a5b93111011672940a2e6b11a03a956b, type: 2}
+      neededStack: 2000

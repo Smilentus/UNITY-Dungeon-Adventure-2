@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3b04e3faace6e24095144940ae663a7, type: 3}
+  m_Name: GoldIngot
+  m_EditorClassIdentifier: 
+  Type: 4
+  recipeName: 
+  resultItem: {fileID: 11400000, guid: 3e0c4fa1de97edf42a7e1e6d7b681e7c, type: 2}
+  resultStack: 1
+  neededItems:
+  - neededItem: {fileID: 11400000, guid: 8ebbf1878bf821148a02c21ea5497e06, type: 2}
+    neededStack: 6
+  - neededItem: {fileID: 11400000, guid: a8e10c052e0f8b441906e2b14f30bbe8, type: 2}
+    neededStack: 3

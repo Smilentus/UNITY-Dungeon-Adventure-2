@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
+  m_Name: StoneGolem
+  m_EditorClassIdentifier: 
+  Type: 1
+  Element: 4
+  Name: "\u041A\u0430\u043C\u0435\u043D\u043D\u044B\u0439 \u0433\u043E\u043B\u0435\u043C"
+  MaxHealth: 1000
+  Health: 1000
+  ArmorType: 3
+  Armor: 15
+  MaxMana: 0
+  Mana: 0
+  AttackType: 3
+  AttackSpeed: 1
+  Attack: 100
+  Exp: 1250
+  Gold: 250
+  DropItems: []
+  CharacterImage: {fileID: 2800000, guid: 268e100e205a99f4bbe0802c67e0630b, type: 3}
+  Helpers: []

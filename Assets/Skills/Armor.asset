@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fca0588bd3e9ed4d959aad25a04dc03, type: 3}
+  m_Name: Armor
+  m_EditorClassIdentifier: 
+  neededLvl: 0
+  neededLvlMulty: 0
+  Type: 6
+  Name: "\u0417\u0430\u0449\u0438\u0442\u043D\u0430\u044F \u0447\u0435\u0448\u0443\u044F"
+  Descr: "\u0417\u0430\u0449\u0438\u0442\u0430 +{skill:armor}"
+  Cost: 1
+  DefaultCost: 1
+  CostMulty: 1
+  CostChangeLvl: 3
+  defaultVariable: 1
+  currentVariable: 1
+  changableVariable: 1
+  Lvl: 0
+  isInfinity: 1
+  MaxLvl: 0
+  Icon: {fileID: 2800000, guid: 24d7e2c03a08a8f4ca8a0503af3610a2, type: 3}

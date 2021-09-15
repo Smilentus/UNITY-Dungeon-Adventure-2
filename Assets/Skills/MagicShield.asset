@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fca0588bd3e9ed4d959aad25a04dc03, type: 3}
+  m_Name: MagicShield
+  m_EditorClassIdentifier: 
+  neededLvl: 6
+  neededLvlMulty: 1
+  Type: 19
+  Name: "\u041C\u0430\u0433. \u0437\u0430\u0449\u0438\u0442\u0430"
+  Descr: "\u041C\u0430\u0433\u0438\u0447\u0435\u0441\u043A\u0430\u044F \u0437\u0430\u0449\u0438\u0442\u0430
+    \u0443\u043B\u0443\u0447\u0448\u0430\u0435\u0442 \u0432\u0430\u0448\u0443 \u0437\u0430\u0449\u0438\u0442\u0443
+    \u043D\u0430 {magic:shield} \u0435\u0434. \u0412\u0440\u0435\u043C\u044F \u043D\u0430
+    \u0432\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435
+    {magic:shieldcd} \u0445\u043E\u0434\u043E\u0432."
+  Cost: 10
+  DefaultCost: 10
+  CostMulty: 1
+  CostChangeLvl: 2
+  Lvl: 0
+  isInfinity: 0
+  MaxLvl: 25
+  Icon: {fileID: 2800000, guid: 5b381a0d45294f044b660d3c67533663, type: 3}
