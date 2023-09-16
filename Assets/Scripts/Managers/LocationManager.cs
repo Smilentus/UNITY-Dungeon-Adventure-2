@@ -199,7 +199,7 @@ public class LocationManager : MonoBehaviour
         if (CheckExtraLoc(extraLocation) == false)
         {
             foundedLocations.Add(extraLocation);
-            GameHelper._GH.ShowMessageText("Вы нашли локацию " + LocationToText(extraLocation), 1);
+            GameController.Instance.ShowMessageText("Вы нашли локацию " + LocationToText(extraLocation));
             buttonFoundedLocations.SetActive(true);
         }
         ReDrawFoundedLocations();
@@ -299,7 +299,7 @@ public class LocationManager : MonoBehaviour
                         AllLocations[i].SetActive(false);
                 }
                 
-                FindObjectOfType<GameHelper>().AddEventText("Вы переместились на локацию.");
+                FindObjectOfType<GameController>().AddEventText("Вы переместились на локацию.");
                 AllLocations[pos].SetActive(true);
                 Debug.Log(AllLocations[pos].name);
 
@@ -308,12 +308,12 @@ public class LocationManager : MonoBehaviour
             }
             else
             {
-                FindObjectOfType<GameHelper>().ShowMessageText("Вы уже находитесь на этой локации!", 1);
+                FindObjectOfType<GameController>().ShowMessageText("Вы уже находитесь на этой локации!");
             }
         }
         catch (System.Exception)
         {
-            GameHelper._GH.ShowMessageText("Такой локации не существует! :С", 1);
+            GameController.Instance.ShowMessageText("Такой локации не существует! :С");
         }
 
         HideLocationInfo();

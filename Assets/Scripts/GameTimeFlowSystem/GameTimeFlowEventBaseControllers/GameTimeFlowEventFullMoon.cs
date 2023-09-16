@@ -16,7 +16,7 @@ public class GameTimeFlowEventFullMoon : GameTimeFlowEventBaseController
 
     public override void StartEvent()
     {
-        GameHelper._GH.ShowMessageText(GameTimeFlowEventReference.EventDescription, 0);
+        GameController.Instance.ShowMessageText(GameTimeFlowEventReference.EventDescription, "[Событие]");
         FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.FullmoonBuff);
 
         base.StartEvent();

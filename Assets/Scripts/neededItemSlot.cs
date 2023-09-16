@@ -11,6 +11,6 @@ public class neededItemSlot : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        GameHelper._GH.ShowMessageText(("Как получить предмет: \""+neededItem.Name+"\"\n\n" + neededItem.WhereToFind), 1);
+        GameController.Instance.ShowMessageText(("Как получить предмет: \""+neededItem.Name+"\"\n\n" + neededItem.WhereToFind));
     }
 }

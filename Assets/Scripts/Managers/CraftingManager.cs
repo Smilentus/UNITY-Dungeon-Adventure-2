@@ -9,7 +9,7 @@ public class CraftingManager : MonoBehaviour
 
     [Header("Основные ссылки")]
     public Inventory inv;
-    public GameHelper GH;
+    public GameController GH;
 
     [Space(20)]
     [Header("Все рецепты в игре")]
@@ -228,7 +228,7 @@ public class CraftingManager : MonoBehaviour
         // Проверяем открыт ли сейчас рецепт
         if (currentRecipeNum == -1 || currentSlotNum == -1)
         {
-            GH.ShowMessageText("Сначала выберите рецепт!", 1);
+            GH.ShowMessageText("Сначала выберите рецепт!");
             return;
         }
 
@@ -283,6 +283,6 @@ public class CraftingManager : MonoBehaviour
             ReDrawRecipes(currentRecipeNum, currentSlotNum);
         }
         else
-            GH.ShowMessageText("Недостаточно ресурсов для создания предмета!", 1);
+            GH.ShowMessageText("Недостаточно ресурсов для создания предмета!");
     }
 }

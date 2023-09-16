@@ -159,7 +159,7 @@ public class BattleHelper : MonoBehaviour
 
             FindObjectOfType<SavingManager>().SaveGame("AutoSave");
 
-            GameHelper._GH.Blocker.SetActive(true);
+            GameController.Instance.Blocker.SetActive(true);
             startBattleImage.SetActive(true);
         }
     }
@@ -167,7 +167,7 @@ public class BattleHelper : MonoBehaviour
     // Открытие битвы
     public void StartBattleAfterAnim()
     {
-        GameHelper._GH.Blocker.SetActive(false);
+        GameController.Instance.Blocker.SetActive(false);
         startBattleImage.SetActive(false);
 
         // Открытие панели битвы
@@ -209,7 +209,7 @@ public class BattleHelper : MonoBehaviour
     // Конец сражения
     public void EndBattle()
     {
-        GameHelper._GH.Blocker.SetActive(false);
+        GameController.Instance.Blocker.SetActive(false);
         endBattleImage.SetActive(false);
 
         if (isWin)
@@ -253,8 +253,8 @@ public class BattleHelper : MonoBehaviour
         // Деньги и опыт с каждого моба
         for (int i = 0; i < defeatedEnemies.Count; i++)
         {
-            GameHelper._GH.GiveMoney(defeatedEnemies[i].Gold);
-            GameHelper._GH.GiveExp(defeatedEnemies[i].Exp);
+            GameController.Instance.GiveMoney(defeatedEnemies[i].Gold);
+            GameController.Instance.GiveExp(defeatedEnemies[i].Exp);
         }
 
         // Добавляем игроку индивидуальные вещи моба
@@ -393,7 +393,7 @@ public class BattleHelper : MonoBehaviour
         }
         else
         {
-            GameHelper._GH.AddEventText("Вы оглушены и не можете атаковать.");
+            GameController.Instance.AddEventText("Вы оглушены и не можете атаковать.");
         }
 
         // Проверяем баффы на урон и снимаем длительность всех баффов
@@ -417,12 +417,12 @@ public class BattleHelper : MonoBehaviour
         {
             isBattle = false;
             isWin = false;
-            GameHelper._GH.AddEventText("Вы сбежали.");
+            GameController.Instance.AddEventText("Вы сбежали.");
             EndBattle();
         }
         else
         {
-            GameHelper._GH.AddEventText("Вы не смогли избежать боя.");
+            GameController.Instance.AddEventText("Вы не смогли избежать боя.");
             EnemyAIAttack();
         }
     }
@@ -441,18 +441,18 @@ public class BattleHelper : MonoBehaviour
                 {
                     allEnemies[allEnemies.Count - 1].Health -= dmg;
                     // Анимируем удар
-                    GameHelper._GH.AddEventText(CurrentRound + " - Вы нанесли урон слабым ударом: " + dmg + " ед.");
+                    GameController.Instance.AddEventText(CurrentRound + " - Вы нанесли урон слабым ударом: " + dmg + " ед.");
                 }
                 else
                 {
-                    GameHelper._GH.AddEventText(CurrentRound + " - Броня защитила противника.");
+                    GameController.Instance.AddEventText(CurrentRound + " - Броня защитила противника.");
                 }
             }
             else
-                GameHelper._GH.AddEventText(CurrentRound + " - Вы промахнулись.");
+                GameController.Instance.AddEventText(CurrentRound + " - Вы промахнулись.");
         }
         else
-            GameHelper._GH.AddEventText(CurrentRound + " - Противник увернулся.");
+            GameController.Instance.AddEventText(CurrentRound + " - Противник увернулся.");
     }
     private void MediumStrike()
     {
@@ -467,18 +467,18 @@ public class BattleHelper : MonoBehaviour
                 {
                     allEnemies[allEnemies.Count - 1].Health -= dmg;
                     // Анимируем удар
-                    GameHelper._GH.AddEventText(CurrentRound + " - Вы нанесли урон нормальным ударом: " + dmg + " ед.");
+                    GameController.Instance.AddEventText(CurrentRound + " - Вы нанесли урон нормальным ударом: " + dmg + " ед.");
                 }
                 else
                 {
-                    GameHelper._GH.AddEventText(CurrentRound + " - Броня защитила противника.");
+                    GameController.Instance.AddEventText(CurrentRound + " - Броня защитила противника.");
                 }
             }
             else
-                GameHelper._GH.AddEventText(CurrentRound + " - Вы промахнулись.");
+                GameController.Instance.AddEventText(CurrentRound + " - Вы промахнулись.");
         }
         else
-            GameHelper._GH.AddEventText(CurrentRound + " - Противник увернулся.");
+            GameController.Instance.AddEventText(CurrentRound + " - Противник увернулся.");
     }
     private void HeavyStrike()
     {
@@ -493,18 +493,18 @@ public class BattleHelper : MonoBehaviour
                 {
                     allEnemies[allEnemies.Count - 1].Health -= dmg;
                     // Анимируем удар
-                    GameHelper._GH.AddEventText(CurrentRound + " - Вы нанесли урон сильным ударом: " + dmg + " ед.");
+                    GameController.Instance.AddEventText(CurrentRound + " - Вы нанесли урон сильным ударом: " + dmg + " ед.");
                 }
                 else
                 {
-                    GameHelper._GH.AddEventText(CurrentRound + " - Броня защитила противника.");
+                    GameController.Instance.AddEventText(CurrentRound + " - Броня защитила противника.");
                 }
             }
             else
-                GameHelper._GH.AddEventText(CurrentRound + " - Вы промахнулись.");
+                GameController.Instance.AddEventText(CurrentRound + " - Вы промахнулись.");
         }
         else
-            GameHelper._GH.AddEventText(CurrentRound + " - Противник увернулся.");
+            GameController.Instance.AddEventText(CurrentRound + " - Противник увернулся.");
     }
     private bool CriticalStrike()
     {
@@ -514,7 +514,7 @@ public class BattleHelper : MonoBehaviour
         if (rndChance <= Player.CriticalStrikeChance)
         {
             allEnemies[allEnemies.Count - 1].Health -= dmg;
-            GameHelper._GH.AddEventText(CurrentRound + " - Вы нанесли урон критическим ударом: " + dmg + " ед.");
+            GameController.Instance.AddEventText(CurrentRound + " - Вы нанесли урон критическим ударом: " + dmg + " ед.");
             return true;
         }
         return false;
@@ -559,7 +559,7 @@ public class BattleHelper : MonoBehaviour
                 }
                 else
                 {
-                    GameHelper._GH.AddEventText("Противник был оглушён и не смог атаковать.");
+                    GameController.Instance.AddEventText("Противник был оглушён и не смог атаковать.");
                 }
             }
 
@@ -688,7 +688,7 @@ public class BattleHelper : MonoBehaviour
     }
     public void UseEnemyMagic(CharacterMagic.spellType useSpell, int c, int s)
     {
-        GameHelper._GH.AddEventText(CurrentRound + " - Противник использовал магию: " + magicName(useSpell, allEnemies[c].Spells[s].spellPower));
+        GameController.Instance.AddEventText(CurrentRound + " - Противник использовал магию: " + magicName(useSpell, allEnemies[c].Spells[s].spellPower));
         switch(useSpell)
         {
             case CharacterMagic.spellType.MagicFireball:
@@ -767,13 +767,13 @@ public class BattleHelper : MonoBehaviour
                         if (allEnemies[c].Attack / 2 > Player.Armor)
                         {
                             Player.Health -= dmg;
-                            GameHelper._GH.AddEventText(CurrentRound + " - Противник атаковал слабым ударом и нанёс " + dmg + " ед. урона.");
+                            GameController.Instance.AddEventText(CurrentRound + " - Противник атаковал слабым ударом и нанёс " + dmg + " ед. урона.");
                         }
                         else
-                            GameHelper._GH.AddEventText(CurrentRound + " - Броня защитила Вас.");
+                            GameController.Instance.AddEventText(CurrentRound + " - Броня защитила Вас.");
                     }
                     else
-                        GameHelper._GH.AddEventText(CurrentRound + " - Противник промахнулся");
+                        GameController.Instance.AddEventText(CurrentRound + " - Противник промахнулся");
                     break;
                 // Средний удар
                 case 1:
@@ -783,13 +783,13 @@ public class BattleHelper : MonoBehaviour
                         if (allEnemies[c].Attack > Player.Armor)
                         {
                             Player.Health -= dmg;
-                            GameHelper._GH.AddEventText(CurrentRound + " - Противник атаковал средним ударом и нанёс " + dmg + " ед. урона.");
+                            GameController.Instance.AddEventText(CurrentRound + " - Противник атаковал средним ударом и нанёс " + dmg + " ед. урона.");
                         }
                         else
-                            GameHelper._GH.AddEventText(CurrentRound + " - Броня защитила Вас.");
+                            GameController.Instance.AddEventText(CurrentRound + " - Броня защитила Вас.");
                     }
                     else
-                        GameHelper._GH.AddEventText(CurrentRound + " - Противник промахнулся");
+                        GameController.Instance.AddEventText(CurrentRound + " - Противник промахнулся");
                     break;
                 // Сильный удар
                 case 2:
@@ -799,19 +799,19 @@ public class BattleHelper : MonoBehaviour
                         if (allEnemies[c].Attack * 2 > Player.Armor)
                         {
                             Player.Health -= dmg;
-                            GameHelper._GH.AddEventText(CurrentRound + " - Противник атаковал сильным ударом и нанёс " + dmg + " ед. урона.");
+                            GameController.Instance.AddEventText(CurrentRound + " - Противник атаковал сильным ударом и нанёс " + dmg + " ед. урона.");
                         }
                         else
-                            GameHelper._GH.AddEventText(CurrentRound + " - Броня защитила Вас.");
+                            GameController.Instance.AddEventText(CurrentRound + " - Броня защитила Вас.");
                     }
                     else
-                        GameHelper._GH.AddEventText(CurrentRound + " - Противник промахнулся");
+                        GameController.Instance.AddEventText(CurrentRound + " - Противник промахнулся");
                     break;
             }
         }
         else
         {
-            GameHelper._GH.AddEventText(CurrentRound + " - Вы уклонились от атаки противника.");
+            GameController.Instance.AddEventText(CurrentRound + " - Вы уклонились от атаки противника.");
             FindObjectOfType<HeroAbilityManager>().ChargeHeroAbility(Player.HeroAbility.Ninja);
         }
     }
@@ -891,7 +891,7 @@ public class BattleHelper : MonoBehaviour
         {
             Debug.Log("Противники закончились, мы выйграли!");
             isWin = true;
-            GameHelper._GH.Blocker.SetActive(true);
+            GameController.Instance.Blocker.SetActive(true);
             endBattleImage.SetActive(true);
         }
 
@@ -908,7 +908,7 @@ public class BattleHelper : MonoBehaviour
 
             isWin = false;
             EndBattle();
-            GameHelper._GH.ShowDeathBox("Вы умерли во время битвы.");
+            GameController.Instance.ShowDeathBox("Вы умерли во время битвы.");
         }
     }
 

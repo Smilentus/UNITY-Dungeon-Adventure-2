@@ -23,9 +23,9 @@ public class DirButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         GetComponent<Image>().color = hoverColor;
         if (act == LocationManager.Action.None && loc != LocationManager.Location.None)
-            FindObjectOfType<GameHelper>().PressDirectionButton(loc);
+            FindObjectOfType<GameController>().PressDirectionButton(loc);
         else
-            FindObjectOfType<GameHelper>().PressActionButton(act);
+            FindObjectOfType<GameController>().PressActionButton(act);
     }
 
     public void OnPointerDown(PointerEventData eventData)

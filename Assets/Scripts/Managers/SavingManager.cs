@@ -142,7 +142,7 @@ public class SavingManager : MonoBehaviour
 
     [Header("Ссылки")]
     public BattleHelper BH;
-    public GameHelper GH;
+    public GameController GH;
     public CharacterManager CM;
     public LocationManager LM;
     public Inventory INV;
@@ -660,7 +660,7 @@ public class SavingManager : MonoBehaviour
     {
         // Ищем все контроллеры ...
         BH = FindObjectOfType<BattleHelper>();
-        GH = FindObjectOfType<GameHelper>();
+        GH = FindObjectOfType<GameController>();
         CM = FindObjectOfType<CharacterManager>();
         LM = FindObjectOfType<LocationManager>();
         INV = FindObjectOfType<Inventory>();

@@ -127,13 +127,13 @@ public class SkillsManager : MonoBehaviour
             }
             else
             {
-                FindObjectOfType<GameHelper>().ShowMessageText("Достигнут максимальный уровень навыка!", 1);
+                FindObjectOfType<GameController>().ShowMessageText("Достигнут максимальный уровень навыка!");
                 acceptButton.SetActive(false);
             }
         }
         else
         {
-            FindObjectOfType<GameHelper>().ShowMessageText("Недостаточно очков навыков для улучшения! \nНеобходимо минимум " + AllSkills[pos].Cost.ToString() + " ОН", 1);
+            FindObjectOfType<GameController>().ShowMessageText("Недостаточно очков навыков для улучшения! \nНеобходимо минимум " + AllSkills[pos].Cost.ToString() + " ОН");
             HideSkillDescr();
         }
 
@@ -461,7 +461,7 @@ public class SkillsManager : MonoBehaviour
         }
         else
         {
-            FindObjectOfType<GameHelper>().ShowMessageText(("Ваш уровень слишком мал для улучшения! \nНеобходим минимальный уровень: " + AllSkills[SkillPos(dType)].neededLvl.ToString()), 1);
+            FindObjectOfType<GameController>().ShowMessageText(("Ваш уровень слишком мал для улучшения! \nНеобходим минимальный уровень: " + AllSkills[SkillPos(dType)].neededLvl.ToString()));
             acceptButton.SetActive(false);
         }
     }

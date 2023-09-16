@@ -7,7 +7,7 @@ public class PlayerVillageActivity : MonoBehaviour
     [HideInInspector()]
     public Inventory INV;
     [HideInInspector()]
-    public GameHelper GH;
+    public GameController GH;
 
     public enum villagePart
     {
@@ -111,7 +111,7 @@ public class PlayerVillageActivity : MonoBehaviour
     private void Start()
     {
         INV = FindObjectOfType<Inventory>();
-        GH = FindObjectOfType<GameHelper>();
+        GH = FindObjectOfType<GameController>();
     }
 
     // Поиск части по типу в списке
@@ -403,13 +403,13 @@ public class PlayerVillageActivity : MonoBehaviour
                     UpdateDescrInfo(partNum);
                 }
                 else
-                    GH.ShowMessageText("Недостаточно ресурсов для улучшения!", 1);
+                    GH.ShowMessageText("Недостаточно ресурсов для улучшения!");
             }
             else
-                GH.ShowMessageText("Недостаточно золотых монет для улучшения!", 1);
+                GH.ShowMessageText("Недостаточно золотых монет для улучшения!");
         }
         else
-            GH.ShowMessageText("Здание улучшено на максимальный уровень!", 1);
+            GH.ShowMessageText("Здание улучшено на максимальный уровень!");
     }
 
     // Изменение имени деревни

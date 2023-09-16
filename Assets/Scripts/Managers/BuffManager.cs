@@ -196,13 +196,13 @@ public class BuffManager : MonoBehaviour
                         break;
                     // Зелья превращения
                     case Buff.BuffType.RabbitBuff:
-                        GameHelper._GH.ShowMessageText("Вы превратились в кролика, милого и пушистого.", 1);
+                        GameController.Instance.ShowMessageText("Вы превратились в кролика, милого и пушистого.");
                         break;
                     case Buff.BuffType.SheepBuff:
-                        GameHelper._GH.ShowMessageText("Вы превратились в овцу. Прямо как Ваша жена.", 1);
+                        GameController.Instance.ShowMessageText("Вы превратились в овцу. Прямо как Ваша жена.");
                         break;
                     case Buff.BuffType.ChickenBuff:
-                        GameHelper._GH.ShowMessageText("Вы превратились в курицу! Ко-ко-ко", 1);
+                        GameController.Instance.ShowMessageText("Вы превратились в курицу! Ко-ко-ко");
                         break;
                     case Buff.BuffType.FrogBuff:
                         if (!isBuffOnAction(Buff.BuffType.FrogBuff, 0))
@@ -226,7 +226,7 @@ public class BuffManager : MonoBehaviour
                             Player.Armor = 0;
 
                             // Информируем
-                            GameHelper._GH.ShowMessageText("Вы превратились в лягушку. А я говорил!", 1);
+                            GameController.Instance.ShowMessageText("Вы превратились в лягушку. А я говорил!");
                         }
                         break;
                     case Buff.BuffType.SunstayBuff:
@@ -579,7 +579,7 @@ public class BuffManager : MonoBehaviour
 
         if (pos == -1)
         {
-            FindObjectOfType<GameHelper>().ShowMessageText("Вы не зачарованы! Попробуйте позже.", 1);
+            FindObjectOfType<GameController>().ShowMessageText("Вы не зачарованы! Попробуйте позже.");
             return;
         }
 

@@ -311,7 +311,7 @@ public class Inventory : MonoBehaviour
                     CheckItemForDelete(ID, 1);
                 }
                 else
-                    GameHelper._GH.ShowMessageText("У Вас и так максимальный запас здоровья!", 1);
+                    GameController.Instance.ShowMessageText("У Вас и так максимальный запас здоровья!");
                 break;
             case "Potion_Mana":
                 if (manaPotionCounter > 0)
@@ -330,7 +330,7 @@ public class Inventory : MonoBehaviour
                     }
                     else if (Player.Mana >= Player.MaxMana)
                     {
-                        GameHelper._GH.ShowMessageText("Если Вы продолжите пить эту бяку при максимальном запасе маны, то Вы превратитесь в лягушку. Я серьёзно!(нет)", 1);
+                        GameController.Instance.ShowMessageText("Если Вы продолжите пить эту бяку при максимальном запасе маны, то Вы превратитесь в лягушку. Я серьёзно!(нет)");
                         manaPotionCounter++;
                     }
                 }
@@ -343,7 +343,7 @@ public class Inventory : MonoBehaviour
                     CheckItemForDelete(ID, 1);
                 }
                 else
-                    GameHelper._GH.ShowMessageText("Ваше тело не выдержит большей нагрузки!", 1);
+                    GameController.Instance.ShowMessageText("Ваше тело не выдержит большей нагрузки!");
                 break;
             case "Potion_Regen":
                 if (!FindObjectOfType<BuffManager>().isBuffOnAction(Buff.BuffType.RegenBonus, 0))
@@ -353,7 +353,7 @@ public class Inventory : MonoBehaviour
                     CheckItemForDelete(ID, 1);
                 }
                 else
-                    GameHelper._GH.ShowMessageText("Если выпить слишком много восстановительного зелья, то можно умереть!", 1);
+                    GameController.Instance.ShowMessageText("Если выпить слишком много восстановительного зелья, то можно умереть!");
                 break;
             case "Potion_ManaRegen":
                 if (!FindObjectOfType<BuffManager>().isBuffOnAction(Buff.BuffType.ManaRegenBonus, 0))
@@ -363,7 +363,7 @@ public class Inventory : MonoBehaviour
                     CheckItemForDelete(ID, 1);
                 }
                 else
-                    GameHelper._GH.ShowMessageText("Частое употребление зелья восстановления маны вредит здоровью!", 1);
+                    GameController.Instance.ShowMessageText("Частое употребление зелья восстановления маны вредит здоровью!");
                 break;
             case "Potion_Random": // Зелье случайности
                 int rndAction = Random.Range(0, 8);
@@ -374,26 +374,26 @@ public class Inventory : MonoBehaviour
                 {
                     case 0:
                         FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.FrogBuff);
-                        GameHelper._GH.ShowMessageText("Зелье изуродовало Вас ещё сильнее, чем Ваша жизнь. Вы стали лягушкой.", 0);
+                        GameController.Instance.ShowMessageText("Зелье изуродовало Вас ещё сильнее, чем Ваша жизнь. Вы стали лягушкой.", "[Событие]");
                         break;
                     case 1:
                         FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.HealthAndManaRegen);
-                        GameHelper._GH.ShowMessageText("Зелье придало Вам мощи! (Бафф: Усиленное восстановление маны и здоровья)", 0);
+                        GameController.Instance.ShowMessageText("Зелье придало Вам мощи! (Бафф: Усиленное восстановление маны и здоровья)", "[Событие]");
                         break;
                     case 2:
                         if (!Player.AntiHole)
                         {
-                            GameHelper._GH.ShowDeathBox("О, нет, зелье превратилось в чёрную дыру и засосало всё и вся в себя!");
+                            GameController.Instance.ShowDeathBox("О, нет, зелье превратилось в чёрную дыру и засосало всё и вся в себя!");
                         }
                         else
-                            GameHelper._GH.ShowMessageText("О, нет, зелье просто упало и разбилось! (Защита от чёрной дыры)", 0);
+                            GameController.Instance.ShowMessageText("О, нет, зелье просто упало и разбилось! (Защита от чёрной дыры)", "[Событие]");
                         break;
                     case 3:
-                        GameHelper._GH.TakeDamage(1000, true);
+                        GameController.Instance.TakeDamage(1000, true);
                         if (Player.Health <= 0)
-                            GameHelper._GH.ShowDeathBox("Зелье оказалось сильнодействующим токсином, который уничтожил Вас в ту же секунду, как Вы глотнули его!");
+                            GameController.Instance.ShowDeathBox("Зелье оказалось сильнодействующим токсином, который уничтожил Вас в ту же секунду, как Вы глотнули его!");
                         else
-                            GameHelper._GH.ShowMessageText("Зелье оказалось сильнодействующим токсином, который не смог Вас уничтожить!", 0);
+                            GameController.Instance.ShowMessageText("Зелье оказалось сильнодействующим токсином, который не смог Вас уничтожить!", "[Событие]");
                         break;
                     case 4:
                         int rndPotion = Random.Range(0, 5);
@@ -416,14 +416,14 @@ public class Inventory : MonoBehaviour
                                 potionID = "Potion_Armor";
                                 break;
                         }
-                        GameHelper._GH.ShowMessageText(("На зелье была наклейка, это оказалось " + AllItems[FindItemPos(potionID)].Name) + "!", 0);
+                        GameController.Instance.ShowMessageText(("На зелье была наклейка, это оказалось " + AllItems[FindItemPos(potionID)].Name) + "!", "[Событие]");
                         AddItem(potionID, 1);
                         break;
                     case 5:
-                        GameHelper._GH.ShowMessageText("Зелье превратилось в облако и улетело в небеса!", 0);
+                        GameController.Instance.ShowMessageText("Зелье превратилось в облако и улетело в небеса!", "[Событие]");
                         break;
                     case 6:
-                        GameHelper._GH.ShowMessageText("Вы нарушили баланс Вселенной, готовьтесь к худшему!", 0);
+                        GameController.Instance.ShowMessageText("Вы нарушили баланс Вселенной, готовьтесь к худшему!", "[Событие]");
                         BattleHelper._BH.StartBattle(CharacterManager.CharacterType.BalanceKeeper);
                         break;
                     case 7:
@@ -451,7 +451,7 @@ public class Inventory : MonoBehaviour
 
                     if (Player.Health < 0)
                     {
-                        GameHelper._GH.ShowDeathBox("Зелье уничтожило Вас!");
+                        GameController.Instance.ShowDeathBox("Зелье уничтожило Вас!");
                     }
                     else
                     {
@@ -460,7 +460,7 @@ public class Inventory : MonoBehaviour
                 }
                 else
                 {
-                    GameHelper._GH.ShowMessageText("Это зелье можно использовать только в битве!", 1);
+                    GameController.Instance.ShowMessageText("Это зелье можно использовать только в битве!");
                 }
                 break;
             case "Potion_Speed":
@@ -488,11 +488,11 @@ public class Inventory : MonoBehaviour
                     }
                     else
                     {
-                        GameHelper._GH.ShowMessageText("Это нужно использовать на другое существо!", 1);
+                        GameController.Instance.ShowMessageText("Это нужно использовать на другое существо!");
                     }
                 }
                 else
-                    GameHelper._GH.ShowMessageText("Это нужно использовать на КРАСНОГО кролика в КРАСНОМ лесу!", 1);
+                    GameController.Instance.ShowMessageText("Это нужно использовать на КРАСНОГО кролика в КРАСНОМ лесу!");
                 break;
             case "RabbitInCage":
                 if (LocationManager.CurrentLocation == LocationManager.Location.RF_House)

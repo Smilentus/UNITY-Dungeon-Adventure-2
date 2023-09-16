@@ -1,18 +1,28 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class GameHelper : MonoBehaviour
+public class GameController : MonoBehaviour
 {
-    #region Для обращения
-    private static GameHelper GH;
-    public static GameHelper _GH
-    { get { return GH; } }
-    #endregion
+    private static GameController instance;
+    public static GameController Instance
+    { 
+        get 
+        { 
+            if (instance == null)
+            {
+                instance = FindObjectOfType<GameController>();
+            }
+
+            return instance; 
+        }
+    }
+
 
     [Header("Ссылка на LocationsManager")]
-    public LocationManager LM;
+    public LocationManager m_locationManager;
     [Header("Ссылка на Inventory")]
-    public Inventory Inv;
+    public Inventory m_inventory;
+
 
     [Header("Префаб информационного текста")]
     public GameObject EventText;
@@ -21,15 +31,15 @@ public class GameHelper : MonoBehaviour
     [Header("Панель скролов")]
     public ScrollRect eventScroll;
 
+
     [Header("Окно информации")]
-    public GameObject MessageBox;
-    public GameObject AcceptBox;
     public GameObject Blocker;
     public GameObject DeathBox;
 
+
     private void Start()
     {
-        GH = this;
+        instance = this;
 
         FindObjectOfType<faderScript>().FadeScreenOut();
     }
@@ -37,8 +47,24 @@ public class GameHelper : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
-            if (!AcceptBox.activeSelf)
-                ShowAcceptBox();
+        {
+            if (GlobalWindowsController.Instance.IsWindowShown(typeof(AcceptGlobalWindow)))
+            {
+                Blocker.SetActive(false);
+                GlobalWindowsController.Instance.TryHideGlobalWindow(typeof(AcceptGlobalWindow));
+            }
+            else
+            {
+                Blocker.SetActive(true);
+                GlobalWindowsController.Instance.TryShowGlobalWindow(typeof(AcceptGlobalWindow), new AcceptGlobalWindowData() {
+                    GlobalWindowTitle = "Информация",
+                    GlobalWindowDescription = "Вы действительно хотите выйти в меню?",
+                    ApplyButtonText = "Принять",
+                    CancelButtonText = "Отменить",
+                    OnApply = ExitToMainMenu
+                });
+            }
+        }
 
         if (Input.GetKeyDown(KeyCode.M))
         {
@@ -70,26 +96,23 @@ public class GameHelper : MonoBehaviour
     /// <summary>
     /// 0 - Событие. 1 - Информация.
     /// </summary>
-    /// <param name="text"></param>
+    /// <param name="message"></param>
     /// <param name="action"></param>
-    public void ShowMessageText(string text, int action)
+    public void ShowMessageText(string message, string title = "[Информация]")
     {
-        string beginText = "";
-
-        if (action == 0)
-            beginText = "[Событие]";
-        if (action == 1)
-            beginText = "[Информация]";
-        MessageBox.GetComponentInChildren<Text>().text = beginText + "\n" + text;
-
         Blocker.SetActive(true);
-        MessageBox.SetActive(true);
+
+        GlobalWindowsController.Instance.TryShowGlobalWindow(typeof(InfoGlobalWindow), new InfoGlobalWindowData() { 
+            GlobalWindowTitle = title,
+            InfoMessage = message,
+            ApplyButtonText = "Принять",
+            OnApply = HideMessageText
+        });
     }
     // Закрытие информационного окна
     public void HideMessageText()
     {
         Blocker.SetActive(false);
-        MessageBox.SetActive(false);
     }
 
     // DeathBox открытие
@@ -100,31 +123,18 @@ public class GameHelper : MonoBehaviour
         DeathBox.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = deathText;
     }
 
-    // Открыть панель подтверждения
-    public void ShowAcceptBox()
-    {
-        Blocker.SetActive(true);
-        AcceptBox.SetActive(true);
-    }
-    // Закрыть панель подтверждения
-    public void HideAcceptBox()
-    {
-        Blocker.SetActive(false);
-        AcceptBox.SetActive(false);
-    }
-    // Подтверждение действия
-    public void Accept()
+
+    public void ExitToMainMenu()
     {
         FindObjectOfType<SavingManager>().SaveGame("AutoSave");
         FindObjectOfType<faderScript>().FadeScreen("MenuScene");
-        HideAcceptBox();
         Blocker.SetActive(true);
     }
+
 
     public void LoadAutoSave()
     {
         FindObjectOfType<SaveButtonsLoader>().LoadGame("AutoSave");
-        HideAcceptBox();
         Blocker.SetActive(true);
     }
 
@@ -182,15 +192,15 @@ public class GameHelper : MonoBehaviour
                 DungeonLocation();
                 break;
             case LocationManager.Action.RH_WatchRoom:
-                if (Inv.IsContainItem("RabbitInCage") && !FindObjectOfType<BuffManager>().isBuffOnAction(Buff.BuffType.Happiness, 0))
+                if (m_inventory.IsContainItem("RabbitInCage") && !FindObjectOfType<BuffManager>().isBuffOnAction(Buff.BuffType.Happiness, 0))
                 {
                     // Удаляем клетку из инвентаря (Выпускаем зверя)
-                    Inv.CheckItemForDelete("RabbitInCage", 1);
+                    m_inventory.CheckItemForDelete("RabbitInCage", 1);
                     FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.Happiness);
                 }
                 else
                 {
-                    ShowMessageText("Подсказка: Найдите в КРАСНОМ лесу КРАСНОГО кролика и поймайте его в клетку.", 1);
+                    ShowMessageText("Подсказка: Найдите в КРАСНОМ лесу КРАСНОГО кролика и поймайте его в клетку.");
                 }
                 break;
             case LocationManager.Action.UM_MineResources:
@@ -414,7 +424,7 @@ public class GameHelper : MonoBehaviour
         int rndResource = Random.Range(0, 6);
 
         AddEventText("[Лесопилка] \nДобыто: Древесина " + rndResource + " шт.");
-        Inv.AddItem("Log", rndResource);
+        m_inventory.AddItem("Log", rndResource);
         FindObjectOfType<GameTimeFlowController>().AddTime(rndResource);
 
         GiveExp(rndResource / 2);
@@ -544,56 +554,56 @@ public class GameHelper : MonoBehaviour
         {
             // Титан
             AddEventText("[Шахта] \nДобыто: Титановая руда " + rndAmount + "шт....");
-            Inv.AddItem("Ore_Titan", rndAmount);
+            m_inventory.AddItem("Ore_Titan", rndAmount);
             oreMultiply = 45;
         }
         else if (rndResource <= 12)
         {
             // Лазурит
             AddEventText("[Шахта] \nДобыто: Лазуритовая руда " + rndAmount + "шт....");
-            Inv.AddItem("Ore_Lazuli", rndAmount);
+            m_inventory.AddItem("Ore_Lazuli", rndAmount);
             oreMultiply = 40;
         }
         else if (rndResource <= 18)
         {
             // Малахит
             AddEventText("[Шахта] \nДобыто: Малахитовая руда " + rndAmount + "шт....");
-            Inv.AddItem("Ore_Malahit", rndAmount);
+            m_inventory.AddItem("Ore_Malahit", rndAmount);
             oreMultiply = 35;
         }
         else if (rndResource <= 20)
         {
             // Бронза
             AddEventText("[Шахта] \nДобыто: Бронзовая руда " + rndAmount + "шт....");
-            Inv.AddItem("Ore_Bronze", rndAmount);
+            m_inventory.AddItem("Ore_Bronze", rndAmount);
             oreMultiply = 30;
         }
         else if (rndResource <= 26)
         {
             // Золото
             AddEventText("[Шахта] \nДобыто: Золотая руда " + rndAmount + "шт....");
-            Inv.AddItem("Ore_Gold", rndAmount);
+            m_inventory.AddItem("Ore_Gold", rndAmount);
             oreMultiply = 25;
         }
         else if (rndResource <= 36)
         {
             // Железо
             AddEventText("[Шахта] \nДобыто: Железная руда " + rndAmount + "шт....");
-            Inv.AddItem("Ore_Iron", rndAmount);
+            m_inventory.AddItem("Ore_Iron", rndAmount);
             oreMultiply = 20;
         }
         else if(rndResource <= 50)
         {
             // Медь
             AddEventText("[Шахта] \nДобыто: Медная руда " + rndAmount + "шт....");
-            Inv.AddItem("Ore_Cooper", rndAmount);
+            m_inventory.AddItem("Ore_Cooper", rndAmount);
             oreMultiply = 15;
         }
         else if(rndResource <= 80)
         {
             // Уголь
             AddEventText("[Шахта] \nДобыто: Уголь " + rndAmount + "шт....");
-            Inv.AddItem("Coal", rndAmount);
+            m_inventory.AddItem("Coal", rndAmount);
             oreMultiply = 10;
         }
         else
@@ -660,15 +670,15 @@ public class GameHelper : MonoBehaviour
                 BattleHelper._BH.StartBattle(CharacterManager.CharacterType.StoneMonster);
                 break;
             case 14:
-                ShowMessageText("Вы наткнулись на ядовитую ловушку!", 1);
+                ShowMessageText("Вы наткнулись на ядовитую ловушку!");
                 FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.Poison);
                 break;
             case 15:
-                ShowMessageText("Вы наткнулись на огненную ловушку!", 1);
+                ShowMessageText("Вы наткнулись на огненную ловушку!");
                 FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.Fire);
                 break;
             case 16:
-                ShowMessageText("Вы наткнулись на ловушку с кольями!", 1);
+                ShowMessageText("Вы наткнулись на ловушку с кольями!");
                 FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.Bleeding);
                 break;
             case 17:
@@ -713,7 +723,7 @@ public class GameHelper : MonoBehaviour
                 BattleHelper._BH.StartBattle(CharacterManager.CharacterType.HellScareDemon);
                 break;
             case 6:
-                ShowMessageText("Вы наткнулись на огненную ловушку!", 1);
+                ShowMessageText("Вы наткнулись на огненную ловушку!");
                 FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.Fire);
                 break;
             case 7:
@@ -745,7 +755,7 @@ public class GameHelper : MonoBehaviour
                 BattleHelper._BH.StartBattle(CharacterManager.CharacterType.Satana);
                 break;
             case 5:
-                ShowMessageText("Вы наткнулись на огненную ловушку!", 1);
+                ShowMessageText("Вы наткнулись на огненную ловушку!");
                 FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.Fire);
                 break;
             case 6:
@@ -786,7 +796,7 @@ public class GameHelper : MonoBehaviour
                 BattleHelper._BH.StartBattle(CharacterManager.CharacterType.HellDeath);
                 break;
             case 8:
-                ShowMessageText("Вы наткнулись на огненную ловушку!", 1);
+                ShowMessageText("Вы наткнулись на огненную ловушку!");
                 FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.Fire);
                 break;
             case 9:
