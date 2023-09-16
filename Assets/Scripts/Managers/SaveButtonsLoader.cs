@@ -108,7 +108,7 @@ public class SaveButtonsLoader : MonoBehaviour
             saveLoadButtons[saveLoadButtons.Length - 1].GetComponent<saveSlot>().isSaved = false;
 
         saveLoadButtons[saveLoadButtons.Length - 1].GetComponent<saveSlot>().saveRealDate = DateTime.Now;
-        saveLoadButtons[saveLoadButtons.Length - 1].GetComponent<saveSlot>().saveGameDate = GameTimeScript.DateNow();
+        saveLoadButtons[saveLoadButtons.Length - 1].GetComponent<saveSlot>().saveGameDate = GameTimeFlowController.Instance.DateNow();
         saveLoadButtons[saveLoadButtons.Length - 1].GetComponent<saveSlot>().UpdateText();
     }
 

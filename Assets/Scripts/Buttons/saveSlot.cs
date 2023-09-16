@@ -24,7 +24,7 @@ public class saveSlot : MonoBehaviour, IPointerClickHandler
             isSaved = true;
 
             saveRealDate = DateTime.Now;
-            saveGameDate = GameTimeScript.DateNow();
+            saveGameDate = GameTimeFlowController.Instance.DateNow();
 
             FindObjectOfType<SaveButtonsLoader>().SaveState(hiddenSaveName);
             FindObjectOfType<SavingManager>().SaveGame(hiddenSaveName);

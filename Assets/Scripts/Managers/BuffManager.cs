@@ -480,7 +480,7 @@ public class BuffManager : MonoBehaviour
                     Player.MaxMana -= 500;
                     Player.Mana -= 500;
                     Player.ManaRegen -= 125;
-                    FindObjectOfType<GameTimeScript>().currentTimeEvent = GameTimeScript.TimeEvent.None;
+                    GameTimeFlowController.Instance.ForceFinishGameTimeFlowEvent("SunStay_GameTimeFlowEvent");
                     break;
                 case Buff.BuffType.FullmoonBuff:
                     Player.MaxHealth -= 100;
@@ -488,7 +488,7 @@ public class BuffManager : MonoBehaviour
                     Player.Damage -= 35;
                     Player.HealthRegen -= 10;
                     Player.ManaRegen -= 5;
-                    FindObjectOfType<GameTimeScript>().currentTimeEvent = GameTimeScript.TimeEvent.None;
+                    GameTimeFlowController.Instance.ForceFinishGameTimeFlowEvent("FullMoon_Sunstay_GameTimeFlowEvent");
                     break;
                 case Buff.BuffType.PlanetRowBuff:
                     Player.MaxHealth -= 2500;
@@ -499,7 +499,7 @@ public class BuffManager : MonoBehaviour
                     Player.ManaRegen -= 50;
                     Player.MaxMana -= 200;
                     Player.Mana -= 200;
-                    FindObjectOfType<GameTimeScript>().currentTimeEvent = GameTimeScript.TimeEvent.None;
+                    GameTimeFlowController.Instance.ForceFinishGameTimeFlowEvent("PlanetRow_GameTimeFlowEvent");
                     break;
                 case Buff.BuffType.MageAbility:
                     Player.MaxMana -= 1000 * Player.HALvl;

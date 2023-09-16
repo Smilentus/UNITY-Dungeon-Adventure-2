@@ -92,7 +92,7 @@ public class UIScript : MonoBehaviour
         ManaSlider.GetComponentInChildren<Text>().text = Player.Mana + "/" + Player.MaxMana + " ОМ";
 
         // Тексты
-        currentStepText.text = GameTimeScript.DateNow() + "\n" + GameTimeScript.DayStatusNow();
+        currentStepText.text = GameTimeFlowController.Instance.DateNow() + "\n" + GameTimeFlowController.Instance.DayStatusNow();
         AttackText.text = "Урон: " + Player.Damage.ToString();
         ArmorText.text = "Защита: " + Player.Armor.ToString();
         SpeedText.text = "Скорость атаки: " + Player.AttackSpeed.ToString();

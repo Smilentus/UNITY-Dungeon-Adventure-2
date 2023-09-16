@@ -80,7 +80,7 @@ public class SavingManager : MonoBehaviour
         public List<producingItem> villageProducedItems;
         public List<SVillagePart> villageParts;
 
-        public GameTimeScript.TimeEvent savedTimeEvent;
+        public List<GameTimeFlowEvent> savedTimeEvents;
 
         public CharacterManager.CharacterArmorType ArmorType;
         public CharacterManager.CharacterAttackType AttackType;
@@ -175,11 +175,11 @@ public class SavingManager : MonoBehaviour
         save.isFirstEnter = Player.isFirstEnter;
 
         // Сохранение даты
-        save.CurrentHour = GameTimeScript.CurrentHour;
-        save.CurrentDay = GameTimeScript.CurrentDay;
-        save.CurrentMonth = GameTimeScript.CurrentMonth;
-        save.CurrentYear = GameTimeScript.CurrentYear;
-        save.savedTimeEvent = FindObjectOfType<GameTimeScript>().currentTimeEvent;
+        save.CurrentHour = GameTimeFlowController.Instance.CurrentHour;
+        save.CurrentDay = GameTimeFlowController.Instance.CurrentDay;
+        save.CurrentMonth = GameTimeFlowController.Instance.CurrentMonth;
+        save.CurrentYear = GameTimeFlowController.Instance.CurrentYear;
+        save.savedTimeEvents = FindObjectOfType<GameTimeFlowController>().CurrentGameTimeFlowEvents;
 
         // СОХРАНЯТЬ ЗДЕСЬ, НЕ ЗАБУДЬ!
         save.PlayerName = Player.Name;
@@ -352,11 +352,11 @@ public class SavingManager : MonoBehaviour
                 Saver save = (Saver)formatter.Deserialize(fs);
 
                 // Загрузка даты
-                GameTimeScript.CurrentHour = save.CurrentHour;
-                GameTimeScript.CurrentDay = save.CurrentDay;
-                GameTimeScript.CurrentMonth = save.CurrentMonth;
-                GameTimeScript.CurrentYear = save.CurrentYear;
-                FindObjectOfType<GameTimeScript>().currentTimeEvent = save.savedTimeEvent;
+                GameTimeFlowController.Instance.CurrentHour = save.CurrentHour;
+                GameTimeFlowController.Instance.CurrentDay = save.CurrentDay;
+                GameTimeFlowController.Instance.CurrentMonth = save.CurrentMonth;
+                GameTimeFlowController.Instance.CurrentYear = save.CurrentYear;
+                FindObjectOfType<GameTimeFlowController>().SetTimeFlowEvents(save.savedTimeEvents);
 
                 Player.isFirstEnter = save.isFirstEnter;
 
@@ -527,11 +527,11 @@ public class SavingManager : MonoBehaviour
         FindObjectOfType<PlayerVillageActivity>().SetDefault();
 
         // Переменные игрового времени
-        GameTimeScript.CurrentDay = 1;
-        GameTimeScript.CurrentHour = 10;
-        GameTimeScript.CurrentMonth = 1;
-        GameTimeScript.CurrentYear = 1;
-        FindObjectOfType<GameTimeScript>().currentTimeEvent = GameTimeScript.TimeEvent.None;
+        GameTimeFlowController.Instance.CurrentDay = 1;
+        GameTimeFlowController.Instance.CurrentHour = 10;
+        GameTimeFlowController.Instance.CurrentMonth = 1;
+        GameTimeFlowController.Instance.CurrentYear = 1;
+        FindObjectOfType<GameTimeFlowController>().ForceFinishAllGameTimeFlowEvents();
 
         // Переменные игрока
         Player.isFirstEnter = true;

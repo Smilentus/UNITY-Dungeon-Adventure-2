@@ -356,7 +356,7 @@ public class BattleHelper : MonoBehaviour
     public void AttackEnemy(int type)
     {
         if (CurrentRound % 15 == 0)
-            FindObjectOfType<GameTimeScript>().AddTime(1);
+            FindObjectOfType<GameTimeFlowController>().AddTime(1);
 
         if (!Player.isStun)
         {

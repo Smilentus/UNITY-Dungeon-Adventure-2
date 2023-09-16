@@ -60,7 +60,7 @@ public class GameHelper : MonoBehaviour
         }
 
         GameObject newText = Instantiate(EventText, EventParent);
-        newText.GetComponent<Text>().text = "[" + GameTimeScript.DateNow() + "]\n" + text + "\n";
+        newText.GetComponent<Text>().text = "[" + GameTimeFlowController.Instance.DateNow() + "]\n" + text + "\n";
         newText.transform.SetAsFirstSibling();
 
         eventScroll.normalizedPosition = new Vector2(eventScroll.normalizedPosition.x, 1);
@@ -276,7 +276,7 @@ public class GameHelper : MonoBehaviour
             // Добавляем время
             if (timeToWait < 0)
                 timeToWait *= -1;
-            FindObjectOfType<GameTimeScript>().AddTime(timeToWait);
+            FindObjectOfType<GameTimeFlowController>().AddTime(timeToWait);
         }
     }
     // --------------
@@ -415,7 +415,7 @@ public class GameHelper : MonoBehaviour
 
         AddEventText("[Лесопилка] \nДобыто: Древесина " + rndResource + " шт.");
         Inv.AddItem("Log", rndResource);
-        FindObjectOfType<GameTimeScript>().AddTime(rndResource);
+        FindObjectOfType<GameTimeFlowController>().AddTime(rndResource);
 
         GiveExp(rndResource / 2);
     }
@@ -603,7 +603,7 @@ public class GameHelper : MonoBehaviour
         }
 
         GiveExp(rndAmount * oreMultiply);
-        FindObjectOfType<GameTimeScript>().AddTime(4);
+        FindObjectOfType<GameTimeFlowController>().AddTime(4);
         // Накладываем бафф усталости когда находимся в шахте
     }
     public void DungeonLocation()

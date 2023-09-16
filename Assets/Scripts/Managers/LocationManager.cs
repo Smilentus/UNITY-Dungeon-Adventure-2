@@ -287,7 +287,7 @@ public class LocationManager : MonoBehaviour
         {
             if (CurrentLocation != currentInfoLoc)
             {
-                FindObjectOfType<GameTimeScript>().AddTime(timeToAdd);
+                FindObjectOfType<GameTimeFlowController>().AddTime(timeToAdd);
 
                 int pos = LocPos(currentInfoLoc);
 
