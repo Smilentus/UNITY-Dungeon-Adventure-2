@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class neededItemSlot : MonoBehaviour, IPointerClickHandler
 {
     [Header("Нужный предмет")]
-    public Item neededItem;
+    public ItemProfile neededItem;
 
     public void OnPointerClick(PointerEventData eventData)
     {

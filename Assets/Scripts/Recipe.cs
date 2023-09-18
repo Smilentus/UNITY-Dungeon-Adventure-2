@@ -29,7 +29,7 @@ public class Recipe : ScriptableObject
     public string recipeName;
     [Space]
     [Header("Получаемый предмет")]
-    public Item resultItem;
+    public ItemProfile resultItem;
     [Header("Получаемое кол-во предмета")]
     public int resultStack;
     [Header("Необходимые вещи")]

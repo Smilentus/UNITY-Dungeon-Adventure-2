@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class BuffManager : MonoBehaviour
 {
-    public BattleHelper BH;
-
     [Header("Коробка описания")]
     public GameObject DescrBox;
 
@@ -35,11 +33,6 @@ public class BuffManager : MonoBehaviour
     public List<Buff> activeBuffs = new List<Buff>();
     [Header("Активные баффы противников")]
     public List<Buff> enemyActiveBuffs = new List<Buff>();
-
-    private void Start()
-    {
-        BH = FindObjectOfType<BattleHelper>();
-    }
 
     // Обновляем каждый кадр. P.S.: Написал просто для красоты, да, Я дебил.
     private void Update()
@@ -103,7 +96,7 @@ public class BuffManager : MonoBehaviour
     // Добавление баффа противнику
     public void SetBuffToEnemy(Buff.BuffType sType)
     {
-        if (BH.isBattle)
+        if (BattleController.Instance.IsBattle)
         {
             bool isFound = false;
 
@@ -279,45 +272,45 @@ public class BuffManager : MonoBehaviour
             }
         }
 
-        // Противник
-        if (character == 1)
-        {
-            for (int i = 0; i < enemyActiveBuffs.Count; i++)
-            {
-                var = enemyActiveBuffs[i].buffPower;
-                switch (enemyActiveBuffs[i].Type)
-                {
-                    case Buff.BuffType.RegenBonus:
-                        BH.allEnemies[BH.allEnemies.Count - 1].HealthRegen += var;
-                        break;
-                    case Buff.BuffType.HealthBonus:
-                        BH.allEnemies[BH.allEnemies.Count - 1].MaxHealth += var;
-                        BH.allEnemies[BH.allEnemies.Count - 1].Health += var;
-                        break;
-                    case Buff.BuffType.ManaBonus:
-                        BH.allEnemies[BH.allEnemies.Count - 1].MaxMana += var;
-                        BH.allEnemies[BH.allEnemies.Count - 1].Mana += var;
-                        break;
-                    case Buff.BuffType.DamageBonus:
-                        BH.allEnemies[BH.allEnemies.Count - 1].Attack += var;
-                        break;
-                    case Buff.BuffType.ArmorDecreasing:
-                        BH.allEnemies[BH.allEnemies.Count - 1].Armor -= var;
-                        break;
-                    case Buff.BuffType.ArmorBonus:
-                        BH.allEnemies[BH.allEnemies.Count - 1].Armor += var;
-                        break;
-                    case Buff.BuffType.Magic_Stun:
-                        BH.allEnemies[BH.allEnemies.Count - 1].isStun = true;
-                        Debug.Log(BH.allEnemies[BH.allEnemies.Count - 1].Name + " - Имя - " + BH.allEnemies[BH.allEnemies.Count - 1].isStun);
-                        break;
-                }
-            }
-        }
+        //// Противник
+        //if (character == 1)
+        //{
+        //    for (int i = 0; i < enemyActiveBuffs.Count; i++)
+        //    {
+        //        var = enemyActiveBuffs[i].buffPower;
+        //        switch (enemyActiveBuffs[i].Type)
+        //        {
+        //            case Buff.BuffType.RegenBonus:
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].HealthRegen += var;
+        //                break;
+        //            case Buff.BuffType.HealthBonus:
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].MaxHealth += var;
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].Health += var;
+        //                break;
+        //            case Buff.BuffType.ManaBonus:
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].MaxMana += var;
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].Mana += var;
+        //                break;
+        //            case Buff.BuffType.DamageBonus:
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].Damage += var;
+        //                break;
+        //            case Buff.BuffType.ArmorDecreasing:
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].Armor -= var;
+        //                break;
+        //            case Buff.BuffType.ArmorBonus:
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].Armor += var;
+        //                break;
+        //            case Buff.BuffType.Magic_Stun:
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].isStun = true;
+        //                Debug.Log(BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].Name + " - Имя - " + BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].isStun);
+        //                break;
+        //        }
+        //    }
+        //}
 
         CheckBuffEnd();
     }
-
+    
     // Действие баффов каждый ход
     public void BuffsAction()
     {
@@ -349,38 +342,38 @@ public class BuffManager : MonoBehaviour
             }
         }
 
-        // Противник
-        for (int i = 0; i < enemyActiveBuffs.Count; i++)
-        {
-            // На всякий случай проверим должен ли бафф работать
-            if (enemyActiveBuffs[i].Duration > 0)
-            {
-                int var = enemyActiveBuffs[i].buffPower;
-                // Эффект баффа 
-                switch (enemyActiveBuffs[i].Type)
-                {
-                    case Buff.BuffType.Poison:
-                        BH.allEnemies[BH.allEnemies.Count - 1].Health -= var;
-                        break;
-                    case Buff.BuffType.Bleeding:
-                        BH.allEnemies[BH.allEnemies.Count - 1].Health -= var;
-                        break;
-                    case Buff.BuffType.Fire:
-                        BH.allEnemies[BH.allEnemies.Count - 1].Health -= var;
-                        break;
-                    case Buff.BuffType.Magic_Poison:
-                        var MM = FindObjectOfType<MagicManager>();
-                        BH.allEnemies[BH.allEnemies.Count - 1].Health -= MM.allMagicInGame[MM.FindMagicPosInAllMagic(MagicManager.MagicType.Poison)].actionVar;
-                        break;
-                }
+        //// Противник
+        //for (int i = 0; i < enemyActiveBuffs.Count; i++)
+        //{
+        //    // На всякий случай проверим должен ли бафф работать
+        //    if (enemyActiveBuffs[i].Duration > 0)
+        //    {
+        //        int var = enemyActiveBuffs[i].buffPower;
+        //        // Эффект баффа 
+        //        switch (enemyActiveBuffs[i].Type)
+        //        {
+        //            case Buff.BuffType.Poison:
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].Health -= var;
+        //                break;
+        //            case Buff.BuffType.Bleeding:
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].Health -= var;
+        //                break;
+        //            case Buff.BuffType.Fire:
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].Health -= var;
+        //                break;
+        //            case Buff.BuffType.Magic_Poison:
+        //                var MM = FindObjectOfType<MagicManager>();
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].Health -= MM.allMagicInGame[MM.FindMagicPosInAllMagic(MagicManager.MagicType.Poison)].actionVar;
+        //                break;
+        //        }
 
-                if (!enemyActiveBuffs[i].isInfinity)
-                {
-                    // Изменяем пару переменных
-                    enemyActiveBuffs[i].Duration--;
-                }
-            }
-        }
+        //        if (!enemyActiveBuffs[i].isInfinity)
+        //        {
+        //            // Изменяем пару переменных
+        //            enemyActiveBuffs[i].Duration--;
+        //        }
+        //    }
+        //}
 
         // Проверяем закончился ли бафф
         CheckBuffEnd();
@@ -530,39 +523,39 @@ public class BuffManager : MonoBehaviour
                     break;
             }
         }
-        if(character == 1)
-        {
-            var = enemyActiveBuffs[i].buffPower;
-            if (BH.allEnemies.Count != 0)
-            {
-                switch (enemyActiveBuffs[i].Type)
-                {
-                    case Buff.BuffType.RegenBonus:
-                        BH.allEnemies[BH.allEnemies.Count - 1].HealthRegen -= var;
-                        break;
-                    case Buff.BuffType.HealthBonus:
-                        BH.allEnemies[BH.allEnemies.Count - 1].MaxHealth -= var;
-                        BH.allEnemies[BH.allEnemies.Count - 1].Health -= var;
-                        break;
-                    case Buff.BuffType.ManaBonus:
-                        BH.allEnemies[BH.allEnemies.Count - 1].MaxMana -= var;
-                        BH.allEnemies[BH.allEnemies.Count - 1].Mana -= var;
-                        break;
-                    case Buff.BuffType.DamageBonus:
-                        BH.allEnemies[BH.allEnemies.Count - 1].Attack -= var;
-                        break;
-                    case Buff.BuffType.ArmorDecreasing:
-                        BH.allEnemies[BH.allEnemies.Count - 1].Armor += var;
-                        break;
-                    case Buff.BuffType.ArmorBonus:
-                        BH.allEnemies[BH.allEnemies.Count - 1].Armor -= var;
-                        break;
-                    case Buff.BuffType.Magic_Stun:
-                        BH.allEnemies[BH.allEnemies.Count - 1].isStun = false;
-                        break;
-                }
-            }
-        }
+        //if(character == 1)
+        //{
+        //    var = enemyActiveBuffs[i].buffPower;
+        //    if (BattleController.Instance.allEnemies.Count != 0)
+        //    {
+        //        switch (enemyActiveBuffs[i].Type)
+        //        {
+        //            case Buff.BuffType.RegenBonus:
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].HealthRegen -= var;
+        //                break;
+        //            case Buff.BuffType.HealthBonus:
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].MaxHealth -= var;
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].Health -= var;
+        //                break;
+        //            case Buff.BuffType.ManaBonus:
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].MaxMana -= var;
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].Mana -= var;
+        //                break;
+        //            case Buff.BuffType.DamageBonus:
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].Damage -= var;
+        //                break;
+        //            case Buff.BuffType.ArmorDecreasing:
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].Armor += var;
+        //                break;
+        //            case Buff.BuffType.ArmorBonus:
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].Armor -= var;
+        //                break;
+        //            case Buff.BuffType.Magic_Stun:
+        //                BattleController.Instance.allEnemies[BattleController.Instance.allEnemies.Count - 1].isStun = false;
+        //                break;
+        //        }
+        //    }
+        //}
     }
     public void DeleteBuffAction(Buff.BuffType dType)
     {

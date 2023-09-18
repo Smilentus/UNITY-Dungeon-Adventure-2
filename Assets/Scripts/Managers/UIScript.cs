@@ -106,35 +106,35 @@ public class UIScript : MonoBehaviour
         DodgeChanceText.text = "Шанс уворота: " + Player.DodgeChance + "%";
         ExtraExpModText.text = "Доп. опыт: " + Player.ExtraExpMod + "%";
         ExtraMoneyModText.text = "Доп. золото: " + Player.ExtraMoneyMod + "%";
-        currentLocation.text = LocationManager.LocationToText(LocationManager.CurrentLocation);
+        currentLocation.text = LocationsController.Instance.CurrentLocation.LocationTitle;
     }
 
     // Обновление текстов противника
     public void UpdateEnemyUIText()
     {
-        for (int i = 0; i < BattleHelper._BH.allEnemies.Count; i++)
-        {
-            // Проверка допустимых значений
-            if (BattleHelper._BH.allEnemies[i].Health > BattleHelper._BH.allEnemies[i].MaxHealth)
-                BattleHelper._BH.allEnemies[i].Health = BattleHelper._BH.allEnemies[i].MaxHealth;
-            if (BattleHelper._BH.allEnemies[i].Mana > BattleHelper._BH.allEnemies[i].MaxMana)
-                BattleHelper._BH.allEnemies[i].Mana = BattleHelper._BH.allEnemies[i].MaxMana;
+        //for (int i = 0; i < BattleController.Instance.allEnemies.Count; i++)
+        //{
+        //    // Проверка допустимых значений
+        //    if (BattleController.Instance.allEnemies[i].Health > BattleController.Instance.allEnemies[i].MaxHealth)
+        //        BattleController.Instance.allEnemies[i].Health = BattleController.Instance.allEnemies[i].MaxHealth;
+        //    if (BattleController.Instance.allEnemies[i].Mana > BattleController.Instance.allEnemies[i].MaxMana)
+        //        BattleController.Instance.allEnemies[i].Mana = BattleController.Instance.allEnemies[i].MaxMana;
 
-            // Установка новых значений
-            BattleHelper._BH.allEnemiesObjects[i].transform.GetChild(1).GetComponent<Text>().text = BattleHelper._BH.allEnemies[i].Name.ToString();
-            BattleHelper._BH.allEnemiesObjects[i].transform.GetChild(2).GetChild(2).GetComponent<Text>().text = BattleHelper._BH.allEnemies[i].Health.ToString() + "/" + BattleHelper._BH.allEnemies[i].MaxHealth.ToString();
-            BattleHelper._BH.allEnemiesObjects[i].transform.GetChild(2).GetComponent<Slider>().value = (float)BattleHelper._BH.allEnemies[i].Health;
-            BattleHelper._BH.allEnemiesObjects[i].transform.GetChild(2).GetComponent<Slider>().maxValue = (float)BattleHelper._BH.allEnemies[i].MaxHealth;
-            BattleHelper._BH.allEnemiesObjects[i].transform.GetChild(3).GetComponent<Text>().text = BattleHelper._BH.allEnemies[i].Attack.ToString();
-            BattleHelper._BH.allEnemiesObjects[i].transform.GetChild(4).GetComponent<Text>().text = BattleHelper._BH.allEnemies[i].AttackSpeed.ToString();
-            BattleHelper._BH.allEnemiesObjects[i].transform.GetChild(5).GetComponent<Text>().text = BattleHelper._BH.allEnemies[i].Armor.ToString();
-            BattleHelper._BH.allEnemiesObjects[i].transform.GetChild(6).GetComponent<Text>().text = BattleHelper._BH.allEnemies[i].elementStr;
+        //    // Установка новых значений
+        //    BattleController.Instance.allEnemiesObjects[i].transform.GetChild(1).GetComponent<Text>().text = BattleController.Instance.allEnemies[i].Name.ToString();
+        //    BattleController.Instance.allEnemiesObjects[i].transform.GetChild(2).GetChild(2).GetComponent<Text>().text = BattleController.Instance.allEnemies[i].Health.ToString() + "/" + BattleController.Instance.allEnemies[i].MaxHealth.ToString();
+        //    BattleController.Instance.allEnemiesObjects[i].transform.GetChild(2).GetComponent<Slider>().value = (float)BattleController.Instance.allEnemies[i].Health;
+        //    BattleController.Instance.allEnemiesObjects[i].transform.GetChild(2).GetComponent<Slider>().maxValue = (float)BattleController.Instance.allEnemies[i].MaxHealth;
+        //    BattleController.Instance.allEnemiesObjects[i].transform.GetChild(3).GetComponent<Text>().text = BattleController.Instance.allEnemies[i].Damage.ToString();
+        //    BattleController.Instance.allEnemiesObjects[i].transform.GetChild(4).GetComponent<Text>().text = BattleController.Instance.allEnemies[i].AttackSpeed.ToString();
+        //    BattleController.Instance.allEnemiesObjects[i].transform.GetChild(5).GetComponent<Text>().text = BattleController.Instance.allEnemies[i].Armor.ToString();
+        //    BattleController.Instance.allEnemiesObjects[i].transform.GetChild(6).GetComponent<Text>().text = BattleController.Instance.allEnemies[i].elementStr;
 
-            // Помощник
-            if (BattleHelper._BH.allEnemies[i].Health < 0)
-                BattleHelper._BH.allEnemiesObjects[i].transform.GetChild(2).GetComponent<Slider>().value = 0;
-            else
-                BattleHelper._BH.allEnemiesObjects[i].transform.GetChild(2).GetComponent<Slider>().value = (float)BattleHelper._BH.allEnemies[i].Health;
-        }
+        //    // Помощник
+        //    if (BattleController.Instance.allEnemies[i].Health < 0)
+        //        BattleController.Instance.allEnemiesObjects[i].transform.GetChild(2).GetComponent<Slider>().value = 0;
+        //    else
+        //        BattleController.Instance.allEnemiesObjects[i].transform.GetChild(2).GetComponent<Slider>().value = (float)BattleController.Instance.allEnemies[i].Health;
+        //}
     }
 }

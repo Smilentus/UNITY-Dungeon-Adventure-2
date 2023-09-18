@@ -57,6 +57,7 @@ public class InfoGlobalWindow : MonoBehaviour, IGlobalWindow
 
     public void Show()
     {
+        Debug.Log($"show");
         this.gameObject.SetActive(true);
     }
 

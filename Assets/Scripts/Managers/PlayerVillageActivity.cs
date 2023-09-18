@@ -364,7 +364,7 @@ public class PlayerVillageActivity : MonoBehaviour
     }
 
     // Добавляем в общий список продукцию
-    public void AddProducingResource(Item item, int stack)
+    public void AddProducingResource(ItemProfile item, int stack)
     {
         currentProducingItems.Add(new producingItem() { item = item, producingStack = stack });
     }

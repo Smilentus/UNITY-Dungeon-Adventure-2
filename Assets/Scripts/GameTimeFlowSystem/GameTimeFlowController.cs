@@ -125,9 +125,12 @@ public class GameTimeFlowController : MonoBehaviour
     {
         foreach (GameTimeFlowEventBaseController controller in m_gameTimeFlowEventBaseControllers)
         {
-            controller.FinishEvent();
+            if (controller.IsEventStarted)
+            {
+                controller.FinishEvent();
 
-            currentGameTimeEvents.Remove(controller.GameTimeFlowEventReference);
+                currentGameTimeEvents.Remove(controller.GameTimeFlowEventReference);
+            }
         }
     }
 

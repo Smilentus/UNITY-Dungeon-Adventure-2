@@ -82,13 +82,13 @@ public class SavingManager : MonoBehaviour
 
         public List<GameTimeFlowEvent> savedTimeEvents;
 
-        public CharacterManager.CharacterArmorType ArmorType;
-        public CharacterManager.CharacterAttackType AttackType;
-        public CharacterManager.CharacterElement Element;
+        public CharactersLibrary.CharacterArmorType ArmorType;
+        public CharactersLibrary.CharacterAttackType AttackType;
+        public CharactersLibrary.CharacterElement Element;
 
-        public LocationManager.Location Location;
+        public LocationProfile Location;
 
-        public List<LocationManager.Location> savedLocations = new List<LocationManager.Location>();
+        public List<LocationProfile> savedLocations = new List<LocationProfile>();
 
         public List<SSkill> savedSkills = new List<SSkill>();
         public List<SItem> savedInv = new List<SItem>();
@@ -141,10 +141,10 @@ public class SavingManager : MonoBehaviour
     }
 
     [Header("Ссылки")]
-    public BattleHelper BH;
+    public BattleController BH;
     public GameController GH;
-    public CharacterManager CM;
-    public LocationManager LM;
+    public CharactersLibrary CM;
+    public LocationsController LM;
     public Inventory INV;
     public PanelsManager PM;
     public SkillsManager SMr;
@@ -245,7 +245,7 @@ public class SavingManager : MonoBehaviour
         save.manaPotionCounter = INV.manaPotionCounter;
 
         // Локация
-        save.Location = LocationManager.CurrentLocation;
+        save.Location = LocationsController.Instance.CurrentLocation;
 
         // Сохранение деревни
         save.villageName = PVA.villageName;
@@ -274,12 +274,12 @@ public class SavingManager : MonoBehaviour
             });
         }
 
-        var locList = FindObjectOfType<LocationManager>();
-        // Сохранение найденных локаций
-        for (int i = 0; i < locList.foundedLocations.Count; i++)
-        {
-            save.savedLocations.Add(locList.foundedLocations[i]);
-        }
+        //var locList = FindObjectOfType<LocationsController>();
+        //// Сохранение найденных локаций
+        //for (int i = 0; i < locList.foundedLocations.Count; i++)
+        //{
+        //    save.savedLocations.Add(locList.foundedLocations[i]);
+        //}
 
         // Сохранение скиллов
         for(int skill = 0; skill < SMr.AllSkills.Length; skill++)
@@ -425,10 +425,10 @@ public class SavingManager : MonoBehaviour
                 INV.manaPotionCounter = save.manaPotionCounter;
 
                 // Локация
-                LocationManager.CurrentLocation = save.Location;
-                LM.ChangeLocationAfterLoading(LocationManager.CurrentLocation);
+                //LocationsController.Instance.CurrentLocation = save.Location;
+                //LM.ChangeLocationAfterLoading(LocationsController.CurrentLocation);
 
-                var locList = FindObjectOfType<LocationManager>();
+                var locList = FindObjectOfType<LocationsController>();
 
                 // Загрузка деревни
                 PVA.SetDefault();
@@ -453,14 +453,14 @@ public class SavingManager : MonoBehaviour
                 }
 
                 // Загрузка найденных локаций
-                for (int i = 0; i < save.savedLocations.Count; i++)
-                {
-                    locList.foundedLocations.Add(save.savedLocations[i]);
-                }
-                if (save.savedLocations.Count > 0)
-                    LM.buttonFoundedLocations.SetActive(true);
-                else
-                    LM.buttonFoundedLocations.SetActive(false);
+                //for (int i = 0; i < save.savedLocations.Count; i++)
+                //{
+                //    locList.foundedLocations.Add(save.savedLocations[i]);
+                //}
+                //if (save.savedLocations.Count > 0)
+                //    LM.buttonFoundedLocations.SetActive(true);
+                //else
+                //    LM.buttonFoundedLocations.SetActive(false);
                 // Загрузка скиллов
                 for (int skill = 0; skill < SMr.AllSkills.Length; skill++)
                 {
@@ -588,15 +588,15 @@ public class SavingManager : MonoBehaviour
         INV.manaPotionCounter = 0;
 
         // Типы
-        Player.AttackType = CharacterManager.CharacterAttackType.Melee;
-        Player.ArmorType = CharacterManager.CharacterArmorType.None;
-        Player.Element = CharacterManager.CharacterElement.None;
+        Player.AttackType = CharactersLibrary.CharacterAttackType.Melee;
+        Player.ArmorType = CharactersLibrary.CharacterArmorType.None;
+        Player.Element = CharactersLibrary.CharacterElement.None;
 
         // Локация
-        LocationManager.CurrentLocation = LocationManager.Location.GreenForest;
-        LM.ChangeLocationAfterLoading(LocationManager.CurrentLocation);
-        LM.foundedLocations = new List<LocationManager.Location>();
-        LM.CheckLocations();
+        //LocationsController.CurrentLocation = LocationsController.Location.GreenForest;
+        //LM.ChangeLocationAfterLoading(LocationsController.CurrentLocation);
+        //LM.foundedLocations = new List<LocationsController.Location>();
+        //LM.CheckLocations();
 
         // Функции
         SMr.NullSkills();
@@ -652,17 +652,17 @@ public class SavingManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Home) || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Menu))
         {
-            if(!BattleHelper._BH.isBattle)
+            if(!BattleController.Instance.IsBattle)
                 SaveGame("AutoSave");
         }
     }
     private void Awake()
     {
         // Ищем все контроллеры ...
-        BH = FindObjectOfType<BattleHelper>();
+        BH = FindObjectOfType<BattleController>();
         GH = FindObjectOfType<GameController>();
-        CM = FindObjectOfType<CharacterManager>();
-        LM = FindObjectOfType<LocationManager>();
+        CM = FindObjectOfType<CharactersLibrary>();
+        LM = FindObjectOfType<LocationsController>();
         INV = FindObjectOfType<Inventory>();
         SMr = FindObjectOfType<SkillsManager>();
         BM = FindObjectOfType<BuffManager>();

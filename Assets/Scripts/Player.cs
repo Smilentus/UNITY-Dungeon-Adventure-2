@@ -12,7 +12,7 @@ public class Player
         Explosioner
     }
 
-    public static CharacterManager.CharacterElement Element;
+    public static CharactersLibrary.CharacterElement Element;
     public static string elementStr
     {
         get
@@ -20,25 +20,25 @@ public class Player
             string str = "";
             switch (Element)
             {
-                case CharacterManager.CharacterElement.Dark:
+                case CharactersLibrary.CharacterElement.Dark:
                     str = "Тьма";
                     break;
-                case CharacterManager.CharacterElement.Earth:
+                case CharactersLibrary.CharacterElement.Earth:
                     str = "Земля";
                     break;
-                case CharacterManager.CharacterElement.Fire:
+                case CharactersLibrary.CharacterElement.Fire:
                     str = "Огонь";
                     break;
-                case CharacterManager.CharacterElement.Light:
+                case CharactersLibrary.CharacterElement.Light:
                     str = "Свет";
                     break;
-                case CharacterManager.CharacterElement.None:
+                case CharactersLibrary.CharacterElement.None:
                     str = "Нет стихии";
                     break;
-                case CharacterManager.CharacterElement.Water:
+                case CharactersLibrary.CharacterElement.Water:
                     str = "Вода";
                     break;
-                case CharacterManager.CharacterElement.Wind:
+                case CharactersLibrary.CharacterElement.Wind:
                     str = "Воздух";
                     break;
             }
@@ -48,11 +48,11 @@ public class Player
     public static string Name;
     public static double MaxHealth, Health;
     public static double HealthRegen;
-    public static CharacterManager.CharacterArmorType ArmorType;
+    public static CharactersLibrary.CharacterArmorType ArmorType;
     public static double Armor;
     public static double MaxMana, Mana;
     public static double ManaRegen;
-    public static CharacterManager.CharacterAttackType AttackType;
+    public static CharactersLibrary.CharacterAttackType AttackType;
     public static double AttackSpeed;
     public static double Damage;
 

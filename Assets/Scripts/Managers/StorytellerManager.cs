@@ -166,7 +166,7 @@ public class StorytellerManager : MonoBehaviour
                 Player.isHadVillage = true;
                 Player.Money -= 100000;
                 // Покупка деревни
-                FindObjectOfType<LocationManager>().AddNewExtraLocation(LocationManager.Location.Player_Village);
+                //FindObjectOfType<LocationsController>().AddNewExtraLocation(LocationsController.Location.Player_Village);
             }
         }
     }

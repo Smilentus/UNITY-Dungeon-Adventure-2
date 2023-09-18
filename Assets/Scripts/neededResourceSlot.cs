@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class neededResourceSlot : MonoBehaviour, IPointerClickHandler
 {
     [Header("Ресурс")]
-    public Item item;
+    public ItemProfile item;
     public int producingStack;
 
     public bool isProducing;

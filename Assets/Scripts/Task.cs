@@ -34,7 +34,7 @@ public class Task : ScriptableObject
 
     [Space(20)]
     [Header("Предмет")]
-    public Item rewardItem;
+    public ItemProfile rewardItem;
     [Header("Кол-во предметов")]
     public int rewardStack;
     // Добавить исследование

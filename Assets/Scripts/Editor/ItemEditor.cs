@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(Item))]
+[CustomEditor(typeof(ItemProfile))]
 public class ItemEditor : Editor
 {
     // Ссылка на предметный скрипт
-    private Item currentItem;
+    private ItemProfile currentItem;
     // Сериализируемый объект
     private SerializedObject soItem;
 
@@ -45,7 +45,7 @@ public class ItemEditor : Editor
     // Инициализация
     public void OnEnable()
     {
-        currentItem = (Item)target;
+        currentItem = (ItemProfile)target;
         soItem = new SerializedObject(target);
 
         takedSlot = soItem.FindProperty("takedSlot");

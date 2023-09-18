@@ -133,55 +133,54 @@ public class HeroAbilityManager : MonoBehaviour
     // Использование индивидуальной способности персонажа
     public void UseHeroAbility()
     {
-        if (Player.HACharge >= Player.HAMaxCharge)
-        {
-            switch (Player.Ability)
-            {
-                case Player.HeroAbility.Archer:
-                    if (BattleHelper._BH.isBattle)
-                    {
-                        Player.HACharge = 0;
-                        BattleHelper._BH.allEnemies[0].Health = BattleHelper._BH.allEnemies[0].Health * 0.01;
-                        FindObjectOfType<BattleHelper>().CheckEnemyDeath();
-                    }
-                    break;
-                case Player.HeroAbility.Explosioner:
-                    if (BattleHelper._BH.isBattle)
-                    {
-                        Player.HACharge = 0;
-                        var helper = BattleHelper._BH;
-                        for (int i = 0; i < helper.allEnemies.Count; i++)
-                        {
-                            helper.allEnemies[i].Health -= 1000 * Player.HALvl;
-                        }
-                    }
-                    break;
-                case Player.HeroAbility.Warrior:
-                    Player.HACharge = 0;
-                    FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.WarriorAbility);
-                    break;
-                case Player.HeroAbility.Mage:
-                    Player.HACharge = 0;
-                    FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.MageAbility);
-                    if(BattleHelper._BH.isBattle)
-                    {
-                        // Если в битве, то пускаем X фаерболлов в противника
-                        for(int i = 0; i < Player.HALvl; i++)
-                            BattleHelper._BH.allEnemies[0].Health -= 100 * Player.HALvl;
-                    }
-                    break;
-                case Player.HeroAbility.Ninja:
-                    Player.HACharge = 0;
-                    Player.MaxHealth += 50 * Player.HALvl;
-                    Player.Health += 50 * Player.HALvl;
-                    Player.Damage += 5 * Player.HALvl;
-                    Player.AttackSpeed += 1;
-                    break;
-                default:
-                    // Пусто :P
-                    break;
-            }
-            FindObjectOfType<AbilityButton>().StopAnimateButton();
-        }
+        //if (Player.HACharge >= Player.HAMaxCharge)
+        //{
+        //    switch (Player.Ability)
+        //    {
+        //        case Player.HeroAbility.Archer:
+        //            if (BattleController.Instance.IsBattle)
+        //            {
+        //                Player.HACharge = 0;
+        //                //BattleController.Instance.allEnemies[0].Health = BattleController.Instance.allEnemies[0].Health * 0.01;
+        //                BattleController.Instance.CheckEnemyDeath();
+        //            }
+        //            break;
+        //        case Player.HeroAbility.Explosioner:
+        //            if (BattleController.Instance.isBattle)
+        //            {
+        //                Player.HACharge = 0;
+        //                for (int i = 0; i < BattleController.Instance.allEnemies.Count; i++)
+        //                {
+        //                    BattleController.Instance.allEnemies[i].Health -= 1000 * Player.HALvl;
+        //                }
+        //            }
+        //            break;
+        //        case Player.HeroAbility.Warrior:
+        //            Player.HACharge = 0;
+        //            FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.WarriorAbility);
+        //            break;
+        //        case Player.HeroAbility.Mage:
+        //            Player.HACharge = 0;
+        //            FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.MageAbility);
+        //            if(BattleController.Instance.isBattle)
+        //            {
+        //                // Если в битве, то пускаем X фаерболлов в противника
+        //                for(int i = 0; i < Player.HALvl; i++)
+        //                    BattleController.Instance.allEnemies[0].Health -= 100 * Player.HALvl;
+        //            }
+        //            break;
+        //        case Player.HeroAbility.Ninja:
+        //            Player.HACharge = 0;
+        //            Player.MaxHealth += 50 * Player.HALvl;
+        //            Player.Health += 50 * Player.HALvl;
+        //            Player.Damage += 5 * Player.HALvl;
+        //            Player.AttackSpeed += 1;
+        //            break;
+        //        default:
+        //            // Пусто :P
+        //            break;
+        //    }
+        //    FindObjectOfType<AbilityButton>().StopAnimateButton();
+        //}
     }
 }

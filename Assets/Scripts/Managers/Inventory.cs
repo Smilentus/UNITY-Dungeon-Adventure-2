@@ -28,19 +28,19 @@ public class Inventory : MonoBehaviour
     }
 
     [Header("Все вещи в игре")]
-    public Item[] AllItems;
+    public ItemProfile[] AllItems;
 
     [Space(20)]
     [Header("Вещи путешествующего странника")]
-    public Item[] adventurerItems;
+    public ItemProfile[] adventurerItems;
     [Header("Вещи путешествующего священника")]
-    public Item[] preacherItems;
+    public ItemProfile[] preacherItems;
     [Header("Вещи из сундука")]
-    public Item[] ChestItems;
+    public ItemProfile[] ChestItems;
 
     [Space(20)]
     [Header("Вещи в инвентаре")]
-    public Item[] inventory;
+    public ItemProfile[] inventory;
     [Header("Кнопки инвентаря")]
     public GameObject[] Buttons;
 
@@ -61,7 +61,7 @@ public class Inventory : MonoBehaviour
     [Space(20)]
     [Header("Слот мышки")]
     public Transform mouseIcon;
-    public Item mouseSlot;
+    public ItemProfile mouseSlot;
 
     [Header("Панель описания")]
     public GameObject DescrBox;
@@ -121,7 +121,7 @@ public class Inventory : MonoBehaviour
     public void InventoryInitialization()
     {
         Buttons = new GameObject[InvCapacity + 34];
-        inventory = new Item[InvCapacity + 34];
+        inventory = new ItemProfile[InvCapacity + 34];
 
         Debug.Log("Очищен инвентарь!");
 
@@ -136,7 +136,7 @@ public class Inventory : MonoBehaviour
                 newSlot.GetComponent<InvButton>().isActive = false;
             newSlot.GetComponent<InvButton>().UpdateState();
 
-            inventory[i] = new Item();
+            inventory[i] = new ItemProfile();
 
             Buttons[i] = newSlot;
         }
@@ -152,7 +152,7 @@ public class Inventory : MonoBehaviour
                 newSlot.GetComponent<InvButton>().isActive = false;
             newSlot.GetComponent<InvButton>().UpdateState();
 
-            inventory[i] = new Item();
+            inventory[i] = new ItemProfile();
 
             Buttons[i] = newSlot;
         }
@@ -164,7 +164,7 @@ public class Inventory : MonoBehaviour
             newSlot.GetComponent<InvButton>().isActive = true;
             newSlot.GetComponent<InvButton>().UpdateState();
 
-            inventory[i] = new Item();
+            inventory[i] = new ItemProfile();
 
             Buttons[i] = newSlot;
         }
@@ -176,7 +176,7 @@ public class Inventory : MonoBehaviour
             newSlot.GetComponent<InvButton>().isActive = true;
             newSlot.GetComponent<InvButton>().UpdateState();
 
-            inventory[i] = new Item();
+            inventory[i] = new ItemProfile();
 
             Buttons[i] = newSlot;
         }
@@ -195,7 +195,7 @@ public class Inventory : MonoBehaviour
                 newSlot.GetComponent<InvButton>().isActive = false;
             newSlot.GetComponent<InvButton>().UpdateState();
 
-            inventory[i] = new Item();
+            inventory[i] = new ItemProfile();
 
             Buttons[i] = newSlot;
         }
@@ -204,7 +204,7 @@ public class Inventory : MonoBehaviour
         GameObject Trash = Instantiate(invSlot, trashPanel);
         Trash.GetComponent<InvButton>().slotNum = 70;
         Trash.GetComponent<InvButton>().isActive = true;
-        inventory[70] = new Item();
+        inventory[70] = new ItemProfile();
         Buttons[70] = Trash;
         // Закончили создавать мусорку.
         // РЕГИОНЫ ДЛЯ СЛАБАКОВ.
@@ -262,7 +262,7 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < inventory.Length; i++)
         {
-            inventory[i] = new Item();
+            inventory[i] = new ItemProfile();
         }
     }
 
@@ -280,7 +280,7 @@ public class Inventory : MonoBehaviour
     // Обнуление слота мышки
     public void NullMouseSlot()
     {
-        mouseSlot = new Item();
+        mouseSlot = new ItemProfile();
         ReDrawInventory();
     }
 
@@ -424,7 +424,7 @@ public class Inventory : MonoBehaviour
                         break;
                     case 6:
                         GameController.Instance.ShowMessageText("Вы нарушили баланс Вселенной, готовьтесь к худшему!", "[Событие]");
-                        BattleHelper._BH.StartBattle(CharacterManager.CharacterType.BalanceKeeper);
+                        BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.BalanceKeeper);
                         break;
                     case 7:
                         FindObjectOfType<ArtAndVideoManager>().StartArtShow("IlluminatiArt");
@@ -441,13 +441,13 @@ public class Inventory : MonoBehaviour
                 break;
             case "Potion_Destroyer":
                 // Зелье уничтожения -> Добавить возможность уничтожения противника
-                if (FindObjectOfType<BattleHelper>().isBattle)
+                if (FindObjectOfType<BattleController>().IsBattle)
                 {
                     CheckItemForDelete(ID, 1);
-                    if (Random.Range(1, 101) <= 50)
-                        BattleHelper._BH.allEnemies[0].Health = -1;
-                    else
-                        Player.Health = -1;
+                    //if (Random.Range(1, 101) <= 50)
+                    //    BattleController.Instance.allEnemies[0].Health = -1;
+                    //else
+                    //    Player.Health = -1;
 
                     if (Player.Health < 0)
                     {
@@ -455,7 +455,7 @@ public class Inventory : MonoBehaviour
                     }
                     else
                     {
-                        BattleHelper._BH.CheckEnemyDeath();
+                        BattleController.Instance.CheckEnemyDeath();
                     }
                 }
                 else
@@ -477,32 +477,32 @@ public class Inventory : MonoBehaviour
                 }
                 break;
             case "Cage":
-                if (BattleHelper._BH.isBattle)
+                if (BattleController.Instance.IsBattle)
                 {
-                    if (BattleHelper._BH.allEnemies[0].Type == CharacterManager.CharacterType.RedRabbit)
-                    {
-                        FindObjectOfType<Inventory>().CheckItemForDelete("Cage", 1);
-                        FindObjectOfType<Inventory>().AddItem("RabbitInCage", 1);
-                        BattleHelper._BH.isWin = true;
-                        BattleHelper._BH.EndBattle();
-                    }
-                    else
-                    {
-                        GameController.Instance.ShowMessageText("Это нужно использовать на другое существо!");
-                    }
+                    //if (BattleController.Instance.allEnemies[0].Type == CharactersLibrary.CharacterType.RedRabbit)
+                    //{
+                    //    FindObjectOfType<Inventory>().CheckItemForDelete("Cage", 1);
+                    //    FindObjectOfType<Inventory>().AddItem("RabbitInCage", 1);
+                    //    BattleController.Instance.isWin = true;
+                    //    BattleController.Instance.EndBattle();
+                    //}
+                    //else
+                    //{
+                    //    GameController.Instance.ShowMessageText("Это нужно использовать на другое существо!");
+                    //}
                 }
                 else
                     GameController.Instance.ShowMessageText("Это нужно использовать на КРАСНОГО кролика в КРАСНОМ лесу!");
                 break;
             case "RabbitInCage":
-                if (LocationManager.CurrentLocation == LocationManager.Location.RF_House)
-                {
-                    if (IsContainItem("RabbitInCage"))
-                    {
-                        FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.Happiness);
-                        CheckItemForDelete("RabbitInCage", 1);
-                    }
-                }
+                //if (LocationsController.CurrentLocation == LocationsController.Location.RF_House)
+                //{
+                //    if (IsContainItem("RabbitInCage"))
+                //    {
+                //        FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.Happiness);
+                //        CheckItemForDelete("RabbitInCage", 1);
+                //    }
+                //}
                 break;
             case "Book_Black":
                 // Чёрная книга -> Случайный эффект, усиленная версия зелья
@@ -545,7 +545,7 @@ public class Inventory : MonoBehaviour
         if (slot != 70 && inventory[slot].Icon != null)
         {
             inventory[70] = inventory[slot];
-            inventory[slot] = new Item();
+            inventory[slot] = new ItemProfile();
             HighlightSlots();
             ReDrawInventory();
         }
@@ -581,7 +581,7 @@ public class Inventory : MonoBehaviour
                 inventory[i].Stack -= stack;
                 // Если кол-во равно 0, удаляем полностью
                 if (inventory[i].Stack <= 0)
-                    inventory[i] = new Item();
+                    inventory[i] = new ItemProfile();
                 break;
             }
         }
@@ -831,7 +831,7 @@ public class Inventory : MonoBehaviour
                         // Забираем предмет в мышку
                         mouseSlot = inventory[slot];
                         // Даём новый ПУСТОЙ предмет в слот
-                        inventory[slot] = new Item();
+                        inventory[slot] = new ItemProfile();
                     }
                     else // Если слот не имеет предмет
                     {
@@ -898,7 +898,7 @@ public class Inventory : MonoBehaviour
                     {
                         // Забираем предмет из мусорки
                         mouseSlot = inventory[slot];
-                        inventory[slot] = new Item();
+                        inventory[slot] = new ItemProfile();
                     }
                     else // Если в мышке есть предмет, то передаём в мусорку и обнуляем мышку
                     {
@@ -934,7 +934,7 @@ public class Inventory : MonoBehaviour
                         // Если предмет в мышке можно положить в слот, то меняем местами
                         if (CheckEquipment(slot))
                         {
-                            Item temp = mouseSlot;
+                            ItemProfile temp = mouseSlot;
                             EnequipItem(slot);
                             mouseSlot = inventory[slot];
                             inventory[slot] = temp;
@@ -994,7 +994,7 @@ public class Inventory : MonoBehaviour
                     {
                         EnequipItem(slot);
                         mouseSlot = inventory[slot];
-                        inventory[slot] = new Item();
+                        inventory[slot] = new ItemProfile();
                     }
                     else // Если на слоте нет предмета
                     {

@@ -3,6 +3,6 @@
 [System.Serializable]
 public class NeededItem
 {
-    public Item neededItem;
+    public ItemProfile neededItem;
     public int neededStack;
 }

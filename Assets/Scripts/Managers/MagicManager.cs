@@ -19,7 +19,7 @@ public class MagicManager : MonoBehaviour
     }
 
     // Ссылка на BattleHelper
-    private BattleHelper BH;
+    private BattleController BH;
 
     [Header("Вся магия в игре")]
     public Magic[] allMagicInGame;
@@ -36,7 +36,7 @@ public class MagicManager : MonoBehaviour
 
     private void Awake()
     {
-        BH = FindObjectOfType<BattleHelper>();
+        BH = FindObjectOfType<BattleController>();
     }
 
     // Поиск магии в списке игрока
@@ -118,66 +118,66 @@ public class MagicManager : MonoBehaviour
     // Использование магии
     public void UseMagic(MagicType usableMagic)
     {
-        if (playerMagic[FindMagicPos(usableMagic)].canUseMagic)
-        {
-            playerMagic[FindMagicPos(usableMagic)].currentCooldown = playerMagic[FindMagicPos(usableMagic)].cooldownTimeMax;
+        //if (playerMagic[FindMagicPos(usableMagic)].canUseMagic)
+        //{
+        //    playerMagic[FindMagicPos(usableMagic)].currentCooldown = playerMagic[FindMagicPos(usableMagic)].cooldownTimeMax;
 
-            switch (usableMagic)
-            {
-                case MagicType.Fireball:
-                    // Наносим урон от фаербола первому противнику в ряду
-                    Debug.Log("Фаерболл");
-                    Debug.Log("Наносим " + playerMagic[FindMagicPos(usableMagic)].actionVar + " ед  урона противнику " + BH.allEnemies[BH.allEnemies.Count - 1].Name);
-                    BH.allEnemies[BH.allEnemies.Count - 1].Health -= playerMagic[FindMagicPos(usableMagic)].actionVar;
-                    break;
-                case MagicType.Lighting:
-                    // Наносим урон всем противникам в ряду
-                    for (int i = 0; i < BH.allEnemies.Count; i++)
-                    {
-                        BH.allEnemies[i].Health -= playerMagic[FindMagicPos(usableMagic)].actionVar;
-                    }
-                    break;
-                case MagicType.Poison:
-                    // Каждый ход наносится урон противнику
-                    FindObjectOfType<BuffManager>().SetBuffToEnemy(Buff.BuffType.Magic_Poison);
-                    break;
-                case MagicType.Shield:
-                    // Магический щит, защищающий от физ. и маг. урона
-                    FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.Magic_Shield);
-                    break;
-                case MagicType.Stun:
-                    // Противник не может ходить Х ходов
-                    FindObjectOfType<BuffManager>().SetBuffToEnemy(Buff.BuffType.Magic_Stun);
-                    break;
-                case MagicType.SlamStun:
-                    // Наносим урон всем противникам в ряду и станим их
-                    for(int i = 0; i < FindObjectOfType<BattleHelper>().allEnemies.Count; i++)
-                    {
-                        FindObjectOfType<BuffManager>().SetBuffToEnemy(Buff.BuffType.Magic_Stun);
-                    }
-                    break;
-                case MagicType.ZapperLighting:
-                    float percentage = 1f;
-                    // Наносим урон всем противникам в ряду, каждый последующий получает на 10 процентов меньше
-                    for (int i = 0; i < BH.allEnemies.Count; i++)
-                    {
-                        if (percentage > 0)
-                        {
-                            BH.allEnemies[i].Health -= playerMagic[FindMagicPos(usableMagic)].actionVar * percentage;
-                            percentage -= 0.1f;
-                        }
-                        else
-                            break;
-                    }
-                    break;
-            }
+        //    switch (usableMagic)
+        //    {
+        //        case MagicType.Fireball:
+        //            // Наносим урон от фаербола первому противнику в ряду
+        //            Debug.Log("Фаерболл");
+        //            Debug.Log("Наносим " + playerMagic[FindMagicPos(usableMagic)].actionVar + " ед  урона противнику " + BH.allEnemies[BH.allEnemies.Count - 1].Name);
+        //            BH.allEnemies[BH.allEnemies.Count - 1].Health -= playerMagic[FindMagicPos(usableMagic)].actionVar;
+        //            break;
+        //        case MagicType.Lighting:
+        //            // Наносим урон всем противникам в ряду
+        //            for (int i = 0; i < BH.allEnemies.Count; i++)
+        //            {
+        //                BH.allEnemies[i].Health -= playerMagic[FindMagicPos(usableMagic)].actionVar;
+        //            }
+        //            break;
+        //        case MagicType.Poison:
+        //            // Каждый ход наносится урон противнику
+        //            FindObjectOfType<BuffManager>().SetBuffToEnemy(Buff.BuffType.Magic_Poison);
+        //            break;
+        //        case MagicType.Shield:
+        //            // Магический щит, защищающий от физ. и маг. урона
+        //            FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.Magic_Shield);
+        //            break;
+        //        case MagicType.Stun:
+        //            // Противник не может ходить Х ходов
+        //            FindObjectOfType<BuffManager>().SetBuffToEnemy(Buff.BuffType.Magic_Stun);
+        //            break;
+        //        case MagicType.SlamStun:
+        //            // Наносим урон всем противникам в ряду и станим их
+        //            for(int i = 0; i < FindObjectOfType<BattleController>().allEnemies.Count; i++)
+        //            {
+        //                FindObjectOfType<BuffManager>().SetBuffToEnemy(Buff.BuffType.Magic_Stun);
+        //            }
+        //            break;
+        //        case MagicType.ZapperLighting:
+        //            float percentage = 1f;
+        //            // Наносим урон всем противникам в ряду, каждый последующий получает на 10 процентов меньше
+        //            for (int i = 0; i < BH.allEnemies.Count; i++)
+        //            {
+        //                if (percentage > 0)
+        //                {
+        //                    BH.allEnemies[i].Health -= playerMagic[FindMagicPos(usableMagic)].actionVar * percentage;
+        //                    percentage -= 0.1f;
+        //                }
+        //                else
+        //                    break;
+        //            }
+        //            break;
+        //    }
 
-            SetCooldownUI(FindMagicPos(usableMagic));
-            UIScript.Instance.UpdateEnemyUIText();
-            BH.CheckEnemyDeath();
+        //    SetCooldownUI(FindMagicPos(usableMagic));
+        //    UIScript.Instance.UpdateEnemyUIText();
+        //    BH.CheckEnemyDeath();
 
-            playerMagic[FindMagicPos(usableMagic)].canUseMagic = false;
-        }
+        //    playerMagic[FindMagicPos(usableMagic)].canUseMagic = false;
+        //}
     }
 
     // Установка кулдауна 

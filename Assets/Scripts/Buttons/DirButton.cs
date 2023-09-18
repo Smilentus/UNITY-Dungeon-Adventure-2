@@ -11,21 +11,32 @@ public class DirButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     [Header("Цвет нажатия")]
     public Color pressedColor;
 
+    
     bool isHover;
 
+
     [Header("Локация")]
-    public LocationManager.Location loc;
+    [SerializeField]
+    private LocationProfile m_locationProfile;
 
     [Header("Действие при нажатии")]
-    public LocationManager.Action act;
+    [SerializeField]
+    private BaseGameEventProfile m_gameEventProfile;
+
 
     public void OnPointerClick(PointerEventData eventData)
     {
         GetComponent<Image>().color = hoverColor;
-        if (act == LocationManager.Action.None && loc != LocationManager.Location.None)
-            FindObjectOfType<GameController>().PressDirectionButton(loc);
-        else
-            FindObjectOfType<GameController>().PressActionButton(act);
+
+        if (m_locationProfile != null)
+        {
+            GameController.Instance.PressDirectionButton(m_locationProfile);
+        }
+        
+        if (m_gameEventProfile != null)
+        {
+            GameController.Instance.PressActionButton(m_gameEventProfile);
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)

@@ -6,7 +6,7 @@ using UnityEngine;
 public class producingItem : MonoBehaviour
 {
     [Header("Предмет")]
-    public Item item;
+    public ItemProfile item;
     [Header("Производственное количество")]
     public int producingStack;
 }
