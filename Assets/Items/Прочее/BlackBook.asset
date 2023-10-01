@@ -3,35 +3,32 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a59123ccfb9b5e34c9816184170f13e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 57c25c92d4f099240bee11eb06eb173e, type: 3}
   m_Name: BlackBook
   m_EditorClassIdentifier: 
   takedSlot: 0
-  Type: 2
-  Icon: {fileID: 2800000, guid: 1a8b54875c8df6844ac97ee7cbeefa31, type: 3}
-  Name: "\u0427\u0451\u0440\u043D\u0430\u044F \u043A\u043D\u0438\u0433\u0430"
-  Descr: "\u0412 \u043D\u0435\u0439 \u0441\u043A\u0440\u044B\u0442\u044B \u0441\u0442\u0440\u0430\u0445\u0438
-    \u0438 \u0434\u0443\u0448\u0438 \u0443\u043C\u0435\u0440\u0448\u0438\u0445 \u043B\u044E\u0434\u0435\u0439
-    \u0438 \u0442\u0435\u0445, \u043A\u0442\u043E \u043A\u043E\u0433\u0434\u0430-\u0442\u043E
-    \u0441\u043C\u043E\u0442\u0440\u0435\u043B \u044D\u0442\u0443 \u043A\u043D\u0438\u0433\u0443
-    \u0438 \u0434\u0435\u0440\u0436\u0430\u043B \u0435\u0451 \u0432 \u0441\u0432\u043E\u0438\u0445
-    \u0440\u0443\u043A\u0430\u0445!"
-  WhereToFind: "\u0421\u0443\u043D\u0434\u0443\u043A \u0441 \u0448\u0430\u043D\u0441\u043E\u043C
-    1%;"
+  Type: 0
+  Icon: {fileID: 0}
+  Name: 
+  Descr: 
+  WhereToFind: 
   Cost: 0
-  ChanceToFind: 1
+  ChanceToFind: 0
   Damage: 0
   Health: 0
   Armor: 0
   AttackSpeed: 0
   Mana: 0
+  ExtraExp: 0
+  ExtraMoney: 0
   equipBuffs: []
   Stack: 0
-  MaxStack: 999
+  MaxStack: 0
   DropStack: 0
-  ItemID: Book_Black
+  ItemID: 

@@ -57,9 +57,29 @@ public class LocationsController : MonoBehaviour
     }
 
 
+    public void SetLocationAfterLoading(LocationProfile loadingProfile)
+    {
+        RuntimeLocationObject tempLocationObject = m_locationObjects.Find(x => x.LocationProfileReference.Equals(loadingProfile));
+
+        if (tempLocationObject != null)
+        {
+            currentLocation = loadingProfile;
+
+            currentRuntimeLocationObject = tempLocationObject;
+
+            HideAllLocationObjects();
+
+            currentRuntimeLocationObject.gameObject.SetActive(true);
+        }
+    }
+
+
     public void TravelToLocation(LocationProfile locationToChange, int travelTimeHours = 0)
     {
-        RuntimeLocationObject tempLocationObject = m_locationObjects.Find(x => x.LocationProfileReference.Equals(locationToChange));
+        RuntimeLocationObject tempLocationObject = m_locationObjects
+                .Where(x => x.LocationProfileReference != null)
+                .ToList()
+                .Find(x => x.LocationProfileReference == locationToChange);
 
         if (tempLocationObject != null)
         {
@@ -120,5 +140,26 @@ public class LocationsController : MonoBehaviour
     public void ShowInfoAboutLocation(LocationProfile locationInfo)
     {
         // Может просто кастомное окно сделаем???
+    }
+
+
+    /// <summary>
+    ///     Основное действие направления по локации
+    /// </summary>
+    public void ExecuteLocationEventRandomly()
+    {
+        if (currentLocation != null)
+        {
+            BaseGameEventProfile randomEvent = currentLocation.LocationEvents[UnityEngine.Random.Range(0, currentLocation.LocationEvents.Count)];
+
+            if (randomEvent != null)
+            {
+                GameEventsController.Instance.StartGameEvent(randomEvent);
+            }
+            else
+            {
+                Debug.LogError($"Локация {currentLocation.LocationTitle} не имеет привязанных событий.");
+            }
+        }
     }
 }

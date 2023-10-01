@@ -11,6 +11,7 @@ public class BattleGameEventProfile : BaseGameEventProfile
 {
     [SerializeField]
     private List<CharacterProfile> m_characters = new List<CharacterProfile>();
+    public List<CharacterProfile> Characters => m_characters;
 
 
     [Tooltip("Когда установлен флаг True наименования будут генерироваться сами")]
@@ -29,7 +30,12 @@ public class BattleGameEventProfile : BaseGameEventProfile
         // TODO: Переделать 
         if (m_autoGenerateNames)
         { 
-            if (m_characters.Count == 1)
+            if (m_characters.Count == 0)
+            {
+                this.m_eventTitle = "Бой с тенью";
+                this.m_eventDescription = $"Воздух вокруг вас содрогнулся.";
+            }
+            else if (m_characters.Count == 1)
             {
                 this.m_eventTitle = "Дуэль";
                 this.m_eventDescription = $"Вы вступили в дуэль с '{m_characters[0].Name}'";

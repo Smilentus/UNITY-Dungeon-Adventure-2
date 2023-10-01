@@ -7,7 +7,7 @@ public class PlayerActionsAnimator : MonoBehaviour
     // Конец анимации мечей и начало боя
     public void EndAnimation()
     {
-        BattleController.Instance.StartBattleAfterAnim();
+        //BattleController.Instance.StartBattleAfterAnim();
     }
 
     // Конец битвы и начало анимации монеток как знак победы

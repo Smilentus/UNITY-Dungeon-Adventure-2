@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Creatable/LocationSystem/New LocationProfile", fileName = "LocationProfile")]
+[System.Serializable]
 public class LocationProfile : ScriptableObject
 {
     [TextArea(3, 5)]

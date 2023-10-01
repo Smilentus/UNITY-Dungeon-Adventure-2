@@ -8,6 +8,7 @@ using UnityEngine;
 /// </summary>
 public class RuntimeBattleCharacter : MonoBehaviour
 {
+    public event Action onCharacterDeath;
     public event Action onCharacterActionsCompleted;
 
 
@@ -45,12 +46,19 @@ public class RuntimeBattleCharacter : MonoBehaviour
         {
             runtimeBattleCharacter = this
         });
+
+        UpdateCharacterView();
     }
 
     public virtual void ProcessCharacterActions()
     {
         onCharacterActionsCompleted?.Invoke();
 
+        UpdateCharacterView();
+    }
+
+    public virtual void UpdateCharacterView()
+    {
         m_characterView.DrawCharacterInfo(new CharacterDrawerData()
         {
             runtimeBattleCharacter = this

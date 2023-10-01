@@ -216,3 +216,11 @@ The following packages were updated:
   com.unity.xr.legacyinputhelpers from version 2.0.2 to 2.1.10
 The following packages were removed:
   com.unity.multiplayer-hlapi@1.0.4
+
+=== Fri Sep 22 21:31:20 2023
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.purchasing from version 4.6.0 to 4.7.0

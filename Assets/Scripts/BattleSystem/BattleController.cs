@@ -1,32 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
+/*
+    Суть системы боя такова
+    У нас есть персонаж, которым мы управляем
+    У персонажа есть определённые удары, магия и т.п.
+    Игра идёт по ходам, у игрока есть ход с определённым количеством действий
+    Каждое действие тратит очко действий
+    Когда у игрока заканчиваются очки действий начинается ход противников
+    Противники это стак персонажей друг над другом
+    Активный противник всегда тот, который поверх всех
+    Противники лежащие под ним могут использовать только второстепенные навыки прикрытия и поддержки
+    А активный противник может делать всё, что угодно
+ */
 public class BattleController : MonoBehaviour
 {
-    // Это всё переместить на конкретные локации и т.п.
-    [Space(20)]
-    [Header("Вещи падающие с каждого моба (Просто добавь сюда)")]
-    public ItemProfile[] ItemsToDropFromAll;
-    [Header("Вещи со всех лесов")]
-    public ItemProfile[] ItemsToDropFromAllForests;
-    [Header("Вещи с синего леса")]
-    public ItemProfile[] ItemsToDropFromBlueForest;
-    [Header("Вещи с красного леса")]
-    public ItemProfile[] ItemsToDropFromRedForest;
-    [Header("Вещи с жёлтого леса")]
-    public ItemProfile[] ItemsToDropFromYellowForest;
-    [Header("Вещи с зелёного леса")]
-    public ItemProfile[] ItemsToDropFromGreenForest;
-    [Header("Вещи с подземелья")]
-    public ItemProfile[] ItemsToDropFromDungeon;
-
-
-
-
-    [Header("Кнопки действия в битве")]
-    public GameObject[] ActionButtons;
+    public enum TurnStatus
+    {
+        PlayerTurn,
+        EnemiesTurn
+    }
 
     [Header("Кнопка ожидания")]
     public GameObject waitButton;
@@ -35,18 +29,6 @@ public class BattleController : MonoBehaviour
     public GameObject startBattleImage;
     [Header("Аниматор конца битвы")]
     public GameObject endBattleImage;
-
-    [Space(20)]
-    [Header("Параметры битвы")]
-    public Transform spawnEnemyParent;
-    [Header("Префаб противника")]
-    public GameObject enemyPrefab;
-    [Header("Объекты всех противников")]
-    public List<GameObject> allEnemiesObjects = new List<GameObject>();
-    [Header("Список противников которые учавствуют в битве")]
-    public List<CharacterProfile> allEnemies = new List<CharacterProfile>();
-    [Header("Список противников, которых мы убили")]
-    public List<CharacterProfile> defeatedEnemies = new List<CharacterProfile>();
 
 
     // ======
@@ -63,15 +45,14 @@ public class BattleController : MonoBehaviour
         }
     }
 
-    public event Action onBattleStarted;
-    public event Action onBattleFinished;
 
-    public event Action onPlayerTurnStarted;
-    public event Action onPlayerTurnFinished;
+    public event Action<bool> onBattleStatusChanged;
 
-    public event Action onEnemiesTurnStarted;
-    public event Action onEnemiesTurnFinished;
+    public event Action<TurnStatus> onBattleTurnStatusChanged;
 
+
+    [SerializeField]
+    private RuntimeBattlePlayerController m_runtimeBattlePlayerController;
 
     [SerializeField]
     private RuntimeBattleCharacter m_defaultRuntimeBattleCharacterPrefab;
@@ -81,144 +62,207 @@ public class BattleController : MonoBehaviour
 
 
     private List<RuntimeBattleCharacter> enemiesInBattle = new List<RuntimeBattleCharacter>();
-    private List<RuntimeBattleCharacter> defeatedEnemiesInBattle = new List<RuntimeBattleCharacter>();
+    public List<RuntimeBattleCharacter> EnemiesInBattle => enemiesInBattle;
 
-    
+
+    private List<CharacterProfile> defeatedEnemiesInBattle = new List<CharacterProfile>();
+    public List<CharacterProfile> DefeatedEnemiesInBattle => defeatedEnemiesInBattle;
+
+
     private bool isBattle;
-    public bool IsBattle => isBattle;
+    public bool IsBattle { get => isBattle; set => isBattle = value; }
 
     private bool isWin;
-    public bool IsWin => isWin;
+    public bool IsWin { get => isWin; set => isWin = value; }
 
 
-    private int CurrentBattleStep;
+    private TurnStatus m_currentTurnStatus;
+    public TurnStatus CurrentTurnStatus => m_currentTurnStatus;
 
+
+    private int currentBattleStep = 0;
+    public int CurrentBattleStep => currentBattleStep;
+
+
+    public List<CharacterProfile> CharacterProfiles = new List<CharacterProfile>();
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            TryStartBattle(CharacterProfiles);
+        }
+    }
 
     public void AddEnemyToBattle(CharacterProfile character)
     {
         RuntimeBattleCharacter createdEnemy;
 
         if (character.CharacterPrefab != null)
-        { 
+        {
             createdEnemy = Instantiate(character.CharacterPrefab, m_enemiesSpawnArea);
         }
         else
         {
             createdEnemy = Instantiate(m_defaultRuntimeBattleCharacterPrefab, m_enemiesSpawnArea);
         }
-        
+
         createdEnemy.CreateBattleCharacter(character);
         enemiesInBattle.Add(createdEnemy);
     }
 
+
     public void StartPlayerTurn()
     {
-        onPlayerTurnStarted?.Invoke();
-    }
+        if (CheckEndBattleConditions()) return;
 
-    public void StartEnemiesTurn()
-    {
-        onEnemiesTurnStarted?.Invoke();
-    }
-
-    // ====
-
-    // Начало сражения
-    public void StartBattle(CharactersLibrary.CharacterType EnemyType)
-    {
-        if (isBattle == false)
+        if (!Player.isStun)
         {
-            isBattle = true;
-            CurrentBattleStep = 0;
+            UpdateAllEnemiesUI();
 
-            //Player.isStun = false; // Какое-то Legacy
-
-            // Прогружаем магию персонажа
-            FindObjectOfType<MagicManager>().LoadMagicInBattle();
-
-            // Выпускаем в битву
-            //AddEnemyToBattle(EnemyType);
-            //waitButton.SetActive(false);
-
-            FindObjectOfType<SavingManager>().SaveGame("AutoSave");
-
-            //GameController.Instance.Blocker.SetActive(true);
-            //startBattleImage.SetActive(true);
-
-            StartPlayerTurn();
-
-            onBattleStarted?.Invoke();
+            m_currentTurnStatus = TurnStatus.PlayerTurn;
+            onBattleTurnStatusChanged?.Invoke(m_currentTurnStatus);
+        }
+        else
+        {
+            GameController.Instance.AddEventText("Вы оглушены и не можете атаковать.");
+            StartEnemiesTurn();
         }
     }
 
-    // Открытие битвы
-    public void StartBattleAfterAnim()
+    public void EndPlayerTurn()
     {
-        //GameController.Instance.Blocker.SetActive(false);
-        //startBattleImage.SetActive(false);
+        GameController.Instance.AddEventText("Вы закончили свой ход.");
 
-        // Открытие панели битвы
+        StartEnemiesTurn();
+    }
+
+
+    public void StartEnemiesTurn()
+    {
+        if (CheckEndBattleConditions()) return;
+
+        m_currentTurnStatus = TurnStatus.EnemiesTurn;
+        onBattleTurnStatusChanged?.Invoke(m_currentTurnStatus);
+
+        for (int i = 0; i < enemiesInBattle.Count; i++)
+        {
+            enemiesInBattle[i].ProcessCharacterActions();
+        }
+
+        EndEnemiesTurn();
+    }
+
+    public void UpdateAllEnemiesUI()
+    {
+        foreach (RuntimeBattleCharacter runtimeBattleCharacter in enemiesInBattle)
+        {
+            runtimeBattleCharacter.UpdateCharacterView();
+        }
+    }
+
+    // Фактически здесь конец хода, потому что и игрок сходил и все противники
+    private void EndEnemiesTurn()
+    {
+        GameTimeFlowController.Instance.AddTime(1);
+
+        currentBattleStep++;
+
+        StartPlayerTurn();
+    }
+
+
+    public bool CheckEndBattleConditions()
+    {
+        // Здесь все проверки после каждого действия, чтобы понять умер противник или нет
+        if (Player.Health <= 0)
+        {
+            Player.isDeath = true;
+
+            isWin = false;
+            EndBattle();
+            GameController.Instance.ShowDeathBox("Вы умерли во время битвы.");
+
+            return true;
+        }
+        
+
+        for (int i = 0; i < enemiesInBattle.Count; i++)
+        {
+            if (enemiesInBattle[i].Health <= 0)
+            {
+                Debug.Log("Противник: " + enemiesInBattle[i].characterProfile.Name + " - Повержен.");
+                // Добавляем противника в побеждённых
+                defeatedEnemiesInBattle.Add(enemiesInBattle[i].characterProfile);
+                Destroy(enemiesInBattle[i].gameObject);
+                // Удаляем противника из списка
+                enemiesInBattle.RemoveAt(i);
+            }
+        }
+        
+        
+        // Если противников не осталось, заканчиваем бой
+        if (enemiesInBattle.Count == 0)
+        {
+            Debug.Log("Противники закончились, мы выйграли!");
+            isWin = true;
+            GameController.Instance.Blocker.SetActive(true);
+            endBattleImage.SetActive(true);
+            EndBattle();
+            return true;
+        }
+
+        return false;
+    }
+
+
+    public void TryStartBattle(List<CharacterProfile> characters)
+    {
+        if (isBattle) return;
+
+        ClearBattleData();
+
+        //FindObjectOfType<SavingManager>().SaveGame("AutoSave");
+
+        foreach (CharacterProfile characterProfile in characters)
+        {
+            AddEnemyToBattle(characterProfile);
+        }
+
+        isBattle = true;
+        isWin = false;
+        currentBattleStep = 0;
+
+        m_runtimeBattlePlayerController.InitializeBattlePlayer();
+        FindObjectOfType<MagicManager>().LoadMagicInBattle();
+
         FindObjectOfType<PanelsManager>().OpenHideActionPanel(0, true);
 
-        // Эффект спавна персонажа
-        CharacterSpawnEffect(0);
-        // Эффект спавна противника
-        CharacterSpawnEffect(1);
+        onBattleStatusChanged?.Invoke(true);
+        StartPlayerTurn();
     }
 
-    // Обнуление текущего противника
-    private void ResetCurrentEnemies()
-    {
-        //// Очистка текущего списка противников ...
-        //for (int i = 0; i < allEnemies.Count; i++)
-        //{
-        //    allEnemies.RemoveAt(i);
-        //    allEnemiesObjects.RemoveAt(i);
-        //    Destroy(spawnEnemyParent.GetChild(i).gameObject);
-        //}
-        //// ... и очистка побеждённых противников
-        //defeatedEnemies.Clear();
-        //// Удаление бафов противника, если они ещё действуют
-        //FindObjectOfType<BuffManager>().NullAllEnemyBuffs();
-    }
-
-    // Конец сражения
     public void EndBattle()
     {
-        //GameController.Instance.Blocker.SetActive(false);
-        //endBattleImage.SetActive(false);
+        GameController.Instance.Blocker.SetActive(false);
+        endBattleImage.SetActive(false);
 
-        //if (isWin)
-        //{
-        //    WinCondition();
+        if (isWin)
+        {
+            WinCondition();
+            FindObjectOfType<SavingManager>().SaveGame("AutoSave");
+        }
 
-        //    // Сохраняем игру, если выйграли
-        //    FindObjectOfType<SavingManager>().SaveGame("AutoSave");
-        //}
+        isWin = false;
+        isBattle = false;
 
-        //isWin = false;
-        //isBattle = false;
+        ClearBattleData();
 
-        //try
-        //{
-        //    // Обнуление противника
-        //    ResetCurrentEnemies();
-        //}
-        //catch (System.Exception e)
-        //{
-        //    Debug.Log("Ошибка при обнулении противника - \n" + e.Message);
-        //}
+        waitButton.SetActive(true);
 
-        //waitButton.SetActive(true);
-
-        //// Изменяем цвет всех кнопок на нормальный
-        //foreach (var go in ActionButtons)
-        //{
-        //    go.GetComponent<Image>().color = go.GetComponent<ButtonInteract>().normalColor;
-        //}
-
-        //// Закрываем панели
-        //FindObjectOfType<PanelsManager>().CloseAllActionPanels();
+        // Закрываем панели
+        FindObjectOfType<PanelsManager>().CloseAllActionPanels();
     }
 
     // Выдача предметов за победу
@@ -227,24 +271,24 @@ public class BattleController : MonoBehaviour
         Player.isStun = false;
 
         // Деньги и опыт с каждого моба
-        for (int i = 0; i < defeatedEnemies.Count; i++)
+        for (int i = 0; i < defeatedEnemiesInBattle.Count; i++)
         {
-            GameController.Instance.GiveMoney(defeatedEnemies[i].Gold);
-            GameController.Instance.GiveExp(defeatedEnemies[i].Exp);
+            GameController.Instance.GiveMoney(defeatedEnemiesInBattle[i].Gold);
+            GameController.Instance.GiveExp(defeatedEnemiesInBattle[i].Exp);
         }
 
         // Добавляем игроку индивидуальные вещи моба
-        for (int j = 0; j < defeatedEnemies.Count; j++)
+        for (int j = 0; j < defeatedEnemiesInBattle.Count; j++)
         {
-            for (int i = 0; i < defeatedEnemies[j].DropItems.Length; i++)
+            for (int i = 0; i < defeatedEnemiesInBattle[j].DropItems.Length; i++)
             {
                 int stack;
                 try
                 {
-                    Debug.Log(defeatedEnemies[j].DropItems[i].Name + " - " + defeatedEnemies[j].DropItems[i].DropStack + " - " + defeatedEnemies[j].DropItems[i].ItemID);
-                    stack = UnityEngine.Random.Range(1, defeatedEnemies[j].DropItems[i].DropStack);
+                    Debug.Log(defeatedEnemiesInBattle[j].DropItems[i].Name + " - " + defeatedEnemiesInBattle[j].DropItems[i].DropStack + " - " + defeatedEnemiesInBattle[j].DropItems[i].ItemID);
+                    stack = UnityEngine.Random.Range(1, defeatedEnemiesInBattle[j].DropItems[i].DropStack);
                     Debug.Log("Стак - " + stack);
-                    FindObjectOfType<Inventory>().AddItem(defeatedEnemies[j].DropItems[i].ItemID, stack);
+                    FindObjectOfType<Inventory>().AddItem(defeatedEnemiesInBattle[j].DropItems[i].ItemID, stack);
                 }
                 catch (System.Exception e)
                 {
@@ -253,249 +297,41 @@ public class BattleController : MonoBehaviour
             }
         }
 
-        // Вещи с каждого моба
-        for (int i = 0; i < ItemsToDropFromAll.Length; i++)
+
+        // Дроп с локации
+        if (LocationsController.Instance.CurrentLocation != null)
         {
-            // Если шанс выпал, то добавляем
-            if (UnityEngine.Random.Range(0, 101) <= ItemsToDropFromAll[i].ChanceToFind + Player.Luck)
-                FindObjectOfType<Inventory>().AddItem(ItemsToDropFromAll[i].ItemID, 1);
-        }
-
-        /* Вещи по локациям */
-        //if (LocationsController.CurrentLocation.ToString().ToLower().Contains("forest"))
-        //{
-        //    // Вещи из всех лесов 
-        //    for (int i = 0; i < ItemsToDropFromAllForests.Length; i++)
-        //    {
-        //        // Если шанс выпал, то добавляем
-        //        if (UnityEngine.Random.Range(0, 101) <= ItemsToDropFromAllForests[i].ChanceToFind + Player.Luck)
-        //            FindObjectOfType<Inventory>().AddItem(ItemsToDropFromAllForests[i].ItemID, 1);
-        //    }
-        //}
-        //if (LocationsController.CurrentLocation == LocationsController.Location.BlueForest)
-        //{
-        //    // Вещи из синего леса
-        //    for (int i = 0; i < ItemsToDropFromBlueForest.Length; i++)
-        //    {
-        //        // Если шанс выпал, то добавляем
-        //        if (UnityEngine.Random.Range(0, 101) <= ItemsToDropFromBlueForest[i].ChanceToFind + Player.Luck)
-        //            FindObjectOfType<Inventory>().AddItem(ItemsToDropFromBlueForest[i].ItemID, 1);
-        //    }
-        //}
-        //if (LocationsController.CurrentLocation == LocationsController.Location.RedForest)
-        //{
-        //    // Вещи их красного леса
-        //    for (int i = 0; i < ItemsToDropFromRedForest.Length; i++)
-        //    {
-        //        // Если шанс выпал, то добавляем
-        //        if (UnityEngine.Random.Range(0, 101) <= ItemsToDropFromRedForest[i].ChanceToFind + Player.Luck)
-        //            FindObjectOfType<Inventory>().AddItem(ItemsToDropFromRedForest[i].ItemID, 1);
-        //    }
-        //}
-        //if (LocationsController.CurrentLocation == LocationsController.Location.YellowForest)
-        //{
-        //    // Вещи из жёлтого леса
-        //    for (int i = 0; i < ItemsToDropFromYellowForest.Length; i++)
-        //    {
-        //        // Если шанс выпал, то добавляем
-        //        if (UnityEngine.Random.Range(0, 101) <= ItemsToDropFromYellowForest[i].ChanceToFind + Player.Luck)
-        //            FindObjectOfType<Inventory>().AddItem(ItemsToDropFromYellowForest[i].ItemID, 1);
-        //    }
-        //}
-        //if (LocationsController.CurrentLocation == LocationsController.Location.GreenForest)
-        //{
-        //    // Вещи из зелёного леса
-        //    for (int i = 0; i < ItemsToDropFromGreenForest.Length; i++)
-        //    {
-        //        // Если шанс выпал, то добавляем
-        //        if (UnityEngine.Random.Range(0, 101) <= ItemsToDropFromGreenForest[i].ChanceToFind + Player.Luck)
-        //            FindObjectOfType<Inventory>().AddItem(ItemsToDropFromGreenForest[i].ItemID, 1);
-        //    }
-        //}
-        //if (LocationsController.CurrentLocation == LocationsController.Location.Dungeon)
-        //{
-        //    // Вещи из зелёного леса
-        //    for (int i = 0; i < ItemsToDropFromDungeon.Length; i++)
-        //    {
-        //        // Если шанс выпал, то добавляем
-        //        if (UnityEngine.Random.Range(0, 101) <= ItemsToDropFromDungeon[i].ChanceToFind + Player.Luck)
-        //            FindObjectOfType<Inventory>().AddItem(ItemsToDropFromDungeon[i].ItemID, 1);
-        //    }
-        //}
-    }
-
-    // Атака игрока
-    /// <summary>
-    /// Типы атак: 0 - слабая. 1 - средняя. 2 - сильная.
-    /// </summary>
-    /// <param name="type"></param>
-    public void AttackEnemy(int type)
-    {
-        //if (CurrentRound % 15 == 0)
-        //    FindObjectOfType<GameTimeFlowController>().AddTime(1);
-
-        //if (!Player.isStun)
-        //{
-        //    // Атакуем Х раз от скорости атаки
-        //    for (int i = 0; i < Player.AttackSpeed; i++)
-        //    {
-        //        // Эффекты до удара
-        //        CharacterBeforeAttackEffect(0);
-        //        // Крит. удар - TODO: Переделать <--
-        //        if (!CriticalStrike())
-        //        {
-        //            switch (type)
-        //            {
-        //                case 0:
-        //                    LightStrike();
-        //                    break;
-        //                case 1:
-        //                    MediumStrike();
-        //                    break;
-        //                case 2:
-        //                    HeavyStrike();
-        //                    break;
-        //            }
-        //        }
-        //        // Эффекты после удара
-        //        CharacterAfterAttackEffect(0);
-
-        //        // Работа скиллов
-        //        FindObjectOfType<SkillsManager>().SkillsAction();
-
-        //        if (allEnemies[allEnemies.Count - 1].Health <= 0)
-        //            break;
-        //    }
-        //}
-        //else
-        //{
-        //    GameController.Instance.AddEventText("Вы оглушены и не можете атаковать.");
-        //}
-
-        //// Проверяем баффы на урон и снимаем длительность всех баффов
-        //FindObjectOfType<BuffManager>().BuffsAction();
-
-        //UIScript.Instance.UpdateEnemyUIText();
-        //FindObjectOfType<MagicManager>().UpdateMagicCooldown();
-
-        //CheckEnemyDeath();
-
-        //if (Player.Health <= 0)
-        //    CheckPlayerDeath();
-        //else
-        //    EnemyAIAttack();
-    }
-
-    // Попытка сбежать
-    public void TryToEscape()
-    {
-        if (UnityEngine.Random.Range(0, 101) <= 50 + Player.Luck)
-        {
-            isBattle = false;
-            isWin = false;
-            GameController.Instance.AddEventText("Вы сбежали.");
-            EndBattle();
-        }
-        else
-        {
-            GameController.Instance.AddEventText("Вы не смогли избежать боя.");
-            EnemyAIAttack();
+            for (int i = 0; i < LocationsController.Instance.CurrentLocation.DroppableItems.Count; i++)
+            {
+                if (UnityEngine.Random.Range(0, 101) <= LocationsController.Instance.CurrentLocation.DroppableItems[i].ChanceToFind + Player.Luck)
+                {
+                    FindObjectOfType<Inventory>().AddItem(LocationsController.Instance.CurrentLocation.DroppableItems[i].ItemID, 1);
+                }
+            }
         }
     }
 
-    #region Удары персонажа по противнику
-    private void LightStrike()
+    public void ForceKillAllEnemies()
     {
-        //double dmg = Player.Damage / 2;
+        foreach (RuntimeBattleCharacter enemy in enemiesInBattle)
+        {
+            enemy.Health = -999999999;
+        }
 
-        //// Проверка уклонения противника
-        //if (Random.Range(0, 101) + Player.Luck > allEnemies[allEnemies.Count - 1].DodgeChance)
-        //{
-        //    if (Random.Range(0, 101) <= Player.LightStrikeChance + Player.Luck)
-        //    {
-        //        if (dmg > allEnemies[allEnemies.Count - 1].Armor)
-        //        {
-        //            allEnemies[allEnemies.Count - 1].Health -= dmg;
-        //            // Анимируем удар
-        //            GameController.Instance.AddEventText(CurrentRound + " - Вы нанесли урон слабым ударом: " + dmg + " ед.");
-        //        }
-        //        else
-        //        {
-        //            GameController.Instance.AddEventText(CurrentRound + " - Броня защитила противника.");
-        //        }
-        //    }
-        //    else
-        //        GameController.Instance.AddEventText(CurrentRound + " - Вы промахнулись.");
-        //}
-        //else
-        //    GameController.Instance.AddEventText(CurrentRound + " - Противник увернулся.");
+        CheckEndBattleConditions();
     }
-    private void MediumStrike()
+
+    private void ClearBattleData()
     {
-        //    double dmg = Player.Damage;
-
-        //    if (Random.Range(0, 101) + Player.Luck > allEnemies[allEnemies.Count - 1].DodgeChance)
-        //    {
-        //        // Проверка уклонения противника
-        //        if (Random.Range(0, 101) <= Player.MediumStrikeChance + Player.Luck)
-        //        {
-        //            if (dmg > allEnemies[allEnemies.Count - 1].Armor)
-        //            {
-        //                allEnemies[allEnemies.Count - 1].Health -= dmg;
-        //                // Анимируем удар
-        //                GameController.Instance.AddEventText(CurrentRound + " - Вы нанесли урон нормальным ударом: " + dmg + " ед.");
-        //            }
-        //            else
-        //            {
-        //                GameController.Instance.AddEventText(CurrentRound + " - Броня защитила противника.");
-        //            }
-        //        }
-        //        else
-        //            GameController.Instance.AddEventText(CurrentRound + " - Вы промахнулись.");
-        //    }
-        //    else
-        //        GameController.Instance.AddEventText(CurrentRound + " - Противник увернулся.");
+        enemiesInBattle.Clear();
+        defeatedEnemiesInBattle.Clear();
     }
-    private void HeavyStrike()
-    {
-        //double dmg = Player.Damage * 2;
 
-        //// Проверка уклонения противника       
-        //if (Random.Range(0, 101) + Player.Luck > allEnemies[allEnemies.Count - 1].DodgeChance)
-        //{
-        //    if (Random.Range(0, 101) <= Player.HeavyStrikeChance + Player.Luck)
-        //    {
-        //        if (dmg > allEnemies[allEnemies.Count - 1].Armor)
-        //        {
-        //            allEnemies[allEnemies.Count - 1].Health -= dmg;
-        //            // Анимируем удар
-        //            GameController.Instance.AddEventText(CurrentRound + " - Вы нанесли урон сильным ударом: " + dmg + " ед.");
-        //        }
-        //        else
-        //        {
-        //            GameController.Instance.AddEventText(CurrentRound + " - Броня защитила противника.");
-        //        }
-        //    }
-        //    else
-        //        GameController.Instance.AddEventText(CurrentRound + " - Вы промахнулись.");
-        //}
-        //else
-        //    GameController.Instance.AddEventText(CurrentRound + " - Противник увернулся.");
-    }
-    private bool CriticalStrike()
-    {
-        //int rndChance = Random.Range(0, 101);
-        //double dmg = Player.Damage * Player.CriticalStrikeMulty;
+    // ====
 
-        //if (rndChance <= Player.CriticalStrikeChance)
-        //{
-        //    allEnemies[allEnemies.Count - 1].Health -= dmg;
-        //    GameController.Instance.AddEventText(CurrentRound + " - Вы нанесли урон критическим ударом: " + dmg + " ед.");
-        //    return true;
-        //}
-        return false;
-    }
-    #endregion
+    // Начало сражения
+    public void StartBattle(CharactersLibrary.CharacterType EnemyType) { }
+
 
     // Атака противника - ДОДЕЛАТЬ КУЧУ ПРОВЕРОК !!!!!!
     public void EnemyAIAttack()
@@ -546,6 +382,7 @@ public class BattleController : MonoBehaviour
 
         //UIScript.Instance.UpdateEnemyUIText();
     }
+
 
     // Расчёт приоритета атаки противника
     private void EnemyAICalculateChances(int c)
@@ -729,67 +566,67 @@ public class BattleController : MonoBehaviour
     }
     public void EnemyAttack(int c, int attackType)
     {
-        int rndAtk = attackType;
-        if (UnityEngine.Random.Range(0, 101) > Player.DodgeChance + Player.Luck)
-        {
-            CharacterBeforeAttackEffect(1);
-            switch (rndAtk)
-            {
-                // Слабый удар
-                case 0:
-                    if (UnityEngine.Random.Range(0, 101) <= 95)
-                    {
-                        double dmg = allEnemies[c].Damage / 2 - Player.Armor;
-                        if (allEnemies[c].Damage / 2 > Player.Armor)
-                        {
-                            Player.Health -= dmg;
-                            GameController.Instance.AddEventText(CurrentBattleStep + " - Противник атаковал слабым ударом и нанёс " + dmg + " ед. урона.");
-                        }
-                        else
-                            GameController.Instance.AddEventText(CurrentBattleStep + " - Броня защитила Вас.");
-                    }
-                    else
-                        GameController.Instance.AddEventText(CurrentBattleStep + " - Противник промахнулся");
-                    break;
-                // Средний удар
-                case 1:
-                    if (UnityEngine.Random.Range(0, 101) <= 65)
-                    {
-                        double dmg = allEnemies[c].Damage - Player.Armor;
-                        if (allEnemies[c].Damage > Player.Armor)
-                        {
-                            Player.Health -= dmg;
-                            GameController.Instance.AddEventText(CurrentBattleStep + " - Противник атаковал средним ударом и нанёс " + dmg + " ед. урона.");
-                        }
-                        else
-                            GameController.Instance.AddEventText(CurrentBattleStep + " - Броня защитила Вас.");
-                    }
-                    else
-                        GameController.Instance.AddEventText(CurrentBattleStep + " - Противник промахнулся");
-                    break;
-                // Сильный удар
-                case 2:
-                    if (UnityEngine.Random.Range(0, 101) <= 30)
-                    {
-                        double dmg = allEnemies[c].Damage * 2 - Player.Armor;
-                        if (allEnemies[c].Damage * 2 > Player.Armor)
-                        {
-                            Player.Health -= dmg;
-                            GameController.Instance.AddEventText(CurrentBattleStep + " - Противник атаковал сильным ударом и нанёс " + dmg + " ед. урона.");
-                        }
-                        else
-                            GameController.Instance.AddEventText(CurrentBattleStep + " - Броня защитила Вас.");
-                    }
-                    else
-                        GameController.Instance.AddEventText(CurrentBattleStep + " - Противник промахнулся");
-                    break;
-            }
-        }
-        else
-        {
-            GameController.Instance.AddEventText(CurrentBattleStep + " - Вы уклонились от атаки противника.");
-            FindObjectOfType<HeroAbilityManager>().ChargeHeroAbility(Player.HeroAbility.Ninja);
-        }
+        //int rndAtk = attackType;
+        //if (UnityEngine.Random.Range(0, 101) > Player.DodgeChance + Player.Luck)
+        //{
+        //    CharacterBeforeAttackEffect(1);
+        //    switch (rndAtk)
+        //    {
+        //        // Слабый удар
+        //        case 0:
+        //            if (UnityEngine.Random.Range(0, 101) <= 95)
+        //            {
+        //                double dmg = allEnemies[c].Damage / 2 - Player.Armor;
+        //                if (allEnemies[c].Damage / 2 > Player.Armor)
+        //                {
+        //                    Player.Health -= dmg;
+        //                    GameController.Instance.AddEventText(CurrentBattleStep + " - Противник атаковал слабым ударом и нанёс " + dmg + " ед. урона.");
+        //                }
+        //                else
+        //                    GameController.Instance.AddEventText(CurrentBattleStep + " - Броня защитила Вас.");
+        //            }
+        //            else
+        //                GameController.Instance.AddEventText(CurrentBattleStep + " - Противник промахнулся");
+        //            break;
+        //        // Средний удар
+        //        case 1:
+        //            if (UnityEngine.Random.Range(0, 101) <= 65)
+        //            {
+        //                double dmg = allEnemies[c].Damage - Player.Armor;
+        //                if (allEnemies[c].Damage > Player.Armor)
+        //                {
+        //                    Player.Health -= dmg;
+        //                    GameController.Instance.AddEventText(CurrentBattleStep + " - Противник атаковал средним ударом и нанёс " + dmg + " ед. урона.");
+        //                }
+        //                else
+        //                    GameController.Instance.AddEventText(CurrentBattleStep + " - Броня защитила Вас.");
+        //            }
+        //            else
+        //                GameController.Instance.AddEventText(CurrentBattleStep + " - Противник промахнулся");
+        //            break;
+        //        // Сильный удар
+        //        case 2:
+        //            if (UnityEngine.Random.Range(0, 101) <= 30)
+        //            {
+        //                double dmg = allEnemies[c].Damage * 2 - Player.Armor;
+        //                if (allEnemies[c].Damage * 2 > Player.Armor)
+        //                {
+        //                    Player.Health -= dmg;
+        //                    GameController.Instance.AddEventText(CurrentBattleStep + " - Противник атаковал сильным ударом и нанёс " + dmg + " ед. урона.");
+        //                }
+        //                else
+        //                    GameController.Instance.AddEventText(CurrentBattleStep + " - Броня защитила Вас.");
+        //            }
+        //            else
+        //                GameController.Instance.AddEventText(CurrentBattleStep + " - Противник промахнулся");
+        //            break;
+        //    }
+        //}
+        //else
+        //{
+        //    GameController.Instance.AddEventText(CurrentBattleStep + " - Вы уклонились от атаки противника.");
+        //    FindObjectOfType<HeroAbilityManager>().ChargeHeroAbility(Player.HeroAbility.Ninja);
+        //}
     }
     public string magicName(CharacterMagic.spellType spell, double spellPower)
     {
@@ -831,132 +668,4 @@ public class BattleController : MonoBehaviour
 
         return newName;
     }
-
-    #region Различные проверки в битве
-    // Проверка смерти противника
-    public void CheckEnemyDeath()
-    {
-        //try
-        //{
-        //    for (int i = 0; i < allEnemies.Count; i++)
-        //    {
-        //        if (allEnemies[i].Health <= 0)
-        //        {
-        //            //CharacterAfterDeathEffect(1);
-        //            Debug.Log("Противник: " + allEnemies[i].Name + " - Повержен.");
-        //            // Добавляем противника в побеждённых
-        //            CharacterProfile newCharacter = new CharacterProfile();
-        //            newCharacter = allEnemies[i];
-        //            defeatedEnemies.Add(newCharacter);
-        //            Debug.Log("Добавили противника - " + defeatedEnemies[defeatedEnemies.Count - 1].Name);
-        //            // Удаляем противника из списка
-        //            allEnemies.RemoveAt(i);
-        //            // Удаляем противника из списка объектов
-        //            allEnemiesObjects.RemoveAt(i);
-        //            // Удаляем противника визуально
-        //            Destroy(spawnEnemyParent.GetChild(i).gameObject);
-        //        }
-        //    }
-        //}catch(System.Exception e)
-        //{
-        //    Debug.Log("Ошибка при проверке смерти противника - " + e.Message);
-        //}
-
-        //// Если противников не осталось, заканчиваем бой
-        //if (allEnemies.Count == 0)
-        //{
-        //    Debug.Log("Противники закончились, мы выйграли!");
-        //    isWin = true;
-        //    GameController.Instance.Blocker.SetActive(true);
-        //    endBattleImage.SetActive(true);
-        //}
-
-        //UIScript.Instance.UpdateEnemyUIText();
-    }
-
-    // Проверка смерти персонажа
-    public void CheckPlayerDeath()
-    {
-        if (Player.Health <= 0)
-        {
-            Player.isDeath = true;
-            CharacterAfterDeathEffect(0);
-
-            isWin = false;
-            EndBattle();
-            GameController.Instance.ShowDeathBox("Вы умерли во время битвы.");
-        }
-    }
-
-    // Эффект после спавна
-    public void CharacterSpawnEffect(int character)
-    {
-        if (character == 0)
-        {
-
-        }
-
-        if (character == 1)
-        {
-
-        }
-    }
-
-    // Эффект перед КАЖДОЙ атакой
-    public void CharacterBeforeAttackEffect(int character)
-    {
-        if (character == 0)
-        {
-            FindObjectOfType<HeroAbilityManager>().ChargeHeroAbility(Player.HeroAbility.Archer);
-        }
-
-        if (character == 1)
-        {
-
-        }
-    }
-
-    // Эффект после ВСЕХ атак
-    public void CharacterAfterAttackEffect(int character)
-    {
-        //if (character == 0)
-        //{
-        //    // Проверяем баффы после атаки персонажа
-        //    FindObjectOfType<BuffManager>().BuffsBattleAction();
-        //}
-
-        //if (character == 1)
-        //{
-        //    FindObjectOfType<HeroAbilityManager>().ChargeHeroAbility(Player.HeroAbility.Warrior);
-        //    // Регенерация здоровья противника
-        //    allEnemies[allEnemies.Count - 1].Health += allEnemies[allEnemies.Count - 1].HealthRegen;
-        //}
-    }
-
-    // Эффект после смерти
-    public void CharacterAfterDeathEffect(int character)
-    {
-        if (character == 0)
-        { }
-
-        //if(character == 1)
-        //{
-        //    switch (Enemy.Type)
-        //    {
-        //        case CharacterManager.CharacterType.DarkElementalOne:
-        //            StartBattle(CharacterManager.CharacterType.DarkElementalTwo);
-        //            break;
-        //        case CharacterManager.CharacterType.DarkElementalTwo:
-        //            StartBattle(CharacterManager.CharacterType.DarkElementalThree);
-        //            break;
-        //        case CharacterManager.CharacterType.HellHound:
-        //            StartBattle(CharacterManager.CharacterType.HellTwoHeadsHound);
-        //            break;
-        //        case CharacterManager.CharacterType.HellTwoHeadsHound:
-        //            StartBattle(CharacterManager.CharacterType.HellThreeHeadsHound);
-        //            break;
-        //    }
-        //}
-    }
-    #endregion
 }

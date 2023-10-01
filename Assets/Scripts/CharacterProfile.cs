@@ -47,37 +47,52 @@ public class CharacterProfile : ScriptableObject
 
     [Header("Описание персонажа при встрече")]
     public string meetingDescr;
+
     [Header("Встретил ли игрок этого персонажа?")]
     public bool isMeeted;
 
     [Header("Имя")]
     public string Name;
+
     [Header("Здоровье")]
     public double MaxHealth;
+
     [Header("Реген. здоровья")]
     public double HealthRegen;
+
     [Header("Реген. маны")]
     public double ManaRegen;
+
     [Header("Тип защиты")]
     public CharactersLibrary.CharacterArmorType ArmorType;
+
     [Header("Защита")]
     public double Armor;
+
     [Header("Мана")]
     public double MaxMana;
+
     [Header("Заклинания персонажа")]
     public CharacterMagic[] Spells;
+
     [Header("Тип атаки")]
     public CharactersLibrary.CharacterAttackType AttackType;
+    
     [Header("Скорость атаки")]
     public double AttackSpeed;
+    
     [Header("Урон")]
     public double Damage;
+    
     [Header("Шанс увернуться | <= чем указанное число")]
     public double DodgeChance;
+    
     [Header("Опыт")]
     public double Exp;
+    
     [Header("Золото")]
     public double Gold;
+    
     [Header("Дроп")]
     public ItemProfile[] DropItems;
 

@@ -425,8 +425,7 @@ public class SavingManager : MonoBehaviour
                 INV.manaPotionCounter = save.manaPotionCounter;
 
                 // Локация
-                //LocationsController.Instance.CurrentLocation = save.Location;
-                //LM.ChangeLocationAfterLoading(LocationsController.CurrentLocation);
+                LocationsController.Instance.SetLocationAfterLoading(save.Location);
 
                 var locList = FindObjectOfType<LocationsController>();
 

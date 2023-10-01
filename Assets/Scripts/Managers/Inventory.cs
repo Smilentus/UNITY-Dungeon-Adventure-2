@@ -455,7 +455,7 @@ public class Inventory : MonoBehaviour
                     }
                     else
                     {
-                        BattleController.Instance.CheckEnemyDeath();
+                        BattleController.Instance.ForceKillAllEnemies();
                     }
                 }
                 else

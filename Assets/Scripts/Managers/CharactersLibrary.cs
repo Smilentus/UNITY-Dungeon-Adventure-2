@@ -136,7 +136,7 @@ public class CharactersLibrary : MonoBehaviour
         Satana,
         HellScareDemon,
 
-        RedRabbit,
+        RedRabbit
     }
     public enum CharacterAttackType
     {

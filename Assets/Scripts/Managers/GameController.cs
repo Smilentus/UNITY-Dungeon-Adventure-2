@@ -18,6 +18,10 @@ public class GameController : MonoBehaviour
     }
 
 
+    [SerializeField]
+    private AllGameEventsWarehouse m_allGameEventsWarehouse;
+
+
     [Header("Ссылка на LocationsManager")]
     public LocationsController m_locationManager;
     [Header("Ссылка на Inventory")]
@@ -66,6 +70,10 @@ public class GameController : MonoBehaviour
             }
         }
     }
+
+
+    
+
 
     // Добавление текста в панель ивентов
     public void AddEventText(string text)

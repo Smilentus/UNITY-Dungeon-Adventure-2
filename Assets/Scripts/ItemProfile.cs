@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Item", menuName = "Creatable/New Item")]
+[System.Serializable]
 public class ItemProfile : ScriptableObject
 {
     // Последний выбранный слот
