@@ -101,4 +101,7 @@ public class CharacterProfile : ScriptableObject
 
     [HideInInspector()]
     public int lastMagicPriority;
+
+    [Header("Action Points")]
+    public int DefaultActionPoints = 5;
 }

@@ -323,6 +323,11 @@ public class BattleController : MonoBehaviour
 
     private void ClearBattleData()
     {
+        foreach (RuntimeBattleCharacter character in enemiesInBattle)
+        {
+            Destroy(character.gameObject);
+        }
+
         enemiesInBattle.Clear();
         defeatedEnemiesInBattle.Clear();
     }

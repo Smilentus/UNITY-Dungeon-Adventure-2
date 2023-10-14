@@ -13,7 +13,7 @@ public class RuntimeBattleCharacter : MonoBehaviour
 
 
     [SerializeField]
-    private RuntimeBattleCharacterView m_characterView;
+    protected RuntimeBattleCharacterView m_characterView;
 
 
     [HideInInspector()]
@@ -26,6 +26,8 @@ public class RuntimeBattleCharacter : MonoBehaviour
 
     [HideInInspector()]
     public double Armor, AttackSpeed, Damage, DodgeChance;
+
+    public int ActionPoints;
 
 
     public virtual void CreateBattleCharacter(CharacterProfile profile)
@@ -41,6 +43,8 @@ public class RuntimeBattleCharacter : MonoBehaviour
         AttackSpeed = profile.AttackSpeed;
         Damage = profile.Damage;
         DodgeChance = profile.DodgeChance;
+
+        ActionPoints = profile.DefaultActionPoints;
 
         m_characterView.DrawCharacterInfo(new CharacterDrawerData()
         {
