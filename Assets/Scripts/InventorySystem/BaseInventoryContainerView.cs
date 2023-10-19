@@ -22,10 +22,14 @@ public class BaseInventoryContainerView : MonoBehaviour
 
 
 
-    private BaseInventoryContainer lastOpenedContainer;
+    private BaseInventoryContainer inventoryContainer;
+    public BaseInventoryContainer InventoryContainer => inventoryContainer;
 
 
     private List<BaseInventoryContainerSlotView> slotViews = new List<BaseInventoryContainerSlotView>();
+
+
+    private bool isSlotsInstantiated;
 
 
     private void OnDestroy()
@@ -34,9 +38,9 @@ public class BaseInventoryContainerView : MonoBehaviour
     }
 
 
-    public void OpenContainer(BaseInventoryContainer inventoryContainer)
+    public void OpenContainer(BaseInventoryContainer _inventoryContainer)
     {
-        if (inventoryContainer == null)
+        if (_inventoryContainer == null)
         {
             HideContainer();
             return;
@@ -46,11 +50,13 @@ public class BaseInventoryContainerView : MonoBehaviour
 
         if (m_containerNameTMP != null)
         {
-            m_containerNameTMP.text = $"'{inventoryContainer.InventoryContainerProfile.ContainerName}' (¬местительность {inventoryContainer.InventoryContainerProfile.ContainerCapacity} €чеек)";
+            m_containerNameTMP.text = $"'{_inventoryContainer.InventoryContainerProfile.ContainerName}' ({_inventoryContainer.InventoryContainerProfile.ContainerCapacity} €ч.)"; // (¬местительность {_inventoryContainer.InventoryContainerProfile.ContainerCapacity} €чеек)
         }
 
-        lastOpenedContainer = inventoryContainer;
-        lastOpenedContainer.onInventorySlotsUpdated += OnInventorySlotsUpdated;
+        this.inventoryContainer = _inventoryContainer;
+        CreateNewSlots();
+
+        this.inventoryContainer.onInventorySlotsUpdated += OnInventorySlotsUpdated;
         OnInventorySlotsUpdated();
 
         m_viewGameObject.SetActive(true);
@@ -63,6 +69,15 @@ public class BaseInventoryContainerView : MonoBehaviour
 
     private void OnInventorySlotsUpdated()
     {
+
+    }
+
+    private void CreateNewSlots()
+    {
+        if (isSlotsInstantiated) return;
+
+        isSlotsInstantiated = true;
+
         // ќчищаем старые слоты
         for (int i = slotViews.Count - 1; i >= 0; i--)
         {
@@ -72,20 +87,28 @@ public class BaseInventoryContainerView : MonoBehaviour
 
 
         // ƒобавл€ем слоты заново
-        foreach (BaseInventoryContainerSlot inventorySlot in lastOpenedContainer.InventorySlots)
+        int slotIndex = 0;
+        foreach (BaseInventoryContainerSlot inventorySlot in inventoryContainer.InventorySlots)
         {
             BaseInventoryContainerSlotView slotView = Instantiate(m_baseInventoryContainerSlotViewPrefab, m_contentParent);
-            slotView.SetData(inventorySlot);
-
+            slotView.SetData(inventorySlot, OnSlotPressedCallback);
+            
             slotViews.Add(slotView);
+
+            slotIndex++;
         }
+    }
+
+    private void OnSlotPressedCallback(BaseInventoryContainerSlot _containerSlot)
+    {
+        InventoryController.Instance.OnAnyContainerSlotPressed(inventoryContainer, _containerSlot);
     }
 
     private void ClearLastContainerData()
     {
-        if (lastOpenedContainer != null)
+        if (inventoryContainer != null)
         {
-            lastOpenedContainer.onInventorySlotsUpdated -= OnInventorySlotsUpdated;
+            inventoryContainer.onInventorySlotsUpdated -= OnInventorySlotsUpdated;
         }
     }
 }

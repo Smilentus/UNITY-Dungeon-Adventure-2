@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -10,8 +11,15 @@ public class BaseInventoryContainerSlotView : MonoBehaviour
     protected TMP_Text m_itemStack;
 
 
-    public void SetData(BaseInventoryContainerSlot _slot)
+    private Action<BaseInventoryContainerSlot> pressedCallback;
+
+    private BaseInventoryContainerSlot containerSlot;
+
+
+    public void SetData(BaseInventoryContainerSlot _slot, Action<BaseInventoryContainerSlot> _callback)
     {
+        pressedCallback = _callback;
+
         if (m_itemName != null)
         {
             m_itemName.text = _slot.SlotItem.BaseItemProfile.ItemName;
@@ -21,5 +29,10 @@ public class BaseInventoryContainerSlotView : MonoBehaviour
         {
 
         }
+    }
+
+    public void OnSlotPressed()
+    {
+        pressedCallback(containerSlot);
     }
 }

@@ -44,12 +44,50 @@ public class BaseInventoryContainer
     }
 
 
-    public virtual void AddItem(BaseItem baseItemToAdd)
+    public virtual bool TryAddItem(BaseItem _baseItemToAdd)
     {
+        int nearestSlot = GetNearestEmptySlotIndex();
 
+        if (nearestSlot == -1)
+        {
+            //  онтейнер заполнен - тут надо что-то делать
+            return false;
+        }
 
-        onInventorySlotsUpdated?.Invoke();
+        return TryPlaceItemToEmptySlot(_baseItemToAdd, nearestSlot);
     }
+
+    public virtual bool TryAddItem(BaseItem _baseItemToAdd, int _slotIndex)
+    {
+        return TryPlaceItemToEmptySlot(_baseItemToAdd, _slotIndex);
+    }
+
+    
+    protected virtual bool TryPlaceItemToEmptySlot(BaseItem _baseItemToAdd, int _slotIndex)
+    {
+        if (m_inventorySlots[_slotIndex].SlotItem == null)
+        {
+            m_inventorySlots[_slotIndex].SetSlotItem(_baseItemToAdd);
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
+    protected virtual int GetNearestEmptySlotIndex()
+    {
+        for (int i = 0; i < m_inventorySlots.Length; i++)
+        {
+            if (m_inventorySlots[i].SlotItem == null) return i;
+        }
+
+        return -1;
+    }
+
 
     public virtual BaseItem GetItem(int slotIndex)
     {
@@ -62,6 +100,7 @@ public class BaseInventoryContainer
             return null;
         }
     }
+
 
     public virtual void DestroyItem(int slotIndex)
     {
@@ -77,5 +116,7 @@ public class BaseInventoryContainer
     public virtual void ClearSlots()
     {
         m_inventorySlots = new BaseInventoryContainerSlot[inventoryContainerProfile.ContainerCapacity];
+
+        onInventorySlotsUpdated?.Invoke();
     }
 }

@@ -832,6 +832,14 @@
       <Project>{63F89083-D66F-ADF3-8280-F415C38E0DFC}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
+    <ProjectReference Include="UnityUIExtensions.csproj">
+      <Project>{8F09AF94-99CC-8E3C-5CF9-ED6AED2B8D45}</Project>
+      <Name>UnityUIExtensions</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityUIExtensions.editor.csproj">
+      <Project>{4DDCC8D6-9BEE-3CD3-DB2B-A747C8633277}</Project>
+      <Name>UnityUIExtensions.editor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

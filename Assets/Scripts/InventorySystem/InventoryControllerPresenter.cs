@@ -11,15 +11,18 @@ public class InventoryControllerPresenter : MonoBehaviour
     private Transform m_containerButtonsParent;
 
 
-    [Header("Selected Inventory Container")]
     [SerializeField]
-    private BaseInventoryContainerView m_selectedContainerView;
+    private BaseInventoryContainerView m_containerViewPrefab;
+
+    [SerializeField]
+    private Transform m_containerViewsParent;
 
 
     private InventoryController controller;
 
 
     private List<BaseInventoryContainerButtonView> containerButtonViews = new List<BaseInventoryContainerButtonView>();
+    private List<BaseInventoryContainerView> openedContainers = new List<BaseInventoryContainerView>();
 
 
     private void Start()
@@ -33,6 +36,7 @@ public class InventoryControllerPresenter : MonoBehaviour
         {
             controller.onInventoryContainersUpdated -= OnInventoryContainersUpdated;
             controller.onInventoryContainerOpened -= OnInventoryContainerOpened;
+            controller.onInventoryContainerClosed -= OnInventoryContainerClosed;
         }
     }
 
@@ -45,27 +49,53 @@ public class InventoryControllerPresenter : MonoBehaviour
 
         controller.onInventoryContainersUpdated += OnInventoryContainersUpdated;
         controller.onInventoryContainerOpened += OnInventoryContainerOpened;
+        controller.onInventoryContainerClosed += OnInventoryContainerClosed;
 
         containerButtonViews = new List<BaseInventoryContainerButtonView>();
     }
 
-    private void OnInventoryContainerOpened(BaseInventoryContainer _container)
+    private void OnInventoryContainerClosed(BaseInventoryContainer _container)
     {
-        HighlightSelectedContainerButton(_container);
-        m_selectedContainerView.OpenContainer(_container);
+        HighlightSelectedContainerButton(_container, false);
+
+        DestroyContainerView(_container);
     }
 
-    private void HighlightSelectedContainerButton(BaseInventoryContainer _container)
+    private void OnInventoryContainerOpened(BaseInventoryContainer _container)
     {
-        foreach (BaseInventoryContainerButtonView containerButtonView in containerButtonViews)
-        {
-            containerButtonView.SetOpenStatus(false);
-        }
+        HighlightSelectedContainerButton(_container, true);
 
+        InstantiateContainerView(_container);
+    }
+
+
+    private void InstantiateContainerView(BaseInventoryContainer _container)
+    {
+        BaseInventoryContainerView containerView = Instantiate(m_containerViewPrefab, m_containerViewsParent);
+        containerView.OpenContainer(_container);
+
+        openedContainers.Add(containerView);
+    }
+
+    private void DestroyContainerView(BaseInventoryContainer _container)
+    {
+        BaseInventoryContainerView containerView = openedContainers.Find(x => x.InventoryContainer == _container);
+        if (containerView != null)
+        {
+            containerView.HideContainer();
+            Destroy(containerView.gameObject);
+
+            openedContainers.Remove(containerView); 
+        }
+    }
+
+
+    private void HighlightSelectedContainerButton(BaseInventoryContainer _container, bool _toggle)
+    {
         BaseInventoryContainerButtonView buttonView = containerButtonViews.Find(x => x.Container == _container);
         if (buttonView != null)
         {
-            buttonView.SetOpenStatus(true);
+            buttonView.SetOpenStatus(_toggle);
         }
     }
 
@@ -85,33 +115,14 @@ public class InventoryControllerPresenter : MonoBehaviour
         {
             BaseInventoryContainerButtonView containerButtonView = Instantiate(m_buttonViewPrefab, m_containerButtonsParent);
             containerButtonView.SetData(baseInventoryContainer, OnBaseInventoryContainerButtonViewPressed);
-            containerButtonView.SetOpenStatus(false);
+            containerButtonView.SetOpenStatus(controller.OpenedContainers.Contains(baseInventoryContainer));
 
             containerButtonViews.Add(containerButtonView);
-        }
-
-
-        // Ищем последний открытый контейнер и на всякий случай снова его открываем
-        BaseInventoryContainerButtonView foundedView = containerButtonViews.Find(x => x.Container == controller.SelectedContainer);
-        if (foundedView != null)
-        {
-            OnInventoryContainerOpened(foundedView.Container);
-        }
-        else
-        {
-            if (containerButtonViews.Count > 0)
-            {
-                OnInventoryContainerOpened(containerButtonViews[0].Container);
-            }
-            else
-            {
-                // Нет сумок, какая-то заглушка наверно открывается, да?
-            }
         }
     }
 
     private void OnBaseInventoryContainerButtonViewPressed(BaseInventoryContainer _container)
     {
-        controller.OpenContainer(_container);
+        controller.ToggleContainer(_container);
     }
 }
