@@ -26,4 +26,9 @@ public class BaseItemProfile : ScriptableObject
     [TextArea(5, 10)]
     protected string m_itemDescription;
     public string ItemDescription => m_itemDescription;
+
+
+    [SerializeField]
+    protected int m_maximumStack;
+    public int MaximumStack => m_maximumStack;
 }

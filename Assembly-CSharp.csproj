@@ -59,14 +59,15 @@
     <Compile Include="Assets\Scripts\Buttons\saveSlot.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\PlayerSystem\RuntimeBattlePlayerController.cs" />
     <Compile Include="Assets\Scripts\Buttons\PanelCraftButton.cs" />
-    <Compile Include="Assets\Scripts\Managers\StatisticsManager.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\IGlobalWindow.cs" />
+    <Compile Include="Assets\Scripts\Managers\StatisticsManager.cs" />
     <Compile Include="Assets\Scripts\Dialog.cs" />
     <Compile Include="Assets\Scripts\Task.cs" />
     <Compile Include="Assets\Scripts\Buff.cs" />
     <Compile Include="Assets\Scripts\Managers\TasksManager.cs" />
     <Compile Include="Assets\Scripts\GameTimeFlowSystem\GameTimeFlowEventBaseControllers\GameTimeFlowEventBaseController.cs" />
     <Compile Include="Assets\Scripts\Managers\LoadingSceneScript.cs" />
+    <Compile Include="Assets\Scripts\InventorySystem\BaseMouseItemController.cs" />
     <Compile Include="Assets\Scripts\neededResourceSlot.cs" />
     <Compile Include="Assets\Scripts\Art.cs" />
     <Compile Include="Assets\Scripts\Buttons\BuffButton.cs" />
@@ -77,11 +78,11 @@
     <Compile Include="Assets\Scripts\GameTimeFlowSystem\GameTimeFlowController.cs" />
     <Compile Include="Assets\Scripts\GameEventSystem\GameEventsController.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
-    <Compile Include="Assets\Scripts\Managers\SkillsManager.cs" />
-    <Compile Include="Assets\Scripts\InventorySystem\Inventory.cs" />
     <Compile Include="Assets\Scripts\CharacterProfile.cs" />
     <Compile Include="Assets\Scripts\AnimationsSctipts\PlayerActionsAnimator.cs" />
+    <Compile Include="Assets\Scripts\InventorySystem\Inventory.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\BattleActionSystem\IBattleActionExecuter.cs" />
+    <Compile Include="Assets\Scripts\Managers\SkillsManager.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\GlobalWindowButton.cs" />
     <Compile Include="Assets\Scripts\Managers\CharactersLibrary.cs" />
     <Compile Include="Assets\Scripts\GameEventSystem\Profiles\BattleGameEventProfile.cs" />
@@ -158,7 +159,7 @@
     <Compile Include="Assets\Scripts\Buttons\ButtonInteract.cs" />
     <Compile Include="Assets\Scripts\Buttons\AbilityButton.cs" />
     <Compile Include="Assets\Scripts\MonoScriptPropertyDrawer.cs" />
-    <Compile Include="Assets\Scripts\InventorySystem\BaseMouseItemController.cs" />
+    <Compile Include="Assets\Scripts\InventorySystem\DynamicTimelyInventoryContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

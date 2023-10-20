@@ -19,10 +19,14 @@ public class InventoryController : MonoBehaviour
     }
 
 
-
     public event Action onInventoryContainersUpdated;
     public event Action<BaseInventoryContainer> onInventoryContainerOpened;
     public event Action<BaseInventoryContainer> onInventoryContainerClosed;
+
+
+    [Tooltip("Уникальный контейнер, который будет динамически расширяться для мусора и предметов, которые не смогли поместиться в контейнере")]
+    [SerializeField]
+    private BaseInventoryContainerProfile m_dynamicTimelyContainer;
 
 
     private List<BaseInventoryContainer> inventoryContainers = new List<BaseInventoryContainer>();
@@ -36,10 +40,66 @@ public class InventoryController : MonoBehaviour
 
 
     private BaseMouseItemController mouseItemController;
+    private DynamicTimelyInventoryContainer dynamicContainer;
+
+
+    private void Awake()
+    {
+        dynamicContainer = new DynamicTimelyInventoryContainer(m_dynamicTimelyContainer);
+    }
 
 
     public void OnAnyContainerSlotPressed(BaseInventoryContainer _container, BaseInventoryContainerSlot _slot)
     {
+        // Управление с ПК:
+        // 2) Если слот ПУСТОЙ и мышка ЗАНЯТА - помещаем из мышки в слот
+        if (_slot.IsSlotEmpty && !mouseItemController.MouseSlot.IsSlotEmpty)
+        {
+            _slot.SetItem(mouseItemController.MouseSlot.SlotItem, mouseItemController.MouseSlot.CurrentStack);
+            
+            mouseItemController.MouseSlot.ClearSlot();
+            return;
+        }
+
+        // 3) Если слот ЗАНЯТ и мышка ПУСТАЯ - показываем информацию о предмете и возможные действия
+        if (!_slot.IsSlotEmpty && mouseItemController.MouseSlot.IsSlotEmpty)
+        {
+            mouseItemController.MouseSlot.SetItem(_slot.SlotItem, _slot.CurrentStack);
+
+            _slot.ClearSlot();
+            return;
+        }
+
+        // 4) Если слот ЗАНЯТ и мышка ЗАНЯТА - свапаем предметы с мышки и на слот и забираем то что было в мышку
+        // * на самом деле тут надо проверять какой предмет мы помещаем, если предметы одинаковые - дополняем стаки того предмета, который в контейнере
+        // * всё что не влезло - остаётся в мышке
+        // * если предметы разные - свапаем их
+        if (!_slot.IsSlotEmpty && !mouseItemController.MouseSlot.IsSlotEmpty)
+        {
+            if (_slot.SlotItem.BaseItemProfile == mouseItemController.MouseSlot.SlotItem.BaseItemProfile)
+            {
+                int unplacedStack = _slot.AddItemStack(mouseItemController.MouseSlot.CurrentStack);
+                if (unplacedStack > 0)
+                {
+                    mouseItemController.MouseSlot.CurrentStack = unplacedStack;
+                }
+                else
+                {
+                    mouseItemController.MouseSlot.ClearSlot();
+                }
+            }
+            else
+            {
+                BaseItem tempItem = _slot.SlotItem;
+                int tempStack = _slot.CurrentStack;
+
+                _slot.SetItem(mouseItemController.MouseSlot.SlotItem, mouseItemController.MouseSlot.CurrentStack);
+                mouseItemController.MouseSlot.SetItem(tempItem, tempStack);
+                tempItem = null;
+            }
+            return;
+        }
+
         // По факту тут надо обрабатывать любой слот в любом контейнере, что я и делаю
         // Тут должны быть обработки, а пустой ли этот слот, а пустой ли слот в мышке
         // А могу ли я взять этот предмет и т.п.
@@ -89,6 +149,28 @@ public class InventoryController : MonoBehaviour
     }
 
 
+    public void TryAddItemToAnyContainer(BaseItemProfile _baseItemProfile, int _stack)
+    {
+        if (inventoryContainers.Count == 0) { return; }
+
+        BaseInventoryAdditionData additionData = new BaseInventoryAdditionData(new BaseItem(_baseItemProfile), _stack);
+
+        for (int i = 0; i < inventoryContainers.Count; i++)
+        {
+            additionData = inventoryContainers[i].TryAddItem(additionData.BaseItem, additionData.ItemStack);
+
+            if (additionData.ItemStack == 0)
+            {
+                break;
+            }
+        }
+
+        if (additionData.ItemStack > 0)
+        {
+            // Не смогли разместить предмет ни в один контейнер - значит помещаем его в динамический контейнер с мусором (или на землю, я пока не решил)
+        }
+    }
+
 
     public void AddInventoryContainer(BaseInventoryContainerProfile _baseInventoryContainerProfile)
     {
@@ -135,7 +217,16 @@ public class InventoryController : MonoBehaviour
     [Header("Debug")]
     public BaseInventoryContainerProfile debugProfile;
 
-    [ContextMenu("AddContainer")]
+    public BaseItemProfile baseItemProfile;
+    public int itemStack;
+
+    [ContextMenu("Add Item")]
+    public void DebugAddItem()
+    {
+        TryAddItemToAnyContainer(baseItemProfile, itemStack);
+    }
+
+    [ContextMenu("Add Container")]
     public void DebugAddContainer()
     {
         AddInventoryContainer(debugProfile);
