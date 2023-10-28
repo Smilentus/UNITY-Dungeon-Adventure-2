@@ -160,6 +160,13 @@
     <Compile Include="Assets\Scripts\Buttons\AbilityButton.cs" />
     <Compile Include="Assets\Scripts\MonoScriptPropertyDrawer.cs" />
     <Compile Include="Assets\Scripts\InventorySystem\BaseMouseControllerPresenter.cs" />
+    <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\InventoryGlobalWindow.cs" />
+    <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\BaseGameGlobalWindow.cs" />
+    <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\WorldMapGlobalWindow.cs" />
+    <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\CraftingGlobalWindow.cs" />
+    <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\PlayerSkillsGlobalWindow.cs" />
+    <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\BaseGameGlobalWindowSelector.cs" />
+    <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\BaseGameGlobalWindowButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

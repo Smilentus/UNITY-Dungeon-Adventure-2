@@ -27,6 +27,8 @@ public class GlobalWindowsController : MonoBehaviour
 
     private List<IGlobalWindow> globalWindows = new List<IGlobalWindow>();
 
+    private List<BaseGameGlobalWindow> baseGameGlobalWindows = new List<BaseGameGlobalWindow>();
+
 
     private void Awake()
     {
@@ -42,6 +44,12 @@ public class GlobalWindowsController : MonoBehaviour
             if (gameObject.TryGetComponent<IGlobalWindow>(out window))
             {
                 globalWindows.Add(window);
+            }
+
+            BaseGameGlobalWindow baseGameGlobalWindow;
+            if (gameObject.TryGetComponent<BaseGameGlobalWindow>(out baseGameGlobalWindow))
+            {
+                baseGameGlobalWindows.Add(baseGameGlobalWindow);
             }
         }
     }
@@ -76,6 +84,38 @@ public class GlobalWindowsController : MonoBehaviour
         if (windowToClose != null)
         {
             windowToClose.Hide();
+        }
+    }
+
+
+    public void TryToggleGlobalWindow(Type globalWindowType, IGlobalWindowData globalWindowData = null)
+    {
+        if (IsWindowShown(globalWindowType))
+        {
+            TryHideGlobalWindow(globalWindowType);  
+        }
+        else
+        {
+            TryShowGlobalWindow(globalWindowType, globalWindowData);
+        }
+    }
+
+
+    public void CloseEveryBaseGameGlobalWindow()
+    {
+        foreach (BaseGameGlobalWindow window in baseGameGlobalWindows)
+        {
+            window.Hide();
+        }
+    }
+
+    public void CloseEveryBaseGameGlobalWindowExceptOne(Type globalWindowType)
+    {
+        foreach (BaseGameGlobalWindow window in baseGameGlobalWindows)
+        {
+            if (window.GetType().Equals(globalWindowType)) continue;
+            
+            window.Hide();
         }
     }
 }
