@@ -18,6 +18,10 @@ public class InventoryControllerPresenter : MonoBehaviour
     private Transform m_containerViewsParent;
 
 
+    [SerializeField]
+    private BaseInventoryContainerView m_quickSlotsContainer;
+
+
     private InventoryController controller;
 
 
@@ -50,6 +54,10 @@ public class InventoryControllerPresenter : MonoBehaviour
         controller.onInventoryContainersUpdated += OnInventoryContainersUpdated;
         controller.onInventoryContainerOpened += OnInventoryContainerOpened;
         controller.onInventoryContainerClosed += OnInventoryContainerClosed;
+
+        
+        m_quickSlotsContainer.OpenContainer(controller.QuickSlotsContainer);
+
 
         containerButtonViews = new List<BaseInventoryContainerButtonView>();
     }

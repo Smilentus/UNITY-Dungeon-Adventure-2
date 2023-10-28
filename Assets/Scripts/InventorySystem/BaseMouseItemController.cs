@@ -1,11 +1,10 @@
-using UnityEngine;
-
-public class BaseMouseItemController : MonoBehaviour
+[System.Serializable]
+public class BaseMouseItemController
 {
     public BaseInventoryContainerSlot MouseSlot { get; private set; }
 
 
-    private void Awake()
+    public BaseMouseItemController()
     {
         MouseSlot = new BaseInventoryContainerSlot();
     }

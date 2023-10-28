@@ -1,9 +1,14 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class BaseInventoryContainerSlotView : MonoBehaviour
+public class BaseInventoryContainerSlotView : MonoBehaviour, IPointerClickHandler
 {
+    [SerializeField]
+    protected Image m_itemImage;
+
     [SerializeField]
     protected TMP_Text m_itemName;
 
@@ -18,21 +23,54 @@ public class BaseInventoryContainerSlotView : MonoBehaviour
 
     public void SetData(BaseInventoryContainerSlot _slot, Action<BaseInventoryContainerSlot> _callback)
     {
+        containerSlot = _slot;
         pressedCallback = _callback;
 
-        if (m_itemName != null)
+        if (_slot == null || _slot.IsSlotEmpty)
         {
-            m_itemName.text = _slot.SlotItem.BaseItemProfile.ItemName;
+            if (m_itemImage != null)
+            {
+                m_itemImage.gameObject.SetActive(false);
+                m_itemImage.sprite = null;
+            }
+
+            if (m_itemName != null)
+            {
+                m_itemName.text = "";
+            }
+
+            if (m_itemStack != null)
+            {
+                m_itemStack.text = "";
+            }
         }
-
-        if (m_itemName != null)
+        else
         {
+            if (m_itemImage != null)
+            {
+                m_itemImage.gameObject.SetActive(true);
+                m_itemImage.sprite = _slot.SlotItem.BaseItemProfile.ItemSprite;
+            }
 
+            if (m_itemName != null)
+            {
+                m_itemName.text = _slot.SlotItem.BaseItemProfile.ItemName;
+            }
+
+            if (m_itemStack != null)
+            {
+                m_itemStack.text = _slot.CurrentStack.ToString();
+            }
         }
     }
 
     public void OnSlotPressed()
     {
         pressedCallback(containerSlot);
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        OnSlotPressed();
     }
 }

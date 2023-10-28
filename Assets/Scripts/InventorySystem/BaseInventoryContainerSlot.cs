@@ -12,7 +12,7 @@ public class BaseInventoryContainerSlot
     {
         get
         {
-            if (slotItem == null || slotItem.BaseItemProfile == null)
+            if (IsSlotEmpty)
             {
                 return 0;
             }
@@ -27,7 +27,7 @@ public class BaseInventoryContainerSlot
     {
         get
         {
-            if (slotItem == null || slotItem.BaseItemProfile == null)
+            if (IsSlotEmpty)
             {
                 return 0;
             }
@@ -39,7 +39,7 @@ public class BaseInventoryContainerSlot
     }
 
      
-    public bool IsSlotEmpty => slotItem.BaseItemProfile == null;
+    public bool IsSlotEmpty => slotItem == null || slotItem.BaseItemProfile == null;
 
 
     public BaseInventoryContainerSlot()

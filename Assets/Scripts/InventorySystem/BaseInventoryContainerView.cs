@@ -69,7 +69,9 @@ public class BaseInventoryContainerView : MonoBehaviour
 
     private void OnInventorySlotsUpdated()
     {
-
+        // Пока что так, подумать про кэширование и прочие штуки
+        isSlotsInstantiated = false;
+        CreateNewSlots();
     }
 
     private void CreateNewSlots()

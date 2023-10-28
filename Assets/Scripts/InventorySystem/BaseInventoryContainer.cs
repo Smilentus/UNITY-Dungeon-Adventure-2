@@ -26,8 +26,12 @@ public class BaseInventoryContainer
     public event Action onInventorySlotsUpdated;
 
 
-    protected BaseInventoryContainerSlot[] m_inventorySlots;
-    public BaseInventoryContainerSlot[] InventorySlots => m_inventorySlots;
+    protected List<BaseInventoryContainerSlot> m_inventorySlots;
+    public List<BaseInventoryContainerSlot> InventorySlots => m_inventorySlots;
+
+
+    private int inventoryCapacity;
+    public int InventoryCapacity => inventoryCapacity;
 
 
     protected BaseInventoryContainerProfile inventoryContainerProfile;
@@ -37,8 +41,24 @@ public class BaseInventoryContainer
     public BaseInventoryContainer(BaseInventoryContainerProfile _profile)
     {
         inventoryContainerProfile = _profile;
+        inventoryCapacity = _profile.ContainerCapacity;
 
-        m_inventorySlots = new BaseInventoryContainerSlot[_profile.ContainerCapacity];
+        CreateNewInventorySlots();
+    }
+
+
+    protected virtual void CreateNewInventorySlots()
+    {
+        if (inventoryCapacity == -1)
+        {
+            inventoryCapacity = 0;
+        }
+
+        m_inventorySlots = new List<BaseInventoryContainerSlot>(inventoryCapacity);
+        for (int i = 0; i < inventoryCapacity; i++)
+        {
+            m_inventorySlots.Add(new BaseInventoryContainerSlot());
+        }
     }
 
 
@@ -97,12 +117,14 @@ public class BaseInventoryContainer
             }
         }
 
+        onInventorySlotsUpdated?.Invoke();
+
         return new BaseInventoryAdditionData(_baseItemToAdd, unplacedStacks);
     }
 
     protected virtual int GetNearestEmptySlotIndex()
     {
-        for (int i = 0; i < m_inventorySlots.Length; i++)
+        for (int i = 0; i < m_inventorySlots.Count; i++)
         {
             if (m_inventorySlots[i].IsSlotEmpty) return i;
         }
@@ -112,7 +134,7 @@ public class BaseInventoryContainer
 
     protected virtual int GetNearestSlotWithItemStackDelta(BaseItem _baseItem)
     {
-        for (int i = 0; i < m_inventorySlots.Length; i++)
+        for (int i = 0; i < m_inventorySlots.Count; i++)
         {
             if (m_inventorySlots[i].IsSlotEmpty || m_inventorySlots[i].DeltaStack == 0) continue;
 
@@ -129,7 +151,7 @@ public class BaseInventoryContainer
 
     public virtual BaseItem GetItemAtSlot(int slotIndex)
     {
-        if (slotIndex >= 0 && slotIndex < m_inventorySlots.Length)
+        if (slotIndex >= 0 && slotIndex < m_inventorySlots.Count)
         {
             return m_inventorySlots[slotIndex].SlotItem;
         }
@@ -151,9 +173,14 @@ public class BaseInventoryContainer
     }
 
 
+    public virtual void ForceUpdateStoredItems()
+    {
+        onInventorySlotsUpdated?.Invoke();
+    }
+
     public virtual void ClearSlots()
     {
-        m_inventorySlots = new BaseInventoryContainerSlot[InventoryContainerProfile.ContainerCapacity];
+        CreateNewInventorySlots();
 
         onInventorySlotsUpdated?.Invoke();
     }

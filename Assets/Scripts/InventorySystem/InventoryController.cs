@@ -24,9 +24,12 @@ public class InventoryController : MonoBehaviour
     public event Action<BaseInventoryContainer> onInventoryContainerClosed;
 
 
+    [SerializeField]
+    private BaseInventoryContainerProfile m_quickSlotsContainer;
+   
     [Tooltip("”никальный контейнер, который будет динамически расшир€тьс€ дл€ мусора и предметов, которые не смогли поместитьс€ в контейнере")]
     [SerializeField]
-    private BaseInventoryContainerProfile m_dynamicTimelyContainer;
+    private BaseInventoryContainerProfile m_dynamicTimelyContainerProfile;
 
 
     private List<BaseInventoryContainer> inventoryContainers = new List<BaseInventoryContainer>();
@@ -39,13 +42,23 @@ public class InventoryController : MonoBehaviour
     public List<BaseInventoryContainer> OpenedContainers = new List<BaseInventoryContainer>();
 
 
+    private BaseInventoryContainer quickSlotsContainer;
+    public BaseInventoryContainer QuickSlotsContainer => quickSlotsContainer;
+
+
+    private BaseInventoryContainer dynamicTimelyContainer;
+
+
     private BaseMouseItemController mouseItemController;
-    private DynamicTimelyInventoryContainer dynamicContainer;
+    public BaseMouseItemController MouseItemController => mouseItemController;
 
 
     private void Awake()
     {
-        dynamicContainer = new DynamicTimelyInventoryContainer(m_dynamicTimelyContainer);
+        mouseItemController = new BaseMouseItemController();
+
+        quickSlotsContainer = new BaseInventoryContainer(m_quickSlotsContainer);
+        dynamicTimelyContainer = new BaseInventoryContainer(m_dynamicTimelyContainerProfile);
     }
 
 
@@ -58,6 +71,7 @@ public class InventoryController : MonoBehaviour
             _slot.SetItem(mouseItemController.MouseSlot.SlotItem, mouseItemController.MouseSlot.CurrentStack);
             
             mouseItemController.MouseSlot.ClearSlot();
+            _container.ForceUpdateStoredItems();
             return;
         }
 
@@ -67,6 +81,7 @@ public class InventoryController : MonoBehaviour
             mouseItemController.MouseSlot.SetItem(_slot.SlotItem, _slot.CurrentStack);
 
             _slot.ClearSlot();
+            _container.ForceUpdateStoredItems();
             return;
         }
 
@@ -97,6 +112,7 @@ public class InventoryController : MonoBehaviour
                 mouseItemController.MouseSlot.SetItem(tempItem, tempStack);
                 tempItem = null;
             }
+            _container.ForceUpdateStoredItems();
             return;
         }
 
