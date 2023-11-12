@@ -67,10 +67,10 @@ public class SkillsManager : MonoBehaviour
     // Работа скиллов
     public void SkillsAction()
     {
-        if(Player.Health < Player.MaxHealth)
-            Player.Health += Player.HealthRegen;
-        if(Player.Mana < Player.MaxMana)
-            Player.Mana += Player.ManaRegen;
+        if(RuntimePlayer.Instance.RuntimePlayerStats.Health < RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth)
+            RuntimePlayer.Instance.RuntimePlayerStats.Health += RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen;
+        if(RuntimePlayer.Instance.RuntimePlayerStats.Mana < RuntimePlayer.Instance.RuntimePlayerStats.MaxMana)
+            RuntimePlayer.Instance.RuntimePlayerStats.Mana += RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen;
     }
 
     // Обнуление скиллов
@@ -109,11 +109,11 @@ public class SkillsManager : MonoBehaviour
     {
         int pos = SkillPos(currentSkill);
 
-        if(Player.SkillPoints >= AllSkills[pos].Cost)
+        if(RuntimePlayer.Instance.RuntimePlayerStats.SkillPoints >= AllSkills[pos].Cost)
         {
             if (AllSkills[pos].isInfinity || AllSkills[pos].Lvl < AllSkills[pos].MaxLvl)
             {
-                Player.SkillPoints -= AllSkills[pos].Cost;
+                RuntimePlayer.Instance.RuntimePlayerStats.SkillPoints -= AllSkills[pos].Cost;
 
                 UpgradeSkill(currentSkill);
 
@@ -149,52 +149,52 @@ public class SkillsManager : MonoBehaviour
             switch (uType)
             {
                 case SkillType.HealthRegen:
-                    Player.HealthRegen += (int)var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen += (int)var;
                     break;
                 case SkillType.MaxHealth:
-                    Player.MaxHealth += (int)var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth += (int)var;
                     break;
                 case SkillType.MaxMana:
-                    Player.MaxMana += (int)var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.MaxMana += (int)var;
                     break;
                 case SkillType.ManaRegen:
-                    Player.ManaRegen += (int)var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen += (int)var;
                     break;
                 case SkillType.Luck:
-                    Player.Luck += var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Luck += var;
                     break;
                 case SkillType.Damage:
-                    Player.Damage += (int)var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Damage += (int)var;
                     break;
                 case SkillType.AttackSpeed:
-                    Player.AttackSpeed += (int)var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.AttackSpeed += (int)var;
                     break;
                 case SkillType.Armor:
-                    Player.Armor += (int)var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Armor += (int)var;
                     break;
                 case SkillType.AntiHole:
-                    Player.AntiHole = true;
+                    RuntimePlayer.Instance.RuntimePlayerStats.AntiHole = true;
                     break;
                 case SkillType.ExtraExp:
-                    Player.ExtraExpMod += (int)var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod += (int)var;
                     break;
                 case SkillType.ExtraMoney:
-                    Player.ExtraMoneyMod += (int)var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMod += (int)var;
                     break;
                 case SkillType.ChanceNotToDelete:
-                    Player.ChanceNotToDelete += var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.ChanceNotToDelete += var;
                     break;
                 case SkillType.ChanceToCraftTwice:
-                    Player.ChanceToCraftTwice += var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.ChanceToCraftTwice += var;
                     break;
                 case SkillType.CriticalChance:
-                    Player.CriticalStrikeChance += var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.CriticalStrikeChance += var;
                     break;
                 case SkillType.CriticalMulty:
-                    Player.CriticalStrikeMulty += var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.CriticalStrikeMulty += var;
                     break;
                 case SkillType.DodgeChance:
-                    Player.DodgeChance += var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.DodgeChance += var;
                     break;
                 case SkillType.Magic_Fireball:
                     if (AllSkills[SkillPos(uType)].Lvl == 0)
@@ -277,12 +277,12 @@ public class SkillsManager : MonoBehaviour
                 case SkillType.Magic_SlamStun:
                     break;
                 case SkillType.ExtraInvSlot:
-                    FindObjectOfType<Inventory>().OpenInvSlot(Player.openedInvCases);
-                    Player.openedInvCases += (int)var;
+                    FindObjectOfType<Inventory>().OpenInvSlot(RuntimePlayer.Instance.RuntimePlayerStats.openedInvCases);
+                    RuntimePlayer.Instance.RuntimePlayerStats.openedInvCases += (int)var;
                     break;
                 case SkillType.ExtraRuneSlot:
-                    FindObjectOfType<Inventory>().OpenRuneSlot(FindObjectOfType<Inventory>().inventory.Length - 8 + Player.openedRuneCases);
-                    Player.openedRuneCases += (int)var;
+                    FindObjectOfType<Inventory>().OpenRuneSlot(FindObjectOfType<Inventory>().inventory.Length - 8 + RuntimePlayer.Instance.RuntimePlayerStats.openedRuneCases);
+                    RuntimePlayer.Instance.RuntimePlayerStats.openedRuneCases += (int)var;
                     break;
             }
     }
@@ -445,7 +445,7 @@ public class SkillsManager : MonoBehaviour
     public void ShowSkillDescr(SkillType dType)
     {
         // Если уровень больше нужного - показываем инфу
-        if (Player.Lvl >= AllSkills[SkillPos(dType)].neededLvl)
+        if (RuntimePlayer.Instance.RuntimePlayerStats.Lvl >= AllSkills[SkillPos(dType)].neededLvl)
         {
             upgradePanel.SetActive(true);
 
@@ -493,7 +493,7 @@ public class SkillsManager : MonoBehaviour
 
         int neededLvl = AllSkills[SkillPos(dType)].neededLvl;
 
-        if (Player.Lvl < neededLvl)
+        if (RuntimePlayer.Instance.RuntimePlayerStats.Lvl < neededLvl)
             text += ("\nНужен " + neededLvl + " для улучшения!");
 
         text = TransformDescr(text);
@@ -504,7 +504,7 @@ public class SkillsManager : MonoBehaviour
     // Обновление текстов
     public void UpdateTexts()
     {
-        SkillScoreText.text = "ОН: " + Player.SkillPoints;
+        SkillScoreText.text = "ОН: " + RuntimePlayer.Instance.RuntimePlayerStats.SkillPoints;
         foreach(GameObject slot in SkillsButtons)
         {
             slot.GetComponentsInChildren<RawImage>()[1].texture = AllSkills[SkillPos(slot.GetComponent<SkillButton>().Type)].Icon;

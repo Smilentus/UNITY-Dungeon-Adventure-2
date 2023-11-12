@@ -230,21 +230,21 @@ public class InventoryController : MonoBehaviour
     }
 
 
-    [Header("Debug")]
-    public BaseInventoryContainerProfile debugProfile;
+    //[Header("Debug")]
+    //public BaseInventoryContainerProfile debugProfile;
 
-    public BaseItemProfile baseItemProfile;
-    public int itemStack;
+    //public BaseItemProfile baseItemProfile;
+    //public int itemStack;
 
-    [ContextMenu("Add Item")]
-    public void DebugAddItem()
-    {
-        TryAddItemToAnyContainer(baseItemProfile, itemStack);
-    }
+    //[ContextMenu("Add Item")]
+    //public void DebugAddItem()
+    //{
+    //    TryAddItemToAnyContainer(baseItemProfile, itemStack);
+    //}
 
-    [ContextMenu("Add Container")]
-    public void DebugAddContainer()
-    {
-        AddInventoryContainer(debugProfile);
-    }
+    //[ContextMenu("Add Container")]
+    //public void DebugAddContainer()
+    //{
+    //    AddInventoryContainer(debugProfile);
+    //}
 }

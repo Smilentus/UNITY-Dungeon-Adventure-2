@@ -105,12 +105,12 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < inventory.Length; i++)
         {
-            if (i < Player.openedInvCases)
+            if (i < RuntimePlayer.Instance.RuntimePlayerStats.openedInvCases)
             {
                 Buttons[i].GetComponent<InvButton>().isActive = true;
                 Buttons[i].GetComponent<InvButton>().UpdateState();
             }
-            if (i > 70 && i < 71 + Player.openedRuneCases)
+            if (i > 70 && i < 71 + RuntimePlayer.Instance.RuntimePlayerStats.openedRuneCases)
             {
                 Buttons[i].GetComponent<InvButton>().isActive = true;
                 Buttons[i].GetComponent<InvButton>().UpdateState();
@@ -130,7 +130,7 @@ public class Inventory : MonoBehaviour
             GameObject newSlot = Instantiate(invSlot, invExtraParent);
 
             newSlot.GetComponent<InvButton>().slotNum = i;
-            if (i < Player.openedInvCases)
+            if (i < RuntimePlayer.Instance.RuntimePlayerStats.openedInvCases)
                 newSlot.GetComponent<InvButton>().isActive = true;
             else
                 newSlot.GetComponent<InvButton>().isActive = false;
@@ -146,7 +146,7 @@ public class Inventory : MonoBehaviour
 
             newSlot.GetComponent<InvButton>().slotNum = i;
 
-            if (i < Player.openedInvCases)
+            if (i < RuntimePlayer.Instance.RuntimePlayerStats.openedInvCases)
                 newSlot.GetComponent<InvButton>().isActive = true;
             else
                 newSlot.GetComponent<InvButton>().isActive = false;
@@ -189,7 +189,7 @@ public class Inventory : MonoBehaviour
 
             newSlot.GetComponent<InvButton>().slotNum = i;
 
-            if (i < InvCapacity + 26 + Player.openedRuneCases)
+            if (i < InvCapacity + 26 + RuntimePlayer.Instance.RuntimePlayerStats.openedRuneCases)
                 newSlot.GetComponent<InvButton>().isActive = true;
             else
                 newSlot.GetComponent<InvButton>().isActive = false;
@@ -304,9 +304,9 @@ public class Inventory : MonoBehaviour
         switch (ID)
         {
             case "Potion_Health":
-                if (Player.Health < Player.MaxHealth)
+                if (RuntimePlayer.Instance.RuntimePlayerStats.Health < RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth)
                 {
-                    Player.Health += 25;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Health += 25;
 
                     CheckItemForDelete(ID, 1);
                 }
@@ -321,14 +321,14 @@ public class Inventory : MonoBehaviour
                 }
                 else
                 {
-                    if (Player.Mana < Player.MaxMana)
+                    if (RuntimePlayer.Instance.RuntimePlayerStats.Mana < RuntimePlayer.Instance.RuntimePlayerStats.MaxMana)
                     {
-                        Player.Mana += 15;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Mana += 15;
                         manaPotionCounter = 0;
 
                         CheckItemForDelete(ID, 1);
                     }
-                    else if (Player.Mana >= Player.MaxMana)
+                    else if (RuntimePlayer.Instance.RuntimePlayerStats.Mana >= RuntimePlayer.Instance.RuntimePlayerStats.MaxMana)
                     {
                         GameController.Instance.ShowMessageText("Если Вы продолжите пить эту бяку при максимальном запасе маны, то Вы превратитесь в лягушку. Я серьёзно!(нет)");
                         manaPotionCounter++;
@@ -381,7 +381,7 @@ public class Inventory : MonoBehaviour
                         GameController.Instance.ShowMessageText("Зелье придало Вам мощи! (Бафф: Усиленное восстановление маны и здоровья)", "[Событие]");
                         break;
                     case 2:
-                        if (!Player.AntiHole)
+                        if (!RuntimePlayer.Instance.RuntimePlayerStats.AntiHole)
                         {
                             GameController.Instance.ShowDeathBox("О, нет, зелье превратилось в чёрную дыру и засосало всё и вся в себя!");
                         }
@@ -390,7 +390,7 @@ public class Inventory : MonoBehaviour
                         break;
                     case 3:
                         GameController.Instance.TakeDamage(1000, true);
-                        if (Player.Health <= 0)
+                        if (RuntimePlayer.Instance.RuntimePlayerStats.Health <= 0)
                             GameController.Instance.ShowDeathBox("Зелье оказалось сильнодействующим токсином, который уничтожил Вас в ту же секунду, как Вы глотнули его!");
                         else
                             GameController.Instance.ShowMessageText("Зелье оказалось сильнодействующим токсином, который не смог Вас уничтожить!", "[Событие]");
@@ -449,7 +449,7 @@ public class Inventory : MonoBehaviour
                     //else
                     //    Player.Health = -1;
 
-                    if (Player.Health < 0)
+                    if (RuntimePlayer.Instance.RuntimePlayerStats.Health < 0)
                     {
                         GameController.Instance.ShowDeathBox("Зелье уничтожило Вас!");
                     }
@@ -778,13 +778,13 @@ public class Inventory : MonoBehaviour
     // Надевание вещи
     public void EquipItem(int slot)
     {
-        Player.MaxHealth += inventory[slot].Health;
-        Player.Damage += inventory[slot].Damage;
-        Player.AttackSpeed += inventory[slot].AttackSpeed;
-        Player.Armor += inventory[slot].Armor;
-        Player.MaxMana += inventory[slot].Mana;
-        Player.ExtraExpMod += inventory[slot].ExtraExp;
-        Player.ExtraMoneyMod += inventory[slot].ExtraMoney;
+        RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth += inventory[slot].Health;
+        RuntimePlayer.Instance.RuntimePlayerStats.Damage += inventory[slot].Damage;
+        RuntimePlayer.Instance.RuntimePlayerStats.AttackSpeed += inventory[slot].AttackSpeed;
+        RuntimePlayer.Instance.RuntimePlayerStats.Armor += inventory[slot].Armor;
+        RuntimePlayer.Instance.RuntimePlayerStats.MaxMana += inventory[slot].Mana;
+        RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod += inventory[slot].ExtraExp;
+        RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMod += inventory[slot].ExtraMoney;
 
         //FindObjectOfType<BuffManager>().BuffsEquipAction();
 
@@ -793,13 +793,13 @@ public class Inventory : MonoBehaviour
     // Снятие вещи
     public void EnequipItem(int slot)
     {
-        Player.MaxHealth -= inventory[slot].Health;
-        Player.Damage -= inventory[slot].Damage;
-        Player.AttackSpeed -= inventory[slot].AttackSpeed;
-        Player.Armor -= inventory[slot].Armor;
-        Player.MaxMana -= inventory[slot].Mana;
-        Player.ExtraExpMod -= inventory[slot].ExtraExp;
-        Player.ExtraMoneyMod -= inventory[slot].ExtraMoney;
+        RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth -= inventory[slot].Health;
+        RuntimePlayer.Instance.RuntimePlayerStats.Damage -= inventory[slot].Damage;
+        RuntimePlayer.Instance.RuntimePlayerStats.AttackSpeed -= inventory[slot].AttackSpeed;
+        RuntimePlayer.Instance.RuntimePlayerStats.Armor -= inventory[slot].Armor;
+        RuntimePlayer.Instance.RuntimePlayerStats.MaxMana -= inventory[slot].Mana;
+        RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod -= inventory[slot].ExtraExp;
+        RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMod -= inventory[slot].ExtraMoney;
 
         //FindObjectOfType<BuffManager>().BuffsUnequipAction();
         

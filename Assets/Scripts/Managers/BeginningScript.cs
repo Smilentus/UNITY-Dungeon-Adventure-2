@@ -10,7 +10,7 @@ public class BeginningScript : MonoBehaviour
 
     private void Start()
     {
-        if(Player.isFirstEnter)
+        if(RuntimePlayer.Instance.RuntimePlayerStats.isFirstEnter)
         {
             StartEducation();
         }

@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+
 
 public class UnityEventGameTimeFlowEvent : UnityEvent<GameTimeFlowEvent> { }
 
@@ -18,6 +17,15 @@ public class GameTimeFlowEventBaseController : MonoBehaviour
 
     private bool m_isEventStarted = false;
     public bool IsEventStarted => m_isEventStarted;
+
+
+    /// <summary>
+    ///     ћаска загрузки информации (просто устанавливаютс€ переменные по слепку, но ивент заново не начинаетс€ во избежание проблем и абузов) 
+    /// </summary>
+    public void SetMaskData()
+    {
+        m_isEventStarted = true;
+    }
 
 
     public virtual bool CanStartEvent()

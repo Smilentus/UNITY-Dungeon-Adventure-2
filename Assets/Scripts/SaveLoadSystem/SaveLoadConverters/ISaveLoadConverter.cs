@@ -16,4 +16,9 @@ public interface ISaveLoadConverter
     ///     Вся информация о сохранении
     /// </param>
     public void ParseGeneralSaveData(GeneralSaveData generalSaveData);
+
+    /// <summary>
+    ///     Устанавливает дефолтное состояние зависимых объектов
+    /// </summary>
+    public void SetDefaultData();
 }

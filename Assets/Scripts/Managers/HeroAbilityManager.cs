@@ -10,124 +10,124 @@ public class HeroAbilityManager : MonoBehaviour
 
     private void Start()
     {
-        if (Player.HALvl > 0)
-            abilityPanel.SetActive(true);
-        else
-            abilityPanel.SetActive(false);
+        //if (RuntimePlayer.HALvl > 0)
+        //    abilityPanel.SetActive(true);
+        //else
+        //    abilityPanel.SetActive(false);
     }
 
     // Сброс абилки 
     public void ResetHeroAbility()
     {
-        Player.HALvl = 0;
-        Player.HAMaxLvl = 10;
-        Player.HAChargePower = 0;
-        Player.HACharge = 0;
-        Player.HAMaxCharge = 0;
-        Player.Ability = Player.HeroAbility.None;
-        abilityPanel.SetActive(false);
+        //RuntimePlayer.HALvl = 0;
+        //RuntimePlayer.HAMaxLvl = 10;
+        //RuntimePlayer.HAChargePower = 0;
+        //RuntimePlayer.HACharge = 0;
+        //RuntimePlayer.HAMaxCharge = 0;
+        //RuntimePlayer.Ability = RuntimePlayer.HeroAbility.None;
+        //abilityPanel.SetActive(false);
     }
 
     // Улучшение абилки
     public void UpgradeHeroAbility()
     {
-        if (Player.HALvl < Player.HAMaxLvl && Player.HACharge >= Player.HAMaxCharge)
-        {
-            if (Player.HALvl == 0)
-            {
-                Player.HALvl++;
-                switch (Player.Ability)
-                {
-                    case Player.HeroAbility.Archer:
-                        Player.HAChargePower = 1;
-                        Player.HAMaxCharge = 325;
-                        break;
-                    case Player.HeroAbility.Explosioner:
-                        Player.HAChargePower = 3;
-                        Player.HAMaxCharge = 250;
-                        break;
-                    case Player.HeroAbility.Mage:
-                        Player.HAChargePower = 4;
-                        Player.HAMaxCharge = 150;
-                        break;
-                    case Player.HeroAbility.Ninja:
-                        Player.HAChargePower = 3;
-                        Player.HAMaxCharge = 500;
-                        break;
-                    case Player.HeroAbility.Warrior:
-                        Player.HAChargePower = 2;
-                        Player.HAMaxCharge = 400;
-                        break;
-                    default:
-                        break;
-                }
-                abilityPanel.SetActive(true);
-            }
-            else
-            {
-                Player.HALvl++;
-                switch (Player.Ability)
-                {
-                    case Player.HeroAbility.Archer:
-                        Player.HAChargePower += 1;
-                        Player.HAMaxCharge += Player.HAMaxCharge * 0.40;
-                        break;
-                    case Player.HeroAbility.Explosioner:
-                        Player.HAChargePower += 6;
-                        Player.HAMaxCharge += Player.HAMaxCharge * 0.25;
-                        break;
-                    case Player.HeroAbility.Warrior:
-                        Player.HAChargePower += 3;
-                        Player.HAMaxCharge += Player.HAMaxCharge * 0.30;
-                        break;
-                    case Player.HeroAbility.Mage:
-                        Player.HAChargePower += 4;
-                        Player.HAMaxCharge += Player.HAMaxCharge * 0.25;
-                        break;
-                    case Player.HeroAbility.Ninja:
-                        Player.HAChargePower += 5;
-                        Player.HAMaxCharge += Player.HAMaxCharge * 0.35;
-                        break;
-                    default:
-                        // Пусто :P
-                        break;
-                }
-            }
-        }
+        //if (RuntimePlayer.HALvl < RuntimePlayer.HAMaxLvl && RuntimePlayer.HACharge >= RuntimePlayer.HAMaxCharge)
+        //{
+        //    if (RuntimePlayer.HALvl == 0)
+        //    {
+        //        RuntimePlayer.HALvl++;
+        //        switch (RuntimePlayer.Ability)
+        //        {
+        //            case RuntimePlayer.HeroAbility.Archer:
+        //                RuntimePlayer.HAChargePower = 1;
+        //                RuntimePlayer.HAMaxCharge = 325;
+        //                break;
+        //            case RuntimePlayer.HeroAbility.Explosioner:
+        //                RuntimePlayer.HAChargePower = 3;
+        //                RuntimePlayer.HAMaxCharge = 250;
+        //                break;
+        //            case RuntimePlayer.HeroAbility.Mage:
+        //                RuntimePlayer.HAChargePower = 4;
+        //                RuntimePlayer.HAMaxCharge = 150;
+        //                break;
+        //            case RuntimePlayer.HeroAbility.Ninja:
+        //                RuntimePlayer.HAChargePower = 3;
+        //                RuntimePlayer.HAMaxCharge = 500;
+        //                break;
+        //            case RuntimePlayer.HeroAbility.Warrior:
+        //                RuntimePlayer.HAChargePower = 2;
+        //                RuntimePlayer.HAMaxCharge = 400;
+        //                break;
+        //            default:
+        //                break;
+        //        }
+        //        abilityPanel.SetActive(true);
+        //    }
+        //    else
+        //    {
+        //        RuntimePlayer.HALvl++;
+        //        switch (RuntimePlayer.Ability)
+        //        {
+        //            case RuntimePlayer.HeroAbility.Archer:
+        //                RuntimePlayer.HAChargePower += 1;
+        //                RuntimePlayer.HAMaxCharge += RuntimePlayer.HAMaxCharge * 0.40;
+        //                break;
+        //            case RuntimePlayer.HeroAbility.Explosioner:
+        //                RuntimePlayer.HAChargePower += 6;
+        //                RuntimePlayer.HAMaxCharge += RuntimePlayer.HAMaxCharge * 0.25;
+        //                break;
+        //            case RuntimePlayer.HeroAbility.Warrior:
+        //                RuntimePlayer.HAChargePower += 3;
+        //                RuntimePlayer.HAMaxCharge += RuntimePlayer.HAMaxCharge * 0.30;
+        //                break;
+        //            case RuntimePlayer.HeroAbility.Mage:
+        //                RuntimePlayer.HAChargePower += 4;
+        //                RuntimePlayer.HAMaxCharge += RuntimePlayer.HAMaxCharge * 0.25;
+        //                break;
+        //            case RuntimePlayer.HeroAbility.Ninja:
+        //                RuntimePlayer.HAChargePower += 5;
+        //                RuntimePlayer.HAMaxCharge += RuntimePlayer.HAMaxCharge * 0.35;
+        //                break;
+        //            default:
+        //                // Пусто :P
+        //                break;
+        //        }
+        //    }
+        //}
     }
 
     // Заряд индивидуальной способности персонажа в зависимости от класса
-    public void ChargeHeroAbility(Player.HeroAbility ability)
+    public void ChargeHeroAbility(RuntimePlayerStats.HeroAbility ability)
     {
-        if (Player.HACharge < Player.HAMaxCharge)
-        {
-            switch (ability)
-            {
-                case Player.HeroAbility.Archer:
-                    Player.HACharge += Player.HAChargePower + Player.Damage * 0.10;
-                    break;
-                case Player.HeroAbility.Explosioner:
-                    Player.HACharge += Player.HAChargePower + Player.CriticalStrikeChance + 5;
-                    break;
-                case Player.HeroAbility.Warrior:
-                    Player.HACharge += Player.HAChargePower + Player.MaxHealth * 0.01;
-                    break;
-                case Player.HeroAbility.Mage:
-                    Player.HACharge += Player.HAChargePower + Player.MaxMana * 0.05;
-                    break;
-                case Player.HeroAbility.Ninja:
-                    Player.HACharge += Player.HAChargePower + Player.DodgeChance;
-                    break;
-                default:
-                    Player.HACharge += Player.HAChargePower;
-                    break;
-            }
-            if (Player.HACharge >= Player.HAMaxCharge)
-            {
-                Player.HACharge = Player.HAMaxCharge;
-                FindObjectOfType<AbilityButton>().AnimateButton();
-            }
-        }
+        //if (RuntimePlayer.HACharge < RuntimePlayer.HAMaxCharge)
+        //{
+        //    switch (ability)
+        //    {
+        //        case RuntimePlayer.HeroAbility.Archer:
+        //            RuntimePlayer.HACharge += RuntimePlayer.HAChargePower + RuntimePlayer.Damage * 0.10;
+        //            break;
+        //        case RuntimePlayer.HeroAbility.Explosioner:
+        //            RuntimePlayer.HACharge += RuntimePlayer.HAChargePower + RuntimePlayer.CriticalStrikeChance + 5;
+        //            break;
+        //        case RuntimePlayer.HeroAbility.Warrior:
+        //            RuntimePlayer.HACharge += RuntimePlayer.HAChargePower + RuntimePlayer.MaxHealth * 0.01;
+        //            break;
+        //        case RuntimePlayer.HeroAbility.Mage:
+        //            RuntimePlayer.HACharge += RuntimePlayer.HAChargePower + RuntimePlayer.MaxMana * 0.05;
+        //            break;
+        //        case RuntimePlayer.HeroAbility.Ninja:
+        //            RuntimePlayer.HACharge += RuntimePlayer.HAChargePower + RuntimePlayer.DodgeChance;
+        //            break;
+        //        default:
+        //            RuntimePlayer.HACharge += RuntimePlayer.HAChargePower;
+        //            break;
+        //    }
+        //    if (RuntimePlayer.HACharge >= RuntimePlayer.HAMaxCharge)
+        //    {
+        //        RuntimePlayer.HACharge = RuntimePlayer.HAMaxCharge;
+        //        FindObjectOfType<AbilityButton>().AnimateButton();
+        //    }
+        //}
     }
 
     // Использование индивидуальной способности персонажа

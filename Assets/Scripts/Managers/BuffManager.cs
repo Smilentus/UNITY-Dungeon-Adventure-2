@@ -152,40 +152,40 @@ public class BuffManager : MonoBehaviour
                 switch (activeBuffs[i].Type)
                 {
                     case Buff.BuffType.ManaRegenBonus:
-                        Player.ManaRegen += var;
+                        RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen += var;
                         break;
                     case Buff.BuffType.RegenBonus:
-                        Player.HealthRegen += var;
+                        RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen += var;
                         break;
                     case Buff.BuffType.HealthBonus:
-                        Player.MaxHealth += var;
-                        Player.Health += var;
+                        RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth += var;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Health += var;
                         break;
                     case Buff.BuffType.ManaBonus:
-                        Player.MaxMana += var;
-                        Player.Mana += var;
+                        RuntimePlayer.Instance.RuntimePlayerStats.MaxMana += var;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Mana += var;
                         break;
                     case Buff.BuffType.DamageBonus:
-                        Player.Damage += var;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Damage += var;
                         break;
                     case Buff.BuffType.ArmorDecreasing:
-                        Player.Armor -= var;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Armor -= var;
                         break;
                     case Buff.BuffType.ArmorBonus:
-                        Player.Armor += var;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Armor += var;
                         break;
                     case Buff.BuffType.HealthAndManaRegen:
-                        Player.HealthRegen += var;
-                        Player.ManaRegen += var;
+                        RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen += var;
+                        RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen += var;
                         break;
                     case Buff.BuffType.InfinityHealthRegen:
-                        Player.HealthRegen += var;
+                        RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen += var;
                         break;
                     case Buff.BuffType.InfinityManaRegen:
-                        Player.ManaRegen += var;
+                        RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen += var;
                         break;
                     case Buff.BuffType.InfinityShield:
-                        Player.Armor += var;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Armor += var;
                         break;
                     // Зелья превращения
                     case Buff.BuffType.RabbitBuff:
@@ -201,72 +201,72 @@ public class BuffManager : MonoBehaviour
                         if (!isBuffOnAction(Buff.BuffType.FrogBuff, 0))
                         {
                             // Сохранение переменных игрока
-                            Player.tempDamage = Player.Damage;
-                            Player.tempHealth = Player.Health;
-                            Player.tempMaxHealth = Player.MaxHealth;
-                            Player.tempMaxMana = Player.MaxMana;
-                            Player.tempMana = Player.Mana;
-                            Player.tempAttackSpeed = Player.AttackSpeed;
-                            Player.tempArmor = Player.Armor;
+                            RuntimePlayer.Instance.RuntimePlayerStats.tempDamage = RuntimePlayer.Instance.RuntimePlayerStats.Damage;
+                            RuntimePlayer.Instance.RuntimePlayerStats.tempHealth = RuntimePlayer.Instance.RuntimePlayerStats.Health;
+                            RuntimePlayer.Instance.RuntimePlayerStats.tempMaxHealth = RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth;
+                            RuntimePlayer.Instance.RuntimePlayerStats.tempMaxMana = RuntimePlayer.Instance.RuntimePlayerStats.MaxMana;
+                            RuntimePlayer.Instance.RuntimePlayerStats.tempMana = RuntimePlayer.Instance.RuntimePlayerStats.Mana;
+                            RuntimePlayer.Instance.RuntimePlayerStats.tempAttackSpeed = RuntimePlayer.Instance.RuntimePlayerStats.AttackSpeed;
+                            RuntimePlayer.Instance.RuntimePlayerStats.tempArmor = RuntimePlayer.Instance.RuntimePlayerStats.Armor;
 
                             // Действие баффа
-                            Player.MaxHealth = 10;
-                            Player.Health = 10;
-                            Player.MaxMana = 100;
-                            Player.Mana = 100;
-                            Player.Damage = 1;
-                            Player.AttackSpeed = 1;
-                            Player.Armor = 0;
+                            RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth = 10;
+                            RuntimePlayer.Instance.RuntimePlayerStats.Health = 10;
+                            RuntimePlayer.Instance.RuntimePlayerStats.MaxMana = 100;
+                            RuntimePlayer.Instance.RuntimePlayerStats.Mana = 100;
+                            RuntimePlayer.Instance.RuntimePlayerStats.Damage = 1;
+                            RuntimePlayer.Instance.RuntimePlayerStats.AttackSpeed = 1;
+                            RuntimePlayer.Instance.RuntimePlayerStats.Armor = 0;
 
                             // Информируем
                             GameController.Instance.ShowMessageText("Вы превратились в лягушку. А я говорил!");
                         }
                         break;
                     case Buff.BuffType.SunstayBuff:
-                        Player.MaxMana += 500;
-                        Player.Mana += 500;
-                        Player.ManaRegen += 125;
+                        RuntimePlayer.Instance.RuntimePlayerStats.MaxMana += 500;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Mana += 500;
+                        RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen += 125;
                         break;
                     case Buff.BuffType.FullmoonBuff:
-                        Player.MaxHealth += 100;
-                        Player.Health += 100;
-                        Player.Damage += 35;
-                        Player.HealthRegen += 10;
-                        Player.ManaRegen += 5;
+                        RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth += 100;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Health += 100;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Damage += 35;
+                        RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen += 10;
+                        RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen += 5;
                         break;
                     case Buff.BuffType.PlanetRowBuff:
-                        Player.MaxHealth += 2500;
-                        Player.Health += 2500;
-                        Player.Damage += 750;
-                        Player.AttackSpeed += 5;
-                        Player.HealthRegen += 150;
-                        Player.ManaRegen += 50;
-                        Player.MaxMana += 200;
-                        Player.Mana += 200;
+                        RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth += 2500;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Health += 2500;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Damage += 750;
+                        RuntimePlayer.Instance.RuntimePlayerStats.AttackSpeed += 5;
+                        RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen += 150;
+                        RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen += 50;
+                        RuntimePlayer.Instance.RuntimePlayerStats.MaxMana += 200;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Mana += 200;
                         break;
                     case Buff.BuffType.MageAbility:
-                        Player.MaxMana += 1000 * Player.HALvl;
-                        Player.Mana += 1000 * Player.HALvl;
+                        RuntimePlayer.Instance.RuntimePlayerStats.MaxMana += 1000 * RuntimePlayer.Instance.RuntimePlayerStats.HALvl;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Mana += 1000 * RuntimePlayer.Instance.RuntimePlayerStats.HALvl;
                         break;
                     case Buff.BuffType.WarriorAbility:
-                        Player.Armor += 100 * Player.HALvl;
-                        Player.MaxHealth += 200 * Player.HALvl;
-                        Player.Health += 200 * Player.HALvl;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Armor += 100 * RuntimePlayer.Instance.RuntimePlayerStats.HALvl;
+                        RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth += 200 * RuntimePlayer.Instance.RuntimePlayerStats.HALvl;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Health += 200 * RuntimePlayer.Instance.RuntimePlayerStats.HALvl;
                         break;
                     case Buff.BuffType.Happiness:
-                        Player.MaxHealth += 1000;
-                        Player.Health += 1000;
-                        Player.Damage += 50;
-                        Player.Armor += 10;
+                        RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth += 1000;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Health += 1000;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Damage += 50;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Armor += 10;
                         break;
                     case Buff.BuffType.Illuminati:
-                        Player.ExtraExpMod += var;
+                        RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod += var;
                         break;
                     case Buff.BuffType.Magic_HealthRegen:
                         break;
                     case Buff.BuffType.Magic_Shield:
                         var MM = FindObjectOfType<MagicManager>();
-                        Player.Armor += (int)MM.allMagicInGame[MM.FindMagicPosInAllMagic(MagicManager.MagicType.Shield)].actionVar;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Armor += (int)MM.allMagicInGame[MM.FindMagicPosInAllMagic(MagicManager.MagicType.Shield)].actionVar;
                         break;
                 }
             }
@@ -324,13 +324,13 @@ public class BuffManager : MonoBehaviour
                 switch (activeBuffs[i].Type)
                 {
                     case Buff.BuffType.Poison:
-                        Player.Health -= activeBuffs[i].buffPower;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Health -= activeBuffs[i].buffPower;
                         break;
                     case Buff.BuffType.Bleeding:
-                        Player.Health -= activeBuffs[i].buffPower;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Health -= activeBuffs[i].buffPower;
                         break;
                     case Buff.BuffType.Fire:
-                        Player.Health -= activeBuffs[i].buffPower;
+                        RuntimePlayer.Instance.RuntimePlayerStats.Health -= activeBuffs[i].buffPower;
                         break;
                 }
 
@@ -406,7 +406,7 @@ public class BuffManager : MonoBehaviour
             switch (activeBuffs[i].Type)
             {
                 case Buff.BuffType.Vampirism:
-                    Player.Health += Player.Damage * activeBuffs[i].buffPower;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Health += RuntimePlayer.Instance.RuntimePlayerStats.Damage * activeBuffs[i].buffPower;
                     break;
             }
         }
@@ -426,97 +426,97 @@ public class BuffManager : MonoBehaviour
             switch (activeBuffs[i].Type)
             {
                 case Buff.BuffType.ArmorBonus:
-                    Player.Armor -= var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Armor -= var;
                     break;
                 case Buff.BuffType.ArmorDecreasing:
-                    Player.Armor += var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Armor += var;
                     break;
                 case Buff.BuffType.DamageBonus:
-                    Player.Damage -= var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Damage -= var;
                     break;
                 case Buff.BuffType.HealthBonus:
-                    Player.MaxHealth -= var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth -= var;
                     break;
                 case Buff.BuffType.ManaBonus:
-                    Player.MaxMana -= var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.MaxMana -= var;
                     break;
                 case Buff.BuffType.ManaRegenBonus:
-                    Player.ManaRegen -= var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen -= var;
                     break;
                 case Buff.BuffType.RegenBonus:
-                    Player.HealthRegen -= var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen -= var;
                     break;
                 case Buff.BuffType.HealthAndManaRegen:
-                    Player.HealthRegen -= var;
-                    Player.ManaRegen -= var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen -= var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen -= var;
                     break;
                 case Buff.BuffType.InfinityHealthRegen:
-                    Player.HealthRegen -= var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen -= var;
                     break;
                 case Buff.BuffType.InfinityManaRegen:
-                    Player.ManaRegen -= var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen -= var;
                     break;
                 case Buff.BuffType.InfinityShield:
-                    Player.Armor -= var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Armor -= var;
                     break;
                 case Buff.BuffType.FrogBuff:
                     // Снимаем действие баффа
-                    Player.Damage = Player.tempDamage;
-                    Player.Health = Player.tempHealth;
-                    Player.MaxHealth = Player.tempMaxHealth;
-                    Player.MaxMana = Player.tempMaxMana;
-                    Player.Mana = Player.tempMana;
-                    Player.AttackSpeed = Player.tempAttackSpeed;
-                    Player.Armor = Player.tempArmor;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Damage = RuntimePlayer.Instance.RuntimePlayerStats.tempDamage;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Health = RuntimePlayer.Instance.RuntimePlayerStats.tempHealth;
+                    RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth = RuntimePlayer.Instance.RuntimePlayerStats.tempMaxHealth;
+                    RuntimePlayer.Instance.RuntimePlayerStats.MaxMana = RuntimePlayer.Instance.RuntimePlayerStats.tempMaxMana;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Mana = RuntimePlayer.Instance.RuntimePlayerStats.tempMana;
+                    RuntimePlayer.Instance.RuntimePlayerStats.AttackSpeed = RuntimePlayer.Instance.RuntimePlayerStats.tempAttackSpeed;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Armor = RuntimePlayer.Instance.RuntimePlayerStats.tempArmor;
                     break;
                 case Buff.BuffType.SunstayBuff:
-                    Player.MaxMana -= 500;
-                    Player.Mana -= 500;
-                    Player.ManaRegen -= 125;
+                    RuntimePlayer.Instance.RuntimePlayerStats.MaxMana -= 500;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Mana -= 500;
+                    RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen -= 125;
                     GameTimeFlowController.Instance.ForceFinishGameTimeFlowEvent("SunStay_GameTimeFlowEvent");
                     break;
                 case Buff.BuffType.FullmoonBuff:
-                    Player.MaxHealth -= 100;
-                    Player.Health -= 100;
-                    Player.Damage -= 35;
-                    Player.HealthRegen -= 10;
-                    Player.ManaRegen -= 5;
+                    RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth -= 100;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Health -= 100;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Damage -= 35;
+                    RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen -= 10;
+                    RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen -= 5;
                     GameTimeFlowController.Instance.ForceFinishGameTimeFlowEvent("FullMoon_Sunstay_GameTimeFlowEvent");
                     break;
                 case Buff.BuffType.PlanetRowBuff:
-                    Player.MaxHealth -= 2500;
-                    Player.Health -= 2500;
-                    Player.Damage -= 750;
-                    Player.AttackSpeed -= 5;
-                    Player.HealthRegen -= 150;
-                    Player.ManaRegen -= 50;
-                    Player.MaxMana -= 200;
-                    Player.Mana -= 200;
+                    RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth -= 2500;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Health -= 2500;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Damage -= 750;
+                    RuntimePlayer.Instance.RuntimePlayerStats.AttackSpeed -= 5;
+                    RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen -= 150;
+                    RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen -= 50;
+                    RuntimePlayer.Instance.RuntimePlayerStats.MaxMana -= 200;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Mana -= 200;
                     GameTimeFlowController.Instance.ForceFinishGameTimeFlowEvent("PlanetRow_GameTimeFlowEvent");
                     break;
                 case Buff.BuffType.MageAbility:
-                    Player.MaxMana -= 1000 * Player.HALvl;
-                    Player.Mana -= 1000 * Player.HALvl;
+                    RuntimePlayer.Instance.RuntimePlayerStats.MaxMana -= 1000 * RuntimePlayer.Instance.RuntimePlayerStats.HALvl;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Mana -= 1000 * RuntimePlayer.Instance.RuntimePlayerStats.HALvl;
                     break;
                 case Buff.BuffType.WarriorAbility:
-                    Player.Armor -= 100 * Player.HALvl;
-                    Player.MaxHealth -= 200 * Player.HALvl;
-                    Player.Health -= 200 * Player.HALvl;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Armor -= 100 * RuntimePlayer.Instance.RuntimePlayerStats.HALvl;
+                    RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth -= 200 * RuntimePlayer.Instance.RuntimePlayerStats.HALvl;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Health -= 200 * RuntimePlayer.Instance.RuntimePlayerStats.HALvl;
                     break;
                 case Buff.BuffType.Happiness:
-                    Player.MaxHealth -= 1000;
-                    Player.Health -= 1000;
-                    Player.Damage -= 50;
-                    Player.Armor -= 10;
+                    RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth -= 1000;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Health -= 1000;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Damage -= 50;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Armor -= 10;
                     break;
                 case Buff.BuffType.Magic_HealthRegen:
                     // Добавить потом
                     break;
                 case Buff.BuffType.Illuminati:
-                    Player.ExtraExpMod -= var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod -= var;
                     break;
                 case Buff.BuffType.Magic_Shield:
-                    Player.Armor -= 20;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Armor -= 20;
                     break;
                 case Buff.BuffType.Magic_Stun:
                     // Выход из оглушения

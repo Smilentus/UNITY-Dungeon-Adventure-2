@@ -161,10 +161,10 @@ public class StorytellerManager : MonoBehaviour
         if(dialogID == "TalkToBarmen_01")
         {
             Debug.Log("Покупаю деревню!");
-            if(Player.Money >= 100000 && !Player.isHadVillage)
+            if(RuntimePlayer.Instance.RuntimePlayerStats.Money >= 100000 && !RuntimePlayer.Instance.RuntimePlayerStats.isHadVillage)
             {
-                Player.isHadVillage = true;
-                Player.Money -= 100000;
+                RuntimePlayer.Instance.RuntimePlayerStats.isHadVillage = true;
+                RuntimePlayer.Instance.RuntimePlayerStats.Money -= 100000;
                 // Покупка деревни
                 //FindObjectOfType<LocationsController>().AddNewExtraLocation(LocationsController.Location.Player_Village);
             }

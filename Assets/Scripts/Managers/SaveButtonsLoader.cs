@@ -26,13 +26,16 @@ public class SaveButtonsLoader : MonoBehaviour
     {
         LoadState();
 
-        for(int i = 0; i < saveLoadButtons.Length; i++)
+        for (int i = 0; i < saveLoadButtons.Length; i++)
         {
             saveLoadButtons[i].GetComponent<saveSlot>().UpdateText();
         }
 
         if (SceneManager.GetActiveScene().name == "GameScene")
-            FindObjectOfType<SavingManager>().LoadAfterLoading();
+        {
+            
+            //FindObjectOfType<SavingManager>().LoadAfterLoading();
+        }
     }
 
     // Сохранение состояния загрузки

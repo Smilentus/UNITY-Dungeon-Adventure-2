@@ -254,7 +254,7 @@ public class CraftingManager : MonoBehaviour
             // Удаляем вещи для крафта
             for (int i = 0; i < AllRecipes[currentRecipeNum].recipes[currentSlotNum].neededItems.Length; i++)
             {
-                if (Random.Range(0, 101) > Player.ChanceNotToDelete + Player.Luck)
+                if (Random.Range(0, 101) > RuntimePlayer.Instance.RuntimePlayerStats.ChanceNotToDelete + RuntimePlayer.Instance.RuntimePlayerStats.Luck)
                 {
                     inv.DeleteItemAmount(AllRecipes[currentRecipeNum].recipes[currentSlotNum].neededItems[i].neededItem.ItemID, AllRecipes[currentRecipeNum].recipes[currentSlotNum].neededItems[i].neededStack);
                     // Информируем игрока об удалении предмета
@@ -263,7 +263,7 @@ public class CraftingManager : MonoBehaviour
             }
 
             // Если выпал шанс на крафт вещи дважды, даём доп. вещь
-            if (Random.Range(0, 101) <= Player.ChanceToCraftTwice + Player.Luck)
+            if (Random.Range(0, 101) <= RuntimePlayer.Instance.RuntimePlayerStats.ChanceToCraftTwice + RuntimePlayer.Instance.RuntimePlayerStats.Luck)
             {
                 // Добавляем скрафченную вещь в инвентарь и +1 копию
                 inv.AddItem(AllRecipes[currentRecipeNum].recipes[currentSlotNum].resultItem.ItemID, AllRecipes[currentRecipeNum].recipes[currentSlotNum].resultStack + 1);

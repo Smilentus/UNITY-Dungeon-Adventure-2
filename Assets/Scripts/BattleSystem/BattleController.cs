@@ -117,7 +117,7 @@ public class BattleController : MonoBehaviour
     {
         if (CheckEndBattleConditions()) return;
 
-        if (!Player.isStun)
+        if (!RuntimePlayer.Instance.RuntimePlayerStats.isStun)
         {
             UpdateAllEnemiesUI();
 
@@ -176,9 +176,9 @@ public class BattleController : MonoBehaviour
     public bool CheckEndBattleConditions()
     {
         // Здесь все проверки после каждого действия, чтобы понять умер противник или нет
-        if (Player.Health <= 0)
+        if (RuntimePlayer.Instance.RuntimePlayerStats.Health <= 0)
         {
-            Player.isDeath = true;
+            RuntimePlayer.Instance.RuntimePlayerStats.isDeath = true;
 
             isWin = false;
             EndBattle();
@@ -251,7 +251,8 @@ public class BattleController : MonoBehaviour
         if (isWin)
         {
             WinCondition();
-            FindObjectOfType<SavingManager>().SaveGame("AutoSave");
+            SaveLoadSystemController.Instance.TrySaveGameState("AutoSave");
+            //FindObjectOfType<SavingManager>().SaveGame("AutoSave");
         }
 
         isWin = false;
@@ -268,7 +269,7 @@ public class BattleController : MonoBehaviour
     // Выдача предметов за победу
     public void WinCondition()
     {
-        Player.isStun = false;
+        RuntimePlayer.Instance.RuntimePlayerStats.isStun = false;
 
         // Деньги и опыт с каждого моба
         for (int i = 0; i < defeatedEnemiesInBattle.Count; i++)
@@ -303,7 +304,7 @@ public class BattleController : MonoBehaviour
         {
             for (int i = 0; i < LocationsController.Instance.CurrentLocation.DroppableItems.Count; i++)
             {
-                if (UnityEngine.Random.Range(0, 101) <= LocationsController.Instance.CurrentLocation.DroppableItems[i].ChanceToFind + Player.Luck)
+                if (UnityEngine.Random.Range(0, 101) <= LocationsController.Instance.CurrentLocation.DroppableItems[i].ChanceToFind + RuntimePlayer.Instance.RuntimePlayerStats.Luck)
                 {
                     FindObjectOfType<Inventory>().AddItem(LocationsController.Instance.CurrentLocation.DroppableItems[i].ItemID, 1);
                 }

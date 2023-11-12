@@ -64,48 +64,48 @@ public class UIScript : MonoBehaviour
     // Обновление текстов игрока
     public void UpdateUIText()
     {
-        if (Player.Health > Player.MaxHealth)
-            Player.Health = Player.MaxHealth;
-        if (Player.Mana > Player.MaxMana)
-            Player.Mana = Player.MaxMana;
+        if (RuntimePlayer.Instance.RuntimePlayerStats.Health > RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth)
+            RuntimePlayer.Instance.RuntimePlayerStats.Health = RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth;
+        if (RuntimePlayer.Instance.RuntimePlayerStats.Mana > RuntimePlayer.Instance.RuntimePlayerStats.MaxMana)
+            RuntimePlayer.Instance.RuntimePlayerStats.Mana = RuntimePlayer.Instance.RuntimePlayerStats.MaxMana;
 
         // Слайдер опыта
-        LvlSlider.maxValue = (float)Player.MaxExp;
-        LvlSlider.value = (float)Player.Exp;
-        LvlSlider.GetComponentInChildren<Text>().text = "Ур." + Player.Lvl;
+        LvlSlider.maxValue = (float)RuntimePlayer.Instance.RuntimePlayerStats.MaxExp;
+        LvlSlider.value = (float)RuntimePlayer.Instance.RuntimePlayerStats.Exp;
+        LvlSlider.GetComponentInChildren<Text>().text = "Ур." + RuntimePlayer.Instance.RuntimePlayerStats.Lvl;
            //" | До " + (Player.Lvl + 1) + " ур. " + (Player.MaxExp - Player.Exp) + " ОО";
 
         // Слайдер здоровья
-        HealthSlider.maxValue = (float)Player.MaxHealth;
-        if(Player.Health < 0)
+        HealthSlider.maxValue = (float)RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth;
+        if(RuntimePlayer.Instance.RuntimePlayerStats.Health < 0)
             HealthSlider.value = 0;
         else
-            HealthSlider.value = (float)Player.Health;
-        HealthSlider.GetComponentInChildren<Text>().text = Player.Health + "/" + Player.MaxHealth + " ОЗ";
+            HealthSlider.value = (float)RuntimePlayer.Instance.RuntimePlayerStats.Health;
+        HealthSlider.GetComponentInChildren<Text>().text = RuntimePlayer.Instance.RuntimePlayerStats.Health + "/" + RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth + " ОЗ";
 
         // Слайдер маны
-        ManaSlider.maxValue = (float)Player.MaxMana;
-        if (Player.Mana < 0)
+        ManaSlider.maxValue = (float)RuntimePlayer.Instance.RuntimePlayerStats.MaxMana;
+        if (RuntimePlayer.Instance.RuntimePlayerStats.Mana < 0)
             ManaSlider.value = 0;
         else
-            ManaSlider.value = (float)Player.Mana;
-        ManaSlider.GetComponentInChildren<Text>().text = Player.Mana + "/" + Player.MaxMana + " ОМ";
+            ManaSlider.value = (float)RuntimePlayer.Instance.RuntimePlayerStats.Mana;
+        ManaSlider.GetComponentInChildren<Text>().text = RuntimePlayer.Instance.RuntimePlayerStats.Mana + "/" + RuntimePlayer.Instance.RuntimePlayerStats.MaxMana + " ОМ";
 
         // Тексты
         currentStepText.text = GameTimeFlowController.Instance.DateNow() + "\n" + GameTimeFlowController.Instance.DayStatusNow();
-        AttackText.text = "Урон: " + Player.Damage.ToString();
-        ArmorText.text = "Защита: " + Player.Armor.ToString();
-        SpeedText.text = "Скорость атаки: " + Player.AttackSpeed.ToString();
-        HealthRegen.text = "Реген. ОЗ: " + Player.HealthRegen.ToString();
-        ManaRegen.text = "Реген. ОМ: " + Player.ManaRegen.ToString();
-        elementText.text = Player.elementStr;
-        GoldText.text = "Золото: " + Player.Money.ToString();
-        LuckText.text = "Удача: " + Player.Luck.ToString("f2") + "%";
-        CriticalDamageText.text = "Крит. урон: " + (Player.CriticalStrikeMulty * 100 - 100) + "%";
-        CriticalChanceText.text = "Крит. шанс: " + Player.CriticalStrikeChance + "%";
-        DodgeChanceText.text = "Шанс уворота: " + Player.DodgeChance + "%";
-        ExtraExpModText.text = "Доп. опыт: " + Player.ExtraExpMod + "%";
-        ExtraMoneyModText.text = "Доп. золото: " + Player.ExtraMoneyMod + "%";
+        AttackText.text = "Урон: " + RuntimePlayer.Instance.RuntimePlayerStats.Damage.ToString();
+        ArmorText.text = "Защита: " + RuntimePlayer.Instance.RuntimePlayerStats.Armor.ToString();
+        SpeedText.text = "Скорость атаки: " + RuntimePlayer.Instance.RuntimePlayerStats.AttackSpeed.ToString();
+        HealthRegen.text = "Реген. ОЗ: " + RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen.ToString();
+        ManaRegen.text = "Реген. ОМ: " + RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen.ToString();
+        elementText.text = RuntimePlayer.Instance.RuntimePlayerStats.elementStr;
+        GoldText.text = "Золото: " + RuntimePlayer.Instance.RuntimePlayerStats.Money.ToString();
+        LuckText.text = "Удача: " + RuntimePlayer.Instance.RuntimePlayerStats.Luck.ToString("f2") + "%";
+        CriticalDamageText.text = "Крит. урон: " + (RuntimePlayer.Instance.RuntimePlayerStats.CriticalStrikeMulty * 100 - 100) + "%";
+        CriticalChanceText.text = "Крит. шанс: " + RuntimePlayer.Instance.RuntimePlayerStats.CriticalStrikeChance + "%";
+        DodgeChanceText.text = "Шанс уворота: " + RuntimePlayer.Instance.RuntimePlayerStats.DodgeChance + "%";
+        ExtraExpModText.text = "Доп. опыт: " + RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod + "%";
+        ExtraMoneyModText.text = "Доп. золото: " + RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMod + "%";
         currentLocation.text = LocationsController.Instance.CurrentLocation ? LocationsController.Instance.CurrentLocation.LocationTitle : "[Location]";
     }
 }

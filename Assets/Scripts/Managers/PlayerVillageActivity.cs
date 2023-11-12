@@ -383,12 +383,12 @@ public class PlayerVillageActivity : MonoBehaviour
     {
         if (VillageParts[partNum].currentLvl < VillageParts[partNum].maxLvl)
         {
-            if (Player.Money >= VillageParts[partNum].upgradeCost)
+            if (RuntimePlayer.Instance.RuntimePlayerStats.Money >= VillageParts[partNum].upgradeCost)
             {
                 if (isAllNeededItemsExist(partNum))
                 {
                     // Вычитаем деньги
-                    Player.Money -= VillageParts[partNum].upgradeCost;
+                    RuntimePlayer.Instance.RuntimePlayerStats.Money -= VillageParts[partNum].upgradeCost;
                     // Увеличиваем цену
                     VillageParts[partNum].upgradeCost += VillageParts[partNum].upgradeMulty;
                     // Добавляем уровень

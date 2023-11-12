@@ -11,8 +11,8 @@ public class AbilityButton : MonoBehaviour
     {
         animator = GetComponent<Animator>();
 
-        if (Player.HACharge >= Player.HAMaxCharge && Player.HACharge != 0)
-            AnimateButton();
+        //if (RuntimePlayer.HACharge >= RuntimePlayer.HAMaxCharge && RuntimePlayer.HACharge != 0)
+        //    AnimateButton();
     }
 
     // Начать анимацию кнопки
@@ -28,6 +28,6 @@ public class AbilityButton : MonoBehaviour
 
     private void Update()
     {
-        transform.GetChild(0).GetComponent<Text>().text = Player.HACharge + "/" + Player.HAMaxCharge;
+        //transform.GetChild(0).GetComponent<Text>().text = RuntimePlayer.HACharge + "/" + RuntimePlayer.HAMaxCharge;
     }
 }

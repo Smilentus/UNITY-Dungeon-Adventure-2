@@ -19,14 +19,14 @@ public class BattleActionExecuter_MediumStrike : MonoBehaviour, IBattleActionExe
         if (!RuntimeBattlePlayerController.Instance.CriticalStrike())
         {
             // Атакуем Х раз от скорости атаки
-            for (int i = 0; i < Player.AttackSpeed; i++)
+            for (int i = 0; i < RuntimePlayer.Instance.RuntimePlayerStats.AttackSpeed; i++)
             {
-                double dmg = Player.Damage;
+                double dmg = RuntimePlayer.Instance.RuntimePlayerStats.Damage;
 
-                if (UnityEngine.Random.Range(0, 101) + Player.Luck > BattleController.Instance.EnemiesInBattle[BattleController.Instance.EnemiesInBattle.Count - 1].DodgeChance)
+                if (UnityEngine.Random.Range(0, 101) + RuntimePlayer.Instance.RuntimePlayerStats.Luck > BattleController.Instance.EnemiesInBattle[BattleController.Instance.EnemiesInBattle.Count - 1].DodgeChance)
                 {
                     // Проверка уклонения противника
-                    if (UnityEngine.Random.Range(0, 101) <= Player.MediumStrikeChance + Player.Luck)
+                    if (UnityEngine.Random.Range(0, 101) <= RuntimePlayer.Instance.RuntimePlayerStats.MediumStrikeChance + RuntimePlayer.Instance.RuntimePlayerStats.Luck)
                     {
                         if (dmg > BattleController.Instance.EnemiesInBattle[BattleController.Instance.EnemiesInBattle.Count - 1].Armor)
                         {

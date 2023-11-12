@@ -35,6 +35,45 @@ public class GameTimeFlowController : MonoBehaviour
     public int CurrentDay, CurrentMonth, CurrentYear, CurrentHour;
 
 
+    public GameTimeFlowEventSaveMaskData GetSaveMaskData()
+    {
+        GameTimeFlowEventSaveMaskData maskData = new GameTimeFlowEventSaveMaskData();
+
+        maskData.CurrentDay = CurrentDay;
+        maskData.CurrentMonth = CurrentMonth;
+        maskData.CurrentYear = CurrentYear;
+        maskData.CurrentHour = CurrentHour;
+
+        maskData.ActiveGameTimeFlowEventGUIDs = new List<string>();
+        foreach (GameTimeFlowEventBaseController controller in m_gameTimeFlowEventBaseControllers)
+        {
+            if (controller.IsEventStarted)
+            {
+                maskData.ActiveGameTimeFlowEventGUIDs.Add(controller.GameTimeFlowEventReference.EventUID);
+            }
+        }
+
+        return maskData;
+    }
+    public void SetSaveMaskData(GameTimeFlowEventSaveMaskData maskData)
+    {
+        CurrentDay = maskData.CurrentDay;
+        CurrentMonth = maskData.CurrentMonth;
+        CurrentYear = maskData.CurrentYear;
+        CurrentHour = maskData.CurrentHour;
+
+        foreach (string eventGUID in maskData.ActiveGameTimeFlowEventGUIDs)
+        {
+            GameTimeFlowEventBaseController controller = m_gameTimeFlowEventBaseControllers.Find(x => x.GameTimeFlowEventReference.EventUID == eventGUID);
+
+            if (controller != null)
+            {
+                controller.SetMaskData();
+            }
+        }
+    }
+
+
     // Строка для возврата полной даты
     public string DateNow()
     {
@@ -157,4 +196,15 @@ public class GameTimeFlowController : MonoBehaviour
     {
         m_availableGameTimeFlowEvents = gameTimeFlowEvents;
     }
+}
+
+[System.Serializable]
+public class GameTimeFlowEventSaveMaskData
+{
+    public int CurrentDay;
+    public int CurrentHour;
+    public int CurrentMonth;
+    public int CurrentYear;
+
+    public List<string> ActiveGameTimeFlowEventGUIDs = new List<string>();
 }

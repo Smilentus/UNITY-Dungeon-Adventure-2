@@ -6,12 +6,6 @@ public class SaveLoadSlotDataConverter : SaveLoadBaseConverter<SaveLoadSlotData>
 {
     private string GetRandomVisibleSaveFileName => "Новое сохранение";
 
-
-    private void Awake()
-    {
-        SaveLoadSystemController.Instance.AddSaveLoadConverter(this);
-    }
-
     public SaveLoadSlotData GetData()
     {
         SaveLoadSlotData saveLoadSlotData = new SaveLoadSlotData();
@@ -37,6 +31,8 @@ public class SaveLoadSlotDataConverter : SaveLoadBaseConverter<SaveLoadSlotData>
     }
 
     public override void ParseGeneralSaveData(GeneralSaveData generalSaveData) { }
+
+    public override void SetDefaultData() { }
 }
 
 [System.Serializable]

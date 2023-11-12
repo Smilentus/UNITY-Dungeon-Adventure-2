@@ -120,7 +120,7 @@ public class GameController : MonoBehaviour
     // DeathBox открытие
     public void ShowDeathBox(string deathText)
     {
-        Player.isDeath = true;
+        RuntimePlayer.Instance.RuntimePlayerStats.isDeath = true;
         DeathBox.SetActive(true);
         DeathBox.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = deathText;
     }
@@ -128,7 +128,8 @@ public class GameController : MonoBehaviour
 
     public void ExitToMainMenu()
     {
-        FindObjectOfType<SavingManager>().SaveGame("AutoSave");
+        SaveLoadSystemController.Instance.TrySaveGameState("AutoSave");
+        //FindObjectOfType<SavingManager>().SaveGame("AutoSave");
         FindObjectOfType<faderScript>().FadeScreen("MenuScene");
         Blocker.SetActive(true);
     }
@@ -220,15 +221,15 @@ public class GameController : MonoBehaviour
     {
         if (ignoreArmor)
         {
-            Player.Health -= dmg;
+            RuntimePlayer.Instance.RuntimePlayerStats.Health -= dmg;
             AddEventText("Вы получили урон через броню: " + dmg);
         }
         else
         {
-            if (dmg > Player.Armor)
+            if (dmg > RuntimePlayer.Instance.RuntimePlayerStats.Armor)
             {
-                Player.Health -= (dmg - Player.Armor);
-                AddEventText("Вы получили урон: " + (dmg - Player.Armor));
+                RuntimePlayer.Instance.RuntimePlayerStats.Health -= (dmg - RuntimePlayer.Instance.RuntimePlayerStats.Armor);
+                AddEventText("Вы получили урон: " + (dmg - RuntimePlayer.Instance.RuntimePlayerStats.Armor));
             }
             else
                 AddEventText("Броня заблокировала урон.");
@@ -238,39 +239,39 @@ public class GameController : MonoBehaviour
     public void GiveExp(double exp)
     {
         // Подсчёт доп. процентного опыта
-        double extraExp = exp * (Player.ExtraExpMod / 100);
+        double extraExp = exp * (RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod / 100);
         // Опыт, который дадим
         exp += extraExp;
-        Player.Exp += exp;
+        RuntimePlayer.Instance.RuntimePlayerStats.Exp += exp;
 
         string info = "Получено: " + exp + " ед. опыта!";
-        if (Player.ExtraExpMod > 0)
+        if (RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod > 0)
         {
             info = "Получено: " + exp + " + (" + extraExp + ") ед. опыта.";
         }
 
         AddEventText(info);
 
-        while (Player.Exp >= Player.MaxExp)
+        while (RuntimePlayer.Instance.RuntimePlayerStats.Exp >= RuntimePlayer.Instance.RuntimePlayerStats.MaxExp)
         {
-            Player.Lvl++;
-            Player.SkillPoints += 5;
-            Player.Exp -= Player.MaxExp;
-            Player.MaxExp += Player.ExpMulty;
-            Player.ExpMulty += 1;
-            AddEventText("Новый уровень - " + Player.Lvl + "!");
+            RuntimePlayer.Instance.RuntimePlayerStats.Lvl++;
+            RuntimePlayer.Instance.RuntimePlayerStats.SkillPoints += 5;
+            RuntimePlayer.Instance.RuntimePlayerStats.Exp -= RuntimePlayer.Instance.RuntimePlayerStats.MaxExp;
+            RuntimePlayer.Instance.RuntimePlayerStats.MaxExp += RuntimePlayer.Instance.RuntimePlayerStats.ExpMulty;
+            RuntimePlayer.Instance.RuntimePlayerStats.ExpMulty += 1;
+            AddEventText("Новый уровень - " + RuntimePlayer.Instance.RuntimePlayerStats.Lvl + "!");
         }
     }
     // Получение монет
     public void GiveMoney(double money)
     {
-        double extraMoney = money * Player.ExtraMoneyMod / 100;
+        double extraMoney = money * RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMod / 100;
 
         money += extraMoney;
-        Player.Money += (int)money;
+        RuntimePlayer.Instance.RuntimePlayerStats.Money += (int)money;
 
         string info = "Получено: " + money + " ед. золота!";
-        if(Player.ExtraMoneyMod > 0)
+        if(RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMod > 0)
         {
             info = "Получено: " + money + " + (" + extraMoney + ") ед. золота.";
         }

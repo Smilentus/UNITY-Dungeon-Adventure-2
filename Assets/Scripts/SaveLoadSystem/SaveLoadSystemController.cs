@@ -48,6 +48,12 @@ public class SaveLoadSystemController : MonoBehaviour
     }
 
 
+    private void Start()
+    {
+        TryLoadGameState("AutoSave");
+    }
+
+
     public void AddSaveLoadConverter(ISaveLoadConverter converter)
     {
         if (SaveLoadConverters.Contains(converter)) return;
@@ -90,12 +96,27 @@ public class SaveLoadSystemController : MonoBehaviour
     }
 
 
-    public bool TrySaveGameState()
+    public bool TrySaveGameState(string saveFileName = "")
     {
-        string fullFilePath = Path.Combine(saveFolderPath, GenerateRandomSaveFileName());
+        string fullFilePath;
+
+        if (saveFileName == "")
+        {
+            fullFilePath = Path.Combine(saveFolderPath, GenerateRandomSaveFileName());
+        }
+        else
+        {
+            fullFilePath = Path.Combine(saveFolderPath, saveFileName);
+        }
+
         return TryCollectAndSaveDataToFile(fullFilePath);
     }
+    public bool TryLoadGameState(string loadFileName)
+    {
+        string fullFilePath = Path.Combine(saveFolderPath, loadFileName);
 
+        return TryLoadAndParseDataFromFile(fullFilePath);
+    }
 
     public GeneralSaveData CollectSaveData()
     {
@@ -150,6 +171,7 @@ public class SaveLoadSystemController : MonoBehaviour
 
         return generalSaveData;
     }
+
 
 
     public bool TryCollectAndSaveDataToFile(string fullFilePath)
@@ -214,6 +236,18 @@ public class SaveLoadSystemController : MonoBehaviour
         }
 
         return true;
+    }
+
+
+    [ContextMenu("DEBUG_Save_AutoSave")]
+    private void DEBUG_SaveAutoSave()
+    {
+        TrySaveGameState("AutoSave");
+    }
+    [ContextMenu("DEBUG_Load_AutoSave")]
+    private void DEBUG_LoadAutoSave()
+    {
+        TryLoadGameState("AutoSave");
     }
 }
 

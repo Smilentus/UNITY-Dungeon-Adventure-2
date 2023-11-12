@@ -19,14 +19,14 @@ public class BattleActionExecuter_LightStrike : MonoBehaviour, IBattleActionExec
         if (!RuntimeBattlePlayerController.Instance.CriticalStrike())
         {
             // Атакуем Х раз от скорости атаки
-            for (int i = 0; i < Player.AttackSpeed; i++)
+            for (int i = 0; i < RuntimePlayer.Instance.RuntimePlayerStats.AttackSpeed; i++)
             {
-                double dmg = Player.Damage / 2;
+                double dmg = RuntimePlayer.Instance.RuntimePlayerStats.Damage / 2;
 
                 // Проверка уклонения противника
-                if (UnityEngine.Random.Range(0, 101) + Player.Luck > BattleController.Instance.EnemiesInBattle[BattleController.Instance.EnemiesInBattle.Count - 1].DodgeChance)
+                if (UnityEngine.Random.Range(0, 101) + RuntimePlayer.Instance.RuntimePlayerStats.Luck > BattleController.Instance.EnemiesInBattle[BattleController.Instance.EnemiesInBattle.Count - 1].DodgeChance)
                 {
-                    if (UnityEngine.Random.Range(0, 101) <= Player.LightStrikeChance + Player.Luck)
+                    if (UnityEngine.Random.Range(0, 101) <= RuntimePlayer.Instance.RuntimePlayerStats.LightStrikeChance + RuntimePlayer.Instance.RuntimePlayerStats.Luck)
                     {
                         if (dmg > BattleController.Instance.EnemiesInBattle[BattleController.Instance.EnemiesInBattle.Count - 1].Armor)
                         {

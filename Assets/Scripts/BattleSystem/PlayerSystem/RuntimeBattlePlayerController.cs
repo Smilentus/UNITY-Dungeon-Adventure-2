@@ -212,9 +212,9 @@ public class RuntimeBattlePlayerController : MonoBehaviour
     public bool CriticalStrike()
     {
         int rndChance = UnityEngine.Random.Range(0, 101);
-        double dmg = Player.Damage * Player.CriticalStrikeMulty;
+        double dmg = RuntimePlayer.Instance.RuntimePlayerStats.Damage * RuntimePlayer.Instance.RuntimePlayerStats.CriticalStrikeMulty;
 
-        if (rndChance <= Player.CriticalStrikeChance)
+        if (rndChance <= RuntimePlayer.Instance.RuntimePlayerStats.CriticalStrikeChance)
         {
             BattleController.Instance.EnemiesInBattle[BattleController.Instance.EnemiesInBattle.Count - 1].Health -= dmg;
             GameController.Instance.AddEventText(BattleController.Instance.CurrentBattleStep + " - Вы нанесли урон критическим ударом: " + dmg + " ед.");
@@ -226,7 +226,7 @@ public class RuntimeBattlePlayerController : MonoBehaviour
     // Попытка сбежать
     public void TryToEscape()
     {
-        if (UnityEngine.Random.Range(0, 101) <= 50 + Player.Luck)
+        if (UnityEngine.Random.Range(0, 101) <= 50 + RuntimePlayer.Instance.RuntimePlayerStats.Luck)
         {
             BattleController.Instance.IsBattle = false;
             BattleController.Instance.IsWin = false;
