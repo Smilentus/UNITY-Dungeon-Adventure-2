@@ -3,12 +3,13 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a570da814f4bad743b0215ef6a27b0f6, type: 3}
+  m_Script: {fileID: 11500000, guid: ac224b22d8e204b46a7787c73425f4e8, type: 3}
   m_Name: Vampirism
   m_EditorClassIdentifier: 
   Type: 13
@@ -17,7 +18,11 @@ MonoBehaviour:
     \u043E\u0442 \u0443\u0440\u043E\u043D\u0430"
   Icon: {fileID: 2800000, guid: e7df606108ac486489a0e22ec71c1684, type: 3}
   iconColor: {r: 0.50735295, g: 0, b: 0, a: 1}
-  buffPower: 0.1
+  buffPower: 0
   Duration: 5
   MaxDuration: 5
   isInfinity: 0
+  m_BuffName: "\u0412\u0430\u043C\u043F\u0438\u0440\u0438\u0437\u043C"
+  m_Description: "\u0412\u0430\u043C\u043F\u0438\u0440\u0438\u0437\u043C +10% \u041E\u0417
+    \u043E\u0442 \u0443\u0440\u043E\u043D\u0430"
+  m_Icon: {fileID: 21300000, guid: e7df606108ac486489a0e22ec71c1684, type: 3}

@@ -3,12 +3,13 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a570da814f4bad743b0215ef6a27b0f6, type: 3}
+  m_Script: {fileID: 11500000, guid: ac224b22d8e204b46a7787c73425f4e8, type: 3}
   m_Name: MageAbility
   m_EditorClassIdentifier: 
   Type: 23
@@ -22,3 +23,8 @@ MonoBehaviour:
   Duration: 10
   MaxDuration: 10
   isInfinity: 0
+  m_BuffName: "\u0412\u0441\u043F\u043B\u0435\u0441\u043A \u043C\u0430\u0433\u0438\u0438"
+  m_Description: "\u0412\u0430\u0448\u0438 \u043C\u0430\u0433\u0438\u0447\u0435\u0441\u043A\u0438\u0435
+    \u0441\u0438\u043B\u044B \u0443\u0432\u0435\u043B\u0438\u0447\u0435\u043D\u044B
+    \u043A\u0430\u043A \u043D\u0438\u043A\u043E\u0433\u0434\u0430."
+  m_Icon: {fileID: 21300000, guid: 134f3b3e2e613d04ea132a13f43f9580, type: 3}

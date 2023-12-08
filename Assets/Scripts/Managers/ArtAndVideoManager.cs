@@ -189,7 +189,7 @@ public class ArtAndVideoManager : MonoBehaviour
                 SM.StartDialog("Learning_06");
                 break;
             case "IlluminatiArt":
-                FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.Illuminati);
+                FindObjectOfType<BuffManager>().SetBuff(BuffProfile.BuffType.Illuminati);
                 break;
         }
     }

@@ -32,7 +32,7 @@ public class ItemProfile : ScriptableObject
     public int Mana;
     public int ExtraExp;
     public int ExtraMoney;
-    public Buff[] equipBuffs;
+    public BuffProfile[] equipBuffs;
     // Текущий стак предмета
     public int Stack;
     // Макс. стак предмета

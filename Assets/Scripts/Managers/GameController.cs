@@ -284,7 +284,7 @@ public class GameController : MonoBehaviour
         if (!BattleController.Instance.IsBattle)
         {
             // Время баффов
-            FindObjectOfType<BuffManager>().ChangeBuffActionTime(timeToWait);
+            //FindObjectOfType<BuffManager>().ChangeBuffActionTime(timeToWait);
 
             // Добавляем время
             if (timeToWait < 0)
@@ -674,15 +674,15 @@ public class GameController : MonoBehaviour
                 break;
             case 14:
                 ShowMessageText("Вы наткнулись на ядовитую ловушку!");
-                FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.Poison);
+                FindObjectOfType<BuffManager>().SetBuff(BuffProfile.BuffType.Poison);
                 break;
             case 15:
                 ShowMessageText("Вы наткнулись на огненную ловушку!");
-                FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.Fire);
+                FindObjectOfType<BuffManager>().SetBuff(BuffProfile.BuffType.Fire);
                 break;
             case 16:
                 ShowMessageText("Вы наткнулись на ловушку с кольями!");
-                FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.Bleeding);
+                FindObjectOfType<BuffManager>().SetBuff(BuffProfile.BuffType.Bleeding);
                 break;
             case 17:
                 AddEventText("[Ничего не произошло]");
@@ -727,7 +727,7 @@ public class GameController : MonoBehaviour
                 break;
             case 6:
                 ShowMessageText("Вы наткнулись на огненную ловушку!");
-                FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.Fire);
+                FindObjectOfType<BuffManager>().SetBuff(BuffProfile.BuffType.Fire);
                 break;
             case 7:
                 AddEventText("[Ничего не произошло]");
@@ -759,7 +759,7 @@ public class GameController : MonoBehaviour
                 break;
             case 5:
                 ShowMessageText("Вы наткнулись на огненную ловушку!");
-                FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.Fire);
+                FindObjectOfType<BuffManager>().SetBuff(BuffProfile.BuffType.Fire);
                 break;
             case 6:
                 AddEventText("[Ничего не произошло]");
@@ -800,7 +800,7 @@ public class GameController : MonoBehaviour
                 break;
             case 8:
                 ShowMessageText("Вы наткнулись на огненную ловушку!");
-                FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.Fire);
+                FindObjectOfType<BuffManager>().SetBuff(BuffProfile.BuffType.Fire);
                 break;
             case 9:
                 AddEventText("[Ничего не произошло]");

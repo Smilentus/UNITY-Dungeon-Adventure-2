@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 public class BuffButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Тип баффа")]
-    public Buff.BuffType bType;
+    public BuffProfile.BuffType bType;
 
     public void OnPointerEnter(PointerEventData eventData)
     {

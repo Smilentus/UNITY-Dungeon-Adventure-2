@@ -65,7 +65,10 @@ public class RuntimeBattlePlayerController : MonoBehaviour
 
     private void OnDestroy()
     {
-        BattleController.Instance.onBattleTurnStatusChanged -= OnBattleTurnStatusChanged;
+        if (BattleController.Instance != null)
+        {
+            BattleController.Instance.onBattleTurnStatusChanged -= OnBattleTurnStatusChanged;
+        }
     }
 
     public void InitializeBattlePlayer()

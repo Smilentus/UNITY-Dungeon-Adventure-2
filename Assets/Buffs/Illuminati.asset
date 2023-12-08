@@ -3,20 +3,25 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a570da814f4bad743b0215ef6a27b0f6, type: 3}
+  m_Script: {fileID: 11500000, guid: ac224b22d8e204b46a7787c73425f4e8, type: 3}
   m_Name: Illuminati
   m_EditorClassIdentifier: 
   Type: 29
-  Name: "\u0422\u0430\u0439\u043D\u044B\u0439 \u0437\u0430\u0433\u043E\u0432\u043E\u0440"
-  Descr: "\u041E\u043D\u0438 \u0441\u043B\u0435\u0434\u044F\u0442 \u0437\u0430 \u0442\u043E\u0431\u043E\u0439..."
-  Icon: {fileID: 2800000, guid: a3e1dc5925032834687fbb019c704d1a, type: 3}
-  iconColor: {r: 0.13443543, g: 0.3962264, b: 0, a: 1}
   buffPower: 1000
   Duration: 120
   MaxDuration: 120
   isInfinity: 0
+  m_runtimeBuffPrefab: {fileID: 4194329092003297287, guid: cbee831d7a2accb428f13efbc48738b4,
+    type: 3}
+  m_BuffUID: buff_illuminati
+  m_BuffName: "\u0422\u0430\u0439\u043D\u044B\u0439 \u0437\u0430\u0433\u043E\u0432\u043E\u0440"
+  m_Description: "\u041E\u043D\u0438 \u0441\u043B\u0435\u0434\u044F\u0442 \u0437\u0430
+    \u0442\u043E\u0431\u043E\u0439..."
+  m_Icon: {fileID: 21300000, guid: a3e1dc5925032834687fbb019c704d1a, type: 3}
+  m_durationHours: 10

@@ -17,14 +17,14 @@ public class GameTimeFlowEventPlanetRow : GameTimeFlowEventBaseController
     public override void StartEvent()
     {
         GameController.Instance.ShowMessageText(GameTimeFlowEventReference.EventDescription, "[Событие]");
-        FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.PlanetRowBuff);
+        FindObjectOfType<BuffManager>().SetBuff(BuffProfile.BuffType.PlanetRowBuff);
 
         base.StartEvent();
     }
 
     public override void FinishEvent()
     {
-        FindObjectOfType<BuffManager>().DeleteBuffAction(Buff.BuffType.PlanetRowBuff);
+        FindObjectOfType<BuffManager>().DeleteBuffAction(BuffProfile.BuffType.PlanetRowBuff);
 
         base.FinishEvent();
     }

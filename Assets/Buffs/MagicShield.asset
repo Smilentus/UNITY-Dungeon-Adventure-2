@@ -3,12 +3,13 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a570da814f4bad743b0215ef6a27b0f6, type: 3}
+  m_Script: {fileID: 11500000, guid: ac224b22d8e204b46a7787c73425f4e8, type: 3}
   m_Name: MagicShield
   m_EditorClassIdentifier: 
   Type: 25
@@ -20,3 +21,6 @@ MonoBehaviour:
   Duration: 5
   MaxDuration: 5
   isInfinity: 0
+  m_BuffName: "\u041C\u0430\u0433. \u0449\u0438\u0442"
+  m_Description: "\u0417\u0430\u0449\u0438\u0442\u0430 +{magic:shield}"
+  m_Icon: {fileID: 21300000, guid: 5b381a0d45294f044b660d3c67533663, type: 3}

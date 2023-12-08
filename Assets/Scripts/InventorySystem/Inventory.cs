@@ -316,7 +316,7 @@ public class Inventory : MonoBehaviour
             case "Potion_Mana":
                 if (manaPotionCounter > 0)
                 {
-                    FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.FrogBuff);
+                    FindObjectOfType<BuffManager>().SetBuff(BuffProfile.BuffType.FrogBuff);
                     manaPotionCounter = 0;
                 }
                 else
@@ -336,9 +336,9 @@ public class Inventory : MonoBehaviour
                 }
                 break;
             case "Potion_Armor":
-                if (!FindObjectOfType<BuffManager>().isBuffOnAction(Buff.BuffType.ArmorBonus, 0))
+                if (!FindObjectOfType<BuffManager>().isBuffOnAction(BuffProfile.BuffType.ArmorBonus, 0))
                 {
-                    FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.ArmorBonus);
+                    FindObjectOfType<BuffManager>().SetBuff(BuffProfile.BuffType.ArmorBonus);
 
                     CheckItemForDelete(ID, 1);
                 }
@@ -346,9 +346,9 @@ public class Inventory : MonoBehaviour
                     GameController.Instance.ShowMessageText("Ваше тело не выдержит большей нагрузки!");
                 break;
             case "Potion_Regen":
-                if (!FindObjectOfType<BuffManager>().isBuffOnAction(Buff.BuffType.RegenBonus, 0))
+                if (!FindObjectOfType<BuffManager>().isBuffOnAction(BuffProfile.BuffType.RegenBonus, 0))
                 {
-                    FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.RegenBonus);
+                    FindObjectOfType<BuffManager>().SetBuff(BuffProfile.BuffType.RegenBonus);
 
                     CheckItemForDelete(ID, 1);
                 }
@@ -356,9 +356,9 @@ public class Inventory : MonoBehaviour
                     GameController.Instance.ShowMessageText("Если выпить слишком много восстановительного зелья, то можно умереть!");
                 break;
             case "Potion_ManaRegen":
-                if (!FindObjectOfType<BuffManager>().isBuffOnAction(Buff.BuffType.ManaRegenBonus, 0))
+                if (!FindObjectOfType<BuffManager>().isBuffOnAction(BuffProfile.BuffType.ManaRegenBonus, 0))
                 {
-                    FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.ManaRegenBonus);
+                    FindObjectOfType<BuffManager>().SetBuff(BuffProfile.BuffType.ManaRegenBonus);
 
                     CheckItemForDelete(ID, 1);
                 }
@@ -373,11 +373,11 @@ public class Inventory : MonoBehaviour
                 switch (rndAction)
                 {
                     case 0:
-                        FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.FrogBuff);
+                        FindObjectOfType<BuffManager>().SetBuff(BuffProfile.BuffType.FrogBuff);
                         GameController.Instance.ShowMessageText("Зелье изуродовало Вас ещё сильнее, чем Ваша жизнь. Вы стали лягушкой.", "[Событие]");
                         break;
                     case 1:
-                        FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.HealthAndManaRegen);
+                        FindObjectOfType<BuffManager>().SetBuff(BuffProfile.BuffType.HealthAndManaRegen);
                         GameController.Instance.ShowMessageText("Зелье придало Вам мощи! (Бафф: Усиленное восстановление маны и здоровья)", "[Событие]");
                         break;
                     case 2:
@@ -433,11 +433,11 @@ public class Inventory : MonoBehaviour
                 break;
             case "Potion_Vampirism":
                 CheckItemForDelete(ID, 1);
-                FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.Vampirism);
+                FindObjectOfType<BuffManager>().SetBuff(BuffProfile.BuffType.Vampirism);
                 break;
             case "Potion_Frog":
                 CheckItemForDelete(ID, 1);
-                FindObjectOfType<BuffManager>().DeleteBuffAction(Buff.BuffType.FrogBuff);
+                FindObjectOfType<BuffManager>().DeleteBuffAction(BuffProfile.BuffType.FrogBuff);
                 break;
             case "Potion_Destroyer":
                 // Зелье уничтожения -> Добавить возможность уничтожения противника

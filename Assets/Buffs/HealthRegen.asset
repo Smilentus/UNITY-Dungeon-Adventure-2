@@ -3,12 +3,13 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a570da814f4bad743b0215ef6a27b0f6, type: 3}
+  m_Script: {fileID: 11500000, guid: ac224b22d8e204b46a7787c73425f4e8, type: 3}
   m_Name: HealthRegen
   m_EditorClassIdentifier: 
   Type: 7
@@ -21,3 +22,7 @@ MonoBehaviour:
   Duration: 5
   MaxDuration: 5
   isInfinity: 0
+  m_BuffName: "\u0412\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435
+    \u0441\u0438\u043B"
+  m_Description: "\u0420\u0435\u0433\u0435\u043D. \u041E\u0417 +25"
+  m_Icon: {fileID: 21300000, guid: ec0ee7f4b36b5cf4bbbf4eb2ae91215c, type: 3}

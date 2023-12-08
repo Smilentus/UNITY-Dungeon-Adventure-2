@@ -3,12 +3,13 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a570da814f4bad743b0215ef6a27b0f6, type: 3}
+  m_Script: {fileID: 11500000, guid: ac224b22d8e204b46a7787c73425f4e8, type: 3}
   m_Name: Health Increase
   m_EditorClassIdentifier: 
   Type: 3
@@ -20,3 +21,6 @@ MonoBehaviour:
   Duration: 7
   MaxDuration: 7
   isInfinity: 0
+  m_BuffName: "\u0421\u0442\u043E\u0439\u043A\u043E\u0441\u0442\u044C"
+  m_Description: "\u041E\u0417 +100"
+  m_Icon: {fileID: 21300000, guid: 08eae71b02e09764cb5ca6ddcddb5ec5, type: 3}

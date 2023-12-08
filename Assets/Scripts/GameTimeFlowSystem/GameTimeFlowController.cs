@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,6 +18,12 @@ public class GameTimeFlowController : MonoBehaviour
             return instance;
         }
     }
+
+
+    public event Action<int> onTimeHoursPassed;
+    public event Action<int> onTimeDaysPassed;
+    public event Action<int> onTimeMonthsPassed;
+    public event Action<int> onTimeYearsPassed;
 
 
     [SerializeField]
@@ -124,22 +131,34 @@ public class GameTimeFlowController : MonoBehaviour
     {
         CurrentHour += hour;
 
+        onTimeHoursPassed?.Invoke(hour);
+
         // Добавляем время
         while (CurrentHour > 30)
         {
             if (CurrentHour >= 30)
             {
                 CurrentHour -= 30;
+                
                 CurrentDay++;
+
+                onTimeDaysPassed?.Invoke(1);
+
                 FindObjectOfType<PlayerVillageActivity>().GetProducedItems();
                 if(CurrentDay > 45)
                 {
                     CurrentDay = 1;
                     CurrentMonth++;
+
+                    onTimeMonthsPassed?.Invoke(1);
+
                     if(CurrentMonth > 20)
                     {
                         CurrentMonth = 1;
+
                         CurrentYear++;
+
+                        onTimeYearsPassed?.Invoke(1);
                     }
                 }
             }

@@ -17,14 +17,14 @@ public class GameTimeFlowEventFullMoon : GameTimeFlowEventBaseController
     public override void StartEvent()
     {
         GameController.Instance.ShowMessageText(GameTimeFlowEventReference.EventDescription, "[Событие]");
-        FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.FullmoonBuff);
+        FindObjectOfType<BuffManager>().SetBuff(BuffProfile.BuffType.FullmoonBuff);
 
         base.StartEvent();
     }
 
     public override void FinishEvent()
     {
-        FindObjectOfType<BuffManager>().DeleteBuffAction(Buff.BuffType.FullmoonBuff);
+        FindObjectOfType<BuffManager>().DeleteBuffAction(BuffProfile.BuffType.FullmoonBuff);
 
         base.FinishEvent();
     }

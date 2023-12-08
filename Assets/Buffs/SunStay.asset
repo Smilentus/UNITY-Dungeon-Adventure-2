@@ -3,12 +3,13 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a570da814f4bad743b0215ef6a27b0f6, type: 3}
+  m_Script: {fileID: 11500000, guid: ac224b22d8e204b46a7787c73425f4e8, type: 3}
   m_Name: SunStay
   m_EditorClassIdentifier: 
   Type: 19
@@ -21,3 +22,8 @@ MonoBehaviour:
   Duration: 15
   MaxDuration: 15
   isInfinity: 0
+  m_BuffName: "\u0421\u043E\u043B\u043D\u0446\u0435\u0441\u0442\u043E\u044F\u043D\u0438\u0435"
+  m_Description: "\u0423\u0432\u0435\u043B\u0438\u0447\u0435\u043D\u043D\u043E\u0435
+    \u0432\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435
+    \u043C\u0430\u0433\u0438\u0447\u0435\u0441\u043A\u0438\u0445 \u0441\u0438\u043B."
+  m_Icon: {fileID: 21300000, guid: 12357f9f77c1056428e7184bbb32b900, type: 3}

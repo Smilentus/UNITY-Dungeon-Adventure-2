@@ -22,7 +22,7 @@ public class BuffManager : MonoBehaviour
     public Transform EnemyBuffsParent;
 
     [Header("Все баффы")]
-    public Buff[] AllBuffs;
+    public BuffProfile[] AllBuffs;
 
     [Header("Объекты баффов игрока")]
     public List<GameObject> buffsObjects = new List<GameObject>();
@@ -30,9 +30,9 @@ public class BuffManager : MonoBehaviour
     public List<GameObject> enemyBuffsObjects = new List<GameObject>();
 
     [Header("Активные баффы")]
-    public List<Buff> activeBuffs = new List<Buff>();
+    public List<BuffProfile> activeBuffs = new List<BuffProfile>();
     [Header("Активные баффы противников")]
-    public List<Buff> enemyActiveBuffs = new List<Buff>();
+    public List<BuffProfile> enemyActiveBuffs = new List<BuffProfile>();
 
     // Обновляем каждый кадр. P.S.: Написал просто для красоты, да, Я дебил.
     private void Update()
@@ -42,7 +42,7 @@ public class BuffManager : MonoBehaviour
     }
 
     // Поиск баффа в списке
-    public int BuffPos(Buff.BuffType fType)
+    public int BuffPos(BuffProfile.BuffType fType)
     {
         int num = -1;
         for (int i = 0; i < AllBuffs.Length; i++)
@@ -54,7 +54,7 @@ public class BuffManager : MonoBehaviour
     }
 
     // Добавление баффа игроку
-    public void SetBuff(Buff.BuffType sType)
+    public void SetBuff(BuffProfile.BuffType sType)
     {
         bool isFound = false;
 
@@ -75,17 +75,17 @@ public class BuffManager : MonoBehaviour
         {
             var b = AllBuffs[BuffPos(sType)];
 
-            activeBuffs.Add(new Buff()
-            {
-                Name = b.Name,
-                Descr = b.Descr, Type = b.Type,
-                Duration = b.Duration,
-                MaxDuration = b.MaxDuration,
-                buffPower = b.buffPower,
-                isInfinity = b.isInfinity,
-                Icon = b.Icon,
-                iconColor = b.iconColor
-            });
+            //activeBuffs.Add(new BuffProfile()
+            //{
+            //    Name = b.Name,
+            //    Descr = b.Description, Type = b.Type,
+            //    Duration = b.Duration,
+            //    MaxDuration = b.MaxDuration,
+            //    buffPower = b.buffPower,
+            //    isInfinity = b.isInfinity,
+            //    Icon = b.Icon,
+            //    iconColor = b.iconColor
+            //});
 
             CreateBuffObject(sType, 0);
 
@@ -94,7 +94,7 @@ public class BuffManager : MonoBehaviour
     }
 
     // Добавление баффа противнику
-    public void SetBuffToEnemy(Buff.BuffType sType)
+    public void SetBuffToEnemy(BuffProfile.BuffType sType)
     {
         if (BattleController.Instance.IsBattle)
         {
@@ -117,18 +117,18 @@ public class BuffManager : MonoBehaviour
             {
                 var b = AllBuffs[BuffPos(sType)];
 
-                enemyActiveBuffs.Add(new Buff()
-                {
-                    Name = b.Name,
-                    Descr = b.Descr,
-                    Type = b.Type,
-                    Duration = b.Duration,
-                    MaxDuration = b.MaxDuration,
-                    buffPower = b.buffPower,
-                    isInfinity = b.isInfinity,
-                    Icon = b.Icon,
-                    iconColor = b.iconColor
-                });
+                //enemyActiveBuffs.Add(new BuffProfile()
+                //{
+                //    Name = b.Name,
+                //    Descr = b.Description,
+                //    Type = b.Type,
+                //    Duration = b.Duration,
+                //    MaxDuration = b.MaxDuration,
+                //    buffPower = b.buffPower,
+                //    isInfinity = b.isInfinity,
+                //    Icon = b.Icon,
+                //    iconColor = b.iconColor
+                //});
 
                 CreateBuffObject(sType, 1);
 
@@ -151,54 +151,54 @@ public class BuffManager : MonoBehaviour
                 var = activeBuffs[i].buffPower;
                 switch (activeBuffs[i].Type)
                 {
-                    case Buff.BuffType.ManaRegenBonus:
+                    case BuffProfile.BuffType.ManaRegenBonus:
                         RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen += var;
                         break;
-                    case Buff.BuffType.RegenBonus:
+                    case BuffProfile.BuffType.RegenBonus:
                         RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen += var;
                         break;
-                    case Buff.BuffType.HealthBonus:
+                    case BuffProfile.BuffType.HealthBonus:
                         RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth += var;
                         RuntimePlayer.Instance.RuntimePlayerStats.Health += var;
                         break;
-                    case Buff.BuffType.ManaBonus:
+                    case BuffProfile.BuffType.ManaBonus:
                         RuntimePlayer.Instance.RuntimePlayerStats.MaxMana += var;
                         RuntimePlayer.Instance.RuntimePlayerStats.Mana += var;
                         break;
-                    case Buff.BuffType.DamageBonus:
+                    case BuffProfile.BuffType.DamageBonus:
                         RuntimePlayer.Instance.RuntimePlayerStats.Damage += var;
                         break;
-                    case Buff.BuffType.ArmorDecreasing:
+                    case BuffProfile.BuffType.ArmorDecreasing:
                         RuntimePlayer.Instance.RuntimePlayerStats.Armor -= var;
                         break;
-                    case Buff.BuffType.ArmorBonus:
+                    case BuffProfile.BuffType.ArmorBonus:
                         RuntimePlayer.Instance.RuntimePlayerStats.Armor += var;
                         break;
-                    case Buff.BuffType.HealthAndManaRegen:
+                    case BuffProfile.BuffType.HealthAndManaRegen:
                         RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen += var;
                         RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen += var;
                         break;
-                    case Buff.BuffType.InfinityHealthRegen:
+                    case BuffProfile.BuffType.InfinityHealthRegen:
                         RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen += var;
                         break;
-                    case Buff.BuffType.InfinityManaRegen:
+                    case BuffProfile.BuffType.InfinityManaRegen:
                         RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen += var;
                         break;
-                    case Buff.BuffType.InfinityShield:
+                    case BuffProfile.BuffType.InfinityShield:
                         RuntimePlayer.Instance.RuntimePlayerStats.Armor += var;
                         break;
                     // Зелья превращения
-                    case Buff.BuffType.RabbitBuff:
+                    case BuffProfile.BuffType.RabbitBuff:
                         GameController.Instance.ShowMessageText("Вы превратились в кролика, милого и пушистого.");
                         break;
-                    case Buff.BuffType.SheepBuff:
+                    case BuffProfile.BuffType.SheepBuff:
                         GameController.Instance.ShowMessageText("Вы превратились в овцу. Прямо как Ваша жена.");
                         break;
-                    case Buff.BuffType.ChickenBuff:
+                    case BuffProfile.BuffType.ChickenBuff:
                         GameController.Instance.ShowMessageText("Вы превратились в курицу! Ко-ко-ко");
                         break;
-                    case Buff.BuffType.FrogBuff:
-                        if (!isBuffOnAction(Buff.BuffType.FrogBuff, 0))
+                    case BuffProfile.BuffType.FrogBuff:
+                        if (!isBuffOnAction(BuffProfile.BuffType.FrogBuff, 0))
                         {
                             // Сохранение переменных игрока
                             RuntimePlayer.Instance.RuntimePlayerStats.tempDamage = RuntimePlayer.Instance.RuntimePlayerStats.Damage;
@@ -222,19 +222,19 @@ public class BuffManager : MonoBehaviour
                             GameController.Instance.ShowMessageText("Вы превратились в лягушку. А я говорил!");
                         }
                         break;
-                    case Buff.BuffType.SunstayBuff:
+                    case BuffProfile.BuffType.SunstayBuff:
                         RuntimePlayer.Instance.RuntimePlayerStats.MaxMana += 500;
                         RuntimePlayer.Instance.RuntimePlayerStats.Mana += 500;
                         RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen += 125;
                         break;
-                    case Buff.BuffType.FullmoonBuff:
+                    case BuffProfile.BuffType.FullmoonBuff:
                         RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth += 100;
                         RuntimePlayer.Instance.RuntimePlayerStats.Health += 100;
                         RuntimePlayer.Instance.RuntimePlayerStats.Damage += 35;
                         RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen += 10;
                         RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen += 5;
                         break;
-                    case Buff.BuffType.PlanetRowBuff:
+                    case BuffProfile.BuffType.PlanetRowBuff:
                         RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth += 2500;
                         RuntimePlayer.Instance.RuntimePlayerStats.Health += 2500;
                         RuntimePlayer.Instance.RuntimePlayerStats.Damage += 750;
@@ -244,27 +244,27 @@ public class BuffManager : MonoBehaviour
                         RuntimePlayer.Instance.RuntimePlayerStats.MaxMana += 200;
                         RuntimePlayer.Instance.RuntimePlayerStats.Mana += 200;
                         break;
-                    case Buff.BuffType.MageAbility:
+                    case BuffProfile.BuffType.MageAbility:
                         RuntimePlayer.Instance.RuntimePlayerStats.MaxMana += 1000 * RuntimePlayer.Instance.RuntimePlayerStats.HALvl;
                         RuntimePlayer.Instance.RuntimePlayerStats.Mana += 1000 * RuntimePlayer.Instance.RuntimePlayerStats.HALvl;
                         break;
-                    case Buff.BuffType.WarriorAbility:
+                    case BuffProfile.BuffType.WarriorAbility:
                         RuntimePlayer.Instance.RuntimePlayerStats.Armor += 100 * RuntimePlayer.Instance.RuntimePlayerStats.HALvl;
                         RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth += 200 * RuntimePlayer.Instance.RuntimePlayerStats.HALvl;
                         RuntimePlayer.Instance.RuntimePlayerStats.Health += 200 * RuntimePlayer.Instance.RuntimePlayerStats.HALvl;
                         break;
-                    case Buff.BuffType.Happiness:
+                    case BuffProfile.BuffType.Happiness:
                         RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth += 1000;
                         RuntimePlayer.Instance.RuntimePlayerStats.Health += 1000;
                         RuntimePlayer.Instance.RuntimePlayerStats.Damage += 50;
                         RuntimePlayer.Instance.RuntimePlayerStats.Armor += 10;
                         break;
-                    case Buff.BuffType.Illuminati:
+                    case BuffProfile.BuffType.Illuminati:
                         RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod += var;
                         break;
-                    case Buff.BuffType.Magic_HealthRegen:
+                    case BuffProfile.BuffType.Magic_HealthRegen:
                         break;
-                    case Buff.BuffType.Magic_Shield:
+                    case BuffProfile.BuffType.Magic_Shield:
                         var MM = FindObjectOfType<MagicManager>();
                         RuntimePlayer.Instance.RuntimePlayerStats.Armor += (int)MM.allMagicInGame[MM.FindMagicPosInAllMagic(MagicManager.MagicType.Shield)].actionVar;
                         break;
@@ -323,13 +323,13 @@ public class BuffManager : MonoBehaviour
                 // Эффект баффа 
                 switch (activeBuffs[i].Type)
                 {
-                    case Buff.BuffType.Poison:
+                    case BuffProfile.BuffType.Poison:
                         RuntimePlayer.Instance.RuntimePlayerStats.Health -= activeBuffs[i].buffPower;
                         break;
-                    case Buff.BuffType.Bleeding:
+                    case BuffProfile.BuffType.Bleeding:
                         RuntimePlayer.Instance.RuntimePlayerStats.Health -= activeBuffs[i].buffPower;
                         break;
-                    case Buff.BuffType.Fire:
+                    case BuffProfile.BuffType.Fire:
                         RuntimePlayer.Instance.RuntimePlayerStats.Health -= activeBuffs[i].buffPower;
                         break;
                 }
@@ -405,7 +405,7 @@ public class BuffManager : MonoBehaviour
         {
             switch (activeBuffs[i].Type)
             {
-                case Buff.BuffType.Vampirism:
+                case BuffProfile.BuffType.Vampirism:
                     RuntimePlayer.Instance.RuntimePlayerStats.Health += RuntimePlayer.Instance.RuntimePlayerStats.Damage * activeBuffs[i].buffPower;
                     break;
             }
@@ -425,41 +425,41 @@ public class BuffManager : MonoBehaviour
             var = activeBuffs[i].buffPower;
             switch (activeBuffs[i].Type)
             {
-                case Buff.BuffType.ArmorBonus:
+                case BuffProfile.BuffType.ArmorBonus:
                     RuntimePlayer.Instance.RuntimePlayerStats.Armor -= var;
                     break;
-                case Buff.BuffType.ArmorDecreasing:
+                case BuffProfile.BuffType.ArmorDecreasing:
                     RuntimePlayer.Instance.RuntimePlayerStats.Armor += var;
                     break;
-                case Buff.BuffType.DamageBonus:
+                case BuffProfile.BuffType.DamageBonus:
                     RuntimePlayer.Instance.RuntimePlayerStats.Damage -= var;
                     break;
-                case Buff.BuffType.HealthBonus:
+                case BuffProfile.BuffType.HealthBonus:
                     RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth -= var;
                     break;
-                case Buff.BuffType.ManaBonus:
+                case BuffProfile.BuffType.ManaBonus:
                     RuntimePlayer.Instance.RuntimePlayerStats.MaxMana -= var;
                     break;
-                case Buff.BuffType.ManaRegenBonus:
+                case BuffProfile.BuffType.ManaRegenBonus:
                     RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen -= var;
                     break;
-                case Buff.BuffType.RegenBonus:
+                case BuffProfile.BuffType.RegenBonus:
                     RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen -= var;
                     break;
-                case Buff.BuffType.HealthAndManaRegen:
+                case BuffProfile.BuffType.HealthAndManaRegen:
                     RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen -= var;
                     RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen -= var;
                     break;
-                case Buff.BuffType.InfinityHealthRegen:
+                case BuffProfile.BuffType.InfinityHealthRegen:
                     RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen -= var;
                     break;
-                case Buff.BuffType.InfinityManaRegen:
+                case BuffProfile.BuffType.InfinityManaRegen:
                     RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen -= var;
                     break;
-                case Buff.BuffType.InfinityShield:
+                case BuffProfile.BuffType.InfinityShield:
                     RuntimePlayer.Instance.RuntimePlayerStats.Armor -= var;
                     break;
-                case Buff.BuffType.FrogBuff:
+                case BuffProfile.BuffType.FrogBuff:
                     // Снимаем действие баффа
                     RuntimePlayer.Instance.RuntimePlayerStats.Damage = RuntimePlayer.Instance.RuntimePlayerStats.tempDamage;
                     RuntimePlayer.Instance.RuntimePlayerStats.Health = RuntimePlayer.Instance.RuntimePlayerStats.tempHealth;
@@ -469,13 +469,13 @@ public class BuffManager : MonoBehaviour
                     RuntimePlayer.Instance.RuntimePlayerStats.AttackSpeed = RuntimePlayer.Instance.RuntimePlayerStats.tempAttackSpeed;
                     RuntimePlayer.Instance.RuntimePlayerStats.Armor = RuntimePlayer.Instance.RuntimePlayerStats.tempArmor;
                     break;
-                case Buff.BuffType.SunstayBuff:
+                case BuffProfile.BuffType.SunstayBuff:
                     RuntimePlayer.Instance.RuntimePlayerStats.MaxMana -= 500;
                     RuntimePlayer.Instance.RuntimePlayerStats.Mana -= 500;
                     RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen -= 125;
                     GameTimeFlowController.Instance.ForceFinishGameTimeFlowEvent("SunStay_GameTimeFlowEvent");
                     break;
-                case Buff.BuffType.FullmoonBuff:
+                case BuffProfile.BuffType.FullmoonBuff:
                     RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth -= 100;
                     RuntimePlayer.Instance.RuntimePlayerStats.Health -= 100;
                     RuntimePlayer.Instance.RuntimePlayerStats.Damage -= 35;
@@ -483,7 +483,7 @@ public class BuffManager : MonoBehaviour
                     RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen -= 5;
                     GameTimeFlowController.Instance.ForceFinishGameTimeFlowEvent("FullMoon_Sunstay_GameTimeFlowEvent");
                     break;
-                case Buff.BuffType.PlanetRowBuff:
+                case BuffProfile.BuffType.PlanetRowBuff:
                     RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth -= 2500;
                     RuntimePlayer.Instance.RuntimePlayerStats.Health -= 2500;
                     RuntimePlayer.Instance.RuntimePlayerStats.Damage -= 750;
@@ -494,31 +494,31 @@ public class BuffManager : MonoBehaviour
                     RuntimePlayer.Instance.RuntimePlayerStats.Mana -= 200;
                     GameTimeFlowController.Instance.ForceFinishGameTimeFlowEvent("PlanetRow_GameTimeFlowEvent");
                     break;
-                case Buff.BuffType.MageAbility:
+                case BuffProfile.BuffType.MageAbility:
                     RuntimePlayer.Instance.RuntimePlayerStats.MaxMana -= 1000 * RuntimePlayer.Instance.RuntimePlayerStats.HALvl;
                     RuntimePlayer.Instance.RuntimePlayerStats.Mana -= 1000 * RuntimePlayer.Instance.RuntimePlayerStats.HALvl;
                     break;
-                case Buff.BuffType.WarriorAbility:
+                case BuffProfile.BuffType.WarriorAbility:
                     RuntimePlayer.Instance.RuntimePlayerStats.Armor -= 100 * RuntimePlayer.Instance.RuntimePlayerStats.HALvl;
                     RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth -= 200 * RuntimePlayer.Instance.RuntimePlayerStats.HALvl;
                     RuntimePlayer.Instance.RuntimePlayerStats.Health -= 200 * RuntimePlayer.Instance.RuntimePlayerStats.HALvl;
                     break;
-                case Buff.BuffType.Happiness:
+                case BuffProfile.BuffType.Happiness:
                     RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth -= 1000;
                     RuntimePlayer.Instance.RuntimePlayerStats.Health -= 1000;
                     RuntimePlayer.Instance.RuntimePlayerStats.Damage -= 50;
                     RuntimePlayer.Instance.RuntimePlayerStats.Armor -= 10;
                     break;
-                case Buff.BuffType.Magic_HealthRegen:
+                case BuffProfile.BuffType.Magic_HealthRegen:
                     // Добавить потом
                     break;
-                case Buff.BuffType.Illuminati:
+                case BuffProfile.BuffType.Illuminati:
                     RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod -= var;
                     break;
-                case Buff.BuffType.Magic_Shield:
+                case BuffProfile.BuffType.Magic_Shield:
                     RuntimePlayer.Instance.RuntimePlayerStats.Armor -= 20;
                     break;
-                case Buff.BuffType.Magic_Stun:
+                case BuffProfile.BuffType.Magic_Stun:
                     // Выход из оглушения
                     break;
             }
@@ -557,7 +557,7 @@ public class BuffManager : MonoBehaviour
         //    }
         //}
     }
-    public void DeleteBuffAction(Buff.BuffType dType)
+    public void DeleteBuffAction(BuffProfile.BuffType dType)
     {
         int pos = -1; 
 
@@ -580,7 +580,7 @@ public class BuffManager : MonoBehaviour
 
         CheckBuffEnd();
     }
-    public void DeleteBuffActionOnEnemy(Buff.BuffType dType)
+    public void DeleteBuffActionOnEnemy(BuffProfile.BuffType dType)
     {
         int pos = -1;
 
@@ -604,7 +604,7 @@ public class BuffManager : MonoBehaviour
     }
 
     // Проверка действует ли сейчас бафф
-    public bool isBuffOnAction(Buff.BuffType cType, int character)
+    public bool isBuffOnAction(BuffProfile.BuffType cType, int character)
     {
         if (character == 0)
         {
@@ -745,21 +745,21 @@ public class BuffManager : MonoBehaviour
     }
 
     // Инициализация баффа и добавление в список после загрузки
-    public void LoadBuff(Buff.BuffType lType, int lDuration)
+    public void LoadBuff(BuffProfile.BuffType lType, int lDuration)
     {
         var b = AllBuffs[BuffPos(lType)];
-        activeBuffs.Add(new Buff()
-        {
-            Name = b.Name,
-            Descr = b.Descr,
-            Type = b.Type,
-            Duration = b.Duration,
-            MaxDuration = b.MaxDuration,
-            buffPower = b.buffPower,
-            isInfinity = b.isInfinity,
-            Icon = b.Icon,
-            iconColor = b.iconColor
-        });
+        //activeBuffs.Add(new BuffProfile()
+        //{
+        //    Name = b.Name,
+        //    Descr = b.Description,
+        //    Type = b.Type,
+        //    Duration = b.Duration,
+        //    MaxDuration = b.MaxDuration,
+        //    buffPower = b.buffPower,
+        //    isInfinity = b.isInfinity,
+        //    Icon = b.Icon,
+        //    iconColor = b.iconColor
+        //});
         CreateBuffObject(lType, 0);
     }
 
@@ -768,7 +768,7 @@ public class BuffManager : MonoBehaviour
     /// 0 - Игрок. 1 - противник.
     /// </summary>
     /// <param name="cType"></param>
-    public void CreateBuffObject(Buff.BuffType cType, int character)
+    public void CreateBuffObject(BuffProfile.BuffType cType, int character)
     {
         if (character == 0)
         {
@@ -787,35 +787,35 @@ public class BuffManager : MonoBehaviour
     // Перерисовка баффов
     public void UpdateBuffsUI()
     {
-        for (int i = 0; i < buffsObjects.Count; i++)
-        {
-            buffsObjects[i].transform.GetChild(0).GetChild(0).GetComponent<RawImage>().texture = activeBuffs[i].Icon;
-            buffsObjects[i].transform.GetChild(0).GetChild(0).GetComponent<RawImage>().color = activeBuffs[i].iconColor;
-            if (!activeBuffs[i].isInfinity)
-                buffsObjects[i].transform.GetChild(1).GetChild(0).GetComponent<Text>().text = activeBuffs[i].Duration + "/" + activeBuffs[i].MaxDuration;
-            else
-                buffsObjects[i].transform.GetChild(1).GetChild(0).GetComponent<Text>().text = "Беск.";
-        }
-        for (int i = 0; i < enemyBuffsObjects.Count; i++)
-        {
-            enemyBuffsObjects[i].transform.GetChild(0).GetChild(0).GetComponent<RawImage>().texture = enemyActiveBuffs[i].Icon;
-            enemyBuffsObjects[i].transform.GetChild(0).GetChild(0).GetComponent<RawImage>().color = enemyActiveBuffs[i].iconColor;
-            if (!enemyActiveBuffs[i].isInfinity)
-                enemyBuffsObjects[i].transform.GetChild(1).GetChild(0).GetComponent<Text>().text = enemyActiveBuffs[i].Duration + "/" + enemyActiveBuffs[i].MaxDuration;
-            else
-                enemyBuffsObjects[i].transform.GetChild(1).GetChild(0).GetComponent<Text>().text = "Беск.";
-        }
+        //for (int i = 0; i < buffsObjects.Count; i++)
+        //{
+        //    buffsObjects[i].transform.GetChild(0).GetChild(0).GetComponent<RawImage>().texture = activeBuffs[i].BuffIcon;
+        //    buffsObjects[i].transform.GetChild(0).GetChild(0).GetComponent<RawImage>().color = activeBuffs[i].iconColor;
+        //    if (!activeBuffs[i].isInfinity)
+        //        buffsObjects[i].transform.GetChild(1).GetChild(0).GetComponent<Text>().text = activeBuffs[i].Duration + "/" + activeBuffs[i].MaxDuration;
+        //    else
+        //        buffsObjects[i].transform.GetChild(1).GetChild(0).GetComponent<Text>().text = "Беск.";
+        //}
+        //for (int i = 0; i < enemyBuffsObjects.Count; i++)
+        //{
+        //    enemyBuffsObjects[i].transform.GetChild(0).GetChild(0).GetComponent<RawImage>().texture = enemyActiveBuffs[i].BuffIcon;
+        //    enemyBuffsObjects[i].transform.GetChild(0).GetChild(0).GetComponent<RawImage>().color = enemyActiveBuffs[i].iconColor;
+        //    if (!enemyActiveBuffs[i].isInfinity)
+        //        enemyBuffsObjects[i].transform.GetChild(1).GetChild(0).GetComponent<Text>().text = enemyActiveBuffs[i].Duration + "/" + enemyActiveBuffs[i].MaxDuration;
+        //    else
+        //        enemyBuffsObjects[i].transform.GetChild(1).GetChild(0).GetComponent<Text>().text = "Беск.";
+        //}
     }
 
     // Показать описание баффа
-    public void ShowDescr(Buff.BuffType dType)
+    public void ShowDescr(BuffProfile.BuffType dType)
     {
         var SM = FindObjectOfType<SkillsManager>();
         var b = AllBuffs[BuffPos(dType)];
         if(!b.isInfinity)
-            DescrBox.GetComponentInChildren<Text>().text = "Бафф: " + b.Name + " \n| " + SM.TransformDescr(b.Descr) + " \n| Действует: " + b.MaxDuration + " ходов.";
+            DescrBox.GetComponentInChildren<Text>().text = "Бафф: " + b.BuffName + " \n| " + SM.TransformDescr(b.BuffDescription) + " \n| Действует: " + b.MaxDuration + " ходов.";
         else
-            DescrBox.GetComponentInChildren<Text>().text = "Бафф: " + b.Name + " \n| " + SM.TransformDescr(b.Descr) + " \n| Действует: Бесконечно";
+            DescrBox.GetComponentInChildren<Text>().text = "Бафф: " + b.BuffName + " \n| " + SM.TransformDescr(b.BuffDescription) + " \n| Действует: Бесконечно";
         DescrBox.SetActive(true);
     }
 
