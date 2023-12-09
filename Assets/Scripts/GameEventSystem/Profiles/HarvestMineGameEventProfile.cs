@@ -35,27 +35,4 @@ public class HarvestMineGameEventProfile : BaseGameEventProfile
     [Range(0, 100)]
     private int m_ChanceToHarvest;
     public int ChanceToHarvest => m_ChanceToHarvest;
-
-
-    [Tooltip("Когда установлен флаг True наименования будут генерироваться сами")]
-    [SerializeField]
-    private bool m_autoGenerateNames = true;
-
-
-    public HarvestMineGameEventProfile()
-    {
-        this.m_eventTitle = "Добыча ресурсов";
-        this.m_eventDescription = "Вы добыли ресурсы.";
-    }
-
-    private void OnValidate()
-    {
-        if (m_autoGenerateNames)
-        {
-
-#if UNITY_EDITOR
-            EditorUtility.SetDirty(this);
-#endif
-        }
-    }
 }

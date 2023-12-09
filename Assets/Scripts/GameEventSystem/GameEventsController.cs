@@ -20,10 +20,6 @@ public class GameEventsController : MonoBehaviour
     }
 
 
-    private BaseGameEventProfile activeGameEventProfile;
-    public BaseGameEventProfile ActiveGameEventProfile => activeGameEventProfile;
-
-
     private List<IGameEventsExecuter> gameEventsExecuters = new List<IGameEventsExecuter>();
 
 
@@ -41,8 +37,6 @@ public class GameEventsController : MonoBehaviour
 
     public void StartGameEvent(BaseGameEventProfile baseGameEventProfile)
     {
-        activeGameEventProfile = baseGameEventProfile;
-
         foreach (IGameEventsExecuter executer in gameEventsExecuters)
         {
             executer.TryExecuteGameEvent(baseGameEventProfile);

@@ -15,6 +15,6 @@ MonoBehaviour:
   m_eventTitle: "\u0414\u0443\u044D\u043B\u044C"
   m_eventDescription: "\u0412\u044B \u0432\u0441\u0442\u0443\u043F\u0438\u043B\u0438
     \u0432 \u0434\u0443\u044D\u043B\u044C \u0441 '\u041F\u0440\u0438\u0437\u0440\u0430\u043A'"
+  m_autoGenerateNames: 1
   m_characters:
   - {fileID: 11400000, guid: e0f19e2b1f9836544a7d03ed552a3dd2, type: 2}
-  m_autoGenerateNames: 1
