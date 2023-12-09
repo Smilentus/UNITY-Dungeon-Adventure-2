@@ -120,7 +120,7 @@ public class LocationsController : MonoBehaviour
     {
         m_locationObjects = FindObjectsOfType<RuntimeLocationObject>(true).ToList();
 
-        Debug.Log($"LocationsController => Было найдено {m_locationObjects.Count} готовых локаций на сцене!");
+        //Debug.Log($"LocationsController => Было найдено {m_locationObjects.Count} готовых локаций на сцене!");
     }
 
 

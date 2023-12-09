@@ -192,7 +192,7 @@ public class BattleController : MonoBehaviour
         {
             if (enemiesInBattle[i].Health <= 0)
             {
-                Debug.Log("Противник: " + enemiesInBattle[i].characterProfile.Name + " - Повержен.");
+                //Debug.Log("Противник: " + enemiesInBattle[i].characterProfile.Name + " - Повержен.");
                 // Добавляем противника в побеждённых
                 defeatedEnemiesInBattle.Add(enemiesInBattle[i].characterProfile);
                 Destroy(enemiesInBattle[i].gameObject);
@@ -205,7 +205,7 @@ public class BattleController : MonoBehaviour
         // Если противников не осталось, заканчиваем бой
         if (enemiesInBattle.Count == 0)
         {
-            Debug.Log("Противники закончились, мы выйграли!");
+            //Debug.Log("Противники закончились, мы выйграли!");
             isWin = true;
             GameController.Instance.Blocker.SetActive(true);
             endBattleImage.SetActive(true);
@@ -288,7 +288,7 @@ public class BattleController : MonoBehaviour
                 {
                     Debug.Log(defeatedEnemiesInBattle[j].DropItems[i].Name + " - " + defeatedEnemiesInBattle[j].DropItems[i].DropStack + " - " + defeatedEnemiesInBattle[j].DropItems[i].ItemID);
                     stack = UnityEngine.Random.Range(1, defeatedEnemiesInBattle[j].DropItems[i].DropStack);
-                    Debug.Log("Стак - " + stack);
+                    //Debug.Log("Стак - " + stack);
                     FindObjectOfType<Inventory>().AddItem(defeatedEnemiesInBattle[j].DropItems[i].ItemID, stack);
                 }
                 catch (System.Exception e)

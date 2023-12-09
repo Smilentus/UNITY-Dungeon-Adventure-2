@@ -6,7 +6,7 @@ public class BattleActionExecuter_HeavyStrike : MonoBehaviour, IBattleActionExec
 {
     public void Initialize()
     {
-        Debug.Log($"BattleActionExecuter_HeavyStrike initialized!");
+        //Debug.Log($"BattleActionExecuter_HeavyStrike initialized!");
     }
 
     public void EveryTurnCheck(BattleController.TurnStatus turnStatus)

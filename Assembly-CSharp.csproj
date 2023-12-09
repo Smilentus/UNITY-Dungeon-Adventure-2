@@ -194,6 +194,9 @@
     <Compile Include="Assets\Scripts\MonoScriptPropertyDrawer.cs" />
     <Compile Include="Assets\Scripts\GameEventSystem\Profiles\HarvestMineGameEventProfile.cs" />
     <Compile Include="Assets\Scripts\GameEventSystem\LocationInteractableButton.cs" />
+    <Compile Include="Assets\Scripts\GameEventSystem\IGameEventsExecuter.cs" />
+    <Compile Include="Assets\Scripts\GameEventSystem\BattleGameEventsExecuter.cs" />
+    <Compile Include="Assets\Scripts\GameEventSystem\BaseGameEventsExecuter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

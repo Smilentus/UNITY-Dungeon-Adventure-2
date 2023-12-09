@@ -6,7 +6,7 @@ public class BattleActionExecuter_LightStrike : MonoBehaviour, IBattleActionExec
 {
     public void Initialize()
     {
-        Debug.Log($"BattleActionExecuter_LightStrike initialized!");
+        //Debug.Log($"BattleActionExecuter_LightStrike initialized!");
     }
 
     public void EveryTurnCheck(BattleController.TurnStatus turnStatus)

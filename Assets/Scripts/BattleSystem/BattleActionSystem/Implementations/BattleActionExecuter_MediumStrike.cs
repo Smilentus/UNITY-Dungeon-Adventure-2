@@ -6,7 +6,7 @@ public class BattleActionExecuter_MediumStrike : MonoBehaviour, IBattleActionExe
 {
     public void Initialize()
     {
-        Debug.Log($"BattleActionExecuter_MediumStrike initialized!");
+        //Debug.Log($"BattleActionExecuter_MediumStrike initialized!");
     }
 
     public void EveryTurnCheck(BattleController.TurnStatus turnStatus)

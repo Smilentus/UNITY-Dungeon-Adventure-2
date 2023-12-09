@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -22,27 +24,28 @@ public class GameEventsController : MonoBehaviour
     public BaseGameEventProfile ActiveGameEventProfile => activeGameEventProfile;
 
 
+    private List<IGameEventsExecuter> gameEventsExecuters = new List<IGameEventsExecuter>();
+
+
+    private void Awake()
+    {
+        CollectGameEventExecuters();
+    }
+
+
+    private void CollectGameEventExecuters()
+    {
+        gameEventsExecuters = GetComponentsInChildren<IGameEventsExecuter>().ToList();
+    }
+
+
     public void StartGameEvent(BaseGameEventProfile baseGameEventProfile)
     {
         activeGameEventProfile = baseGameEventProfile;
 
-        if (baseGameEventProfile.GetType().Equals(typeof(BaseGameEventProfile)))
+        foreach (IGameEventsExecuter executer in gameEventsExecuters)
         {
-            GlobalWindowsController.Instance.TryShowGlobalWindow(
-                typeof(InfoGlobalWindow),
-                new InfoGlobalWindowData()
-                {
-                    ApplyButtonText = "Принять",
-                    GlobalWindowTitle = activeGameEventProfile.EventTitle,
-                    InfoMessage = activeGameEventProfile.EventDescription
-                }
-            );
-        }
-        else if (baseGameEventProfile.GetType().Equals(typeof(BattleGameEventProfile)))
-        {
-            BattleGameEventProfile battleGameEventProfile = baseGameEventProfile as BattleGameEventProfile;
-
-            BattleController.Instance.TryStartBattle(battleGameEventProfile.Characters);
+            executer.TryExecuteGameEvent(baseGameEventProfile);
         }
     }
 }
