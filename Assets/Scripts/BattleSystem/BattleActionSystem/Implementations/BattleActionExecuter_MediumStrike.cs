@@ -33,6 +33,11 @@ public class BattleActionExecuter_MediumStrike : MonoBehaviour, IBattleActionExe
                             BattleController.Instance.EnemiesInBattle[BattleController.Instance.EnemiesInBattle.Count - 1].Health -= dmg;
                             // Анимируем удар
                             GameController.Instance.AddEventText(BattleController.Instance.CurrentBattleStep + " - Вы нанесли урон нормальным ударом: " + dmg + " ед.");
+
+                            if (BattleController.Instance.EnemiesInBattle[BattleController.Instance.EnemiesInBattle.Count - 1].Health <= 0)
+                            {
+                                break;
+                            }
                         }
                         else
                         {

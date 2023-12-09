@@ -15,8 +15,11 @@ public class BattleControllerPresenter : MonoBehaviour
 
     private void OnDestroy()
     {
-        BattleController.Instance.onBattleStatusChanged += OnBattleStatusChanged;
-        BattleController.Instance.onBattleTurnStatusChanged += OnBattleTurnStatusChanged;
+        if (BattleController.Instance != null)
+        {
+            BattleController.Instance.onBattleStatusChanged += OnBattleStatusChanged;
+            BattleController.Instance.onBattleTurnStatusChanged += OnBattleTurnStatusChanged;
+        }
     }
 
 

@@ -188,9 +188,9 @@ public class RuntimeBattlePlayerController : MonoBehaviour
 
                 availablePlayerBattleActions[executerIndex].executer.ExecuteAction();
 
-                FindObjectOfType<SkillsManager>().SkillsAction();
-                FindObjectOfType<BuffManager>().BuffsAction();
-                FindObjectOfType<MagicManager>().UpdateMagicCooldown();
+                //FindObjectOfType<SkillsManager>().SkillsAction();
+                //FindObjectOfType<BuffManager>().BuffsAction();
+                //FindObjectOfType<MagicManager>().UpdateMagicCooldown();
 
                 BattleController.Instance.CheckEndBattleConditions();
                 BattleController.Instance.UpdateAllEnemiesUI();

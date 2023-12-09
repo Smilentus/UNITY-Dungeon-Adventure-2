@@ -35,7 +35,7 @@ public class DirButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         
         if (m_gameEventProfile != null)
         {
-            GameController.Instance.PressActionButton(m_gameEventProfile);
+            GameEventsController.Instance.StartGameEvent(m_gameEventProfile);
         }
     }
 

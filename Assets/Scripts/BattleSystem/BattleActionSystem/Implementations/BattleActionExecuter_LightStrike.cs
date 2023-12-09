@@ -33,6 +33,11 @@ public class BattleActionExecuter_LightStrike : MonoBehaviour, IBattleActionExec
                             BattleController.Instance.EnemiesInBattle[BattleController.Instance.EnemiesInBattle.Count - 1].Health -= dmg;
                             // Анимируем удар
                             GameController.Instance.AddEventText(BattleController.Instance.CurrentBattleStep + " - Вы нанесли урон слабым ударом: " + dmg + " ед.");
+
+                            if (BattleController.Instance.EnemiesInBattle[BattleController.Instance.EnemiesInBattle.Count - 1].Health <= 0)
+                            {
+                                break;
+                            }
                         }
                         else
                         {

@@ -14,4 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_locationTitle: "\u041A\u0440\u0430\u0441\u043D\u044B\u0439 \u043B\u0435\u0441"
   m_locationDescription: 
-  m_locationEvents: []
+  m_locationEvents:
+  - {fileID: 11400000, guid: 8e9edcb76ee15494bbfe57a2af57be3b, type: 2}
+  - {fileID: 11400000, guid: 42f905db2fc24d345bd5fc582ea89adb, type: 2}
+  - {fileID: 11400000, guid: ca46b3820c6d66246803203f90046a22, type: 2}
+  - {fileID: 11400000, guid: 6c94b5eb0de97914c922af5ed378f940, type: 2}
+  - {fileID: 11400000, guid: 4264ff3f56386e841942741191ec6b6f, type: 2}
+  - {fileID: 11400000, guid: ed7010bbe0edaec4082f161eaab52dcc, type: 2}
+  - {fileID: 11400000, guid: 18f1e35fde448b24d9e3682c6e7268f4, type: 2}
+  - {fileID: 11400000, guid: c234cd587156c964a90b24fa849c4284, type: 2}
+  - {fileID: 11400000, guid: 9195c3a178d71864eadbd1d5646d90e8, type: 2}
+  - {fileID: 11400000, guid: 9410b8c4e84df7946a1c832fcc078755, type: 2}
+  m_droppableItems: []

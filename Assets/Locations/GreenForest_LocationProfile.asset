@@ -14,4 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_locationTitle: "\u0417\u0435\u043B\u0451\u043D\u044B\u0439 \u043B\u0435\u0441"
   m_locationDescription: 
-  m_locationEvents: []
+  m_locationEvents:
+  - {fileID: 11400000, guid: 8e9edcb76ee15494bbfe57a2af57be3b, type: 2}
+  - {fileID: 11400000, guid: 720cdac511734ff47aa83ded16d88920, type: 2}
+  - {fileID: 11400000, guid: 69d739bf8bd5b5243a3dc80612ecc546, type: 2}
+  - {fileID: 11400000, guid: 4ddf6b2585b5ded4697e69407e15f2e3, type: 2}
+  - {fileID: 11400000, guid: f7fd8723b5e04b74c93307d1416becb7, type: 2}
+  - {fileID: 11400000, guid: 42f905db2fc24d345bd5fc582ea89adb, type: 2}
+  - {fileID: 11400000, guid: f9748272bd521a540bf8a5053424b9e8, type: 2}
+  - {fileID: 11400000, guid: ca46b3820c6d66246803203f90046a22, type: 2}
+  - {fileID: 11400000, guid: ed7010bbe0edaec4082f161eaab52dcc, type: 2}
+  - {fileID: 11400000, guid: e5d8d09d4497f134aba69d5202eba9fc, type: 2}
+  - {fileID: 11400000, guid: 60e0109f2f3979c42becde927b8b1c5a, type: 2}
+  - {fileID: 11400000, guid: a2ca1f703c2afb24ca51d63ede4472ac, type: 2}
+  - {fileID: 11400000, guid: 18f1e35fde448b24d9e3682c6e7268f4, type: 2}
+  m_droppableItems: []

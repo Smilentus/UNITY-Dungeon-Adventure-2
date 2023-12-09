@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -68,7 +66,14 @@ public class InfoGlobalWindow : MonoBehaviour, IGlobalWindow
 
     public void Apply()
     {
-        windowData.OnApply();
+        if (windowData != null)
+        {
+            if (windowData.OnApply != null)
+            {
+                windowData.OnApply();
+            }
+        }
+
         Hide();
     }
 }
@@ -79,7 +84,7 @@ public class InfoGlobalWindowData : IGlobalWindowData
 
     public string InfoMessage = "Произошло какое-то событие";
 
-    public Action OnApply;
+    public Action OnApply = null;
 
     public string ApplyButtonText = "Принять";
 }

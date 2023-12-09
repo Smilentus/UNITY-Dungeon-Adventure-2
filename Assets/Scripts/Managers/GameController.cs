@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+
 public class GameController : MonoBehaviour
 {
     private static GameController instance;
@@ -16,10 +17,6 @@ public class GameController : MonoBehaviour
             return instance; 
         }
     }
-
-
-    [SerializeField]
-    private AllGameEventsWarehouse m_allGameEventsWarehouse;
 
 
     [Header("Ссылка на LocationsManager")]
@@ -79,9 +76,9 @@ public class GameController : MonoBehaviour
     public void AddEventText(string text)
     {
         // Если текстовых полей >= Х, то удаляем
-        if (EventParent.childCount >= 256)
+        if (EventParent.childCount >= 512)
         {
-            for (int i = 256; i < EventParent.childCount; i++)
+            for (int i = 512; i < EventParent.childCount; i++)
             {
                 Destroy(EventParent.GetChild(i).gameObject);
             }
@@ -235,6 +232,8 @@ public class GameController : MonoBehaviour
                 AddEventText("Броня заблокировала урон.");
         }
     }
+
+
     // Получение опыта
     public void GiveExp(double exp)
     {
@@ -262,6 +261,8 @@ public class GameController : MonoBehaviour
             AddEventText("Новый уровень - " + RuntimePlayer.Instance.RuntimePlayerStats.Lvl + "!");
         }
     }
+
+
     // Получение монет
     public void GiveMoney(double money)
     {
@@ -278,6 +279,8 @@ public class GameController : MonoBehaviour
 
         AddEventText(info);
     }
+
+
     // Ожидание X часов
     public void WaitSomeTime(int timeToWait)
     {
@@ -289,7 +292,8 @@ public class GameController : MonoBehaviour
             // Добавляем время
             if (timeToWait < 0)
                 timeToWait *= -1;
-            FindObjectOfType<GameTimeFlowController>().AddTime(timeToWait);
+
+            GameTimeFlowController.Instance.AddTime(timeToWait);
         }
     }
     // --------------
@@ -306,46 +310,46 @@ public class GameController : MonoBehaviour
         switch (rndEvent)
         {
             case 0:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.RedOrc);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.RedOrc);
                 break;
             case 1:
                 AddEventText("[Ничего не произошло]");
                 break;
             case 2:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.GreenOrc);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.GreenOrc);
                 break;
             case 3:
                 AddEventText("[Ничего не произошло]");
                 break;
             case 4:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.WolfOrc);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.WolfOrc);
                 break;
             case 5:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.Enchantress);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.Enchantress);
                 break;
             case 6:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.FireElemental);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.FireElemental);
                 break;
             case 7:
                 AddEventText("[Ничего не произошло]");
                 break;
             case 8:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.FireGolem);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.FireGolem);
                 break;
             case 9:
                 AddEventText("[Ничего не произошло]");
                 break;
             case 10:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ForestElf);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ForestElf);
                 break;
             case 11:
                 AddEventText("[Ничего не произошло]");
                 break;
             case 12:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.Vampire);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.Vampire);
                 break;
             case 13:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.RedRabbit);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.RedRabbit);
                 break;
         }
     }
@@ -364,7 +368,7 @@ public class GameController : MonoBehaviour
         switch (rndEvent)
         {
             case 0:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.EntWarrior);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.EntWarrior);
                 break;
             case 1:
                 AddEventText("[Ничего не произошло]");
@@ -373,49 +377,49 @@ public class GameController : MonoBehaviour
                 AddEventText("[Ничего не произошло]");
                 break;
             case 3:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.EntDefender);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.EntDefender);
                 break;
             case 4:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.EntKing);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.EntKing);
                 break;
             case 5:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.EntKiller);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.EntKiller);
                 break;
             case 6:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.EntHealer);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.EntHealer);
                 break;
             case 7:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.GreenOrc);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.GreenOrc);
                 break;
             case 8:
                 AddEventText("[Ничего не произошло]");
                 break;
             case 9:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.RedOrc);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.RedOrc);
                 break;
             case 10:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.OrcBetrayer);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.OrcBetrayer);
                 break;
             case 11:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.OrcGienas);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.OrcGienas);
                 break;
             case 12:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.WolfOrc);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.WolfOrc);
                 break;
             case 13:
                 AddEventText("[Ничего не произошло]");
                 break;
             case 14:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.Wolverine);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.Wolverine);
                 break;
             case 15:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.Barsuk);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.Barsuk);
                 break;
             case 16:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.GoblinsSquad);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.GoblinsSquad);
                 break;
             case 17:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ForestElf);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ForestElf);
                 break;
             case 18:
                 AddEventText("[Ничего не произошло]");
@@ -438,37 +442,37 @@ public class GameController : MonoBehaviour
         switch (rndEvent)
         {
             case 0:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.DinosaurMonster);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.DinosaurMonster);
                 break;
             case 1:
                 AddEventText("[Ничего не произошло]");
                 break;
             case 2:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.DragonMutant);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.DragonMutant);
                 break;
             case 3:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.GorgouleMutant);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.GorgouleMutant);
                 break;
             case 4:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.EyeSaurMutant);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.EyeSaurMutant);
                 break;
             case 5:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.GrasshopperMutant);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.GrasshopperMutant);
                 break;
             case 6:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.HomaMutant);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.HomaMutant);
                 break;
             case 7:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.WaterDragonMutant);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.WaterDragonMutant);
                 break;
             case 8:
                 AddEventText("[Ничего не произошло]");
                 break;
             case 9:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.WaterElemental);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.WaterElemental);
                 break;
             case 10:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ForestElf);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ForestElf);
                 break;
         }
     }
@@ -478,28 +482,28 @@ public class GameController : MonoBehaviour
         switch (rndEvent)
         {
             case 0:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.Thief);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.Thief);
                 break;
             case 1:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.Enchantress);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.Enchantress);
                 break;
             case 2:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.BirdMage);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.BirdMage);
                 break;
             case 3:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.LightMage);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.LightMage);
                 break;
             case 4:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ShadowMage);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ShadowMage);
                 break;
             case 5:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ForestElf);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ForestElf);
                 break;
             case 6:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.DamagedMage);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.DamagedMage);
                 break;
             case 7:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.SpiraleMage);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.SpiraleMage);
                 break;
             case 8:
                 AddEventText("[Ничего не произошло]");
@@ -518,25 +522,25 @@ public class GameController : MonoBehaviour
         switch (rndEvent)
         {
             case 0:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.Ghost);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.Ghost);
                 break;
             case 1:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.CursedTigers);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.CursedTigers);
                 break;
             case 2:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ForestMonster);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ForestMonster);
                 break;
             case 3:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ForestScares);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ForestScares);
                 break;
             case 4:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.SomethingInTheFar);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.SomethingInTheFar);
                 break;
             case 5:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.FrozenWolf);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.FrozenWolf);
                 break;
             case 6:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.WindElemental);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.WindElemental);
                 break;
             case 7:
                 AddEventText("[Ничего не произошло]");
@@ -631,46 +635,46 @@ public class GameController : MonoBehaviour
         switch (rndEvent)
         {
             case 0:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.StoneGolem);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.StoneGolem);
                 break;
             case 1:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.IronGolem);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.IronGolem);
                 break;
             case 2:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.CrystalGolem);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.CrystalGolem);
                 break;
             case 3:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ReptileHealer);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ReptileHealer);
                 break;
             case 4:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ReptileMage);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ReptileMage);
                 break;
             case 5:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ReptileReaper);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ReptileReaper);
                 break;
             case 6:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ReptileWarrior);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.ReptileWarrior);
                 break;
             case 7:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.Skelet);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.Skelet);
                 break;
             case 8:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.SkeletMage);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.SkeletMage);
                 break;
             case 9:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.SkeletWarrior);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.SkeletWarrior);
                 break;
             case 10:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.Mimick);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.Mimick);
                 break;
             case 11:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.StoneScorpion);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.StoneScorpion);
                 break;
             case 12:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.PoisonSlime);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.PoisonSlime);
                 break;
             case 13:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.StoneMonster);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.StoneMonster);
                 break;
             case 14:
                 ShowMessageText("Вы наткнулись на ядовитую ловушку!");
@@ -708,22 +712,22 @@ public class GameController : MonoBehaviour
         switch (rndEvent)
         {
             case 0:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.FireGolem);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.FireGolem);
                 break;
             case 1:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.DarkGolem);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.DarkGolem);
                 break;
             case 2:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.FireElemental);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.FireElemental);
                 break;
             case 3:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.HellHound);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.HellHound);
                 break;
             case 4:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.HellDeath);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.HellDeath);
                 break;
             case 5:
-                BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.HellScareDemon);
+                //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.HellScareDemon);
                 break;
             case 6:
                 ShowMessageText("Вы наткнулись на огненную ловушку!");

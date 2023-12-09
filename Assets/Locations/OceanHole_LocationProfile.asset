@@ -15,4 +15,10 @@ MonoBehaviour:
   m_locationTitle: "\u041E\u0433\u0440\u043E\u043C\u043D\u0430\u044F \u043C\u043E\u0440\u0441\u043A\u0430\u044F
     \u0432\u043F\u0430\u0434\u0438\u043D\u0430"
   m_locationDescription: 
-  m_locationEvents: []
+  m_locationEvents:
+  - {fileID: 11400000, guid: 8e9edcb76ee15494bbfe57a2af57be3b, type: 2}
+  - {fileID: 11400000, guid: 01ba9c411de67dd45b97f4cf8e7cd5d1, type: 2}
+  - {fileID: 11400000, guid: aa67c1c02fba8844ca698ba23d00f3df, type: 2}
+  - {fileID: 11400000, guid: 1d2d561284a5a054f83827cd535ef38c, type: 2}
+  - {fileID: 11400000, guid: 7df51a2171ef3ed41b13d8b7f82a3d0b, type: 2}
+  m_droppableItems: []

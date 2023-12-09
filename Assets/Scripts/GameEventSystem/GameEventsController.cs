@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 public class GameEventsController : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class GameEventsController : MonoBehaviour
         {
             if (instance == null)
             {
-                instance = FindObjectOfType<GameEventsController>();    
+                instance = FindObjectOfType<GameEventsController>();
             }
 
             return instance;
@@ -31,12 +30,12 @@ public class GameEventsController : MonoBehaviour
         {
             GlobalWindowsController.Instance.TryShowGlobalWindow(
                 typeof(InfoGlobalWindow),
-                new InfoGlobalWindowData() 
+                new InfoGlobalWindowData()
                 {
                     ApplyButtonText = "Принять",
                     GlobalWindowTitle = activeGameEventProfile.EventTitle,
                     InfoMessage = activeGameEventProfile.EventDescription
-                }    
+                }
             );
         }
         else if (baseGameEventProfile.GetType().Equals(typeof(BattleGameEventProfile)))

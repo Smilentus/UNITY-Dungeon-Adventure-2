@@ -31,6 +31,11 @@ public class LocationProfile : ScriptableObject
     /// </summary>
     public List<BaseGameEventProfile> LocationEvents => m_locationEvents;
 
+    public BaseGameEventProfile GetRandomLocationEvent 
+        => m_locationEvents.Count > 0 
+            ? m_locationEvents[Random.Range(0, m_locationEvents.Count)] 
+            : null;
+
 
     [SerializeField]
     private List<ItemProfile> m_droppableItems = new List<ItemProfile>();

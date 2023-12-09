@@ -18,6 +18,8 @@ public class RuntimeBattlePlayerControllerPresenter : MonoBehaviour
     {
         m_controller.onPlayerActionPointsChanged += OnPlayerActionsChanged;
         m_controller.onBattleActionsUpdated += OnBattleActionsUpdated;
+
+        OnBattleActionsUpdated();
     }
 
     private void OnDestroy()
