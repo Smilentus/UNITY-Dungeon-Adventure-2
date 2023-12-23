@@ -424,7 +424,7 @@ public class Inventory : MonoBehaviour
                         break;
                     case 6:
                         GameController.Instance.ShowMessageText("Вы нарушили баланс Вселенной, готовьтесь к худшему!", "[Событие]");
-                        BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.BalanceKeeper);
+                        //BattleController.Instance.StartBattle(CharactersLibrary.CharacterType.BalanceKeeper);
                         break;
                     case 7:
                         FindObjectOfType<ArtAndVideoManager>().StartArtShow("IlluminatiArt");

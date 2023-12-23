@@ -84,9 +84,6 @@ public class BattleController : MonoBehaviour
     public int CurrentBattleStep => currentBattleStep;
 
 
-    public List<CharacterProfile> CharacterProfiles = new List<CharacterProfile>();
-
-
     public void AddEnemyToBattle(CharacterProfile character)
     {
         RuntimeBattleCharacter createdEnemy;
@@ -326,10 +323,6 @@ public class BattleController : MonoBehaviour
     }
 
     // ====
-
-    // Начало сражения
-    public void StartBattle(CharactersLibrary.CharacterType EnemyType) { }
-
 
     // Атака противника - ДОДЕЛАТЬ КУЧУ ПРОВЕРОК !!!!!!
     public void EnemyAIAttack()
@@ -625,45 +618,5 @@ public class BattleController : MonoBehaviour
         //    GameController.Instance.AddEventText(CurrentBattleStep + " - Вы уклонились от атаки противника.");
         //    FindObjectOfType<HeroAbilityManager>().ChargeHeroAbility(Player.HeroAbility.Ninja);
         //}
-    }
-    public string magicName(CharacterMagic.spellType spell, double spellPower)
-    {
-        string newName = "";
-
-        switch (spell)
-        {
-            case CharacterMagic.spellType.MagicFireball:
-                newName = "*Огненный шар* и нанёс " + spellPower.ToString("f0") + " ед. урона!";
-                break;
-            case CharacterMagic.spellType.MagicHealthHeal:
-                newName = "*Магическая регенерация здоровья* и восстановил " + spellPower.ToString("f0") + " ОЗ";
-                break;
-            case CharacterMagic.spellType.MagicHealthSteal:
-                newName = "*Похищение жизни* и восстановил " + spellPower.ToString("f0") + " ОЗ";
-                break;
-            case CharacterMagic.spellType.MagicManaHeal:
-                newName = "*Магическое восстановление маны* и восстановил " + spellPower.ToString("f0") + " ОМ";
-                break;
-            case CharacterMagic.spellType.MagicManaSteal:
-                newName = "*Похищение маны* и восстановил " + spellPower.ToString("f0") + " ОМ";
-                break;
-            case CharacterMagic.spellType.MagicShield:
-                newName = "*Магическая защита* и усилил защиту на " + spellPower.ToString("f0") + " ед.";
-                break;
-            case CharacterMagic.spellType.MagicSpawn:
-                newName = "*Призыв скелетов* и призвал " + spellPower.ToString("f0") + " скелетов!";
-                break;
-            case CharacterMagic.spellType.MagicStun:
-                newName = "*Остолбенение* и Вы замерли!";
-                break;
-            case CharacterMagic.spellType.MagicThunder:
-                newName = "*Разряд молнии* и нанёс " + spellPower.ToString("f0") + " ед. урона!";
-                break;
-            default:
-                newName = "";
-                break;
-        }
-
-        return newName;
     }
 }

@@ -1,0 +1,67 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "SkillProfile", menuName = "SkillProfiles/Create New Skill Profile")]
+public class SkillProfile : ScriptableObject
+{
+    [SerializeField] private SkillCore m_skillCorePrefab;
+    /// <summary>
+    ///     Главный префаб навыка, со всеми улучшениями и т.п.
+    /// </summary>
+    public SkillCore skillCorePrefab { get => m_skillCorePrefab; }
+
+
+    [SerializeField] private string m_skillName; 
+    /// <summary>
+    ///     Наименование навыка
+    /// </summary>
+    public string skillName { get => m_skillName; }
+
+
+    [TextArea(5, 10)]
+    [SerializeField] private string m_skillDescription;
+    /// <summary>
+    ///     Дополнительное подробное описание навыка
+    /// </summary>
+    public string skillDescription { get => m_skillDescription; }
+
+
+    [SerializeField] private Sprite m_skillIcon;
+    /// <summary>
+    ///     Главная иконка навыка
+    /// </summary>
+    public Sprite skillIcon { get => m_skillIcon; }
+    
+
+    [SerializeField] private List<SkillLevelData> m_skillLevelDatas;
+    /// <summary>
+    ///     Список улучшений навыка
+    /// </summary>
+    public List<SkillLevelData> skillLevelDatas { get => m_skillLevelDatas; }
+}
+
+[System.Serializable]
+public class SkillLevelData
+{
+    [SerializeField] private string m_skillLevelTitle;
+    /// <summary>
+    ///     Наименование улучшения 
+    /// </summary>
+    public string skillLevelTitle { get => m_skillLevelTitle; }
+
+
+    [TextArea(5, 10)]
+    [SerializeField] private string m_skillLevelDescription;
+    /// <summary>
+    ///     Подробное описание улучшения навыка
+    /// </summary>
+    public string skillLevelDescription { get => m_skillLevelDescription; }
+
+
+    [SerializeField] private Sprite m_skillLevelIcon;
+    /// <summary>
+    ///     Главная иконка улучшения (если её нет используется иконка навыка)
+    /// </summary>
+    public Sprite skillLevelIcon { get => m_skillLevelIcon; }
+}

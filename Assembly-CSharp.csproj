@@ -204,6 +204,17 @@
     <Compile Include="Assets\Scripts\BattleSystem\BattleActionSystem\IBattleActionInteraction.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\BattleActionSystem\Implementations\BattleMagicExecuter_BaseActionExecuter.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\BattleActionSystem\Implementations\BattleActionExecuter_BaseActionExecuter.cs" />
+    <Compile Include="Assets\Scripts\UpgradeableSystem\UpgradeableComponent.cs" />
+    <Compile Include="Assets\Scripts\UpgradeableSystem\UpgradeableObserverComponent.cs" />
+    <Compile Include="Assets\Scripts\CoreComponentSystem\ICore.cs" />
+    <Compile Include="Assets\Scripts\CoreComponentSystem\IComponent.cs" />
+    <Compile Include="Assets\Scripts\CoreComponentSystem\Core.cs" />
+    <Compile Include="Assets\Scripts\CoreComponentSystem\CoreComponent.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\AllSkillsLibrary.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\SkillProfile.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\ObtainSkillComponent.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\InGameSkillsHandler.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\SkillCore.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
