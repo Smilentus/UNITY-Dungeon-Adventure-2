@@ -31,7 +31,7 @@ public class RuntimeBattlePlayerControllerPresenter : MonoBehaviour
     private void OnBattleActionsUpdated()
     {
         m_battleActionsView.SetPressedCallback(m_controller.ExecuteAction);
-        m_battleActionsView.UpdateData(m_controller.GetAvailableBattleActionProfiles());
+        m_battleActionsView.UpdateData(m_controller.AvailablePlayerBattleActions);
     }
 
     private void OnPlayerActionsChanged(int value)

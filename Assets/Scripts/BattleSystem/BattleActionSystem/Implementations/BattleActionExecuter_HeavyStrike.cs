@@ -1,21 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class BattleActionExecuter_HeavyStrike : MonoBehaviour, IBattleActionExecuter
+public class BattleActionExecuter_HeavyStrike : BattleActionExecuter_BaseActionExecuter
 {
-    public void Initialize()
+    public override void ExecuteAction()
     {
-        //Debug.Log($"BattleActionExecuter_HeavyStrike initialized!");
-    }
+        base.ExecuteAction();
 
-    public void EveryTurnCheck(BattleController.TurnStatus turnStatus)
-    {
-
-    }
-
-    public void ExecuteAction()
-    {
         if (!RuntimeBattlePlayerController.Instance.CriticalStrike())
         {
             // Атакуем Х раз от скорости атаки

@@ -76,11 +76,13 @@
     <Compile Include="Assets\Scripts\BuffSystem\PlayerBuffsController.cs" />
     <Compile Include="Assets\Scripts\neededResourceSlot.cs" />
     <Compile Include="Assets\Scripts\Art.cs" />
+    <Compile Include="Assets\Scripts\UISystems\RuntimePlayerStatsView.cs" />
     <Compile Include="Assets\Scripts\Buttons\BuffButton.cs" />
     <Compile Include="Assets\Scripts\InventorySystem\BaseMouseControllerPresenter.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\LocationInteractionView.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\LocationProfile.cs" />
     <Compile Include="Assets\Scripts\Managers\MenuManager.cs" />
+    <Compile Include="Assets\Scripts\MagicSystem\PlayerMagicController.cs" />
     <Compile Include="Assets\Scripts\Managers\PanelsManager.cs" />
     <Compile Include="Assets\Scripts\GameTimeFlowSystem\GameTimeFlowController.cs" />
     <Compile Include="Assets\Scripts\GameEventSystem\GameEventsController.cs" />
@@ -107,9 +109,9 @@
     <Compile Include="Assets\Scripts\InventorySystem\InventoryController.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\SaveLoadBaseConverter.cs" />
     <Compile Include="Assets\Scripts\BuffSystem\BuffsContainer.cs" />
-    <Compile Include="Assets\Scripts\InventorySystem\BaseItemView.cs" />
-    <Compile Include="Assets\Scripts\Buttons\Icon.cs" />
+    <Compile Include="Assets\Scripts\Buttons\ShortDescriptionObject.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\PlayerStructuresSaveLoadConverter.cs" />
+    <Compile Include="Assets\Scripts\InventorySystem\BaseItemView.cs" />
     <Compile Include="Assets\Scripts\GameTimeFlowSystem\GameTimeFlowEventBaseControllers\GameTimeFlowEventPlanetRow.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\BattleControllerPresenter.cs" />
     <Compile Include="Assets\Scripts\Buttons\MagicSlotButton.cs" />
@@ -123,9 +125,11 @@
     <Compile Include="Assets\Scripts\RuntimePlayer.cs" />
     <Compile Include="Assets\Scripts\Buttons\TaskButton.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\PlayerSaveLoadConverter.cs" />
+    <Compile Include="Assets\Scripts\GameEventSystem\LocationInteractableButton.cs" />
+    <Compile Include="Assets\Scripts\GameEventSystem\Profiles\ExploreLocationGameEventProfile.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\WorldMapGlobalWindow.cs" />
+    <Compile Include="Assets\Scripts\MagicSystem\RuntimeMagicObjects\RuntimeMagicObject_SmallFireball.cs" />
     <Compile Include="Assets\Scripts\MagicSystem\RuntimeMagicObjectView.cs" />
-    <Compile Include="Assets\Scripts\MagicSystem\MagicContainerPresenter.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\AcceptGlobalWindow.cs" />
     <Compile Include="Assets\Scripts\Managers\MagicManager.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\BaseGameGlobalWindowButton.cs" />
@@ -138,8 +142,7 @@
     <Compile Include="Assets\Scripts\InventorySystem\BaseItem.cs" />
     <Compile Include="Assets\Scripts\BuffSystem\RuntimeBuff.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\CraftingSystemSaveLoadConverter.cs" />
-    <Compile Include="Assets\Scripts\MagicSystem\RuntimeMagicObject.cs" />
-    <Compile Include="Assets\Scripts\Managers\IconsHelper.cs" />
+    <Compile Include="Assets\Scripts\GameEventSystem\GameEventsExecuters\BaseGameEventsExecuter.cs" />
     <Compile Include="Assets\Scripts\Buttons\InvButton.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadSystemController.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadSlotsController.cs" />
@@ -151,6 +154,7 @@
     <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\InventoryGlobalWindow.cs" />
     <Compile Include="Assets\Scripts\Buttons\DirButton.cs" />
     <Compile Include="Assets\Scripts\InventorySystem\BaseInventoryContainerView.cs" />
+    <Compile Include="Assets\Scripts\GameEventSystem\GameEventsExecuters\IGameEventsExecuter.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\BuffsSaveLoadConverter.cs" />
     <Compile Include="Assets\Scripts\Managers\GameController.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\PlayerSkillsGlobalWindow.cs" />
@@ -158,6 +162,7 @@
     <Compile Include="Assets\Scripts\InventorySystem\BaseInventoryContainer.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\SaveLoadSlotDataConverter.cs" />
     <Compile Include="Assets\Scripts\SerializableMonoScript.cs" />
+    <Compile Include="Assets\Scripts\GameEventSystem\GameEventsExecuters\HarvestMineGameEventsExecuter.cs" />
     <Compile Include="Assets\Scripts\InventorySystem\BaseInventoryContainerSlot.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\InfoGlobalWindow.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\EnemiesSystem\RuntimeBattleCharacterView.cs" />
@@ -172,9 +177,8 @@
     <Compile Include="Assets\Scripts\Managers\faderScript.cs" />
     <Compile Include="Assets\Scripts\Skill.cs" />
     <Compile Include="Assets\Scripts\GameTimeFlowSystem\GameTimeFlowEvent.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\PlayerSystem\BattleActionInteractionView.cs" />
+    <Compile Include="Assets\Scripts\BattleSystem\BattleActionSystem\ActionPointsBattleInteractionView.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\EnemiesSystem\RuntimeBattleCharacterSimple.cs" />
-    <Compile Include="Assets\Scripts\Managers\UIScript.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\InventorySaveLoadConverter.cs" />
     <Compile Include="Assets\Scripts\InventorySystem\BaseInventoryContainerButtonView.cs" />
     <Compile Include="Assets\Scripts\MonoScriptAttribute.cs" />
@@ -191,15 +195,15 @@
     <Compile Include="Assets\Scripts\Recipe.cs" />
     <Compile Include="Assets\Scripts\Buttons\ButtonInteract.cs" />
     <Compile Include="Assets\Scripts\Buttons\AbilityButton.cs" />
-    <Compile Include="Assets\Scripts\MonoScriptPropertyDrawer.cs" />
-    <Compile Include="Assets\Scripts\GameEventSystem\Profiles\HarvestMineGameEventProfile.cs" />
-    <Compile Include="Assets\Scripts\GameEventSystem\LocationInteractableButton.cs" />
-    <Compile Include="Assets\Scripts\GameEventSystem\GameEventsExecuters\IGameEventsExecuter.cs" />
     <Compile Include="Assets\Scripts\GameEventSystem\GameEventsExecuters\BattleGameEventsExecuter.cs" />
-    <Compile Include="Assets\Scripts\GameEventSystem\GameEventsExecuters\BaseGameEventsExecuter.cs" />
-    <Compile Include="Assets\Scripts\GameEventSystem\GameEventsExecuters\HarvestMineGameEventsExecuter.cs" />
-    <Compile Include="Assets\Scripts\GameEventSystem\Profiles\ExploreLocationGameEventProfile.cs" />
+    <Compile Include="Assets\Scripts\GameEventSystem\Profiles\HarvestMineGameEventProfile.cs" />
     <Compile Include="Assets\Scripts\GameEventSystem\GameEventsExecuters\ExploreLocationGameEventsExecuter.cs" />
+    <Compile Include="Assets\Scripts\MonoScriptPropertyDrawer.cs" />
+    <Compile Include="Assets\Scripts\BattleSystem\BattleActionSystem\BaseBattleInteractionView.cs" />
+    <Compile Include="Assets\Scripts\BattleSystem\BattleActionSystem\MagicBattleInteractionView.cs" />
+    <Compile Include="Assets\Scripts\BattleSystem\BattleActionSystem\IBattleActionInteraction.cs" />
+    <Compile Include="Assets\Scripts\BattleSystem\BattleActionSystem\Implementations\BattleMagicExecuter_BaseActionExecuter.cs" />
+    <Compile Include="Assets\Scripts\BattleSystem\BattleActionSystem\Implementations\BattleActionExecuter_BaseActionExecuter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

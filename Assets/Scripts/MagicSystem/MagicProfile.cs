@@ -1,19 +1,26 @@
 using UnityEngine;
 
 
-[CreateAssetMenu(menuName = "Creatable/New MagicProfile", fileName = "MagicProfile")]
-public class MagicProfile : ScriptableObject
+[CreateAssetMenu(menuName = "Creatable/Magic System/New MagicProfile", fileName = "MagicProfile_")]
+public class MagicProfile : ScriptableObject, IBattleActionInteraction
 {
     [SerializeField]
-    private RuntimeMagicObject m_MagicObjectPrefab;
-    public RuntimeMagicObject MagicObject => m_MagicObjectPrefab;
+    private BaseBattleInteractionView m_actionProfileViewPrefab;
+    public BaseBattleInteractionView ActionProfileViewPrefab => m_actionProfileViewPrefab;
 
 
     [SerializeField]
+    private SerializableMonoScript<IBattleActionExecuter> m_actionExecuter;
+    public SerializableMonoScript<IBattleActionExecuter> ActionExecuter => m_actionExecuter;
+
+
+    [TextArea(3, 5)]
+    [SerializeField]
     private string m_MagicName;
-    public string MagicName => m_MagicName;
+    public string InteractionTitle => m_MagicName;
 
 
+    [TextArea(5, 10)]
     [SerializeField]
     private string m_MagicDescription;
     public string MagicDescription => m_MagicDescription;

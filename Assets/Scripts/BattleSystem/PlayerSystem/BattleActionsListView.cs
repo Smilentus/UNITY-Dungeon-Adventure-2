@@ -1,21 +1,18 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class BattleActionsListView : MonoBehaviour
 {
-    [SerializeField]
-    private BattleActionInteractionView m_battleActionViewPrefab;
-
     [SerializeField]
     private Transform m_contentParent;
 
 
     private Action<int> callbackAction;
 
-    
-    public void UpdateData(List<BattleActionProfile> profiles)
+
+    public void UpdateData(List<AvailableBattleActionData> availableBattleActions)
     {
         // Очищаем старую информацию
         for (int i = m_contentParent.childCount - 1; i >= 0; i--)
@@ -23,12 +20,11 @@ public class BattleActionsListView : MonoBehaviour
             Destroy(m_contentParent.GetChild(i).gameObject);
         }
 
-
         // Заполняем новую информацию
-        for (int i = 0; i < profiles.Count; i++)
+        for (int i = 0; i < availableBattleActions.Count; i++)
         {
-            BattleActionInteractionView view = Instantiate(m_battleActionViewPrefab, m_contentParent);
-            view.SetData(profiles[i], i);
+            BaseBattleInteractionView view = Instantiate(availableBattleActions[i].interaction.ActionProfileViewPrefab, m_contentParent);
+            view.SetData(availableBattleActions[i], i);
             view.onPressed += OnViewActionPressed;
         }
     }

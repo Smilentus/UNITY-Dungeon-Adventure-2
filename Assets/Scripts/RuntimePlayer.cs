@@ -104,6 +104,104 @@ public class RuntimePlayer : MonoBehaviour
         runtimePlayerStats.ArmorType = CharactersLibrary.CharacterArmorType.None;
         runtimePlayerStats.Element = CharactersLibrary.CharacterElement.None;
     }
+
+
+    // TODO: Временное решение для переработки
+    private void Update()
+    {
+        if (runtimePlayerStats.Health > runtimePlayerStats.MaxHealth)
+        {
+            runtimePlayerStats.Health = runtimePlayerStats.MaxHealth;
+        }
+        if (runtimePlayerStats.Health < 0)
+        {
+            runtimePlayerStats.Health = 0;
+        }
+
+
+        if (runtimePlayerStats.Mana >= runtimePlayerStats.MaxMana)
+        {
+            runtimePlayerStats.Mana = runtimePlayerStats.MaxMana;
+        }
+        if (runtimePlayerStats.Mana < 0)
+        {
+            runtimePlayerStats.Mana = 0;
+        }
+    }
+
+
+    public void DealDamage(double _damage, bool _ignoreArmor)
+    {
+        if (_ignoreArmor)
+        {
+            RuntimePlayer.Instance.RuntimePlayerStats.Health -= _damage;
+            GameController.Instance.AddEventText("Вы получили урон через броню: " + _damage);
+        }
+        else
+        {
+            if (_damage > RuntimePlayer.Instance.RuntimePlayerStats.Armor)
+            {
+                RuntimePlayer.Instance.RuntimePlayerStats.Health -= (_damage - RuntimePlayer.Instance.RuntimePlayerStats.Armor);
+                GameController.Instance.AddEventText("Вы получили урон: " + (_damage - RuntimePlayer.Instance.RuntimePlayerStats.Armor));
+            }
+            else
+                GameController.Instance.AddEventText("Броня заблокировала урон.");
+        }
+    }
+
+    public void GiveExperience(double _experience)
+    {
+        // Подсчёт доп. процентного опыта
+        double extraExp = _experience * (RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod / 100);
+        // Опыт, который дадим
+        _experience += extraExp;
+        RuntimePlayer.Instance.RuntimePlayerStats.Exp += _experience;
+
+        string info = "Получено: " + _experience + " ед. опыта!";
+        if (RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod > 0)
+        {
+            info = "Получено: " + _experience + " + (" + extraExp + ") ед. опыта.";
+        }
+
+        GameController.Instance.AddEventText(info);
+
+        while (RuntimePlayer.Instance.RuntimePlayerStats.Exp >= RuntimePlayer.Instance.RuntimePlayerStats.MaxExp)
+        {
+            RuntimePlayer.Instance.RuntimePlayerStats.Lvl++;
+            RuntimePlayer.Instance.RuntimePlayerStats.SkillPoints += 5;
+            RuntimePlayer.Instance.RuntimePlayerStats.Exp -= RuntimePlayer.Instance.RuntimePlayerStats.MaxExp;
+            RuntimePlayer.Instance.RuntimePlayerStats.MaxExp += RuntimePlayer.Instance.RuntimePlayerStats.ExpMulty;
+            RuntimePlayer.Instance.RuntimePlayerStats.ExpMulty += 1;
+            GameController.Instance.AddEventText("Новый уровень - " + RuntimePlayer.Instance.RuntimePlayerStats.Lvl + "!");
+        }
+    }
+
+    public void GiveMoney(double _money)
+    {
+        double extraMoney = _money * RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMod / 100;
+
+        _money += extraMoney;
+        RuntimePlayer.Instance.RuntimePlayerStats.Money += (int)_money;
+
+        string info = "Получено: " + _money + " ед. золота!";
+        if (RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMod > 0)
+        {
+            info = "Получено: " + _money + " + (" + extraMoney + ") ед. золота.";
+        }
+
+        GameController.Instance.AddEventText(info);
+    }
+
+
+    public void PerformHealthRegeneration()
+    {
+        runtimePlayerStats.Health += runtimePlayerStats.HealthRegen;
+    }
+
+    public void PerformManaRegeneration()
+    {
+        runtimePlayerStats.Mana += runtimePlayerStats.ManaRegen;
+    }
 }
 
 [System.Serializable]

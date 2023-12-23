@@ -389,7 +389,7 @@ public class Inventory : MonoBehaviour
                             GameController.Instance.ShowMessageText("О, нет, зелье просто упало и разбилось! (Защита от чёрной дыры)", "[Событие]");
                         break;
                     case 3:
-                        GameController.Instance.TakeDamage(1000, true);
+                        RuntimePlayer.Instance.DealDamage(1000, true);
                         if (RuntimePlayer.Instance.RuntimePlayerStats.Health <= 0)
                             GameController.Instance.ShowDeathBox("Зелье оказалось сильнодействующим токсином, который уничтожил Вас в ту же секунду, как Вы глотнули его!");
                         else

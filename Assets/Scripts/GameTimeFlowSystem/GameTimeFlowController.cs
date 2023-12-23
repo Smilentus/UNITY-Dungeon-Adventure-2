@@ -131,6 +131,13 @@ public class GameTimeFlowController : MonoBehaviour
     {
         CurrentHour += hour;
 
+        // Почасовые экшоны
+        for (int i = 0; i < hour; i++)
+        {
+            RuntimePlayer.Instance.PerformHealthRegeneration();
+            RuntimePlayer.Instance.PerformManaRegeneration();
+        }
+
         onTimeHoursPassed?.Invoke(hour);
 
         // Добавляем время

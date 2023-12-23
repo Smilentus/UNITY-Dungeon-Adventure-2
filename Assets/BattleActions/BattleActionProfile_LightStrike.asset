@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317ccf673c4ac8544b4c0bace689bb06, type: 3}
   m_Name: BattleActionProfile_LightStrike
   m_EditorClassIdentifier: 
+  m_actionProfileViewPrefab: {fileID: 2135886482872828802, guid: ca39c4dbe5b09724ab91d8bca61aa4e6,
+    type: 3}
   m_actionExecuter:
     m_TypeName: BattleActionExecuter_LightStrike, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null

@@ -348,9 +348,9 @@ public class PlayerVillageActivity : MonoBehaviour
     // Получить продукции с производства
     public void GetProducedItems()
     {
-        GH.GiveMoney(villageIncome);
+        RuntimePlayer.Instance.GiveMoney(villageIncome);
         GH.AddEventText("Доход с деревни: ");
-        GH.GiveExp(villageIncome * 0.1);
+        RuntimePlayer.Instance.GiveExperience(villageIncome * 0.1);
         GH.AddEventText("Опыт с деревни: ");
 
         for (int i = 0; i < currentProducingItems.Count; i++)

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
+
 
 public class RuntimeBattlePlayerController : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class RuntimeBattlePlayerController : MonoBehaviour
         {
             if (instance == null)
             {
-                instance = FindObjectOfType<RuntimeBattlePlayerController>(true);   
+                instance = FindObjectOfType<RuntimeBattlePlayerController>(true);
             }
 
             return instance;
@@ -22,7 +22,7 @@ public class RuntimeBattlePlayerController : MonoBehaviour
 
     public event Action<int> onPlayerActionPointsChanged;
     public event Action onBattleActionsUpdated;
-    
+
 
     [Tooltip(" оличество действи€ на шаг бо€ у игрока")]
     [SerializeField]
@@ -32,10 +32,13 @@ public class RuntimeBattlePlayerController : MonoBehaviour
 
     [SerializeField]
     private List<BattleActionProfile> m_defaultPlayerBattleActions = new List<BattleActionProfile>();
+
+
+    private List<IBattleActionInteraction> defaultPlayerBattleActions = new List<IBattleActionInteraction>();
     /// <summary>
     ///     ƒефолтные действи€, доступные игроку во врем€ битвы
     /// </summary>
-    public List<BattleActionProfile> DefaultPlayerBattleActions => m_defaultPlayerBattleActions;
+    public List<IBattleActionInteraction> DefaultPlayerBattleActions => defaultPlayerBattleActions;
 
 
     private List<AvailableBattleActionData> availablePlayerBattleActions = new List<AvailableBattleActionData>();
@@ -53,10 +56,32 @@ public class RuntimeBattlePlayerController : MonoBehaviour
 
 
     private int playerActionPoints = 0;
-    public int PlayerActionPoints => playerActionPoints;
+    public int PlayerActionPoints
+    { 
+        get => playerActionPoints;
+        set 
+        {
+            if (playerActionPoints < 0)
+            {
+                playerActionPoints = 0;
+            }
+            else
+            {
+                playerActionPoints = value;
+            }
+             
+            onPlayerActionPointsChanged?.Invoke(playerActionPoints);
+        }
+    }   
+    
 
     public int PlayerActionPointsTotalPerRound => m_defaultPlayerActionPoints + extraPlayerActionPoints;
 
+
+    private void Awake()
+    {
+        CreateDefaultPlayerBattleActions();
+    }
 
     private void Start()
     {
@@ -70,6 +95,16 @@ public class RuntimeBattlePlayerController : MonoBehaviour
             BattleController.Instance.onBattleTurnStatusChanged -= OnBattleTurnStatusChanged;
         }
     }
+
+
+    private void CreateDefaultPlayerBattleActions()
+    {
+        foreach (BattleActionProfile profile in m_defaultPlayerBattleActions)
+        {
+            AddDefaultBattleAction(profile);
+        }
+    }
+
 
     public void InitializeBattlePlayer()
     {
@@ -87,9 +122,9 @@ public class RuntimeBattlePlayerController : MonoBehaviour
 
 
         // «аполн€ем новые действи€ дл€ бо€
-        foreach (BattleActionProfile profile in m_defaultPlayerBattleActions)
+        foreach (IBattleActionInteraction profile in defaultPlayerBattleActions)
         {
-            AddBattleAction(profile);   
+            AddAvailableBattleAction(profile);
         }
 
 
@@ -105,72 +140,86 @@ public class RuntimeBattlePlayerController : MonoBehaviour
     }
 
 
-    public List<BattleActionProfile> GetAvailableBattleActionProfiles()
+    public void AddDefaultBattleAction(IBattleActionInteraction interaction)
     {
-        List<BattleActionProfile> profiles = new List<BattleActionProfile>();
-
-        foreach (AvailableBattleActionData actionData in availablePlayerBattleActions)
+        if (interaction == null)
         {
-            profiles.Add(actionData.profile);
-        }
-
-        return profiles;
-    }
-    
-
-    public void AddBattleAction(BattleActionProfile profile)
-    {
-        if (profile == null)
-        {
-            Debug.LogError($"ќбнаружена попытка добавить пустой BattleAction!");
+            Debug.LogError($"ќбнаружена попытка добавить пустой IBattleActionInteraction!");
             return;
         }
 
-        if (profile.ActionExecuter != null)
-        {
-            AvailableBattleActionData searching = availablePlayerBattleActions.Find(x => x.profile == profile);
+        if (defaultPlayerBattleActions.Contains(interaction)) return;
 
-            if (searching != null)
-            {
-                Debug.LogError($"Ѕыла обнаружена попытка добавить действие, которое уже существует '{profile.name}'");
-                return;
-            }
-
-            AvailableBattleActionData availableBattleActionData = new AvailableBattleActionData();
-            availableBattleActionData.profile = profile;
-
-            GameObject tempObject = new GameObject($"{profile.ActionExecuter.Type.ToString()}");
-            tempObject.transform.SetParent(this.transform);
-
-            availableBattleActionData.tempObject = tempObject;
-            availableBattleActionData.executer = profile.ActionExecuter.AddToGameObject(tempObject);
-
-            availablePlayerBattleActions.Add(availableBattleActionData);
-        }
-        else
-        {
-            Debug.LogError($"BattleActionProfile '{profile.name}' не содержит IBattleActionExecuter!");
-        }
-
+        defaultPlayerBattleActions.Add(interaction);
 
         onBattleActionsUpdated?.Invoke();
     }
-
-    public void RemoveBattleAction(BattleActionProfile profile)
+    public void RemoveDefaultBattleAction(IBattleActionInteraction interaction)
     {
-        if (profile == null)
+        if (interaction == null)
         {
             Debug.LogError($"ќбнаружена попытка удалить пустое BattleAction!", this.gameObject);
             return;
         }
 
-        AvailableBattleActionData actionData = availablePlayerBattleActions.Find(x => x.profile == profile);
+        defaultPlayerBattleActions.Remove(interaction);
+
+        onBattleActionsUpdated?.Invoke();
+    }
+
+
+    private void AddAvailableBattleAction(IBattleActionInteraction interaction)
+    {
+        if (interaction == null)
+        {
+            Debug.LogError($"ќбнаружена попытка добавить пустой IBattleActionInteraction!");
+            return;
+        }
+
+        if (interaction.ActionExecuter != null)
+        {
+            AvailableBattleActionData searching = availablePlayerBattleActions.Find(x => x.interaction == interaction);
+
+            if (searching != null)
+            {
+                Debug.LogError($"Ѕыла обнаружена попытка добавить действие, которое уже существует '{interaction.GetType().Name}'");
+                return;
+            }
+
+            AvailableBattleActionData availableBattleActionData = new AvailableBattleActionData();
+            availableBattleActionData.interaction = interaction;
+
+            GameObject tempObject = new GameObject($"{interaction.ActionExecuter.Type.ToString()}");
+            tempObject.transform.SetParent(this.transform);
+
+            availableBattleActionData.tempObject = tempObject;
+            availableBattleActionData.executer = interaction.ActionExecuter.AddToGameObject(tempObject);
+            availableBattleActionData.executer.SetInteraction(interaction);
+
+            availablePlayerBattleActions.Add(availableBattleActionData);
+        }
+        else
+        {
+            Debug.LogError($"BattleActionProfile '{interaction.GetType().Name}' не содержит IBattleActionExecuter!");
+        }
+
+        onBattleActionsUpdated?.Invoke();
+    }
+    private void RemoveAvailableBattleAction(IBattleActionInteraction interaction)
+    {
+        if (interaction == null)
+        {
+            Debug.LogError($"ќбнаружена попытка удалить пустое BattleAction!", this.gameObject);
+            return;
+        }
+
+        AvailableBattleActionData actionData = availablePlayerBattleActions.Find(x => x.interaction == interaction);
 
         if (actionData != null)
         {
             Destroy(actionData.tempObject);
             availablePlayerBattleActions.Remove(actionData);
-            
+
             onBattleActionsUpdated?.Invoke();
         }
     }
@@ -180,14 +229,12 @@ public class RuntimeBattlePlayerController : MonoBehaviour
     {
         if (executerIndex >= 0 && executerIndex < availablePlayerBattleActions.Count)
         {
-            if (playerActionPoints >= 0 && playerActionPoints >= availablePlayerBattleActions[executerIndex].profile.SpendableActions)
+            if (availablePlayerBattleActions[executerIndex].executer.CanExecuteAction())
             {
-                playerActionPoints -= availablePlayerBattleActions[executerIndex].profile.SpendableActions;
-
-                onPlayerActionPointsChanged?.Invoke(playerActionPoints);
-
                 availablePlayerBattleActions[executerIndex].executer.ExecuteAction();
 
+                RuntimePlayer.Instance.PerformHealthRegeneration();
+                RuntimePlayer.Instance.PerformManaRegeneration();
                 //FindObjectOfType<SkillsManager>().SkillsAction();
                 //FindObjectOfType<BuffManager>().BuffsAction();
                 //FindObjectOfType<MagicManager>().UpdateMagicCooldown();
@@ -210,6 +257,13 @@ public class RuntimeBattlePlayerController : MonoBehaviour
             playerActionPoints = PlayerActionPointsTotalPerRound;
             onPlayerActionPointsChanged?.Invoke(playerActionPoints);
         }
+
+        foreach (AvailableBattleActionData availableBattleActionData in availablePlayerBattleActions)
+        {
+            availableBattleActionData.executer.EveryTurnCheck(turnStatus);
+        }
+
+        onBattleActionsUpdated?.Invoke();
     }
 
     public bool CriticalStrike()
@@ -246,7 +300,7 @@ public class RuntimeBattlePlayerController : MonoBehaviour
 [System.Serializable]
 public class AvailableBattleActionData
 {
-    public BattleActionProfile profile;
+    public IBattleActionInteraction interaction;
     public IBattleActionExecuter executer;
     public GameObject tempObject;
 }

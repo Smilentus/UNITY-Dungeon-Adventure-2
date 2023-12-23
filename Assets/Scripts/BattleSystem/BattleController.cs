@@ -87,14 +87,6 @@ public class BattleController : MonoBehaviour
     public List<CharacterProfile> CharacterProfiles = new List<CharacterProfile>();
 
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            TryStartBattle(CharacterProfiles);
-        }
-    }
-
     public void AddEnemyToBattle(CharacterProfile character)
     {
         RuntimeBattleCharacter createdEnemy;
@@ -274,8 +266,8 @@ public class BattleController : MonoBehaviour
         // Деньги и опыт с каждого моба
         for (int i = 0; i < defeatedEnemiesInBattle.Count; i++)
         {
-            GameController.Instance.GiveMoney(defeatedEnemiesInBattle[i].Gold);
-            GameController.Instance.GiveExp(defeatedEnemiesInBattle[i].Exp);
+            RuntimePlayer.Instance.GiveMoney(defeatedEnemiesInBattle[i].Gold);
+            RuntimePlayer.Instance.GiveExperience(defeatedEnemiesInBattle[i].Exp);
         }
 
         // Добавляем игроку индивидуальные вещи моба

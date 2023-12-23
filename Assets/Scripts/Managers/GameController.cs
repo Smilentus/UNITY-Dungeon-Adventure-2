@@ -212,74 +212,6 @@ public class GameController : MonoBehaviour
         //}
     }
 
-    // Различные функции V V V
-    // Получение урона
-    public void TakeDamage(int dmg, bool ignoreArmor)
-    {
-        if (ignoreArmor)
-        {
-            RuntimePlayer.Instance.RuntimePlayerStats.Health -= dmg;
-            AddEventText("Вы получили урон через броню: " + dmg);
-        }
-        else
-        {
-            if (dmg > RuntimePlayer.Instance.RuntimePlayerStats.Armor)
-            {
-                RuntimePlayer.Instance.RuntimePlayerStats.Health -= (dmg - RuntimePlayer.Instance.RuntimePlayerStats.Armor);
-                AddEventText("Вы получили урон: " + (dmg - RuntimePlayer.Instance.RuntimePlayerStats.Armor));
-            }
-            else
-                AddEventText("Броня заблокировала урон.");
-        }
-    }
-
-
-    // Получение опыта
-    public void GiveExp(double exp)
-    {
-        // Подсчёт доп. процентного опыта
-        double extraExp = exp * (RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod / 100);
-        // Опыт, который дадим
-        exp += extraExp;
-        RuntimePlayer.Instance.RuntimePlayerStats.Exp += exp;
-
-        string info = "Получено: " + exp + " ед. опыта!";
-        if (RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod > 0)
-        {
-            info = "Получено: " + exp + " + (" + extraExp + ") ед. опыта.";
-        }
-
-        AddEventText(info);
-
-        while (RuntimePlayer.Instance.RuntimePlayerStats.Exp >= RuntimePlayer.Instance.RuntimePlayerStats.MaxExp)
-        {
-            RuntimePlayer.Instance.RuntimePlayerStats.Lvl++;
-            RuntimePlayer.Instance.RuntimePlayerStats.SkillPoints += 5;
-            RuntimePlayer.Instance.RuntimePlayerStats.Exp -= RuntimePlayer.Instance.RuntimePlayerStats.MaxExp;
-            RuntimePlayer.Instance.RuntimePlayerStats.MaxExp += RuntimePlayer.Instance.RuntimePlayerStats.ExpMulty;
-            RuntimePlayer.Instance.RuntimePlayerStats.ExpMulty += 1;
-            AddEventText("Новый уровень - " + RuntimePlayer.Instance.RuntimePlayerStats.Lvl + "!");
-        }
-    }
-
-
-    // Получение монет
-    public void GiveMoney(double money)
-    {
-        double extraMoney = money * RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMod / 100;
-
-        money += extraMoney;
-        RuntimePlayer.Instance.RuntimePlayerStats.Money += (int)money;
-
-        string info = "Получено: " + money + " ед. золота!";
-        if(RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMod > 0)
-        {
-            info = "Получено: " + money + " + (" + extraMoney + ") ед. золота.";
-        }
-
-        AddEventText(info);
-    }
-
 
     // Ожидание X часов
     public void WaitSomeTime(int timeToWait)
@@ -434,7 +366,7 @@ public class GameController : MonoBehaviour
         m_inventory.AddItem("Log", rndResource);
         FindObjectOfType<GameTimeFlowController>().AddTime(rndResource);
 
-        GiveExp(rndResource / 2);
+        RuntimePlayer.Instance.GiveExperience(rndResource / 2);
     }
     public void BlueForestLocation()
     {
@@ -619,7 +551,7 @@ public class GameController : MonoBehaviour
             AddEventText("[Шахта] \nНичего не добыто ...");
         }
 
-        GiveExp(rndAmount * oreMultiply);
+        RuntimePlayer.Instance.GiveExperience(rndAmount * oreMultiply);
         FindObjectOfType<GameTimeFlowController>().AddTime(4);
         // Накладываем бафф усталости когда находимся в шахте
     }
