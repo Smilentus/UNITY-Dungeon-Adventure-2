@@ -224,7 +224,6 @@ public class BattleController : MonoBehaviour
         currentBattleStep = 0;
 
         m_runtimeBattlePlayerController.InitializeBattlePlayer();
-        FindObjectOfType<MagicManager>().LoadMagicInBattle();
 
         FindObjectOfType<PanelsManager>().OpenHideActionPanel(0, true);
 

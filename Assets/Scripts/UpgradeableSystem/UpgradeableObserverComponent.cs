@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+
 
 public class UpgradeableObserverComponent : CoreComponent
 {
@@ -15,13 +14,7 @@ public class UpgradeableObserverComponent : CoreComponent
     /// </summary>
     public int observableLevel { get => m_observableLevel; }
 
-    /*
-        Ёта булка короче на будущее, она очень важна и по факту даже как античит сработает иногда + ошибки исправит
-         ороче она позвол€ет только один раз при жизни текущего компонента вызвать данную часть (может потом ещЄ что-то придумаю)
-    */
-    private bool m_isAlreadyChanged;
 
-    
     public UnityEvent OnObservableLvlReached = new UnityEvent();
 
 
@@ -35,16 +28,13 @@ public class UpgradeableObserverComponent : CoreComponent
             return;
         }
 
-        m_observableComponent.OnUpgraded.AddListener(OnObservableValueChanged);
+        m_observableComponent.OnUpgradedUnityEvent.AddListener(OnObservableValueChanged);
     }
 
-    
+
     private void OnObservableValueChanged(int level)
     {
-        if (m_isAlreadyChanged) return;
-        if (level != m_observableLevel) return;
-
-        m_isAlreadyChanged = true;
+        if (m_observableLevel != -1 && level != m_observableLevel) return;
 
         OnObservableLvlReached?.Invoke();
     }

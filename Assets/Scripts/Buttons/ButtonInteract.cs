@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class ButtonInteract : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 {
-    [Header("Обычный цвет")]
     public Color normalColor;
-    [Header("Цвет наводки")]
     public Color hoverColor;
-    [Header("Цвет нажатия")]
     public Color pressedColor;
 
+
     public bool isHover;
+
 
     private void Start()
     {

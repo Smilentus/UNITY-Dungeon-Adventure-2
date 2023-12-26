@@ -1,10 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 public class SkillCore : Core
 {
-    [SerializeField] private UpgradeableComponent m_upgradeableComponent;
+    [SerializeField]
+    protected SkillProfile m_skillProfile;
+    public SkillProfile SkillProfile => m_skillProfile;
+
+
+    [SerializeField] 
+    protected UpgradeableComponent m_upgradeableComponent;
+    public UpgradeableComponent UpgradeableComponent => m_upgradeableComponent;
 
 
     public bool isSkillReachedMax => m_upgradeableComponent.reachedMaxUpgrades;
@@ -13,5 +19,13 @@ public class SkillCore : Core
     public override void BuildWithComponents()
     {
         base.BuildWithComponents();
+    }
+
+
+    public bool TryUpgradeSkill()
+    {
+        // Тут добавляем проверки на то можем ли мы апнуть уровень навыка и т.п.
+
+        return m_upgradeableComponent.TryAddLevel();
     }
 }

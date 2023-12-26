@@ -80,6 +80,9 @@ public class RuntimePlayerStatsView : MonoBehaviour
     private TMP_Text m_playerCriticalDamageTMP;
 
 
+    [SerializeField]
+    private TMP_Text m_playerSkillPointsTMP;
+
     
     private void Update()
     {
@@ -102,6 +105,8 @@ public class RuntimePlayerStatsView : MonoBehaviour
 
     private void UpdateTexts()
     {
+        m_playerSkillPointsTMP.text = "ÎÍ: " + RuntimePlayer.Instance.RuntimePlayerStats.SkillPoints;
+
         m_currentDateTimeTMP.text = $"{GameTimeFlowController.Instance.DateNow()}\n{GameTimeFlowController.Instance.DayStatusNow()}";
 
         m_playerHealthTMP.text = $"{RuntimePlayer.Instance.RuntimePlayerStats.Health}/{RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth} ÎÇ";

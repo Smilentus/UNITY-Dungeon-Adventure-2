@@ -504,7 +504,7 @@ public class SkillsManager : MonoBehaviour
     // Обновление текстов
     public void UpdateTexts()
     {
-        SkillScoreText.text = "ОН: " + RuntimePlayer.Instance.RuntimePlayerStats.SkillPoints;
+
         foreach(GameObject slot in SkillsButtons)
         {
             slot.GetComponentsInChildren<RawImage>()[1].texture = AllSkills[SkillPos(slot.GetComponent<SkillButton>().Type)].Icon;

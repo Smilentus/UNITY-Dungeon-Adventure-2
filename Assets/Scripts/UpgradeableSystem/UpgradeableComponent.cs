@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,7 +9,7 @@ using UnityEngine.Events;
 
 public class UpgradeableComponent : CoreComponent
 {
-    [Tooltip("Максимально допустимый уровень улучшений")]
+    [Tooltip("Максимально допустимый уровень улучшений (-1 бесконечно)")]
     [SerializeField] private int m_maxUpgradesLevel;
     /// <summary>
     ///     Возвращает максимально допустимый уровень улучшений
@@ -32,40 +34,75 @@ public class UpgradeableComponent : CoreComponent
     /// <summary>
     ///     События вызываемые при улучшении на 1 уровень
     /// </summary>
-    public UnityEventInt OnUpgraded = new UnityEventInt();
+    public UnityEventInt OnUpgradedUnityEvent = new UnityEventInt();
 
 
     /// <summary>
     ///     Событие вызываемое при достижении максимального уровня
     /// </summary>
-    public UnityEvent OnMaxUpgradesReached = new UnityEvent();
+    public UnityEvent OnMaxUpgradesReachedUnityEvent = new UnityEvent();
 
-    
-    /// <summary>
-    ///     Добавляет 1 уровень 
-    /// </summary>
-    public void AddLevel()
+
+    public event Action<int> OnUpgraded;
+    public event Action OnMaxUpgradesReached;
+
+
+    private List<IUpgradeableChecker> upgradeableCheckers = new List<IUpgradeableChecker>();
+
+
+    public override void InjectComponent(ICore core)
     {
-        if (m_reachedMaxUpgrades) return;
+        base.InjectComponent(core);
+
+        upgradeableCheckers = GetComponentsInChildren<IUpgradeableChecker>(true).ToList();
+    }
+
+    /// <summary>
+    ///     Добавляет 1 уровень
+    /// </summary>
+    public bool TryAddLevel()
+    {
+        if (m_reachedMaxUpgrades) return false;
+
+        if (!CanUpgradeLevel(m_currentLevel + 1)) return false;
 
         m_currentLevel++;
 
+        PostUpgradeCheckers();
+
+        OnUpgradedUnityEvent?.Invoke(m_currentLevel);
         OnUpgraded?.Invoke(m_currentLevel);
 
-        if (m_currentLevel >= m_maxUpgradesLevel)
+        if (maxUpgradesLevel != -1 && m_currentLevel >= m_maxUpgradesLevel)
         {
             m_reachedMaxUpgrades = true;
             m_currentLevel = m_maxUpgradesLevel;
+
+            OnMaxUpgradesReachedUnityEvent?.Invoke();
             OnMaxUpgradesReached?.Invoke();
         }
+
+        return true;
     }
 
-    private void Update()
+
+    private bool CanUpgradeLevel(int upgradeableLevel)
     {
-        if (Input.GetKeyDown(KeyCode.U))
+        IUpgradeableChecker[] checkers = upgradeableCheckers.Where(x => x.CheckLevel == upgradeableLevel).ToArray();
+
+        foreach (IUpgradeableChecker checker in checkers)
         {
-            AddLevel();
-            Debug.Log($"Upgrade Skill -> {m_currentLevel}");
+            if (!checker.CanUpgrade()) return false;
+        }
+
+        return true;
+    }
+
+    private void PostUpgradeCheckers()
+    {
+        foreach (IUpgradeableChecker upgradeableChecker in upgradeableCheckers)
+        {
+            upgradeableChecker.PostUpgrade();
         }
     }
 }

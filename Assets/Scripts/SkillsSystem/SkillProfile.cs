@@ -1,8 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SkillProfile", menuName = "SkillProfiles/Create New Skill Profile")]
+
+[CreateAssetMenu(fileName = "SkillProfile_", menuName = "Creatable/SkillsSystem/Create New Skill Profile")]
 public class SkillProfile : ScriptableObject
 {
     [SerializeField] private SkillCore m_skillCorePrefab;
@@ -12,7 +12,7 @@ public class SkillProfile : ScriptableObject
     public SkillCore skillCorePrefab { get => m_skillCorePrefab; }
 
 
-    [SerializeField] private string m_skillName; 
+    [SerializeField] private string m_skillName;
     /// <summary>
     ///     Наименование навыка
     /// </summary>
@@ -32,7 +32,7 @@ public class SkillProfile : ScriptableObject
     ///     Главная иконка навыка
     /// </summary>
     public Sprite skillIcon { get => m_skillIcon; }
-    
+
 
     [SerializeField] private List<SkillLevelData> m_skillLevelDatas;
     /// <summary>
