@@ -73,18 +73,39 @@ public class UpgradeableComponent : CoreComponent
         OnUpgradedUnityEvent?.Invoke(m_currentLevel);
         OnUpgraded?.Invoke(m_currentLevel);
 
+        CheckMaxUpgrades();
+
+        return true;
+    }
+
+    private void CheckMaxUpgrades(bool verbose = true)
+    {
         if (maxUpgradesLevel != -1 && m_currentLevel >= m_maxUpgradesLevel)
         {
             m_reachedMaxUpgrades = true;
             m_currentLevel = m_maxUpgradesLevel;
 
-            OnMaxUpgradesReachedUnityEvent?.Invoke();
-            OnMaxUpgradesReached?.Invoke();
+            if (verbose)
+            {
+                OnMaxUpgradesReachedUnityEvent?.Invoke();
+                OnMaxUpgradesReached?.Invoke();
+            }
         }
-
-        return true;
     }
 
+    public void LoadLevel(int loadableLevel)
+    {
+        upgradeableCheckers = GetComponentsInChildren<IUpgradeableChecker>(true).ToList();
+
+        m_currentLevel = loadableLevel;
+
+        foreach (IUpgradeableChecker upgradeableChecker in upgradeableCheckers)
+        {
+            upgradeableChecker.LoadUpgradeableLevel(m_currentLevel);
+        }
+
+        CheckMaxUpgrades(false);
+    }
 
     private bool CanUpgradeLevel(int upgradeableLevel)
     {

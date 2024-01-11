@@ -22,6 +22,12 @@ public class SkillCore : Core
     }
 
 
+    public void LoadLevel(int level)
+    {
+        m_upgradeableComponent.LoadLevel(level);
+    }
+
+
     public bool TryUpgradeSkill()
     {
         // Тут добавляем проверки на то можем ли мы апнуть уровень навыка и т.п.

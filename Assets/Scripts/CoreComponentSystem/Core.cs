@@ -7,7 +7,7 @@ public class Core : MonoBehaviour, ICore
 {
     public List<IComponent> components { get; set; }
 
-    private void Start()
+    private void Awake()
     {
         BuildWithComponents();
     }

@@ -25817,7 +25817,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1561713450}
   m_HandleRect: {fileID: 1561713449}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -26116,7 +26116,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 274.10007}
+  m_AnchoredPosition: {x: 0, y: 274.09995}
   m_SizeDelta: {x: 314.98, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &896862604
@@ -27874,7 +27874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3956f527fdb7d41b483a6330739c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_skillProfile: {fileID: 0}
+  m_skillProfile: {fileID: 11400000, guid: a5d751f738e4a6f43885e556fecdf8de, type: 2}
 --- !u!114 &980233262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33227,6 +33227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_skillsParent: {fileID: 1166087850}
+  m_skillsWarehouse: {fileID: 11400000, guid: 341926238b1f5ac4e8b254731de6328c, type: 2}
   healthSkill: {fileID: 11400000, guid: 545ec38b80147d547a9681e26db20a66, type: 2}
 --- !u!1 &1167182671
 GameObject:

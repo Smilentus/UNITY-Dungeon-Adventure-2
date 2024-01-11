@@ -27,6 +27,10 @@ public class PlayerSkillsController : MonoBehaviour
     private Transform m_skillsParent;
 
 
+    [SerializeField]
+    private SkillsWarehouse m_skillsWarehouse;
+
+
     private List<PlayerSkill> playerSkills = new List<PlayerSkill>();
 
 
@@ -38,8 +42,13 @@ public class PlayerSkillsController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             RuntimePlayer.Instance.RuntimePlayerStats.SkillPoints += 100;
-            TryObtainPlayerSkill(healthSkill);
         }
+    }
+
+
+    public PlayerSkill[] GetPlayerSkills()
+    {
+        return playerSkills.ToArray();
     }
 
 
@@ -76,13 +85,32 @@ public class PlayerSkillsController : MonoBehaviour
     }
 
 
-    public void AddNewSkill(SkillProfile skillProfile)
+    public void LoadSkill(string skillGUID, int obtainedLevel)
+    {
+        SkillProfile skillProfile = m_skillsWarehouse.GetSkillProfileByGUID(skillGUID);
+
+        if (skillProfile != null)
+        {
+            PlayerSkill playerSkill = AddNewSkill(skillProfile);
+
+            if (playerSkill != null)
+            {
+                playerSkill.runtimeSkillCore.LoadLevel(obtainedLevel);
+            }
+        }
+        else
+        {
+            Debug.LogError($"Не был найден навык {skillGUID} в общем хранилище");
+        }
+    }
+
+    public PlayerSkill AddNewSkill(SkillProfile skillProfile)
     {
         PlayerSkill contains = playerSkills.Find(x => x.skillProfile == skillProfile);
         if (contains != null)
         {
             Debug.LogWarning($"Данный навык уже добавлен игроку!");
-            return;
+            return null;
         }
 
         SkillCore inGameSkillObject = Instantiate(skillProfile.skillCorePrefab, m_skillsParent);
@@ -96,6 +124,8 @@ public class PlayerSkillsController : MonoBehaviour
         playerSkills.Add(playerSkill);
 
         onSkillObtained?.Invoke();
+
+        return playerSkill;
     }
 
     public bool TryUpgradeSkill(SkillProfile skillProfile)

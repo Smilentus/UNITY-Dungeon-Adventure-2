@@ -14,6 +14,16 @@ public class BaseUpgradeableSkillCheckerComponent : BaseUpgradeableCheckerCompon
     protected int m_everyLevelRaiseSkillPoints;
 
 
+    public override void LoadUpgradeableLevel(int level)
+    {
+        base.LoadUpgradeableLevel(level);
+
+        for (int l = 0; l < level; l++)
+        {
+            CalculateSkillCost(l);
+        }
+    }
+
     public override bool CanUpgrade()
     {
         return m_skillPointsCost <= RuntimePlayer.Instance.RuntimePlayerStats.SkillPoints;
@@ -24,15 +34,20 @@ public class BaseUpgradeableSkillCheckerComponent : BaseUpgradeableCheckerCompon
         base.PostUpgrade();
 
         SkillCore skillCore = attachedCore as SkillCore;
-
-        if (skillCore.UpgradeableComponent.currentLevel % m_everyLevelRaiseSkillPoints == 0)
-        {
-            m_skillPointsCost += m_skillPointsCostRaiseValue;
-        }
+        CalculateSkillCost(skillCore.UpgradeableComponent.currentLevel);
     }
 
     protected override void ProcessUpgrade()
     {
         RuntimePlayer.Instance.RuntimePlayerStats.SkillPoints -= m_skillPointsCost;
+    }
+
+    
+    protected void CalculateSkillCost(int skillLevel)
+    {
+        if (skillLevel % m_everyLevelRaiseSkillPoints == 0)
+        {
+            m_skillPointsCost += m_skillPointsCostRaiseValue;
+        }
     }
 }

@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\Dialog.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\BaseGameGlobalWindow.cs" />
     <Compile Include="Assets\Scripts\Task.cs" />
+    <Compile Include="Assets\Scripts\UpgradeableSystem\BaseUpgradeableSkillCheckerComponent.cs" />
     <Compile Include="Assets\Scripts\CoreComponentSystem\CoreComponent.cs" />
     <Compile Include="Assets\Scripts\Managers\TasksManager.cs" />
     <Compile Include="Assets\Scripts\GameTimeFlowSystem\GameTimeFlowEventBaseControllers\GameTimeFlowEventBaseController.cs" />
@@ -139,7 +140,9 @@
     <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\WorldMapGlobalWindow.cs" />
     <Compile Include="Assets\Scripts\MagicSystem\RuntimeMagicObjects\RuntimeMagicObject_SmallFireball.cs" />
     <Compile Include="Assets\Scripts\MagicSystem\RuntimeMagicObjectView.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerHealthSkillComponent.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\AcceptGlobalWindow.cs" />
+    <Compile Include="Assets\Scripts\UpgradeableSystem\IUpgradeableChecker.cs" />
     <Compile Include="Assets\Scripts\SkillsSystem\SkillProfile.cs" />
     <Compile Include="Assets\Scripts\Managers\MagicManager.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\BaseGameGlobalWindowButton.cs" />
@@ -171,6 +174,7 @@
     <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\PlayerSkillsGlobalWindow.cs" />
     <Compile Include="Assets\Scripts\VillagePart.cs" />
     <Compile Include="Assets\Scripts\InventorySystem\BaseInventoryContainer.cs" />
+    <Compile Include="Assets\Scripts\UpgradeableSystem\BaseUpgradeableCheckerComponent.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\SaveLoadSlotDataConverter.cs" />
     <Compile Include="Assets\Scripts\SerializableMonoScript.cs" />
     <Compile Include="Assets\Scripts\GameEventSystem\GameEventsExecuters\HarvestMineGameEventsExecuter.cs" />
@@ -215,10 +219,8 @@
     <Compile Include="Assets\Scripts\GameEventSystem\GameEventsExecuters\ExploreLocationGameEventsExecuter.cs" />
     <Compile Include="Assets\Scripts\SkillsSystem\Implementations\BaseSkillComponent.cs" />
     <Compile Include="Assets\Scripts\MonoScriptPropertyDrawer.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerHealthSkillComponent.cs" />
-    <Compile Include="Assets\Scripts\UpgradeableSystem\IUpgradeableChecker.cs" />
-    <Compile Include="Assets\Scripts\UpgradeableSystem\BaseUpgradeableCheckerComponent.cs" />
-    <Compile Include="Assets\Scripts\UpgradeableSystem\BaseUpgradeableSkillCheckerComponent.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\SkillsWarehouse.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerManaSkillComponent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

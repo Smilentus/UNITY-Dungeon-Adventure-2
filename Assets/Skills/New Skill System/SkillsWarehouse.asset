@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76eaceb03bc4a864e8bd77db39aceac3, type: 3}
+  m_Name: SkillsWarehouse
+  m_EditorClassIdentifier: 
+  m_skillProfiles:
+  - {fileID: 11400000, guid: 545ec38b80147d547a9681e26db20a66, type: 2}
+  - {fileID: 11400000, guid: a5d751f738e4a6f43885e556fecdf8de, type: 2}

@@ -5,14 +5,21 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SkillProfile_", menuName = "Creatable/SkillsSystem/Create New Skill Profile")]
 public class SkillProfile : ScriptableObject
 {
-    [SerializeField] private SkillCore m_skillCorePrefab;
+    [SerializeField] 
+    private string m_skillGUID;
+    public string skillGUID => m_skillGUID;
+
+
+    [SerializeField] 
+    private SkillCore m_skillCorePrefab;
     /// <summary>
     ///     Главный префаб навыка, со всеми улучшениями и т.п.
     /// </summary>
     public SkillCore skillCorePrefab { get => m_skillCorePrefab; }
 
 
-    [SerializeField] private string m_skillName;
+    [SerializeField] 
+    private string m_skillName;
     /// <summary>
     ///     Наименование навыка
     /// </summary>
@@ -20,21 +27,24 @@ public class SkillProfile : ScriptableObject
 
 
     [TextArea(5, 10)]
-    [SerializeField] private string m_skillDescription;
+    [SerializeField] 
+    private string m_skillDescription;
     /// <summary>
     ///     Дополнительное подробное описание навыка
     /// </summary>
     public string skillDescription { get => m_skillDescription; }
 
 
-    [SerializeField] private Sprite m_skillIcon;
+    [SerializeField] 
+    private Sprite m_skillIcon;
     /// <summary>
     ///     Главная иконка навыка
     /// </summary>
     public Sprite skillIcon { get => m_skillIcon; }
 
 
-    [SerializeField] private List<SkillLevelData> m_skillLevelDatas;
+    [SerializeField] 
+    private List<SkillLevelData> m_skillLevelDatas;
     /// <summary>
     ///     Список улучшений навыка
     /// </summary>
@@ -44,7 +54,16 @@ public class SkillProfile : ScriptableObject
 [System.Serializable]
 public class SkillLevelData
 {
-    [SerializeField] private string m_skillLevelTitle;
+    [SerializeField] 
+    private int m_passSkillLevel;
+    /// <summary>
+    ///     Тот уровень, после которого основной навык заменит своё описание на этот навык
+    /// </summary>
+    public int PassSkillLevel => m_passSkillLevel;
+
+
+    [SerializeField] 
+    private string m_skillLevelTitle;
     /// <summary>
     ///     Наименование улучшения 
     /// </summary>
@@ -52,14 +71,16 @@ public class SkillLevelData
 
 
     [TextArea(5, 10)]
-    [SerializeField] private string m_skillLevelDescription;
+    [SerializeField] 
+    private string m_skillLevelDescription;
     /// <summary>
     ///     Подробное описание улучшения навыка
     /// </summary>
     public string skillLevelDescription { get => m_skillLevelDescription; }
 
 
-    [SerializeField] private Sprite m_skillLevelIcon;
+    [SerializeField] 
+    private Sprite m_skillLevelIcon;
     /// <summary>
     ///     Главная иконка улучшения (если её нет используется иконка навыка)
     /// </summary>

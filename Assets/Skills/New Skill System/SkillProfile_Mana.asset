@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84d386804e472da4a820ed77b88f5f83, type: 3}
-  m_Name: SkillProfile_Health
+  m_Name: SkillProfile_Mana
   m_EditorClassIdentifier: 
-  m_skillGUID: Skill_Health
-  m_skillCorePrefab: {fileID: 5562409851931198464, guid: df144efd464e6294b8c217a8a453ad12,
+  m_skillGUID: Skill_Mana
+  m_skillCorePrefab: {fileID: 5562409851931198464, guid: d3b10072085bd85488762b28ab2a0592,
     type: 3}
-  m_skillName: "\u0423\u0432\u0435\u043B\u0438\u0447\u0435\u043D\u0438\u0435 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F"
+  m_skillName: "\u0423\u0432\u0435\u043B\u0438\u0447\u0435\u043D\u0438\u0435 \u043C\u0430\u043D\u044B"
   m_skillDescription: 
-  m_skillIcon: {fileID: 21300000, guid: e6407821e440b0748a1725147e871a29, type: 3}
+  m_skillIcon: {fileID: 21300000, guid: ef95998b7773e8f4ba4faf5a52e5cd20, type: 3}
   m_skillLevelDatas: []
