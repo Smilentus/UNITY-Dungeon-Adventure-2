@@ -13,5 +13,16 @@ MonoBehaviour:
   m_Name: SkillsWarehouse
   m_EditorClassIdentifier: 
   m_skillProfiles:
+  - {fileID: 11400000, guid: 0888b691547fa2048aa53e04c811a176, type: 2}
+  - {fileID: 11400000, guid: 4b043a8ea45a5ee4789eef0f8112daf4, type: 2}
+  - {fileID: 11400000, guid: 61474db1fdfab2c468f5e2219cdbc73f, type: 2}
+  - {fileID: 11400000, guid: 7f4b67d4d65f4a840ad53c80db9353cc, type: 2}
+  - {fileID: 11400000, guid: c56e9913a7ec792498246b297e9207c5, type: 2}
+  - {fileID: 11400000, guid: 37f58b73733a4a44db06302194625ee8, type: 2}
+  - {fileID: 11400000, guid: ac7fb07444eae974c9bbf2f455d066e6, type: 2}
+  - {fileID: 11400000, guid: f6f228f2adbe3404c8034ae43c0d39ab, type: 2}
   - {fileID: 11400000, guid: 545ec38b80147d547a9681e26db20a66, type: 2}
+  - {fileID: 11400000, guid: e28ee40765f4904498291834cc1e712f, type: 2}
+  - {fileID: 11400000, guid: e900cf934c3b24c409c7404b551f249c, type: 2}
   - {fileID: 11400000, guid: a5d751f738e4a6f43885e556fecdf8de, type: 2}
+  - {fileID: 11400000, guid: 670d2b8d5570fab438a638d1ff7a0f8d, type: 2}
