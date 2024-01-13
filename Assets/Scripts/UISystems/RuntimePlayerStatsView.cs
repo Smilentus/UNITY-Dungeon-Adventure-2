@@ -109,32 +109,32 @@ public class RuntimePlayerStatsView : MonoBehaviour
 
         m_currentDateTimeTMP.text = $"{GameTimeFlowController.Instance.DateNow()}\n{GameTimeFlowController.Instance.DayStatusNow()}";
 
-        m_playerHealthTMP.text = $"{RuntimePlayer.Instance.RuntimePlayerStats.Health}/{RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth} ОЗ";
+        m_playerHealthTMP.text = $"{RuntimePlayer.Instance.RuntimePlayerStats.Health.ToString("f2")}/{RuntimePlayer.Instance.RuntimePlayerStats.MaxHealth.ToString("f2")} ОЗ";
 
         m_playerLevelTMP.text = $"Урв. {RuntimePlayer.Instance.RuntimePlayerStats.Lvl}";
-        m_playerHealthRegenTMP.text = $"Реген. {RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen} ОЗ";
+        m_playerHealthRegenTMP.text = $"Реген. {RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen.ToString("f2")} ОЗ";
 
 
-        m_playerManaTMP.text = $"{RuntimePlayer.Instance.RuntimePlayerStats.Mana}/{RuntimePlayer.Instance.RuntimePlayerStats.MaxMana} ОМ";
-        m_playerManaRegenTMP.text = $"Реген. {RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen} ОМ";
+        m_playerManaTMP.text = $"{RuntimePlayer.Instance.RuntimePlayerStats.Mana.ToString("f2")}/{RuntimePlayer.Instance.RuntimePlayerStats.MaxMana.ToString("f2")} ОМ";
+        m_playerManaRegenTMP.text = $"Реген. {RuntimePlayer.Instance.RuntimePlayerStats.ManaRegen.ToString("f2")} ОМ";
             
-        m_playerDamageTMP.text = $"Урон {RuntimePlayer.Instance.RuntimePlayerStats.Damage} ед.";
-        m_playerAttackSpeedTMP.text = $"Скорость {RuntimePlayer.Instance.RuntimePlayerStats.AttackSpeed} ед.";
-        m_playerArmorTMP.text = $"Защита {RuntimePlayer.Instance.RuntimePlayerStats.Armor} ед.";
+        m_playerDamageTMP.text = $"Урон {RuntimePlayer.Instance.RuntimePlayerStats.Damage.ToString("f2")} ед.";
+        m_playerAttackSpeedTMP.text = $"Скорость {RuntimePlayer.Instance.RuntimePlayerStats.AttackSpeed.ToString("f2")} ед.";
+        m_playerArmorTMP.text = $"Защита {RuntimePlayer.Instance.RuntimePlayerStats.Armor.ToString("f2")} ед.";
 
         m_playerElementTMP.text = $"{RuntimePlayer.Instance.RuntimePlayerStats.elementStr}";
 
-        m_playerGoldTMP.text = $"Золото {RuntimePlayer.Instance.RuntimePlayerStats.Money} ед.";
-        m_playerExtraExpTMP.text = $"Доп. опыт {RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod}%";
-        m_playerExtraMoneyTMP.text = $"Доп. золото {RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMod}%";
+        m_playerGoldTMP.text = $"Золото {RuntimePlayer.Instance.RuntimePlayerStats.Money.ToString("f0")} ед.";
+        m_playerExtraExpTMP.text = $"Доп. опыт {(RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMultiplier * 100).ToString("f2")}%";
+        m_playerExtraMoneyTMP.text = $"Доп. золото {(RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMultiplier * 100).ToString("f2")}%";
 
         m_currentLocationTMP.text = $"Локация {(LocationsController.Instance.CurrentLocation == null ? "Неизвестно" : LocationsController.Instance.CurrentLocation.LocationTitle)}";
 
-        m_dodgeChanceTMP.text = $"Уклонение {RuntimePlayer.Instance.RuntimePlayerStats.DodgeChance}%";
+        m_dodgeChanceTMP.text = $"Уклонение {RuntimePlayer.Instance.RuntimePlayerStats.DodgeChance.ToString("f2")}%";
         m_playerLuckTMP.text = $"Удача {RuntimePlayer.Instance.RuntimePlayerStats.Luck.ToString("f2")}%";
 
-        m_playerCriticalChanceTMP.text = $"Крит. шанс {RuntimePlayer.Instance.RuntimePlayerStats.CriticalStrikeChance}%";
-        m_playerCriticalDamageTMP.text = $"Крит. урон {(RuntimePlayer.Instance.RuntimePlayerStats.CriticalStrikeMulty * 100 - 100)}%";
+        m_playerCriticalChanceTMP.text = $"Крит. шанс {RuntimePlayer.Instance.RuntimePlayerStats.CriticalStrikeChance.ToString("f2")}%";
+        m_playerCriticalDamageTMP.text = $"Крит. урон {(RuntimePlayer.Instance.RuntimePlayerStats.CriticalStrikeDamageMultiplier * 100).ToString("f2")}%";
     }
 
     private void UpdateSliders()

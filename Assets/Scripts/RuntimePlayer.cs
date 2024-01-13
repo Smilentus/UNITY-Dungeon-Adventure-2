@@ -87,8 +87,8 @@ public class RuntimePlayer : MonoBehaviour
         runtimePlayerStats.ExpMulty = 50;
         runtimePlayerStats.Money = 0;
 
-        runtimePlayerStats.ExtraExpMod = 0;
-        runtimePlayerStats.ExtraMoneyMod = 0;
+        runtimePlayerStats.ExtraExpMultiplier = 0;
+        runtimePlayerStats.ExtraMoneyMultiplier = 0;
 
         // Различные шансы
         runtimePlayerStats.DodgeChance = 10;
@@ -96,7 +96,7 @@ public class RuntimePlayer : MonoBehaviour
         runtimePlayerStats.MediumStrikeChance = 65;
         runtimePlayerStats.HeavyStrikeChance = 30;
         runtimePlayerStats.CriticalStrikeChance = 1;
-        runtimePlayerStats.CriticalStrikeMulty = 2;
+        runtimePlayerStats.CriticalStrikeDamageMultiplier = 2;
 
         runtimePlayerStats.isHadVillage = false;
 
@@ -152,13 +152,14 @@ public class RuntimePlayer : MonoBehaviour
     public void GiveExperience(double _experience)
     {
         // Подсчёт доп. процентного опыта
-        double extraExp = _experience * (RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod / 100);
+        double extraExp = (_experience * RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMultiplier);
+
         // Опыт, который дадим
         _experience += extraExp;
         RuntimePlayer.Instance.RuntimePlayerStats.Exp += _experience;
 
         string info = "Получено: " + _experience + " ед. опыта!";
-        if (RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod > 0)
+        if (RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMultiplier > 0)
         {
             info = "Получено: " + _experience + " + (" + extraExp + ") ед. опыта.";
         }
@@ -178,13 +179,13 @@ public class RuntimePlayer : MonoBehaviour
 
     public void GiveMoney(double _money)
     {
-        double extraMoney = _money * RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMod / 100;
+        double extraMoney = _money * RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMultiplier;
 
         _money += extraMoney;
         RuntimePlayer.Instance.RuntimePlayerStats.Money += (int)_money;
 
         string info = "Получено: " + _money + " ед. золота!";
-        if (RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMod > 0)
+        if (RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMultiplier > 0)
         {
             info = "Получено: " + _money + " + (" + extraMoney + ") ед. золота.";
         }
@@ -274,10 +275,8 @@ public class RuntimePlayerStats
     public double MaxExp;
     public double ExpMulty;
 
-    public double ExtraExpMod;
-    public double ExtraExpMulty;
-    public double ExtraMoneyMod;
-    public double ExtraMoneyMulty;
+    public double ExtraExpMultiplier;
+    public double ExtraMoneyMultiplier;
     public int SkillPoints;
 
 
@@ -295,7 +294,7 @@ public class RuntimePlayerStats
     public double MediumStrikeChance;
     public double HeavyStrikeChance;
     public double CriticalStrikeChance;
-    public double CriticalStrikeMulty;
+    public double CriticalStrikeDamageMultiplier;
 
     public bool isDeath;
     public bool isHadVillage;

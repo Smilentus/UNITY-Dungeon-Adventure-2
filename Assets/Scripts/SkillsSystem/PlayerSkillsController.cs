@@ -20,7 +20,8 @@ public class PlayerSkillsController : MonoBehaviour
     }
 
 
-    public event Action onSkillObtained;
+    public event Action<PlayerSkill> onSkillObtained;
+    public event Action<PlayerSkill> onSkillUpgraded;
 
 
     [SerializeField]
@@ -34,21 +35,14 @@ public class PlayerSkillsController : MonoBehaviour
     private List<PlayerSkill> playerSkills = new List<PlayerSkill>();
 
 
-    public SkillProfile healthSkill;
-
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            RuntimePlayer.Instance.RuntimePlayerStats.SkillPoints += 100;
-        }
-    }
-
-
     public PlayerSkill[] GetPlayerSkills()
     {
         return playerSkills.ToArray();
+    }
+
+    public PlayerSkill GetPlayerSkillByGUID(string skillGUID)
+    {
+        return playerSkills.Find(x => x.skillProfile.skillGUID == skillGUID);
     }
 
 
@@ -67,8 +61,16 @@ public class PlayerSkillsController : MonoBehaviour
         }
         else
         {
-            AddNewSkill(skillProfile);
-            return true;
+            PlayerSkill playerSkill = AddNewSkill(skillProfile);
+            
+            if (playerSkill == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 
@@ -113,6 +115,7 @@ public class PlayerSkillsController : MonoBehaviour
             return null;
         }
 
+
         SkillCore inGameSkillObject = Instantiate(skillProfile.skillCorePrefab, m_skillsParent);
 
         PlayerSkill playerSkill = new PlayerSkill()
@@ -121,9 +124,13 @@ public class PlayerSkillsController : MonoBehaviour
             runtimeSkillCore = inGameSkillObject
         };
 
-        playerSkills.Add(playerSkill);
 
-        onSkillObtained?.Invoke();
+        playerSkills.Add(playerSkill);
+        onSkillObtained?.Invoke(playerSkill);
+
+
+        TryUpgradeSkill(skillProfile);
+
 
         return playerSkill;
     }
@@ -134,7 +141,14 @@ public class PlayerSkillsController : MonoBehaviour
 
         if (playerSkill != null)
         {
-            return playerSkill.runtimeSkillCore.TryUpgradeSkill();
+            bool isUpgraded = playerSkill.runtimeSkillCore.TryUpgradeSkill();
+
+            if (isUpgraded)
+            {
+                onSkillUpgraded?.Invoke(playerSkill);
+            }
+
+            return isUpgraded;
         }
         else
         {

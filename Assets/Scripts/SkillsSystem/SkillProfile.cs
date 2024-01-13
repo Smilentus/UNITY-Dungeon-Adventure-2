@@ -19,36 +19,27 @@ public class SkillProfile : ScriptableObject
 
 
     [SerializeField] 
-    private string m_skillName;
-    /// <summary>
-    ///     Наименование навыка
-    /// </summary>
-    public string skillName { get => m_skillName; }
-
-
-    [TextArea(5, 10)]
-    [SerializeField] 
-    private string m_skillDescription;
-    /// <summary>
-    ///     Дополнительное подробное описание навыка
-    /// </summary>
-    public string skillDescription { get => m_skillDescription; }
-
-
-    [SerializeField] 
-    private Sprite m_skillIcon;
-    /// <summary>
-    ///     Главная иконка навыка
-    /// </summary>
-    public Sprite skillIcon { get => m_skillIcon; }
-
-
-    [SerializeField] 
     private List<SkillLevelData> m_skillLevelDatas;
     /// <summary>
     ///     Список улучшений навыка
     /// </summary>
     public List<SkillLevelData> skillLevelDatas { get => m_skillLevelDatas; }
+
+    
+    public SkillLevelData GetLevelData(int level)
+    {
+        SkillLevelData returnableData = null;
+
+        foreach (SkillLevelData skillLevelData in m_skillLevelDatas)
+        {
+            if (skillLevelData.PassSkillLevel <= level)
+            {
+                returnableData = skillLevelData;
+            }
+        }
+
+        return returnableData;
+    }
 }
 
 [System.Serializable]

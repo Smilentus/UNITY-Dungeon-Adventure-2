@@ -783,8 +783,8 @@ public class Inventory : MonoBehaviour
         RuntimePlayer.Instance.RuntimePlayerStats.AttackSpeed += inventory[slot].AttackSpeed;
         RuntimePlayer.Instance.RuntimePlayerStats.Armor += inventory[slot].Armor;
         RuntimePlayer.Instance.RuntimePlayerStats.MaxMana += inventory[slot].Mana;
-        RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod += inventory[slot].ExtraExp;
-        RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMod += inventory[slot].ExtraMoney;
+        RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMultiplier += inventory[slot].ExtraExp;
+        RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMultiplier += inventory[slot].ExtraMoney;
 
         //FindObjectOfType<BuffManager>().BuffsEquipAction();
 
@@ -798,8 +798,8 @@ public class Inventory : MonoBehaviour
         RuntimePlayer.Instance.RuntimePlayerStats.AttackSpeed -= inventory[slot].AttackSpeed;
         RuntimePlayer.Instance.RuntimePlayerStats.Armor -= inventory[slot].Armor;
         RuntimePlayer.Instance.RuntimePlayerStats.MaxMana -= inventory[slot].Mana;
-        RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod -= inventory[slot].ExtraExp;
-        RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMod -= inventory[slot].ExtraMoney;
+        RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMultiplier -= inventory[slot].ExtraExp;
+        RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMultiplier -= inventory[slot].ExtraMoney;
 
         //FindObjectOfType<BuffManager>().BuffsUnequipAction();
         

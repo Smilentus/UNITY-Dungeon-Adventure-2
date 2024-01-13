@@ -140,6 +140,7 @@
     <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\WorldMapGlobalWindow.cs" />
     <Compile Include="Assets\Scripts\MagicSystem\RuntimeMagicObjects\RuntimeMagicObject_SmallFireball.cs" />
     <Compile Include="Assets\Scripts\MagicSystem\RuntimeMagicObjectView.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerManaSkillComponent.cs" />
     <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerHealthSkillComponent.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\AcceptGlobalWindow.cs" />
     <Compile Include="Assets\Scripts\UpgradeableSystem\IUpgradeableChecker.cs" />
@@ -188,6 +189,7 @@
     <Compile Include="Assets\Scripts\BattleSystem\EnemiesSystem\RuntimeBattleCharacter.cs" />
     <Compile Include="Assets\Scripts\Managers\StorytellerManager.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadSlotView.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\SkillsWarehouse.cs" />
     <Compile Include="Assets\Scripts\Managers\HeroAbilityManager.cs" />
     <Compile Include="Assets\Scripts\Managers\faderScript.cs" />
     <Compile Include="Assets\Scripts\Skill.cs" />
@@ -219,8 +221,18 @@
     <Compile Include="Assets\Scripts\GameEventSystem\GameEventsExecuters\ExploreLocationGameEventsExecuter.cs" />
     <Compile Include="Assets\Scripts\SkillsSystem\Implementations\BaseSkillComponent.cs" />
     <Compile Include="Assets\Scripts\MonoScriptPropertyDrawer.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\SkillsWarehouse.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerManaSkillComponent.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerArmorSkillComponent.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerDamageSkillComponent.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerAttackSpeedSkillComponent.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerHealthRegenSkillComponent.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerManaRegenSkillComponent.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerLuckSkillComponent.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerCriticalChanceSkillComponent.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerCriticalDamageComponent.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerExtraExpSkillComponent.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerExtraMoneySkillComponent.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerDodgeChanceSkillComponent.cs" />
+    <Compile Include="Assets\Scripts\SkillsSystem\ObtainSkillInteractionView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -269,7 +269,7 @@ public class RuntimeBattlePlayerController : MonoBehaviour
     public bool CriticalStrike()
     {
         int rndChance = UnityEngine.Random.Range(0, 101);
-        double dmg = RuntimePlayer.Instance.RuntimePlayerStats.Damage * RuntimePlayer.Instance.RuntimePlayerStats.CriticalStrikeMulty;
+        double dmg = RuntimePlayer.Instance.RuntimePlayerStats.Damage * RuntimePlayer.Instance.RuntimePlayerStats.CriticalStrikeDamageMultiplier;
 
         if (rndChance <= RuntimePlayer.Instance.RuntimePlayerStats.CriticalStrikeChance)
         {

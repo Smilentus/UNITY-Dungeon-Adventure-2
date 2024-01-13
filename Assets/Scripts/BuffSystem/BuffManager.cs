@@ -260,7 +260,7 @@ public class BuffManager : MonoBehaviour
                         RuntimePlayer.Instance.RuntimePlayerStats.Armor += 10;
                         break;
                     case BuffProfile.BuffType.Illuminati:
-                        RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod += var;
+                        RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMultiplier += var;
                         break;
                     case BuffProfile.BuffType.Magic_HealthRegen:
                         break;
@@ -513,7 +513,7 @@ public class BuffManager : MonoBehaviour
                     // Добавить потом
                     break;
                 case BuffProfile.BuffType.Illuminati:
-                    RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod -= var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMultiplier -= var;
                     break;
                 case BuffProfile.BuffType.Magic_Shield:
                     RuntimePlayer.Instance.RuntimePlayerStats.Armor -= 20;

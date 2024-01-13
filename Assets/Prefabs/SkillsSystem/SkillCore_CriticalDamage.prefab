@@ -1,0 +1,149 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4363657517461616544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 701868300152379458}
+  - component: {fileID: 7095174416353193268}
+  m_Layer: 0
+  m_Name: UpgradeableCheckers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &701868300152379458
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4363657517461616544}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5562409851931198469}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7095174416353193268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4363657517461616544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57a11fe9ba27afc489b16d45361b26da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_checkLevel: 1
+  m_autoRaiseCheckLevel: 1
+  m_skillPointsCost: 1
+  m_skillPointsCostRaiseValue: 1
+  m_everyLevelRaiseSkillPoints: 3
+--- !u!1 &5562409851931198468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5562409851931198469}
+  - component: {fileID: 5562409851931198464}
+  - component: {fileID: 5562409851931198471}
+  - component: {fileID: 5562409851931198470}
+  - component: {fileID: 3693686938044239680}
+  m_Layer: 0
+  m_Name: SkillCore_CriticalDamage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5562409851931198469
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5562409851931198468}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 701868300152379458}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5562409851931198464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5562409851931198468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c1d58bf32c81cc428aab113428feb8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_skillProfile: {fileID: 11400000, guid: 7f4b67d4d65f4a840ad53c80db9353cc, type: 2}
+  m_upgradeableComponent: {fileID: 5562409851931198471}
+--- !u!114 &5562409851931198471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5562409851931198468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98bb2a7dadc4a264db0b6acf06c863c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_maxUpgradesLevel: -1
+  OnUpgradedUnityEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnMaxUpgradesReachedUnityEvent:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &5562409851931198470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5562409851931198468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a300c6bc79eeaf4cad75d2d8a7a52c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_observableComponent: {fileID: 5562409851931198471}
+  m_observableLevel: -1
+  OnObservableLvlReached:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3693686938044239680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5562409851931198468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1511d7d0e5350ba459e1d8de05781ce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

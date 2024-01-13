@@ -78,14 +78,14 @@ public class UpgradeableComponent : CoreComponent
         return true;
     }
 
-    private void CheckMaxUpgrades(bool verbose = true)
+    private void CheckMaxUpgrades(bool invokeEvents = true)
     {
         if (maxUpgradesLevel != -1 && m_currentLevel >= m_maxUpgradesLevel)
         {
             m_reachedMaxUpgrades = true;
             m_currentLevel = m_maxUpgradesLevel;
 
-            if (verbose)
+            if (invokeEvents)
             {
                 OnMaxUpgradesReachedUnityEvent?.Invoke();
                 OnMaxUpgradesReached?.Invoke();

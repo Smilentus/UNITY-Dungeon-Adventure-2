@@ -176,10 +176,10 @@ public class SkillsManager : MonoBehaviour
                     RuntimePlayer.Instance.RuntimePlayerStats.AntiHole = true;
                     break;
                 case SkillType.ExtraExp:
-                    RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMod += (int)var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMultiplier += (int)var;
                     break;
                 case SkillType.ExtraMoney:
-                    RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMod += (int)var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMultiplier += (int)var;
                     break;
                 case SkillType.ChanceNotToDelete:
                     RuntimePlayer.Instance.RuntimePlayerStats.ChanceNotToDelete += var;
@@ -191,7 +191,7 @@ public class SkillsManager : MonoBehaviour
                     RuntimePlayer.Instance.RuntimePlayerStats.CriticalStrikeChance += var;
                     break;
                 case SkillType.CriticalMulty:
-                    RuntimePlayer.Instance.RuntimePlayerStats.CriticalStrikeMulty += var;
+                    RuntimePlayer.Instance.RuntimePlayerStats.CriticalStrikeDamageMultiplier += var;
                     break;
                 case SkillType.DodgeChance:
                     RuntimePlayer.Instance.RuntimePlayerStats.DodgeChance += var;
