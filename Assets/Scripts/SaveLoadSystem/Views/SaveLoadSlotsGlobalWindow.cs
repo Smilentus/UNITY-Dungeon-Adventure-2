@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class SaveLoadSlotsGlobalWindow : BaseGameGlobalWindow
 {
-    private const string AutoSaveName = "AutoSave"; // Не нравится по названию определять, надо булку добавить наверно внутрь файла :c
-
-
     [SerializeField]
     private bool m_isReWriteButtonEnabled = true;
 

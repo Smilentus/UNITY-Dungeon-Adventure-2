@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class SaveLoadSlotDataConverter : SaveLoadBaseConverter<SaveLoadSlotData>
 {
-    private string GetRandomVisibleSaveFileName => "Новое сохранение";
+    private const string AutoSaveFileName = "AutoSave"; // Не нравится по названию определять, надо булку добавить наверно внутрь файла :c
+    private const string AutoSaveName = "Автосохранение";
+    private const string RandomVisibleSaveFileName = "Новое сохранение";
 
     public override SaveLoadSlotData GetConverterData(string saveFileName)
     {
         SaveLoadSlotData saveLoadSlotData = new SaveLoadSlotData();
 
         // Тут ещё можем добавить опрос пользователя, может он хочет сам название файлу сохранения давать?
-        saveLoadSlotData.VisibleSaveFileName = saveFileName == "AutoSave" ? "Автосохранение" : GetRandomVisibleSaveFileName; // Тоже не нравится :(
+        saveLoadSlotData.VisibleSaveFileName = saveFileName == AutoSaveFileName ? AutoSaveName : RandomVisibleSaveFileName; // Тоже не нравится :(
         saveLoadSlotData.GameVersion = Application.version.ToString();
         saveLoadSlotData.SaveDateTimeStamp = DateTime.Now.Ticks;
         saveLoadSlotData.GameSaveDateTimeStamp = GameTimeFlowController.Instance.DateNow();
