@@ -25,18 +25,6 @@ public class BetweenScenesLoaderAdapter : MonoBehaviour
     public BetweenScenesLoadableData LoadableData { get; private set; }
 
 
-    private void Awake()
-    {
-        if (LoadableData == null || 
-            string.IsNullOrEmpty(LoadableData.SelectedSaveFileFullPath)
-           ) return;
-
-        Debug.Log($"[BetweenScenesLoaderAdapter] --> Попытка загрузить сохранение: '{LoadableData.SelectedSaveFileFullPath}'");
-
-        SaveLoadSystemController.Instance.TryLoadAndParseDataFromFile(LoadableData.SelectedSaveFileFullPath);
-    }
-
-
     public void SetLoadablePath(string loadablePath)
     {
         LoadableData.SelectedSaveFileFullPath = loadablePath;

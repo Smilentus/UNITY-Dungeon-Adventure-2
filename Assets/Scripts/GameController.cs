@@ -32,11 +32,25 @@ public class GameController : MonoBehaviour
     public GameObject Blocker;
     public GameObject DeathBox;
 
-
-    private void Start()
+    // Куда-то вынести отсюдАВА
+    private void Awake()
     {
         instance = this;
 
+
+        BetweenScenesLoadableData data = BetweenScenesLoaderAdapter.Instance.LoadableData;
+
+        if (data == null ||
+            string.IsNullOrEmpty(data.SelectedSaveFileFullPath)
+           ) return;
+
+        Debug.Log($"[BetweenScenesLoaderAdapter] --> Попытка загрузить сохранение: '{data.SelectedSaveFileFullPath}'");
+
+        SaveLoadSystemController.Instance.TryLoadAndParseDataFromFile(data.SelectedSaveFileFullPath);
+    }
+
+    private void Start()
+    {
         FindObjectOfType<faderScript>().FadeScreenOut();
     }
 

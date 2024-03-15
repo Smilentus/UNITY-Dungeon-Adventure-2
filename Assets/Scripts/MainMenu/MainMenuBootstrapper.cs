@@ -7,8 +7,25 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuBootstrapper : MonoBehaviour
 {
+    private static MainMenuBootstrapper _instance;
+    public static MainMenuBootstrapper Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<MainMenuBootstrapper>();
+            }
+
+            return _instance;
+        }
+    }
+
+
+
     [SerializeField]
     private BetweenScenesLoadableData m_loadableData;
+    public BetweenScenesLoadableData LoadableData => m_loadableData;
 
 
     private void Awake()
