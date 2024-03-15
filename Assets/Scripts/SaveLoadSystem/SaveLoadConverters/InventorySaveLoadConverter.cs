@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class InventorySaveLoadConverter : SaveLoadBaseConverter<InventorySaveData>
 {
-    public override InventorySaveData GetConverterData()
+    public override InventorySaveData GetConverterData(string saveFileName)
     {
         InventorySaveData inventorySaveData = new InventorySaveData();
 

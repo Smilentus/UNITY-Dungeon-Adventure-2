@@ -10,7 +10,7 @@ public class GameTimeFlowEventsSaveLoadConverter : SaveLoadBaseConverter<GameTim
         }
     }
 
-    public override GameTimeFlowEventsSaveData GetConverterData()
+    public override GameTimeFlowEventsSaveData GetConverterData(string saveFileName)
     {
         GameTimeFlowEventsSaveData saveData = new GameTimeFlowEventsSaveData();
 

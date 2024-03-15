@@ -1,9 +1,17 @@
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 public class SaveLoadSlotsGlobalWindow : BaseGameGlobalWindow
 {
+    private const string AutoSaveName = "AutoSave"; // Не нравится по названию определять, надо булку добавить наверно внутрь файла :c
+
+
+    [SerializeField]
+    private bool m_isReWriteButtonEnabled = true;
+
+
     [SerializeField]
     private Button m_createNewSaveButton;
 
@@ -16,6 +24,9 @@ public class SaveLoadSlotsGlobalWindow : BaseGameGlobalWindow
 
     [SerializeField]
     private SaveLoadSlotView m_saveLoadSlotViewPrefab;
+
+    [SerializeField]
+    private SaveLoadSlotView m_autoSaveSlotViewPrefab;
 
 
     private SaveLoadSlotsController _saveLoadSlotsController;
@@ -68,9 +79,18 @@ public class SaveLoadSlotsGlobalWindow : BaseGameGlobalWindow
     {
         for (int i = 0; i < _saveLoadSlotsController.SavedSlots.Count; i++)
         {
-            SaveLoadSlotView saveLoadSlotView = Instantiate(m_saveLoadSlotViewPrefab, m_contentParent.transform);
+            SaveLoadSlotView saveLoadSlotView = null;
 
-            saveLoadSlotView.SetData(i, _saveLoadSlotsController.SavedSlots[i]);
+            if (Path.GetFileNameWithoutExtension(_saveLoadSlotsController.SavedSlots[i].SaveFilePath).Equals("AutoSave"))
+            {
+                saveLoadSlotView = Instantiate(m_autoSaveSlotViewPrefab, m_contentParent.transform);
+            }
+            else
+            {
+                saveLoadSlotView = Instantiate(m_saveLoadSlotViewPrefab, m_contentParent.transform);
+            }
+
+            saveLoadSlotView.SetData(i, _saveLoadSlotsController.SavedSlots[i], m_isReWriteButtonEnabled);
             saveLoadSlotView.onSlotInteraction += OnSlotInteraction;
         }
 

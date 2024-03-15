@@ -1,6 +1,6 @@
 public class PlayerSkillsSaveLoadConverter : SaveLoadBaseConverter<PlayerSkillSaveLoadData>
 {
-    public override PlayerSkillSaveLoadData GetConverterData()
+    public override PlayerSkillSaveLoadData GetConverterData(string saveFileName)
     {
         PlayerSkillSaveLoadData saveLoadData = new PlayerSkillSaveLoadData();
 

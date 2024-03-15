@@ -6,25 +6,12 @@ public class SaveLoadSlotDataConverter : SaveLoadBaseConverter<SaveLoadSlotData>
 {
     private string GetRandomVisibleSaveFileName => "Новое сохранение";
 
-    public SaveLoadSlotData GetData()
+    public override SaveLoadSlotData GetConverterData(string saveFileName)
     {
         SaveLoadSlotData saveLoadSlotData = new SaveLoadSlotData();
 
         // Тут ещё можем добавить опрос пользователя, может он хочет сам название файлу сохранения давать?
-        saveLoadSlotData.VisibleSaveFileName = GetRandomVisibleSaveFileName;
-        saveLoadSlotData.GameVersion = Application.version.ToString();
-        saveLoadSlotData.SaveDateTimeStamp = DateTime.Now.Ticks;
-        saveLoadSlotData.GameSaveDateTimeStamp = GameTimeFlowController.Instance.DateNow();
-
-        return saveLoadSlotData;
-    }
-
-    public override SaveLoadSlotData GetConverterData()
-    {
-        SaveLoadSlotData saveLoadSlotData = new SaveLoadSlotData();
-
-        // Тут ещё можем добавить опрос пользователя, может он хочет сам название файлу сохранения давать?
-        saveLoadSlotData.VisibleSaveFileName = GetRandomVisibleSaveFileName;
+        saveLoadSlotData.VisibleSaveFileName = saveFileName == "AutoSave" ? "Автосохранение" : GetRandomVisibleSaveFileName;
         saveLoadSlotData.GameVersion = Application.version.ToString();
         saveLoadSlotData.SaveDateTimeStamp = DateTime.Now.Ticks;
         saveLoadSlotData.GameSaveDateTimeStamp = GameTimeFlowController.Instance.DateNow();

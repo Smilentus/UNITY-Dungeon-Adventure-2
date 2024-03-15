@@ -11,9 +11,9 @@ public abstract class SaveLoadBaseConverter<T> : MonoBehaviour, ISaveLoadConvert
     }
 
 
-    object ISaveLoadConverter.GetConverterData() => GetConverterData();
+    object ISaveLoadConverter.GetConverterData(string saveFileName) => GetConverterData(saveFileName);
 
-    public abstract T GetConverterData();
+    public abstract T GetConverterData(string saveFileName);
     public abstract void ParseGeneralSaveData(GeneralSaveData generalSaveData);
 
     public abstract void SetDefaultData();

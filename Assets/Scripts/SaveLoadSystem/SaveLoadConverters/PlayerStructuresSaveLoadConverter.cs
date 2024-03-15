@@ -1,6 +1,6 @@
 public class PlayerStructuresSaveLoadConverter : SaveLoadBaseConverter<PlayerStructuresSaveLoadData>
 {
-    public override PlayerStructuresSaveLoadData GetConverterData()
+    public override PlayerStructuresSaveLoadData GetConverterData(string saveFileName)
     {
         PlayerStructuresSaveLoadData saveLoadData = new PlayerStructuresSaveLoadData();
 

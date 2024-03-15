@@ -7,7 +7,7 @@ public interface ISaveLoadConverter
     /// <returns>
     ///     Возвращает любой тип данных класса для сохранения в общее место
     /// </returns>
-    public object GetConverterData();
+    public object GetConverterData(string saveFileName);
 
     /// <summary>
     ///     Используется для парсинга объекта сохранения для того, чтобы

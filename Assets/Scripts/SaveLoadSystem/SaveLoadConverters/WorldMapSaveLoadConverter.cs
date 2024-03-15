@@ -1,6 +1,6 @@
 public class WorldMapSaveLoadConverter : SaveLoadBaseConverter<WorldMapSaveLoadData>
 {
-    public override WorldMapSaveLoadData GetConverterData()
+    public override WorldMapSaveLoadData GetConverterData(string saveFileName)
     {
         WorldMapSaveLoadData saveLoadData = new WorldMapSaveLoadData();
 

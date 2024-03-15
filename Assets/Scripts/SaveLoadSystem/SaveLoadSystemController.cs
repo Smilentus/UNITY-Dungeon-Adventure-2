@@ -118,7 +118,7 @@ public class SaveLoadSystemController : MonoBehaviour
         return TryLoadAndParseDataFromFile(fullFilePath);
     }
 
-    public GeneralSaveData CollectSaveData()
+    public GeneralSaveData CollectSaveData(string saveFileName)
     {
         // Ќабрасываем все данные со всех контроллеров
         GeneralSaveData saveData = new GeneralSaveData();
@@ -127,7 +127,7 @@ public class SaveLoadSystemController : MonoBehaviour
 
         foreach (ISaveLoadConverter converter in SaveLoadConverters)
         {
-            saveData.savedObjects.Add(converter.GetConverterData());
+            saveData.savedObjects.Add(converter.GetConverterData(saveFileName));
         }
 
         return saveData;
@@ -176,7 +176,7 @@ public class SaveLoadSystemController : MonoBehaviour
 
     public bool TryCollectAndSaveDataToFile(string fullFilePath)
     {
-        GeneralSaveData saveData = CollectSaveData();
+        GeneralSaveData saveData = CollectSaveData(Path.GetFileNameWithoutExtension(fullFilePath));
         string json = SerializeJSON(saveData);
 
         fullFilePath = CheckExtensions(fullFilePath);

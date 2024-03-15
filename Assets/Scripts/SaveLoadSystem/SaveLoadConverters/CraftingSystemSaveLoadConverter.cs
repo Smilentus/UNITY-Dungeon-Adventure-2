@@ -1,6 +1,6 @@
 public class CraftingSystemSaveLoadConverter : SaveLoadBaseConverter<CraftingSystemSaveLoadData>
 {
-    public override CraftingSystemSaveLoadData GetConverterData()
+    public override CraftingSystemSaveLoadData GetConverterData(string saveFileName)
     {
         CraftingSystemSaveLoadData saveLoadData = new CraftingSystemSaveLoadData();
 

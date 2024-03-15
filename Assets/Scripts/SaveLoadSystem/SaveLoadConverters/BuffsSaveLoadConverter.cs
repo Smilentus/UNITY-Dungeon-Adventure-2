@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public class BuffsSaveLoadConverter : SaveLoadBaseConverter<BuffSaveLoadData>
 {
-    public override BuffSaveLoadData GetConverterData()
+    public override BuffSaveLoadData GetConverterData(string saveFileName)
     {
         BuffSaveLoadData saveLoadData = new BuffSaveLoadData();
 

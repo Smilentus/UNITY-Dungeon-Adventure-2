@@ -51,7 +51,7 @@ public class SaveLoadSlotView : MonoBehaviour
     }
 
 
-    public void SetData(int index, RuntimeSaveLoadSlotData runtimeSaveLoadSlotData)
+    public void SetData(int index, RuntimeSaveLoadSlotData runtimeSaveLoadSlotData, bool isReWriteButtonEnabled = true)
     {
         _slotIndex = index;
         _slotData = runtimeSaveLoadSlotData;
@@ -62,8 +62,14 @@ public class SaveLoadSlotView : MonoBehaviour
         m_saveDateTime.text = $"{converted.ToString("g")}";
         m_gameSaveDateTime.text = $"{_slotData.SlotData.GameSaveDateTimeStamp}";
         m_gameVersion.text = $"{_slotData.SlotData.GameVersion}";
+
+        SetSaveButtonVisibility(isReWriteButtonEnabled);
     }
 
+    public void SetSaveButtonVisibility(bool value)
+    {
+        m_reWriteButton?.gameObject.SetActive(value);
+    }
 
     private void LoadThisSave()
     {

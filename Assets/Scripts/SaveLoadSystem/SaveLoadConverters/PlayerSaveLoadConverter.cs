@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerSaveLoadConverter : SaveLoadBaseConverter<PlayerSaveData>
 {
-    public override PlayerSaveData GetConverterData()
+    public override PlayerSaveData GetConverterData(string saveFileName)
     {
         PlayerSaveData playerData = new PlayerSaveData();
 
