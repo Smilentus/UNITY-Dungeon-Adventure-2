@@ -11,7 +11,7 @@ public class SaveLoadSlotDataConverter : SaveLoadBaseConverter<SaveLoadSlotData>
         SaveLoadSlotData saveLoadSlotData = new SaveLoadSlotData();
 
         // Тут ещё можем добавить опрос пользователя, может он хочет сам название файлу сохранения давать?
-        saveLoadSlotData.VisibleSaveFileName = saveFileName == "AutoSave" ? "Автосохранение" : GetRandomVisibleSaveFileName;
+        saveLoadSlotData.VisibleSaveFileName = saveFileName == "AutoSave" ? "Автосохранение" : GetRandomVisibleSaveFileName; // Тоже не нравится :(
         saveLoadSlotData.GameVersion = Application.version.ToString();
         saveLoadSlotData.SaveDateTimeStamp = DateTime.Now.Ticks;
         saveLoadSlotData.GameSaveDateTimeStamp = GameTimeFlowController.Instance.DateNow();
