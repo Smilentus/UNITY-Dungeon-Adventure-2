@@ -197,6 +197,7 @@
     <Compile Include="Assets\Scripts\InventorySystem\BaseMouseItemController.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\BattleControllerPresenter.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\GameTimeFlowEventsSaveLoadConverter.cs" />
+    <Compile Include="Assets\Scripts\LocationSystem\LocationInfoGlobalWindow.cs" />
     <Compile Include="Assets\Scripts\VillageUpgrade.cs" />
     <Compile Include="Assets\Scripts\GameTimeFlowSystem\GameTimeFlowEvent.cs" />
     <Compile Include="Assets\Scripts\SkillsSystem\SkillCore.cs" />

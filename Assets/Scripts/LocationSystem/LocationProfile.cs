@@ -6,6 +6,14 @@ using UnityEngine;
 [System.Serializable]
 public class LocationProfile : ScriptableObject
 {
+    [SerializeField]
+    private Sprite m_locationPreviewSprite;
+    /// <summary>
+    ///     Основное превью локации в виде спрайта
+    /// </summary>
+    public Sprite LocationPreviewSprite => m_locationPreviewSprite;
+
+
     [TextArea(3, 5)]
     [SerializeField]
     private string m_locationTitle;

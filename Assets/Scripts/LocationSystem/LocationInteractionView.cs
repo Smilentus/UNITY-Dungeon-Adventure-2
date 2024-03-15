@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+
 public class LocationInteractionView : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField]
@@ -14,6 +15,6 @@ public class LocationInteractionView : MonoBehaviour, IPointerClickHandler
     
     public void OnPointerClick(PointerEventData eventData)
     {
-        LocationsController.Instance.TravelToLocation(m_locationProfile, m_travelHours);
+        LocationsController.Instance.ShowInfoAboutLocation(m_locationProfile, m_travelHours);
     }
 }

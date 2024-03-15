@@ -137,9 +137,16 @@ public class LocationsController : MonoBehaviour
         }
     }
 
-    public void ShowInfoAboutLocation(LocationProfile locationInfo)
+    public void ShowInfoAboutLocation(LocationProfile locationInfo, int travelHours)
     {
-        // Может просто кастомное окно сделаем???
+        GlobalWindowsController.Instance.TryShowGlobalWindow(
+            typeof(LocationInfoGlobalWindow), 
+            new LocationInfoGlobalWindowData() 
+            { 
+                LocationProfile = locationInfo,
+                TravelHours = travelHours
+            }
+            );
     }
 
 

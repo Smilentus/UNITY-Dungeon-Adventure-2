@@ -7,6 +7,9 @@ public class BaseGameGlobalWindow : MonoBehaviour, IGlobalWindow
     public IGlobalWindowData globalWindowData => windowData;
 
 
+    public T GetConvertedWindowData<T>() => (T)globalWindowData;
+
+
     private bool isShown;
     public bool IsShown => isShown;
 
