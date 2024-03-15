@@ -13,7 +13,8 @@ public class SaveLoadSlotDataConverter : SaveLoadBaseConverter<SaveLoadSlotData>
         // Тут ещё можем добавить опрос пользователя, может он хочет сам название файлу сохранения давать?
         saveLoadSlotData.VisibleSaveFileName = GetRandomVisibleSaveFileName;
         saveLoadSlotData.GameVersion = Application.version.ToString();
-        saveLoadSlotData.SaveDateTimeStamp = DateTime.Now.Ticks.ToString();
+        saveLoadSlotData.SaveDateTimeStamp = DateTime.Now.Ticks;
+        saveLoadSlotData.GameSaveDateTimeStamp = GameTimeFlowController.Instance.DateNow();
 
         return saveLoadSlotData;
     }
@@ -25,7 +26,8 @@ public class SaveLoadSlotDataConverter : SaveLoadBaseConverter<SaveLoadSlotData>
         // Тут ещё можем добавить опрос пользователя, может он хочет сам название файлу сохранения давать?
         saveLoadSlotData.VisibleSaveFileName = GetRandomVisibleSaveFileName;
         saveLoadSlotData.GameVersion = Application.version.ToString();
-        saveLoadSlotData.SaveDateTimeStamp = DateTime.Now.Ticks.ToString();
+        saveLoadSlotData.SaveDateTimeStamp = DateTime.Now.Ticks;
+        saveLoadSlotData.GameSaveDateTimeStamp = GameTimeFlowController.Instance.DateNow();
 
         return saveLoadSlotData;
     }
@@ -46,7 +48,12 @@ public class SaveLoadSlotData
     /// <summary>
     ///     Реальное время на компьютере во время создания сохранения
     /// </summary>
-    public string SaveDateTimeStamp;
+    public long SaveDateTimeStamp;
+
+    /// <summary>
+    ///     Время в игре на момент сохранения
+    /// </summary>
+    public string GameSaveDateTimeStamp;
 
     /// <summary>
     ///     Версия игры, в которой было создано это сохранение

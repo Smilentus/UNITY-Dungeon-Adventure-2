@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 
 
+// TODO: Refactoring
 public class GameController : MonoBehaviour
 {
     private static GameController instance;
@@ -123,8 +124,14 @@ public class GameController : MonoBehaviour
 
     public void LoadAutoSave()
     {
-        FindObjectOfType<SaveButtonsLoader>().LoadGame("AutoSave");
-        Blocker.SetActive(true);
+        if (SaveLoadSystemController.Instance.TryLoadGameState("AutoSave"))
+        {
+            Blocker.SetActive(true);
+        }
+        else
+        {
+            // ...
+        }
     }
 
     // Действие при нажатии на кнопку локации

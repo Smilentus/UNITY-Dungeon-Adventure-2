@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 
@@ -53,52 +54,52 @@ public class SaveLoadSlotsController : MonoBehaviour
         return true;
     }
 
-
-    [ContextMenu("AddSaveSlot")]
-    public void AddSaveSlot()
-    {
-        SaveLoadSystemController.Instance.TrySaveGameState();
-    }
-
-
-    [ContextMenu("LoadSaveSlots")]
     public void LoadSaveSlots()
     {
         string[] saveFiles;
 
         bool isSavesExists = TryGetSaveFiles(out saveFiles);
 
-        if (isSavesExists)
-        {
-            savedSlots.Clear();
+        //if (isSavesExists)
+        //{
+        savedSlots.Clear();
 
-            foreach (string filePath in saveFiles)
+        foreach (string filePath in saveFiles)
+        {
+            if (SaveLoadSystemController.Instance.TryReadFileJSON(filePath, out string fileJsonData))
             {
-                if (SaveLoadSystemController.Instance.TryReadFileJSON(filePath, out string fileJsonData))
+                GeneralSaveData saveData = SaveLoadSystemController.Instance.DeserializeJSON(fileJsonData);
+
+                if (saveData != null)
                 {
-                    GeneralSaveData saveData = SaveLoadSystemController.Instance.DeserializeJSON(fileJsonData);
-                    
-                    if (saveData != null)
+                    foreach (object obj in saveData.savedObjects)
                     {
-                        foreach (object obj in saveData.savedObjects)
+                        if (obj is SaveLoadSlotData)
                         {
-                            if (obj is SaveLoadSlotData)
+                            SaveLoadSlotData saveLoadSlotData = obj as SaveLoadSlotData;
+                            savedSlots.Add(new RuntimeSaveLoadSlotData()
                             {
-                                SaveLoadSlotData saveLoadSlotData = obj as SaveLoadSlotData;
-                                savedSlots.Add(new RuntimeSaveLoadSlotData()
-                                {
-                                    SaveFilePath = filePath,
-                                    SlotData = saveLoadSlotData
-                                });
-                            }
+                                SaveFilePath = filePath,
+                                SlotData = saveLoadSlotData
+                            });
                         }
                     }
                 }
             }
-
-            onSavedSlotsUpdated?.Invoke();
         }
+
+        savedSlots = savedSlots.OrderByDescending(x => x.SlotData.SaveDateTimeStamp).ToList();
+
+        onSavedSlotsUpdated?.Invoke();
+        //}
     }
+
+
+    public void CreateNewSaveSlot()
+    {
+        SaveLoadSystemController.Instance.TrySaveGameState();
+    }
+
 
 
     public void LoadSaveSlotData(int _slotIndex)

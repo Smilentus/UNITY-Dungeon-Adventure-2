@@ -238,6 +238,20 @@ public class SaveLoadSystemController : MonoBehaviour
         return true;
     }
 
+    public bool TryDeleteSaveFile(string fullFilePath)
+    {
+        if (File.Exists(fullFilePath))
+        {
+            File.Delete(fullFilePath);
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 
     [ContextMenu("DEBUG_Save_AutoSave")]
     private void DEBUG_SaveAutoSave()
