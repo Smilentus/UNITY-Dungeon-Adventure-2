@@ -3,31 +3,34 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
   m_Name: EntDefender
   m_EditorClassIdentifier: 
-  Type: 19
+  m_characterPrefab: {fileID: 0}
   Element: 4
+  meetingDescr: 
+  isMeeted: 0
   Name: "\u042D\u043D\u0442 \u0417\u0430\u0449\u0438\u0442\u043D\u0438\u043A"
   MaxHealth: 100
-  Health: 100
   HealthRegen: 0
+  ManaRegen: 0
   ArmorType: 3
   Armor: 5
   MaxMana: 0
-  Mana: 0
+  Spells: []
   AttackType: 3
   AttackSpeed: 1
-  Attack: 5
+  Damage: 5
   DodgeChance: 5
-  isStun: 0
   Exp: 15
   Gold: 25
   DropItems: []
-  DropStack: 
   CharacterImage: {fileID: 2800000, guid: f915d07fcb117914fa759418cf3c1012, type: 3}
+  lastMagicPriority: 0
+  DefaultActionPoints: 5

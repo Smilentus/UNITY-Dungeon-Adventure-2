@@ -3,29 +3,34 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
   m_Name: HellThreeHound
   m_EditorClassIdentifier: 
-  Type: 94
+  m_characterPrefab: {fileID: 0}
   Element: 3
+  meetingDescr: 
+  isMeeted: 0
   Name: "\u0422\u0440\u0451\u0445\u0433\u043B\u0430\u0432\u0430\u044F \u0433\u043E\u043D\u0447\u0430\u044F"
   MaxHealth: 5000
-  Health: 5000
+  HealthRegen: 0
+  ManaRegen: 0
   ArmorType: 3
   Armor: 50
   MaxMana: 250
-  Mana: 250
+  Spells: []
   AttackType: 3
   AttackSpeed: 5
-  Attack: 500
+  Damage: 500
   DodgeChance: 30
   Exp: 6125
   Gold: 1500
   DropItems: []
-  DropStack: 
   CharacterImage: {fileID: 2800000, guid: 85f96b996ea61dd4c89a8d5df4733eb3, type: 3}
+  lastMagicPriority: 0
+  DefaultActionPoints: 5

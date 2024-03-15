@@ -3,24 +3,26 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
   m_Name: HellSatana
   m_EditorClassIdentifier: 
-  Type: 95
+  m_characterPrefab: {fileID: 0}
   Element: 6
+  meetingDescr: 
+  isMeeted: 0
   Name: "\u0421\u0430\u0442\u0430\u043D\u0430"
   MaxHealth: 6666666
-  Health: 6666666
   HealthRegen: 0
+  ManaRegen: 0
   ArmorType: 4
   Armor: 666
   MaxMana: 666666
-  Mana: 666666
   Spells:
   - currentSpell: 2
     manaCost: 1
@@ -36,11 +38,11 @@ MonoBehaviour:
     usePriority: 2
   AttackType: 2
   AttackSpeed: 6
-  Attack: 6666
+  Damage: 666666
   DodgeChance: 66
-  isStun: 0
   Exp: 666666
   Gold: 66666
   DropItems: []
   CharacterImage: {fileID: 2800000, guid: 3ce7b9487e690fa49ad14dd3dfb358a0, type: 3}
   lastMagicPriority: 0
+  DefaultActionPoints: 5

@@ -30,4 +30,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0868d205b9aa63d43b7d0f76780b56c5, type: 2}
   - {fileID: 11400000, guid: 311e4e2eb4a3d3f4ea377a2cf9563715, type: 2}
   - {fileID: 11400000, guid: 84b13da8936f3394da165f552a1486c7, type: 2}
+  - {fileID: 11400000, guid: b7a9b45978bb4164b998209676a160d5, type: 2}
   m_droppableItems: []

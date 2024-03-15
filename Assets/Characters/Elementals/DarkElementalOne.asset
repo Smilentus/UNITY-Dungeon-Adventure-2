@@ -3,30 +3,34 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
   m_Name: DarkElementalOne
   m_EditorClassIdentifier: 
-  Type: 30
+  m_characterPrefab: {fileID: 0}
   Element: 6
+  meetingDescr: 
+  isMeeted: 0
   Name: "\u042D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u043B\u044C \u0422\u044C\u043C\u044B"
   MaxHealth: 10000000
-  Health: 10000000
+  HealthRegen: 0
+  ManaRegen: 0
   ArmorType: 4
   Armor: 1000
   MaxMana: 1000000
-  Mana: 1000000
+  Spells: []
   AttackType: 2
   AttackSpeed: 10
-  Attack: 10000
+  Damage: 10000000
   DodgeChance: 30
   Exp: 25000000
   Gold: 5000000
   DropItems: []
-  DropStack: 
   CharacterImage: {fileID: 2800000, guid: 624400d5758a6fa4dab6644063d81fa3, type: 3}
-  Helpers: []
+  lastMagicPriority: 0
+  DefaultActionPoints: 5

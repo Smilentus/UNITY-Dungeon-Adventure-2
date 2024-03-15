@@ -3,30 +3,34 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
   m_Name: EntKiller
   m_EditorClassIdentifier: 
-  Type: 18
+  m_characterPrefab: {fileID: 0}
   Element: 4
+  meetingDescr: 
+  isMeeted: 0
   Name: "\u042D\u043D\u0442 \u0443\u0431\u0438\u0439\u0446\u0430"
   MaxHealth: 25
-  Health: 25
   HealthRegen: 0
+  ManaRegen: 0
   ArmorType: 1
   Armor: 0
   MaxMana: 0
-  Mana: 0
+  Spells: []
   AttackType: 3
   AttackSpeed: 2
-  Attack: 6
+  Damage: 15
   DodgeChance: 25
-  isStun: 0
   Exp: 25
   Gold: 10
   DropItems: []
   CharacterImage: {fileID: 2800000, guid: a6a011a6b110e064db47d43fb607f957, type: 3}
+  lastMagicPriority: 0
+  DefaultActionPoints: 5

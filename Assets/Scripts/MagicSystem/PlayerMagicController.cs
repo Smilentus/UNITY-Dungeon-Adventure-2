@@ -23,16 +23,6 @@ public class PlayerMagicController : MonoBehaviour
     public MagicContainer PlayerMagicContainer => m_playerMagicContainer;
 
 
-    public MagicProfile debugMagicProfile;
-
-
-    [ContextMenu("Add Magic Profile")]
-    public void ContextAddMagicProfile()
-    {
-        m_playerMagicContainer.AddMagicProfile(debugMagicProfile);
-    }
-
-
     private void Start()
     {
         m_playerMagicContainer.onMagicProfileAdded += OnMagicAdded;

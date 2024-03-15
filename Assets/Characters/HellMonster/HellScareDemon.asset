@@ -3,29 +3,34 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
   m_Name: HellScareDemon
   m_EditorClassIdentifier: 
-  Type: 96
+  m_characterPrefab: {fileID: 0}
   Element: 3
+  meetingDescr: 
+  isMeeted: 0
   Name: "\u0422\u0451\u043C\u043D\u044B\u0439 \u0434\u0435\u043C\u043E\u043D"
   MaxHealth: 2500
-  Health: 2500
+  HealthRegen: 0
+  ManaRegen: 0
   ArmorType: 3
   Armor: 35
   MaxMana: 1000
-  Mana: 1000
+  Spells: []
   AttackType: 1
   AttackSpeed: 5
-  Attack: 100
+  Damage: 250
   DodgeChance: 25
   Exp: 3125
   Gold: 1050
   DropItems: []
-  DropStack: 
   CharacterImage: {fileID: 2800000, guid: a74edefe27452024cbd81f854a3f8ec9, type: 3}
+  lastMagicPriority: 0
+  DefaultActionPoints: 5

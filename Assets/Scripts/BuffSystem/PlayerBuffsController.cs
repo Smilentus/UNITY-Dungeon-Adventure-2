@@ -72,21 +72,4 @@ public class PlayerBuffsController : MonoBehaviour
     {
         m_playerBuffsContainer.UpdateContainedBuffs();
     }
-
-
-    [SerializeField]
-    private BuffProfile debugProfile;
-
-
-    [ContextMenu("AddBuff")]
-    public void AddDebugBuff()
-    {
-        AddPlayerBuff(debugProfile);
-    }
-
-    [ContextMenu("RemoveBuff")]
-    public void RemoveDebugBuff()
-    {
-        RemovePlayerBuff(debugProfile);
-    }
 }

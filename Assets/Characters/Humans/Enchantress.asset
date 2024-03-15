@@ -3,24 +3,26 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
   m_Name: Enchantress
   m_EditorClassIdentifier: 
-  Type: 88
+  m_characterPrefab: {fileID: 0}
   Element: 6
+  meetingDescr: 
+  isMeeted: 0
   Name: "\u0427\u0430\u0440\u043E\u0434\u0435\u0439\u043A\u0430"
   MaxHealth: 275
-  Health: 275
   HealthRegen: 15
+  ManaRegen: 0
   ArmorType: 0
   Armor: 0
   MaxMana: 150
-  Mana: 150
   Spells:
   - currentSpell: 6
     manaCost: 20
@@ -36,10 +38,11 @@ MonoBehaviour:
     usePriority: 2
   AttackType: 2
   AttackSpeed: 1
-  Attack: 10
+  Damage: 100
   DodgeChance: 0
-  isStun: 0
   Exp: 350
   Gold: 100
   DropItems: []
   CharacterImage: {fileID: 2800000, guid: 7024d10897b8dfe4895678c107172957, type: 3}
+  lastMagicPriority: 0
+  DefaultActionPoints: 5

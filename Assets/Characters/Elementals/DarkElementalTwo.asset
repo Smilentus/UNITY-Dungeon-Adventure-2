@@ -3,31 +3,35 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
   m_Name: DarkElementalTwo
   m_EditorClassIdentifier: 
-  Type: 31
+  m_characterPrefab: {fileID: 0}
   Element: 6
+  meetingDescr: 
+  isMeeted: 0
   Name: "\u042D\u043B\u0435\u043C\u0435\u043D\u0442\u0430\u043B\u044C \u0422\u044C\u043C\u044B.
     \u0412\u0442\u043E\u0440\u0430\u044F \u0444\u0430\u0437\u0430."
   MaxHealth: 12500000
-  Health: 12500000
+  HealthRegen: 0
+  ManaRegen: 0
   ArmorType: 4
   Armor: 1500
   MaxMana: 700000
-  Mana: 700000
+  Spells: []
   AttackType: 2
   AttackSpeed: 15
-  Attack: 20000
+  Damage: 1000000
   DodgeChance: 35
   Exp: 30000000
   Gold: 6000000
   DropItems: []
-  DropStack: 
   CharacterImage: {fileID: 2800000, guid: e780cb71dfcb32b4d815fd4e788f9047, type: 3}
-  Helpers: []
+  lastMagicPriority: 0
+  DefaultActionPoints: 5

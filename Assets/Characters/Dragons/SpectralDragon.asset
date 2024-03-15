@@ -3,29 +3,35 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
   m_Name: SpectralDragon
   m_EditorClassIdentifier: 
-  Type: 15
+  m_characterPrefab: {fileID: 0}
   Element: 0
+  meetingDescr: 
+  isMeeted: 0
   Name: "\u0421\u043F\u0435\u043A\u0442\u0440\u0430\u043B\u044C\u043D\u044B\u0439
     \u0414\u0440\u0430\u043A\u043E\u043D"
   MaxHealth: 1000000
-  Health: 1000000
+  HealthRegen: 0
+  ManaRegen: 0
   ArmorType: 4
   Armor: 10000
   MaxMana: 100000
-  Mana: 100000
+  Spells: []
   AttackType: 2
   AttackSpeed: 1
-  Attack: 100000
+  Damage: 100000
   DodgeChance: 10
   Exp: 5000000
   Gold: 2000000
+  DropItems: []
   CharacterImage: {fileID: 2800000, guid: 1789c27d7b2834a41bf9e3dae1d7cb55, type: 3}
-  Helpers: []
+  lastMagicPriority: 0
+  DefaultActionPoints: 5

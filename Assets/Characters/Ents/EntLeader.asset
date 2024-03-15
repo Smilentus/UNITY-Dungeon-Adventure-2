@@ -3,30 +3,34 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
   m_Name: EntLeader
   m_EditorClassIdentifier: 
-  Type: 36
+  m_characterPrefab: {fileID: 0}
   Element: 4
+  meetingDescr: 
+  isMeeted: 0
   Name: "\u042D\u043D\u0442 \u041B\u0438\u0434\u0435\u0440"
   MaxHealth: 75
-  Health: 75
   HealthRegen: 0
+  ManaRegen: 0
   ArmorType: 2
   Armor: 3
   MaxMana: 0
-  Mana: 0
+  Spells: []
   AttackType: 3
   AttackSpeed: 1
-  Attack: 10
+  Damage: 50
   DodgeChance: 15
-  isStun: 0
   Exp: 85
   Gold: 35
   DropItems: []
   CharacterImage: {fileID: 2800000, guid: 4cd7edeff69e1de43bcdc1581dd56aaa, type: 3}
+  lastMagicPriority: 0
+  DefaultActionPoints: 5

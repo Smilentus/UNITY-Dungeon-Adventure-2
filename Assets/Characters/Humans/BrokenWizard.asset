@@ -3,24 +3,26 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
   m_Name: BrokenWizard
   m_EditorClassIdentifier: 
-  Type: 87
+  m_characterPrefab: {fileID: 0}
   Element: 6
+  meetingDescr: 
+  isMeeted: 0
   Name: "\u0425\u0440\u043E\u043C\u043E\u0439 \u043C\u0430\u0433"
   MaxHealth: 200
-  Health: 200
   HealthRegen: 1
+  ManaRegen: 0
   ArmorType: 0
   Armor: 0
   MaxMana: 2500
-  Mana: 2500
   Spells:
   - currentSpell: 0
     manaCost: 100
@@ -52,10 +54,11 @@ MonoBehaviour:
     usePriority: 5
   AttackType: 2
   AttackSpeed: 5
-  Attack: 25
+  Damage: 20
   DodgeChance: 1
-  isStun: 0
   Exp: 2000
   Gold: 750
   DropItems: []
   CharacterImage: {fileID: 2800000, guid: 75370590cba9a2c42b3152b10dc042ef, type: 3}
+  lastMagicPriority: 0
+  DefaultActionPoints: 5

@@ -135,14 +135,14 @@ public class RuntimePlayer : MonoBehaviour
         if (_ignoreArmor)
         {
             RuntimePlayer.Instance.RuntimePlayerStats.Health -= _damage;
-            GameController.Instance.AddEventText("Вы получили урон через броню: " + _damage);
+            GameController.Instance.AddEventText("Вы получили урон через броню: " + _damage.ToString("f2"));
         }
         else
         {
             if (_damage > RuntimePlayer.Instance.RuntimePlayerStats.Armor)
             {
                 RuntimePlayer.Instance.RuntimePlayerStats.Health -= (_damage - RuntimePlayer.Instance.RuntimePlayerStats.Armor);
-                GameController.Instance.AddEventText("Вы получили урон: " + (_damage - RuntimePlayer.Instance.RuntimePlayerStats.Armor));
+                GameController.Instance.AddEventText("Вы получили урон: " + (_damage - RuntimePlayer.Instance.RuntimePlayerStats.Armor).ToString("f2"));
             }
             else
                 GameController.Instance.AddEventText("Броня заблокировала урон.");
@@ -158,10 +158,10 @@ public class RuntimePlayer : MonoBehaviour
         _experience += extraExp;
         RuntimePlayer.Instance.RuntimePlayerStats.Exp += _experience;
 
-        string info = "Получено: " + _experience + " ед. опыта!";
+        string info = "Получено: " + _experience.ToString("f2") + " ед. опыта!";
         if (RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMultiplier > 0)
         {
-            info = "Получено: " + _experience + " + (" + extraExp + ") ед. опыта.";
+            info = "Получено: " + _experience.ToString("f2") + " + (" + extraExp.ToString("f2") + ") ед. опыта.";
         }
 
         GameController.Instance.AddEventText(info);
@@ -184,10 +184,10 @@ public class RuntimePlayer : MonoBehaviour
         _money += extraMoney;
         RuntimePlayer.Instance.RuntimePlayerStats.Money += (int)_money;
 
-        string info = "Получено: " + _money + " ед. золота!";
+        string info = "Получено: " + _money.ToString("f2") + " ед. золота!";
         if (RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMultiplier > 0)
         {
-            info = "Получено: " + _money + " + (" + extraMoney + ") ед. золота.";
+            info = "Получено: " + _money.ToString("f2") + " + (" + extraMoney.ToString("f2") + ") ед. золота.";
         }
 
         GameController.Instance.AddEventText(info);

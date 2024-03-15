@@ -3,30 +3,34 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
   m_Name: ForestElf
   m_EditorClassIdentifier: 
-  Type: 79
+  m_characterPrefab: {fileID: 0}
   Element: 4
+  meetingDescr: 
+  isMeeted: 0
   Name: "\u041B\u0435\u0441\u043D\u043E\u0439 \u044D\u043B\u044C\u0444"
   MaxHealth: 100
-  Health: 100
   HealthRegen: 0
+  ManaRegen: 0
   ArmorType: 2
   Armor: 10
   MaxMana: 0
-  Mana: 0
+  Spells: []
   AttackType: 1
   AttackSpeed: 3
-  Attack: 8
+  Damage: 10
   DodgeChance: 25
-  isStun: 0
   Exp: 125
   Gold: 75
   DropItems: []
   CharacterImage: {fileID: 2800000, guid: 6ee7309403e56d84aa5133fdadeda1e5, type: 3}
+  lastMagicPriority: 0
+  DefaultActionPoints: 5
