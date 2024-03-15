@@ -3,29 +3,34 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
   m_Name: WaterDragon
   m_EditorClassIdentifier: 
-  Type: 48
+  m_characterPrefab: {fileID: 0}
   Element: 2
+  meetingDescr: 
+  isMeeted: 0
   Name: "\u0412\u043E\u0434\u043D\u044B\u0439 \u0434\u0440\u0430\u043A\u043E\u043D"
   MaxHealth: 7500
-  Health: 7500
+  HealthRegen: 0
+  ManaRegen: 0
   ArmorType: 2
   Armor: 30
   MaxMana: 1000
-  Mana: 1000
+  Spells: []
   AttackType: 3
   AttackSpeed: 3
-  Attack: 325
+  Damage: 1000
   DodgeChance: 25
   Exp: 8000
   Gold: 1250
   DropItems: []
-  DropStack: 
   CharacterImage: {fileID: 2800000, guid: 0b764fb9e481b4148a61e658425232ac, type: 3}
+  lastMagicPriority: 0
+  DefaultActionPoints: 5

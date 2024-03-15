@@ -26,7 +26,7 @@ MonoBehaviour:
   Spells: []
   AttackType: 2
   AttackSpeed: 1
-  Damage: 0
+  Damage: 100
   DodgeChance: 0
   Exp: 5
   Gold: 100
@@ -34,3 +34,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 727dd39b9bc621647844eda969775b8e, type: 2}
   CharacterImage: {fileID: 2800000, guid: 6e952e37ed7b41c4bade08f5a4a45a67, type: 3}
   lastMagicPriority: 0
+  DefaultActionPoints: 5

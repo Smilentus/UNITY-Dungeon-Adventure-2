@@ -3,30 +3,34 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
   m_Name: Skelet
   m_EditorClassIdentifier: 
-  Type: 35
+  m_characterPrefab: {fileID: 0}
   Element: 0
+  meetingDescr: 
+  isMeeted: 0
   Name: "\u0421\u043A\u0435\u043B\u0435\u0442"
   MaxHealth: 15
-  Health: 15
+  HealthRegen: 0
+  ManaRegen: 0
   ArmorType: 0
   Armor: 0
   MaxMana: 0
-  Mana: 0
+  Spells: []
   AttackType: 4
   AttackSpeed: 3
-  Attack: 3
+  Damage: 2
   DodgeChance: 5
   Exp: 5
   Gold: 2
   DropItems: []
-  DropStack: 
   CharacterImage: {fileID: 2800000, guid: 4d8250432f39cbb4f8e77d2e6043fd3a, type: 3}
-  Helpers: []
+  lastMagicPriority: 0
+  DefaultActionPoints: 5

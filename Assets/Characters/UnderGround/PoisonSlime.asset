@@ -26,10 +26,11 @@ MonoBehaviour:
   Spells: []
   AttackType: 1
   AttackSpeed: 1
-  Damage: 0
+  Damage: 5
   DodgeChance: 50
   Exp: 10
   Gold: 5
   DropItems: []
   CharacterImage: {fileID: 2800000, guid: bc6465deb0558d948aecf19b17183d44, type: 3}
   lastMagicPriority: 0
+  DefaultActionPoints: 5

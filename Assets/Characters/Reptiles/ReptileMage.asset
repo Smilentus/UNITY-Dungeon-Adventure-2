@@ -3,30 +3,34 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
   m_Name: ReptileMage
   m_EditorClassIdentifier: 
-  Type: 27
+  m_characterPrefab: {fileID: 0}
   Element: 6
+  meetingDescr: 
+  isMeeted: 0
   Name: "\u0420\u0435\u043F\u0442\u0438\u043B\u0438\u044F \u043C\u0430\u0433"
   MaxHealth: 75
-  Health: 75
+  HealthRegen: 0
+  ManaRegen: 0
   ArmorType: 4
   Armor: 0
   MaxMana: 50
-  Mana: 50
+  Spells: []
   AttackType: 2
   AttackSpeed: 1
-  Attack: 8
+  Damage: 15
   DodgeChance: 0
   Exp: 60
   Gold: 25
   DropItems: []
-  DropStack: 
   CharacterImage: {fileID: 2800000, guid: dff775974fa468e489fe2e98cbda8701, type: 3}
-  Helpers: []
+  lastMagicPriority: 0
+  DefaultActionPoints: 5

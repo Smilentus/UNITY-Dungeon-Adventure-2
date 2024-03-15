@@ -3,29 +3,34 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
   m_Name: Wolverine
   m_EditorClassIdentifier: 
-  Type: 67
+  m_characterPrefab: {fileID: 0}
   Element: 0
+  meetingDescr: 
+  isMeeted: 0
   Name: "\u041E\u0431\u043E\u0440\u043E\u0442\u0435\u043D\u044C"
   MaxHealth: 565
-  Health: 565
+  HealthRegen: 0
+  ManaRegen: 0
   ArmorType: 2
   Armor: 15
   MaxMana: 0
-  Mana: 0
+  Spells: []
   AttackType: 3
   AttackSpeed: 2
-  Attack: 115
+  Damage: 100
   DodgeChance: 5
   Exp: 750
   Gold: 125
   DropItems: []
-  DropStack: 
   CharacterImage: {fileID: 2800000, guid: 55e06eb992f1a0545b74c70c5c5a7b05, type: 3}
+  lastMagicPriority: 0
+  DefaultActionPoints: 5

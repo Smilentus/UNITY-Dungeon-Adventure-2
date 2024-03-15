@@ -3,29 +3,34 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
   m_Name: KrakenMutant
   m_EditorClassIdentifier: 
-  Type: 51
+  m_characterPrefab: {fileID: 0}
   Element: 2
+  meetingDescr: 
+  isMeeted: 0
   Name: "\u041A\u0440\u0430\u043A\u0435\u043D \u041C\u0443\u0442\u0430\u043D\u0442"
   MaxHealth: 2500000
-  Health: 2500000
+  HealthRegen: 0
+  ManaRegen: 0
   ArmorType: 3
   Armor: 1000
   MaxMana: 12000
-  Mana: 1200
+  Spells: []
   AttackType: 1
   AttackSpeed: 10
-  Attack: 1500
+  Damage: 150000
   DodgeChance: 0
   Exp: 3000000
   Gold: 1250000
   DropItems: []
-  DropStack: 
   CharacterImage: {fileID: 2800000, guid: 10cc0244b2c7b9f409007aa8bfe7085b, type: 3}
+  lastMagicPriority: 0
+  DefaultActionPoints: 5

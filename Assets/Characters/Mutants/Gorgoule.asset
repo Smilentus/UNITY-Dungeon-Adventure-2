@@ -3,29 +3,34 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
   m_Name: Gorgoule
   m_EditorClassIdentifier: 
-  Type: 53
+  m_characterPrefab: {fileID: 0}
   Element: 1
+  meetingDescr: 
+  isMeeted: 0
   Name: "\u0413\u043E\u0440\u0433\u0443\u043B\u044C\u044F \u041C\u0443\u0442\u0430\u043D\u0442"
   MaxHealth: 350
-  Health: 350
+  HealthRegen: 0
+  ManaRegen: 0
   ArmorType: 1
   Armor: 15
   MaxMana: 0
-  Mana: 0
+  Spells: []
   AttackType: 1
   AttackSpeed: 2
-  Attack: 35
+  Damage: 35
   DodgeChance: 75
   Exp: 570
   Gold: 125
   DropItems: []
-  DropStack: 
   CharacterImage: {fileID: 2800000, guid: 1a13eabd265bdc34697576c8783c84d2, type: 3}
+  lastMagicPriority: 0
+  DefaultActionPoints: 5

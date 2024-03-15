@@ -3,30 +3,34 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
   m_Name: SkeletWarrior
   m_EditorClassIdentifier: 
-  Type: 34
+  m_characterPrefab: {fileID: 0}
   Element: 0
+  meetingDescr: 
+  isMeeted: 0
   Name: "\u0421\u043A\u0435\u043B\u0435\u0442 \u0432\u043E\u0438\u043D"
   MaxHealth: 50
-  Health: 50
+  HealthRegen: 0
+  ManaRegen: 0
   ArmorType: 1
   Armor: 2
   MaxMana: 0
-  Mana: 0
+  Spells: []
   AttackType: 3
   AttackSpeed: 1
-  Attack: 5
+  Damage: 25
   DodgeChance: 10
   Exp: 35
   Gold: 15
   DropItems: []
-  DropStack: 
   CharacterImage: {fileID: 2800000, guid: de55ebddf33f23e46a6df83d7372a0b8, type: 3}
-  Helpers: []
+  lastMagicPriority: 0
+  DefaultActionPoints: 5

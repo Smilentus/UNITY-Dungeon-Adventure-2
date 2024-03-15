@@ -3,30 +3,34 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 85c017e73d663584191de6eb39fd00dc, type: 3}
   m_Name: OrcOnWolf
   m_EditorClassIdentifier: 
-  Type: 45
+  m_characterPrefab: {fileID: 0}
   Element: 0
+  meetingDescr: 
+  isMeeted: 0
   Name: "\u041E\u0440\u043A \u043D\u0430 \u0432\u043E\u043B\u043A\u0435"
   MaxHealth: 150
-  Health: 150
   HealthRegen: 0
+  ManaRegen: 0
   ArmorType: 1
   Armor: 5
   MaxMana: 0
-  Mana: 0
+  Spells: []
   AttackType: 3
   AttackSpeed: 1
-  Attack: 40
+  Damage: 20
   DodgeChance: 20
-  isStun: 0
   Exp: 200
   Gold: 100
   DropItems: []
   CharacterImage: {fileID: 2800000, guid: 5eb57ecc1e8c01042b28d278bc93c4bc, type: 3}
+  lastMagicPriority: 0
+  DefaultActionPoints: 5
