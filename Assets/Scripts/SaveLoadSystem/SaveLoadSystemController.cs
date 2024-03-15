@@ -30,7 +30,9 @@ public class SaveLoadSystemController : MonoBehaviour
     public string SaveFolderPath => saveFolderPath;
 
 
+    [SerializeField]
     private List<string> PermittedExtensions = new List<string>() { ".savedata", ".json" };
+
 
     private JsonSerializerSettings serializerSettings = new JsonSerializerSettings()
     {
@@ -45,12 +47,8 @@ public class SaveLoadSystemController : MonoBehaviour
     private void Awake()
     {
         saveFolderPath = Path.Combine(Application.persistentDataPath, "Saves");
-    }
 
-
-    private void Start()
-    {
-        TryLoadGameState("AutoSave");
+        instance = this;
     }
 
 

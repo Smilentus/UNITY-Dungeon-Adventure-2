@@ -72,8 +72,8 @@
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\PlayerSaveLoadConverter.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\WorldMapSaveLoadConverter.cs" />
     <Compile Include="Assets\Scripts\GameEventSystem\Profiles\HarvestMineGameEventProfile.cs" />
-    <Compile Include="Assets\Scripts\Managers\SavingManager.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\PlayerSystem\RuntimeBattlePlayerController.cs" />
+    <Compile Include="Assets\Scripts\MainMenu\MainMenuBootstrapper.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\Views\SaveLoadSlotView.cs" />
     <Compile Include="Assets\Scripts\BuffSystem\RuntimeBuffView.cs" />
     <Compile Include="Assets\Scripts\CoreComponentSystem\CoreComponent.cs" />
@@ -103,12 +103,14 @@
     <Compile Include="Assets\Scripts\SerializableMonoScript.cs" />
     <Compile Include="Assets\Scripts\Managers\ArtAndVideoManager.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\ISaveLoadConverter.cs" />
+    <Compile Include="Assets\Scripts\SaveLoadSystem\BetweenScenesLoadableData.cs" />
     <Compile Include="Assets\Scripts\GameTimeFlowSystem\GameTimeFlowEventBaseControllers\GameTimeFlowEventFullMoon.cs" />
     <Compile Include="Assets\Scripts\GameEventSystem\Profiles\AllGameEventsWarehouse.cs" />
     <Compile Include="Assets\Scripts\UpgradeableSystem\IUpgradeableChecker.cs" />
     <Compile Include="Assets\Scripts\Buttons\SkillButton.cs" />
     <Compile Include="Assets\Scripts\Managers\CharactersLibrary.cs" />
     <Compile Include="Assets\Scripts\UpgradeableSystem\UpgradeableObserverComponent.cs" />
+    <Compile Include="Assets\Scripts\SaveLoadSystem\BetweenScenesLoaderAdapter.cs" />
     <Compile Include="Assets\Scripts\BuffSystem\RuntimeBuff.cs" />
     <Compile Include="Assets\Scripts\Magic.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\PlayerSkillsGlobalWindow.cs" />
@@ -142,7 +144,7 @@
     <Compile Include="Assets\Scripts\Buttons\ShortDescriptionObject.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\BaseGameGlobalWindowButton.cs" />
     <Compile Include="Assets\Scripts\CoreComponentSystem\ICore.cs" />
-    <Compile Include="Assets\Scripts\Buttons\saveSlot.cs" />
+    <Compile Include="Assets\Scripts\MainMenu\MainMenuPresenter.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\BaseGameGlobalWindow.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\GlobalWindowsController.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\BuffsSaveLoadConverter.cs" />
@@ -162,7 +164,6 @@
     <Compile Include="Assets\Scripts\MagicSystem\RuntimeMagicObjects\RuntimeMagicObject_SmallFireball.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\InventoryGlobalWindow.cs" />
     <Compile Include="Assets\Scripts\UpgradeableSystem\UpgradeableComponent.cs" />
-    <Compile Include="Assets\Scripts\Managers\MenuManager.cs" />
     <Compile Include="Assets\Scripts\Buttons\InvButton.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\BattleActionSystem\Implementations\BattleActionExecuter_HeavyStrike.cs" />
     <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerLuckSkillComponent.cs" />
@@ -194,7 +195,6 @@
     <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\WorldMapGlobalWindow.cs" />
     <Compile Include="Assets\Scripts\Managers\StorytellerManager.cs" />
     <Compile Include="Assets\Scripts\InventorySystem\BaseMouseItemController.cs" />
-    <Compile Include="Assets\Scripts\Managers\SaveButtonsLoader.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\BattleControllerPresenter.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\GameTimeFlowEventsSaveLoadConverter.cs" />
     <Compile Include="Assets\Scripts\VillageUpgrade.cs" />

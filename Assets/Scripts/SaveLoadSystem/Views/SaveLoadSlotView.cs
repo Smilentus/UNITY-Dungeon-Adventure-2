@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -73,9 +74,9 @@ public class SaveLoadSlotView : MonoBehaviour
 
     private void LoadThisSave()
     {
-        SaveLoadSlotsController.Instance.LoadSaveSlotData(_slotIndex);
+        BetweenScenesLoaderAdapter.Instance.SetLoadablePath(_slotData.SaveFilePath);
 
-        onSlotInteraction?.Invoke();
+        SceneManager.LoadScene("GameScene");
     }
 
     private void ReWriteThisSave()
