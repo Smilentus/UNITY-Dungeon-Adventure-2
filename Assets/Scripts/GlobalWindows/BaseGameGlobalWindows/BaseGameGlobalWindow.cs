@@ -13,9 +13,12 @@ public class BaseGameGlobalWindow : MonoBehaviour, IGlobalWindow
 
     public void Hide()
     {
+        OnHide();
+
         isShown = false;
         this.gameObject.SetActive(false);
     }
+    protected virtual void OnHide() { }
 
     public void SetWindowData(IGlobalWindowData globalWindowData)
     {
@@ -32,7 +35,10 @@ public class BaseGameGlobalWindow : MonoBehaviour, IGlobalWindow
     {
         isShown = true;
         this.gameObject.SetActive(true);
+
+        OnShow();
     }
+    protected virtual void OnShow() { }
 }
 
 public class BaseGameGlobalWindowData : IGlobalWindowData
