@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +7,15 @@ public class LocationInfoGlobalWindow : BaseGameGlobalWindow
 {
     [SerializeField]
     private Image m_locationPreview;
+
+    [SerializeField]
+    private TMP_Text m_locationTitle;
+
+    [SerializeField]
+    private TMP_Text m_locationDescription;
+
+    [SerializeField]
+    private TMP_Text m_travelButtonText;
 
 
     [SerializeField]
@@ -52,8 +60,6 @@ public class LocationInfoGlobalWindow : BaseGameGlobalWindow
     private void OnCancelButton()
     {
         Hide();
-
-        GlobalWindowsController.Instance.TryHideGlobalWindow(typeof(WorldMapGlobalWindow));
     }
 }
 
