@@ -103,21 +103,12 @@ public class SaveLoadSlotsController : MonoBehaviour
     
     public string GetAutoSaveFullFilePath()
     {
+        LoadSaveSlots();
+
         RuntimeSaveLoadSlotData slotData = savedSlots.Find(x => Path.GetFileNameWithoutExtension(x.SaveFilePath).Equals("AutoSave"));
 
         if (slotData == null) return "";
         else return slotData.SaveFilePath;
-    }
-
-
-    public void LoadSaveSlotData(int _slotIndex)
-    {
-        if (_slotIndex < 0 && _slotIndex >= savedSlots.Count)
-        {
-            return;
-        }
-
-        SaveLoadSystemController.Instance.TryLoadAndParseDataFromFile(savedSlots[_slotIndex].SaveFilePath);
     }
 }
 

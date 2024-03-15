@@ -33,4 +33,4 @@ MonoBehaviour:
   DropItems: []
   CharacterImage: {fileID: 2800000, guid: 20394c975c4c48f469abfa97d51ce969, type: 3}
   lastMagicPriority: 0
-  DefaultActionPoints: 5
+  DefaultActionPoints: 2

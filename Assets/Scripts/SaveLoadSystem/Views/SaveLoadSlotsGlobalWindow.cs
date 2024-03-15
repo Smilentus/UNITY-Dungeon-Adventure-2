@@ -36,7 +36,7 @@ public class SaveLoadSlotsGlobalWindow : BaseGameGlobalWindow
         m_closeButton?.onClick.AddListener(Hide);
         m_createNewSaveButton?.onClick.AddListener(() => 
         {
-            _saveLoadSlotsController.CreateNewSaveSlot();
+            SaveLoadSystemController.Instance.TrySaveGameState();
             UpdateSaveSlotsData();
         });
     }

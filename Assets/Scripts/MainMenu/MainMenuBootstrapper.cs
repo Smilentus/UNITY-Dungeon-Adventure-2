@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Analytics;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
@@ -22,12 +19,6 @@ public class MainMenuBootstrapper : MonoBehaviour
     }
 
 
-
-    [SerializeField]
-    private BetweenScenesLoadableData m_loadableData;
-    public BetweenScenesLoadableData LoadableData => m_loadableData;
-
-
     private void Awake()
     {
         SaveLoadSlotsController.Instance.LoadSaveSlots();
@@ -36,7 +27,7 @@ public class MainMenuBootstrapper : MonoBehaviour
 
     public void StartNewGame()
     {
-        m_loadableData.SelectedSaveFileFullPath = "";
+        BetweenScenesLoaderAdapter.Instance.LoadableData.SelectedSaveFileFullPath = "";
 
         SceneManager.LoadScene("GameScene");
     }
@@ -45,7 +36,7 @@ public class MainMenuBootstrapper : MonoBehaviour
     {
         // TODO: ...
         // Тут надо получать последнее сделанное сохранение и загружать его 
-        m_loadableData.SelectedSaveFileFullPath = SaveLoadSlotsController.Instance.GetAutoSaveFullFilePath();
+        BetweenScenesLoaderAdapter.Instance.LoadableData.SelectedSaveFileFullPath = SaveLoadSlotsController.Instance.GetAutoSaveFullFilePath();
 
         SceneManager.LoadScene("GameScene");
     }
@@ -59,7 +50,8 @@ public class MainMenuBootstrapper : MonoBehaviour
     {
         GlobalWindowsController.Instance.TryShowGlobalWindow(
             typeof(AcceptGlobalWindow),
-            new AcceptGlobalWindowData() { 
+            new AcceptGlobalWindowData()
+            {
                 ApplyButtonText = "Выйти из игры",
                 CancelButtonText = "Остаться в игре",
                 GlobalWindowTitle = "Подтверждение выхода",

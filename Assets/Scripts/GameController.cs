@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -138,14 +139,9 @@ public class GameController : MonoBehaviour
 
     public void LoadAutoSave()
     {
-        if (SaveLoadSystemController.Instance.TryLoadGameState("AutoSave"))
-        {
-            Blocker.SetActive(true);
-        }
-        else
-        {
-            // ...
-        }
+        BetweenScenesLoaderAdapter.Instance.LoadableData.SelectedSaveFileFullPath = SaveLoadSlotsController.Instance.GetAutoSaveFullFilePath();
+
+        SceneManager.LoadScene("GameScene");
     }
 
     // Действие при нажатии на кнопку локации
