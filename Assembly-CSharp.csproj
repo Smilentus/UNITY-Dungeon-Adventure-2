@@ -102,6 +102,7 @@
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\CraftingSystemSaveLoadConverter.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\SaveLoadBaseConverter.cs" />
     <Compile Include="Assets\Scripts\SerializableMonoScript.cs" />
+    <Compile Include="Assets\Scripts\CraftingSystem\WorkbenchButtonView.cs" />
     <Compile Include="Assets\Scripts\Managers\ArtAndVideoManager.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\ISaveLoadConverter.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\BetweenScenesLoadableData.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerDamageSkillComponent.cs" />
     <Compile Include="Assets\Scripts\InventorySystem\InventoryControllerPresenter.cs" />
     <Compile Include="Assets\Scripts\GameTimeFlowSystem\GameTimeFlowEventBaseControllers\GameTimeFlowEventBaseController.cs" />
+    <Compile Include="Assets\Scripts\CraftingSystem\CraftingRecipe.cs" />
     <Compile Include="Assets\Scripts\Managers\CraftingManager.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\RuntimeLocationObject.cs" />
     <Compile Include="Assets\Scripts\SerializableInterface.cs" />
@@ -144,6 +146,7 @@
     <Compile Include="Assets\Scripts\MonoScriptPropertyDrawer.cs" />
     <Compile Include="Assets\Scripts\Buttons\ShortDescriptionObject.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\BaseGameGlobalWindowButton.cs" />
+    <Compile Include="Assets\Scripts\CraftingSystem\CraftingRecipesWarehouse.cs" />
     <Compile Include="Assets\Scripts\CoreComponentSystem\ICore.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MainMenuPresenter.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\BaseGameGlobalWindow.cs" />
@@ -160,6 +163,7 @@
     <Compile Include="Assets\Scripts\BattleSystem\PlayerSystem\BattleActionsListView.cs" />
     <Compile Include="Assets\Scripts\Buttons\PanelCraftButton.cs" />
     <Compile Include="Assets\Scripts\InventorySystem\BaseInventoryContainerSlotView.cs" />
+    <Compile Include="Assets\Scripts\CraftingSystem\CraftSystem.cs" />
     <Compile Include="Assets\Scripts\Managers\StatisticsManager.cs" />
     <Compile Include="Assets\Scripts\InventorySystem\BaseInventoryContainer.cs" />
     <Compile Include="Assets\Scripts\MagicSystem\RuntimeMagicObjects\RuntimeMagicObject_SmallFireball.cs" />
@@ -196,14 +200,18 @@
     <Compile Include="Assets\Scripts\Managers\StorytellerManager.cs" />
     <Compile Include="Assets\Scripts\InventorySystem\BaseMouseItemController.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\BattleControllerPresenter.cs" />
+    <Compile Include="Assets\Scripts\CraftingSystem\CraftingWorkbench.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\GameTimeFlowEventsSaveLoadConverter.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\LocationInfoGlobalWindow.cs" />
     <Compile Include="Assets\Scripts\VillageUpgrade.cs" />
+    <Compile Include="Assets\Scripts\CraftingSystem\CraftingWorkbenchProfile.cs" />
     <Compile Include="Assets\Scripts\GameTimeFlowSystem\GameTimeFlowEvent.cs" />
     <Compile Include="Assets\Scripts\SkillsSystem\SkillCore.cs" />
     <Compile Include="Assets\Scripts\Buttons\eventSlot.cs" />
+    <Compile Include="Assets\Scripts\CraftingSystem\WorkbenchesContainer.cs" />
     <Compile Include="Assets\Scripts\Buttons\BuffButton.cs" />
     <Compile Include="Assets\Scripts\Managers\LoadingSceneScript.cs" />
+    <Compile Include="Assets\Scripts\CraftingSystem\BaseWorkbenchRecipesView.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\BattleActionSystem\BattleActionProfile.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\BattleActionSystem\Implementations\BattleActionExecuter_MediumStrike.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\Views\SaveLoadSlotsGlobalWindow.cs" />
@@ -219,6 +227,7 @@
     <Compile Include="Assets\Scripts\Managers\SkillsManager.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\PlayerSystem\RuntimeBattlePlayerControllerPresenter.cs" />
     <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerCriticalChanceSkillComponent.cs" />
+    <Compile Include="Assets\Scripts\CraftingSystem\WorkbenchesContainerPresenter.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\PlayerSkillsSaveLoadConverter.cs" />
     <Compile Include="Assets\Scripts\BuffSystem\PlayerBuffsController.cs" />
     <Compile Include="Assets\Scripts\Buttons\AbilityButton.cs" />

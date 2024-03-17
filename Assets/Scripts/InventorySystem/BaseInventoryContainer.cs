@@ -43,7 +43,7 @@ public class BaseInventoryContainer
         inventoryContainerProfile = _profile;
         inventoryCapacity = _profile.ContainerCapacity;
 
-        CreateNewInventorySlots();
+        CreateNewInventorySlots(); // ”хади отсюдава (TODO)
     }
 
 
@@ -122,7 +122,55 @@ public class BaseInventoryContainer
         return new BaseInventoryAdditionData(_baseItemToAdd, unplacedStacks);
     }
 
-    protected virtual int GetNearestEmptySlotIndex()
+    public bool IsContainsItem(BaseItemProfile profile, int amount = 1)
+    {
+        return GetItemAmount(profile) >= amount;
+    }
+
+    public int GetItemAmount(BaseItemProfile profile)
+    {
+        int itemsAmount = 0;
+
+        foreach (BaseInventoryContainerSlot itemSlot in m_inventorySlots)
+        {
+            if (itemSlot.IsSlotEmpty) continue;
+
+            if (itemSlot.SlotItem.BaseItemProfile.Equals(profile))
+            {
+                itemsAmount += itemSlot.CurrentStack;
+            }
+        }
+
+        return itemsAmount;
+    }
+
+
+    public int TryDeleteItemAmount(BaseItemProfile profile, int amount)
+    {
+        int leftAmount = amount;
+
+        foreach (BaseInventoryContainerSlot slot in m_inventorySlots)
+        {
+            if (leftAmount <= 0) break;
+            if (slot.IsSlotEmpty) continue;
+
+            if (slot.CurrentStack > leftAmount)
+            {
+                slot.CurrentStack -= leftAmount;
+                leftAmount = 0;
+            }
+            else
+            {
+                leftAmount -= slot.CurrentStack;
+                DestroyItem(slot.SlotItem);
+            }
+        }
+
+        return leftAmount;
+    }
+
+
+    protected int GetNearestEmptySlotIndex()
     {
         for (int i = 0; i < m_inventorySlots.Count; i++)
         {
@@ -132,7 +180,7 @@ public class BaseInventoryContainer
         return -1;
     }
 
-    protected virtual int GetNearestSlotWithItemStackDelta(BaseItem _baseItem)
+    protected int GetNearestSlotWithItemStackDelta(BaseItem _baseItem)
     {
         for (int i = 0; i < m_inventorySlots.Count; i++)
         {

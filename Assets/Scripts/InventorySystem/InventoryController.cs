@@ -230,21 +230,37 @@ public class InventoryController : MonoBehaviour
     }
 
 
-    //[Header("Debug")]
-    //public BaseInventoryContainerProfile debugProfile;
+    public bool IsItemContainsInAnyContainer(BaseItemProfile profile, int amount = 1)
+    {
+        return GetItemAmountInAnyContainer(profile) >= amount;
+    }
 
-    //public BaseItemProfile baseItemProfile;
-    //public int itemStack;
+    public int GetItemAmountInAnyContainer(BaseItemProfile profile)
+    {
+        int foundedAmount = 0;
 
-    //[ContextMenu("Add Item")]
-    //public void DebugAddItem()
-    //{
-    //    TryAddItemToAnyContainer(baseItemProfile, itemStack);
-    //}
+        foreach (BaseInventoryContainer baseInventoryContainer in InventoryContainers)
+        {
+            foundedAmount += baseInventoryContainer.GetItemAmount(profile);
+        }
 
-    //[ContextMenu("Add Container")]
-    //public void DebugAddContainer()
-    //{
-    //    AddInventoryContainer(debugProfile);
-    //}
+        return foundedAmount;
+    }
+
+
+    public bool TryRemoveItemFromAnyInventory(BaseItemProfile profile, int amount = 1)
+    {
+        if (GetItemAmountInAnyContainer(profile) < amount) return false;
+
+        int amountLeft = amount;
+
+        foreach (BaseInventoryContainer inventoryContainer in InventoryContainers)
+        {
+            if (amount <= 0) break;
+
+            amountLeft = inventoryContainer.TryDeleteItemAmount(profile, amount);
+        }
+
+        return true;
+    }
 }
