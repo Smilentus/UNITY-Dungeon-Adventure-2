@@ -127,6 +127,7 @@
     <Compile Include="Assets\Scripts\BattleSystem\BattleController.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\BattleActionSystem\IBattleActionInteraction.cs" />
     <Compile Include="Assets\Scripts\producingItem.cs" />
+    <Compile Include="Assets\Scripts\CraftingSystem\CraftInputItemView.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerVillageActivity.cs" />
     <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerManaRegenSkillComponent.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\LocationProfile.cs" />
@@ -154,6 +155,7 @@
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\BuffsSaveLoadConverter.cs" />
     <Compile Include="Assets\Scripts\BuffSystem\BuffManager.cs" />
     <Compile Include="Assets\Scripts\SkillsSystem\ObtainSkillInteraction.cs" />
+    <Compile Include="Assets\Scripts\CraftingSystem\BaseWorkbenchRecipeView.cs" />
     <Compile Include="Assets\Scripts\GameEventSystem\GameEventsExecuters\BaseGameEventsExecuter.cs" />
     <Compile Include="Assets\Scripts\InventorySystem\BaseInventoryContainerView.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\BattleActionSystem\MagicBattleInteractionView.cs" />
@@ -166,6 +168,7 @@
     <Compile Include="Assets\Scripts\CraftingSystem\CraftSystem.cs" />
     <Compile Include="Assets\Scripts\Managers\StatisticsManager.cs" />
     <Compile Include="Assets\Scripts\InventorySystem\BaseInventoryContainer.cs" />
+    <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\ItemDescriptionGlobalWindow.cs" />
     <Compile Include="Assets\Scripts\MagicSystem\RuntimeMagicObjects\RuntimeMagicObject_SmallFireball.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\BaseGameGlobalWindows\InventoryGlobalWindow.cs" />
     <Compile Include="Assets\Scripts\UpgradeableSystem\UpgradeableComponent.cs" />
@@ -211,7 +214,6 @@
     <Compile Include="Assets\Scripts\CraftingSystem\WorkbenchesContainer.cs" />
     <Compile Include="Assets\Scripts\Buttons\BuffButton.cs" />
     <Compile Include="Assets\Scripts\Managers\LoadingSceneScript.cs" />
-    <Compile Include="Assets\Scripts\CraftingSystem\BaseWorkbenchRecipesView.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\BattleActionSystem\BattleActionProfile.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\BattleActionSystem\Implementations\BattleActionExecuter_MediumStrike.cs" />
     <Compile Include="Assets\Scripts\SaveLoadSystem\Views\SaveLoadSlotsGlobalWindow.cs" />

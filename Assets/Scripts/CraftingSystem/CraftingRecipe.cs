@@ -5,6 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "CraftingRecipe", menuName = "CraftingSystem/CraftingRecipe")]
 public class CraftingRecipe : ScriptableObject
 {
+    [SerializeField]
+    protected bool m_autoNameOnValidate;
+
+
     [Header("Info")]
     [TextArea(3, 5)]
     [SerializeField]
@@ -31,6 +35,17 @@ public class CraftingRecipe : ScriptableObject
     [SerializeField]
     private List<InputCraftItem> m_inputCraftItems = new List<InputCraftItem>();
     public List<InputCraftItem> InputCraftItems => m_inputCraftItems;
+
+
+    protected virtual void OnValidate()
+    {
+        if (m_autoNameOnValidate)
+        {
+            if (m_craftedItem == null) return;
+
+            m_recipeName = m_craftedItem.ItemName;
+        }
+    }
 }
 
 

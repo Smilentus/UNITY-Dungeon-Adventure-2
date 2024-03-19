@@ -12,6 +12,16 @@ public class WorkbenchesContainer : MonoBehaviour
     public List<CraftingWorkbenchProfile> AvailableCraftingWorkbenches => _availableCraftingWorkbenches;
 
 
+    public CraftingWorkbenchProfile addable;
+
+
+    [ContextMenu("Add")]
+    public void ADd()
+    {
+        AddCraftingWorkbench(addable);
+    }
+
+
     public void AddCraftingWorkbench(CraftingWorkbenchProfile craftingWorkbench)
     {
         if (craftingWorkbench == null) return;

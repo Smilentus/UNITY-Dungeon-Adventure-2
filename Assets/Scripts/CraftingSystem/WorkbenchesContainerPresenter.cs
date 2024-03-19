@@ -15,7 +15,7 @@ public class WorkbenchesContainerPresenter : MonoBehaviour
 
 
     [SerializeField]
-    private BaseWorkbenchRecipesView m_baseRecipeViewPrefab;
+    private BaseWorkbenchRecipeView m_baseRecipeViewPrefab;
 
     [SerializeField]
     private Transform m_recipesContentParent;
@@ -29,6 +29,12 @@ public class WorkbenchesContainerPresenter : MonoBehaviour
     private void OnDestroy()
     {
         WorkbenchesContainer.onWorkbenchesChanged -= UpdateWorkbenchesUI;
+    }
+
+
+    private void OnEnable()
+    {
+        UpdateWorkbenchesUI();
     }
 
 
@@ -73,7 +79,7 @@ public class WorkbenchesContainerPresenter : MonoBehaviour
     {
         foreach (CraftingRecipe recipe in profile.GetAllCraftingRecipes())
         {
-            BaseWorkbenchRecipesView recipeView = Instantiate(m_baseRecipeViewPrefab, m_recipesContentParent);
+            BaseWorkbenchRecipeView recipeView = Instantiate(m_baseRecipeViewPrefab, m_recipesContentParent);
 
             recipeView.SetData(recipe, OnCraftRecipeButtonPressed);
         }
