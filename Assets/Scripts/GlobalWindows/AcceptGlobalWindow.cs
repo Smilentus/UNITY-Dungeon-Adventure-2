@@ -23,10 +23,10 @@ public class AcceptGlobalWindow : MonoBehaviour, IGlobalWindow
 
 
     [SerializeField]
-    private GlobalWindowButton m_applyButton;
+    private BaseGlobalWindowButton m_applyButton;
 
     [SerializeField]
-    private GlobalWindowButton m_closeButton;
+    private BaseGlobalWindowButton m_closeButton;
 
 
     private void OnEnable()

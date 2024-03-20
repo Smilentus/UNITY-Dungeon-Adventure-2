@@ -20,7 +20,7 @@ public class InfoGlobalWindow : MonoBehaviour, IGlobalWindow
 
 
     [SerializeField]
-    private GlobalWindowButton m_applyButton;
+    private BaseGlobalWindowButton m_applyButton;
 
 
     private void OnEnable()

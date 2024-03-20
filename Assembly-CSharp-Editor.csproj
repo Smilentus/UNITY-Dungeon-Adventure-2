@@ -60,7 +60,7 @@
     <Analyzer Include="C:\MainProgramFiles\Unity Editor Versions\2022.3.19f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Editor\ItemEditor.cs" />
+    <Compile Include="Assets\Scripts\[LEGACY]\Editor\ItemEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.collab-proxy@2.2.0\Lib\Editor\PlasticSCM\Localization\commontypes.ko.txt" />
@@ -1147,9 +1147,9 @@
       <Project>{C140630C-94EB-FB33-FC16-46444975D079}</Project>
       <Name>Unity.Timeline.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Services.Core.csproj">
-      <Project>{CE99699A-94ED-F724-A1C0-73281D3D65A5}</Project>
-      <Name>Unity.Services.Core</Name>
+    <ProjectReference Include="UnityUIExtensions.editor.csproj">
+      <Project>{4DDCC8D6-9BEE-3CD3-DB2B-A747C8633277}</Project>
+      <Name>UnityUIExtensions.editor</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.SpatialTracking.csproj">
       <Project>{95646543-3935-0546-7C31-BACC366C3C09}</Project>
@@ -1179,6 +1179,10 @@
       <Project>{6A0C635B-BE4B-2639-8453-B3B5C3A7EBB7}</Project>
       <Name>UnityEditor.XR.LegacyInputHelpers</Name>
     </ProjectReference>
+    <ProjectReference Include="UnityUIExtensions.csproj">
+      <Project>{8F09AF94-99CC-8E3C-5CF9-ED6AED2B8D45}</Project>
+      <Name>UnityUIExtensions</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Timeline.csproj">
       <Project>{611644F6-8CAC-5CEC-CEBC-9ABB7CC492AF}</Project>
       <Name>Unity.Timeline</Name>
@@ -1195,10 +1199,6 @@
       <Project>{77357676-E83B-4027-FBBA-BEDC693CFC93}</Project>
       <Name>UnityEngine.Purchasing.SecurityCore</Name>
     </ProjectReference>
-    <ProjectReference Include="UnityUIExtensions.editor.csproj">
-      <Project>{4DDCC8D6-9BEE-3CD3-DB2B-A747C8633277}</Project>
-      <Name>UnityUIExtensions.editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.AI.Navigation.Updater.csproj">
       <Project>{4DF1EA53-A32B-3C8D-2355-5BBE317877F2}</Project>
       <Name>Unity.AI.Navigation.Updater</Name>
@@ -1206,6 +1206,10 @@
     <ProjectReference Include="UnityEngine.Purchasing.Codeless.csproj">
       <Project>{A0E9F856-1A7F-EBDB-9710-D03329E4C1FB}</Project>
       <Name>UnityEngine.Purchasing.Codeless</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Services.Core.csproj">
+      <Project>{CE99699A-94ED-F724-A1C0-73281D3D65A5}</Project>
+      <Name>Unity.Services.Core</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.csproj">
       <Project>{CE1F4080-077E-5E77-4970-BFE91618173D}</Project>
@@ -1234,10 +1238,6 @@
     <ProjectReference Include="Unity.VSCode.Editor.csproj">
       <Project>{113E6D5F-7395-9334-DD05-6C0C9063D393}</Project>
       <Name>Unity.VSCode.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityUIExtensions.csproj">
-      <Project>{8F09AF94-99CC-8E3C-5CF9-ED6AED2B8D45}</Project>
-      <Name>UnityUIExtensions</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.Purchasing.csproj">
       <Project>{34ED3932-0C4F-2346-885F-FD832468297C}</Project>

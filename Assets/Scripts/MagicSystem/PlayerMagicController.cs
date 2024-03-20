@@ -30,12 +30,12 @@ public class PlayerMagicController : MonoBehaviour
     }
 
 
-    private void OnMagicAdded(MagicProfile magicProfile)
+    private void OnMagicAdded(BaseMagicProfile magicProfile)
     {
         
     }
 
-    private void OnMagicRemoved(MagicProfile magicProfile)
+    private void OnMagicRemoved(BaseMagicProfile magicProfile)
     {
         
     }

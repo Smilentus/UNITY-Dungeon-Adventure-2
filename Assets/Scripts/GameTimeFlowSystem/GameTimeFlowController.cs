@@ -27,16 +27,16 @@ public class GameTimeFlowController : MonoBehaviour
 
 
     [SerializeField]
-    private List<GameTimeFlowEventBaseController> m_gameTimeFlowEventBaseControllers = new List<GameTimeFlowEventBaseController>();
+    private List<GameTimeFlowEventBase> m_gameTimeFlowEventBaseControllers = new List<GameTimeFlowEventBase>();
 
 
     [SerializeField]
-    private List<GameTimeFlowEvent> m_availableGameTimeFlowEvents = new List<GameTimeFlowEvent>();
-    public List<GameTimeFlowEvent> AvailableGameTimeFlowEvents => m_availableGameTimeFlowEvents;
+    private List<GameTimeFlowEventProfile> m_availableGameTimeFlowEvents = new List<GameTimeFlowEventProfile>();
+    public List<GameTimeFlowEventProfile> AvailableGameTimeFlowEvents => m_availableGameTimeFlowEvents;
 
 
-    private List<GameTimeFlowEvent> currentGameTimeEvents = new List<GameTimeFlowEvent>();
-    public List<GameTimeFlowEvent> CurrentGameTimeFlowEvents => currentGameTimeEvents;
+    private List<GameTimeFlowEventProfile> currentGameTimeEvents = new List<GameTimeFlowEventProfile>();
+    public List<GameTimeFlowEventProfile> CurrentGameTimeFlowEvents => currentGameTimeEvents;
 
 
     public int CurrentDay, CurrentMonth, CurrentYear, CurrentHour;
@@ -52,7 +52,7 @@ public class GameTimeFlowController : MonoBehaviour
         maskData.CurrentHour = CurrentHour;
 
         maskData.ActiveGameTimeFlowEventGUIDs = new List<string>();
-        foreach (GameTimeFlowEventBaseController controller in m_gameTimeFlowEventBaseControllers)
+        foreach (GameTimeFlowEventBase controller in m_gameTimeFlowEventBaseControllers)
         {
             if (controller.IsEventStarted)
             {
@@ -71,7 +71,7 @@ public class GameTimeFlowController : MonoBehaviour
 
         foreach (string eventGUID in maskData.ActiveGameTimeFlowEventGUIDs)
         {
-            GameTimeFlowEventBaseController controller = m_gameTimeFlowEventBaseControllers.Find(x => x.GameTimeFlowEventReference.EventUID == eventGUID);
+            GameTimeFlowEventBase controller = m_gameTimeFlowEventBaseControllers.Find(x => x.GameTimeFlowEventReference.EventUID == eventGUID);
 
             if (controller != null)
             {
@@ -177,7 +177,7 @@ public class GameTimeFlowController : MonoBehaviour
 
     public void ForceFinishGameTimeFlowEvent(string eventUID)
     {
-        GameTimeFlowEventBaseController controller = m_gameTimeFlowEventBaseControllers.Find(x => x.GameTimeFlowEventReference.EventUID == eventUID);
+        GameTimeFlowEventBase controller = m_gameTimeFlowEventBaseControllers.Find(x => x.GameTimeFlowEventReference.EventUID == eventUID);
         if (controller != null)
         {
             controller.FinishEvent();
@@ -188,7 +188,7 @@ public class GameTimeFlowController : MonoBehaviour
 
     public void ForceFinishAllGameTimeFlowEvents()
     {
-        foreach (GameTimeFlowEventBaseController controller in m_gameTimeFlowEventBaseControllers)
+        foreach (GameTimeFlowEventBase controller in m_gameTimeFlowEventBaseControllers)
         {
             if (controller.IsEventStarted)
             {
@@ -202,7 +202,7 @@ public class GameTimeFlowController : MonoBehaviour
     // Случайный ивент связанный с временем
     public void CheckTimeFlowEvents()
     {
-        foreach (GameTimeFlowEventBaseController controller in m_gameTimeFlowEventBaseControllers)
+        foreach (GameTimeFlowEventBase controller in m_gameTimeFlowEventBaseControllers)
         {
             if (controller.IsEventStarted && controller.CanFinishEvent())
             {
@@ -218,7 +218,7 @@ public class GameTimeFlowController : MonoBehaviour
         }
     }
 
-    public void SetTimeFlowEvents(List<GameTimeFlowEvent> gameTimeFlowEvents)
+    public void SetTimeFlowEvents(List<GameTimeFlowEventProfile> gameTimeFlowEvents)
     {
         m_availableGameTimeFlowEvents = gameTimeFlowEvents;
     }
