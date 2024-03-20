@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\BattleSystem\BattleActionSystem\IBattleActionExecuter.cs" />
     <Compile Include="Assets\Scripts\MonoScriptAttribute.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\BattleActionSystem\Implementations\BattleMagicExecuter_BaseActionExecuter.cs" />
+    <Compile Include="Assets\Scripts\CraftingSystem\ItemHelpSource.cs" />
     <Compile Include="Assets\Scripts\InventorySystem\InventoryController.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\GlobalWindowButton.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\IGlobalWindow.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Assets\Scripts\GameTimeFlowSystem\GameTimeFlowEvent.cs" />
     <Compile Include="Assets\Scripts\SkillsSystem\SkillCore.cs" />
     <Compile Include="Assets\Scripts\Buttons\eventSlot.cs" />
+    <Compile Include="Assets\Scripts\CraftingSystem\ItemHelpSourceData.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\WorkbenchesContainer.cs" />
     <Compile Include="Assets\Scripts\Buttons\BuffButton.cs" />
     <Compile Include="Assets\Scripts\Managers\LoadingSceneScript.cs" />
@@ -236,6 +238,7 @@
     <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerHealthRegenSkillComponent.cs" />
     <Compile Include="Assets\Scripts\BuffSystem\BuffsContainer.cs" />
     <Compile Include="Assets\Scripts\UpgradeableSystem\BaseUpgradeableCheckerComponent.cs" />
+    <Compile Include="Assets\Scripts\CraftingSystem\ItemFindHelperView.cs" />
     <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerManaSkillComponent.cs" />
     <Compile Include="Assets\Scripts\Recipe.cs" />
     <Compile Include="Assets\Scripts\Task.cs" />

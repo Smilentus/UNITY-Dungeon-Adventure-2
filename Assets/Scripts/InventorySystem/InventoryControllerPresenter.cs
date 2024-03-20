@@ -55,11 +55,11 @@ public class InventoryControllerPresenter : MonoBehaviour
         controller.onInventoryContainerOpened += OnInventoryContainerOpened;
         controller.onInventoryContainerClosed += OnInventoryContainerClosed;
 
-        
         m_quickSlotsContainer.OpenContainer(controller.QuickSlotsContainer);
 
-
         containerButtonViews = new List<BaseInventoryContainerButtonView>();
+
+        OnInventoryContainersUpdated();
     }
 
     private void OnInventoryContainerClosed(BaseInventoryContainer _container)

@@ -40,10 +40,7 @@ public class WorkbenchButtonView : MonoBehaviour, IPointerClickHandler
 
         _profile = profile;
 
-        if (m_containerIcon != null)
-        {
-            m_containerIcon.sprite = _profile.WorkbenchMiniSprite;
-        }
+        m_containerIcon.sprite = _profile.WorkbenchMiniSprite;
     }
 
     public void SetOpenStatus(bool _isOpened)

@@ -1,9 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Creatable/LocationSystem/New LocationProfile", fileName = "LocationProfile")]
-[System.Serializable]
+
+[CreateAssetMenu(menuName = "LocationSystem/New LocationProfile", fileName = "LocationProfile")]
 public class LocationProfile : ScriptableObject
 {
     [SerializeField]
@@ -21,7 +20,7 @@ public class LocationProfile : ScriptableObject
     ///     Наименование локации
     /// </summary>
     public string LocationTitle => m_locationTitle;
-    
+
 
     [TextArea(5, 10)]
     [SerializeField]
@@ -39,16 +38,16 @@ public class LocationProfile : ScriptableObject
     /// </summary>
     public List<BaseGameEventProfile> LocationEvents => m_locationEvents;
 
-    public BaseGameEventProfile GetRandomLocationEvent 
-        => m_locationEvents.Count > 0 
-            ? m_locationEvents[Random.Range(0, m_locationEvents.Count)] 
+    public BaseGameEventProfile GetRandomLocationEvent
+        => m_locationEvents.Count > 0
+            ? m_locationEvents[Random.Range(0, m_locationEvents.Count)]
             : null;
 
 
     [SerializeField]
-    private List<ItemProfile> m_droppableItems = new List<ItemProfile>();
+    private List<BaseItemProfile> m_droppableItems = new List<BaseItemProfile>();
     /// <summary>
     ///     Список предметов, которые могут выпасть на локации
     /// </summary>
-    public List<ItemProfile> DroppableItems => m_droppableItems;
+    public List<BaseItemProfile> DroppableItems => m_droppableItems;
 }

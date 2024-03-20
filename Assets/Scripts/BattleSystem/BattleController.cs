@@ -267,37 +267,37 @@ public class BattleController : MonoBehaviour
         }
 
         // Добавляем игроку индивидуальные вещи моба
-        for (int j = 0; j < defeatedEnemiesInBattle.Count; j++)
-        {
-            for (int i = 0; i < defeatedEnemiesInBattle[j].DropItems.Length; i++)
-            {
-                int stack;
-                try
-                {
-                    Debug.Log(defeatedEnemiesInBattle[j].DropItems[i].Name + " - " + defeatedEnemiesInBattle[j].DropItems[i].DropStack + " - " + defeatedEnemiesInBattle[j].DropItems[i].ItemID);
-                    stack = UnityEngine.Random.Range(1, defeatedEnemiesInBattle[j].DropItems[i].DropStack);
-                    //Debug.Log("Стак - " + stack);
-                    FindObjectOfType<Inventory>().AddItem(defeatedEnemiesInBattle[j].DropItems[i].ItemID, stack);
-                }
-                catch (System.Exception e)
-                {
-                    Debug.Log("Произошла ошибка при дропе вещи с моба - " + e.Message);
-                }
-            }
-        }
+        //for (int j = 0; j < defeatedEnemiesInBattle.Count; j++)
+        //{
+        //    for (int i = 0; i < defeatedEnemiesInBattle[j].DropItems.Length; i++)
+        //    {
+        //        int stack;
+        //        try
+        //        {
+        //            Debug.Log(defeatedEnemiesInBattle[j].DropItems[i].Name + " - " + defeatedEnemiesInBattle[j].DropItems[i].DropStack + " - " + defeatedEnemiesInBattle[j].DropItems[i].ItemID);
+        //            stack = UnityEngine.Random.Range(1, defeatedEnemiesInBattle[j].DropItems[i].DropStack);
+        //            //Debug.Log("Стак - " + stack);
+        //            FindObjectOfType<Inventory>().AddItem(defeatedEnemiesInBattle[j].DropItems[i].ItemID, stack);
+        //        }
+        //        catch (System.Exception e)
+        //        {
+        //            Debug.Log("Произошла ошибка при дропе вещи с моба - " + e.Message);
+        //        }
+        //    }
+        //}
 
 
         // Дроп с локации
-        if (LocationsController.Instance.CurrentLocation != null)
-        {
-            for (int i = 0; i < LocationsController.Instance.CurrentLocation.DroppableItems.Count; i++)
-            {
-                if (UnityEngine.Random.Range(0, 101) <= LocationsController.Instance.CurrentLocation.DroppableItems[i].ChanceToFind + RuntimePlayer.Instance.RuntimePlayerStats.Luck)
-                {
-                    FindObjectOfType<Inventory>().AddItem(LocationsController.Instance.CurrentLocation.DroppableItems[i].ItemID, 1);
-                }
-            }
-        }
+        //if (LocationsController.Instance.CurrentLocation != null)
+        //{
+        //    for (int i = 0; i < LocationsController.Instance.CurrentLocation.DroppableItems.Count; i++)
+        //    {
+        //        if (UnityEngine.Random.Range(0, 101) <= LocationsController.Instance.CurrentLocation.DroppableItems[i].ChanceToFind + RuntimePlayer.Instance.RuntimePlayerStats.Luck)
+        //        {
+        //            FindObjectOfType<Inventory>().AddItem(LocationsController.Instance.CurrentLocation.DroppableItems[i].ItemID, 1);
+        //        }
+        //    }
+        //}
     }
 
     public void ForceKillAllEnemies()

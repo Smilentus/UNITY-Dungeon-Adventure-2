@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef21fca07247b543af5aa3ab789639a, type: 3}
   m_Name: OceanHole_LocationProfile
   m_EditorClassIdentifier: 
+  m_locationPreviewSprite: {fileID: 21300000, guid: 7e778ed57850115499e2df8169df417b,
+    type: 3}
   m_locationTitle: "\u041E\u0433\u0440\u043E\u043C\u043D\u0430\u044F \u043C\u043E\u0440\u0441\u043A\u0430\u044F
     \u0432\u043F\u0430\u0434\u0438\u043D\u0430"
   m_locationDescription: 

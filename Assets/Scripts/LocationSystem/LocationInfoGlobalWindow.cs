@@ -39,6 +39,8 @@ public class LocationInfoGlobalWindow : BaseGameGlobalWindow
         if (infoData != null)
         {
             m_locationPreview.sprite = infoData.LocationProfile.LocationPreviewSprite;
+            m_locationTitle.text = infoData.LocationProfile.LocationTitle;
+            m_locationDescription.text = infoData.LocationProfile.LocationDescription;
         }
     }
 
