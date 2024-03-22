@@ -24,6 +24,11 @@ public class BaseUpgradeableSkillCheckerComponent : BaseUpgradeableCheckerCompon
         }
     }
 
+    public override string GetDescription()
+    {
+        return $"Необходимо {m_skillPointsCost} ОН";
+    }
+
     public override bool CanUpgrade()
     {
         return m_skillPointsCost <= RuntimePlayer.Instance.RuntimePlayerStats.SkillPoints;

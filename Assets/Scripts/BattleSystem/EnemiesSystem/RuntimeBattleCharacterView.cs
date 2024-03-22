@@ -28,7 +28,7 @@ public class RuntimeBattleCharacterView : MonoBehaviour
 
         double healthRatio = (drawerData.runtimeBattleCharacter.Health / drawerData.runtimeBattleCharacter.MaxHealth);
 
-        m_characterHealthText.text = $"{drawerData.runtimeBattleCharacter.Health}/{drawerData.runtimeBattleCharacter.MaxHealth}  ({(healthRatio * 100).ToString("f2")})%";
+        m_characterHealthText.text = $"{drawerData.runtimeBattleCharacter.Health.ToString("f0")}/{drawerData.runtimeBattleCharacter.MaxHealth.ToString("f0")}  ({(healthRatio * 100f).ToString("f2")})%";
         m_characterHealthBar.fillAmount = (float)healthRatio;
     }
 }

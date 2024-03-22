@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class PlayerDamageSkillComponent : BaseSkillComponent
 {
+    double delta = 2f;
+
+    public override List<string> GetDeltaValues(int level)
+    {
+        return new List<string>()
+        {
+            $"Наносимый урон +{level * delta}"
+        };
+    }
+
     public override void OnUpgraded(int level)
     {
-        double delta = skillCore.UpgradeableComponent.currentLevel * 2;
-
-        RuntimePlayer.Instance.RuntimePlayerStats.Damage += delta;
+        RuntimePlayer.Instance.RuntimePlayerStats.Damage += skillCore.UpgradeableComponent.currentLevel * delta;
     }
 }

@@ -212,8 +212,6 @@ public class BattleController : MonoBehaviour
 
         ClearBattleData();
 
-        //FindObjectOfType<SavingManager>().SaveGame("AutoSave");
-
         foreach (CharacterProfile characterProfile in characters)
         {
             AddEnemyToBattle(characterProfile);
@@ -225,8 +223,8 @@ public class BattleController : MonoBehaviour
 
         m_runtimeBattlePlayerController.InitializeBattlePlayer();
 
-        FindObjectOfType<PanelsManager>().OpenHideActionPanel(0, true);
-
+        GlobalWindowsController.Instance.TryShowGlobalWindow(typeof(BattleGlobalWindow));
+        
         onBattleStatusChanged?.Invoke(true);
         StartPlayerTurn();
     }
@@ -240,7 +238,6 @@ public class BattleController : MonoBehaviour
         {
             WinCondition();
             SaveLoadSystemController.Instance.TrySaveGameState("AutoSave");
-            //FindObjectOfType<SavingManager>().SaveGame("AutoSave");
         }
 
         isWin = false;
@@ -250,8 +247,7 @@ public class BattleController : MonoBehaviour
 
         waitButton.SetActive(true);
 
-        // Закрываем панели
-        FindObjectOfType<PanelsManager>().CloseAllActionPanels();
+        GlobalWindowsController.Instance.TryHideGlobalWindow(typeof(BattleGlobalWindow));
     }
 
     // Выдача предметов за победу

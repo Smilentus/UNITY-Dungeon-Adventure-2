@@ -69,6 +69,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Services.Core.Network
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Services.Core.Scheduler", "Unity.Services.Core.Scheduler.csproj", "{481F0EE2-85F5-7677-1C17-FFC840741F03}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-firstpass", "Assembly-CSharp-firstpass.csproj", "{027EF233-7283-6DBF-0F82-A101ED3435A2}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Services.Analytics.Editor", "Unity.Services.Analytics.Editor.csproj", "{017CF76A-03BD-459B-CE1C-F7D337471124}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.VSCode.Editor", "Unity.VSCode.Editor.csproj", "{113E6D5F-7395-9334-DD05-6C0C9063D393}"
@@ -265,6 +267,10 @@ Global
 		{481F0EE2-85F5-7677-1C17-FFC840741F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{481F0EE2-85F5-7677-1C17-FFC840741F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{481F0EE2-85F5-7677-1C17-FFC840741F03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{027EF233-7283-6DBF-0F82-A101ED3435A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{027EF233-7283-6DBF-0F82-A101ED3435A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{027EF233-7283-6DBF-0F82-A101ED3435A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{027EF233-7283-6DBF-0F82-A101ED3435A2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{017CF76A-03BD-459B-CE1C-F7D337471124}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{017CF76A-03BD-459B-CE1C-F7D337471124}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{017CF76A-03BD-459B-CE1C-F7D337471124}.Release|Any CPU.ActiveCfg = Release|Any CPU

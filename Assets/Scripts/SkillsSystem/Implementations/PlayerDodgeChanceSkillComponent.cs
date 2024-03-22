@@ -1,13 +1,20 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class PlayerDodgeChanceSkillComponent : BaseSkillComponent
 {
+    private double delta = 1f;
+
+
+    public override List<string> GetDeltaValues(int level)
+    {
+        return new List<string>()
+        {
+            $"Шанс уклонения +{(delta).ToString("f2")}%"
+        };
+    }
+
     public override void OnUpgraded(int level)
     {
-        double delta = 1f;
-
         RuntimePlayer.Instance.RuntimePlayerStats.DodgeChance += delta;
     }
 }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -14,6 +16,26 @@ public class SkillCore : Core
 
 
     public bool isSkillReachedMax => m_upgradeableComponent.reachedMaxUpgrades;
+
+
+    private List<BaseSkillComponent> skillComponents = new List<BaseSkillComponent>();
+
+    
+    // Переделай, дружище =(
+    public List<string> GetSkillDeltaValues(int level)
+    {
+        if (skillComponents.Count == 0)
+            skillComponents = GetComponentsInChildren<BaseSkillComponent>().ToList();
+        
+        List<string> output = new List<string>();
+
+        foreach (BaseSkillComponent baseSkillComponent in skillComponents)
+        {
+            output.AddRange(baseSkillComponent.GetDeltaValues(level));
+        }
+
+        return output;
+    }
 
 
     public override void BuildWithComponents()

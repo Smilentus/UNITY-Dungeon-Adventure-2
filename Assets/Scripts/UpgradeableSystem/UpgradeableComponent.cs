@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI.Extensions;
 
 [System.Serializable] public class UnityEventInt : UnityEvent<int> { }
 
@@ -54,7 +55,16 @@ public class UpgradeableComponent : CoreComponent
     {
         base.InjectComponent(core);
 
-        upgradeableCheckers = GetComponentsInChildren<IUpgradeableChecker>(true).ToList();
+        GetCheckers();
+    }
+
+
+    private void GetCheckers()
+    {
+        if (upgradeableCheckers.Count == 0)
+        {
+            upgradeableCheckers = GetComponentsInChildren<IUpgradeableChecker>(true).ToList();
+        }
     }
 
     /// <summary>
@@ -78,6 +88,25 @@ public class UpgradeableComponent : CoreComponent
         return true;
     }
 
+    public List<SkillUpgradeDescriptionData> GetUpgradeDescriptions()
+    {
+        GetCheckers();
+
+        List<SkillUpgradeDescriptionData> output = new List<SkillUpgradeDescriptionData>();
+
+        foreach (IUpgradeableChecker upgradeableChecker in upgradeableCheckers)
+        {
+            SkillUpgradeDescriptionData description = new SkillUpgradeDescriptionData()
+            {
+                IsAccomplished = upgradeableChecker.CanUpgrade(),
+                Description = upgradeableChecker.GetDescription()
+            };
+            output.Add(description);
+        }
+
+        return output;
+    }
+
     private void CheckMaxUpgrades(bool invokeEvents = true)
     {
         if (maxUpgradesLevel != -1 && m_currentLevel >= m_maxUpgradesLevel)
@@ -95,7 +124,7 @@ public class UpgradeableComponent : CoreComponent
 
     public void LoadLevel(int loadableLevel)
     {
-        upgradeableCheckers = GetComponentsInChildren<IUpgradeableChecker>(true).ToList();
+        GetCheckers();
 
         m_currentLevel = loadableLevel;
 
@@ -107,8 +136,10 @@ public class UpgradeableComponent : CoreComponent
         CheckMaxUpgrades(false);
     }
 
-    private bool CanUpgradeLevel(int upgradeableLevel)
+    public bool CanUpgradeLevel(int upgradeableLevel)
     {
+        GetCheckers();
+
         IUpgradeableChecker[] checkers = upgradeableCheckers.Where(x => x.CheckLevel == upgradeableLevel).ToArray();
 
         foreach (IUpgradeableChecker checker in checkers)
@@ -121,9 +152,18 @@ public class UpgradeableComponent : CoreComponent
 
     private void PostUpgradeCheckers()
     {
+        GetCheckers();
+
         foreach (IUpgradeableChecker upgradeableChecker in upgradeableCheckers)
         {
             upgradeableChecker.PostUpgrade();
         }
     }
+}
+
+
+public struct SkillUpgradeDescriptionData
+{
+    public bool IsAccomplished;
+    public string Description;
 }

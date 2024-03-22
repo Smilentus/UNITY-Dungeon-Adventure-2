@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 
-public class BaseSkillComponent : CoreComponent
+public abstract class BaseSkillComponent : CoreComponent
 {
     protected SkillCore skillCore;
 
@@ -27,7 +25,8 @@ public class BaseSkillComponent : CoreComponent
         skillCore.UpgradeableComponent.OnMaxUpgradesReached -= OnMaxLvlReached;
     }
 
-
-    public virtual void OnUpgraded(int level) {  }
     public virtual void OnMaxLvlReached() { }
+    public abstract void OnUpgraded(int level);
+
+    public abstract List<string> GetDeltaValues(int level);
 }

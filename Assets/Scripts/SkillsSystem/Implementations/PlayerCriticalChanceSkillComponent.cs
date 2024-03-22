@@ -5,6 +5,14 @@ using UnityEngine;
 
 public class PlayerCriticalChanceSkillComponent : BaseSkillComponent
 {
+    public override List<string> GetDeltaValues(int level)
+    {
+        return new List<string>()
+        {
+            $"Шанс нанести критический урон +15%"
+        };
+    }
+
     public override void OnUpgraded(int level)
     {
         double delta = 1.5f;

@@ -30,6 +30,11 @@ public class BaseUpgradeableCheckerComponent : CoreComponent, IUpgradeableChecke
         m_checkLevel = level + 1;
     }
 
+    public virtual string GetDescription() 
+    {
+        return $"[Условие улучшения не описано]";
+    }
+
     protected virtual void ProcessUpgrade() { }
 
     public virtual bool CanUpgrade() { return true; }

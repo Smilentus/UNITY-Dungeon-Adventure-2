@@ -45,6 +45,18 @@ public class PlayerSkillsController : MonoBehaviour
         return playerSkills.Find(x => x.skillProfile.skillGUID == skillGUID);
     }
 
+    public int GetPlayerSkillLevelByGUID(string skillGUID)
+    {
+        PlayerSkill skill = GetPlayerSkillByGUID(skillGUID);
+
+        if (skill != null)
+        {
+            return skill.runtimeSkillCore.UpgradeableComponent.currentLevel;
+        }
+
+        return -1;
+    }
+
 
     /// <summary>
     ///     «десь провер€ем имеетс€ ли данный навык у игрока
@@ -61,15 +73,15 @@ public class PlayerSkillsController : MonoBehaviour
         }
         else
         {
-            PlayerSkill playerSkill = AddNewSkill(skillProfile);
-            
-            if (playerSkill == null)
+            if (skillProfile.skillCorePrefab.UpgradeableComponent.CanUpgradeLevel(1))
             {
-                return false;
+                PlayerSkill playerSkill = AddNewSkill(skillProfile);
+
+                return playerSkill != null;
             }
             else
             {
-                return true;
+                return false;
             }
         }
     }

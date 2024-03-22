@@ -28,7 +28,8 @@ public class BaseGlobalWindowButton : MonoBehaviour
 
     public void SetButtonTitle(string buttonTitle)
     {
-        m_buttonTitle.text = buttonTitle;
+        if (m_buttonTitle != null)
+            m_buttonTitle.text = buttonTitle;
     }
 
     private void OnButtonClicked()

@@ -23,7 +23,16 @@ public class ObtainSkillInteraction : MonoBehaviour, IPointerClickHandler
             return;
         }
 
-        PlayerSkillsController.instance.TryObtainPlayerSkill(m_skillProfile);
+        GlobalWindowsController.Instance.TryShowGlobalWindow(typeof(ObtainSkillGlobalWindow), new ObtainSkillGlobalWindowData()
+        {
+            Profile = m_skillProfile,
+            OnApply = Apply
+        });
+
+        void Apply()
+        {
+            PlayerSkillsController.instance.TryObtainPlayerSkill(m_skillProfile);
+        }
     }
 
     public void OnPointerClick(PointerEventData eventData)
