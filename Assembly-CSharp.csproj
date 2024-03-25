@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\GameEventSystem\Profiles\HarvestMineGameEventProfile.cs" />
     <Compile Include="Assets\Scripts\[LEGACY]\Buttons\InvButton.cs" />
     <Compile Include="Assets\Scripts\[LEGACY]\Buttons\TaskButton.cs" />
+    <Compile Include="Assets\Scripts\CinematicSystem\InputHandlers\CinematicsKeyboardInputHandler.cs" />
     <Compile Include="Assets\Scripts\GameTimeFlowSystem\GTFEvents\GameTimeFlowEventFullMoon.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\PlayerSystem\RuntimeBattlePlayerController.cs" />
     <Compile Include="Assets\Scripts\[LEGACY]\BuffSystem\BuffManager.cs" />
@@ -116,15 +117,18 @@
     <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\Interfaces\ISaveLoadConverter.cs" />
     <Compile Include="Assets\Scripts\[LEGACY]\NeededItem.cs" />
     <Compile Include="Assets\Scripts\BuffSystem\Views\RuntimeBuffView.cs" />
+    <Compile Include="Assets\Scripts\Utilities\ScreenFader.cs" />
     <Compile Include="Assets\Scripts\[LEGACY]\Skill.cs" />
     <Compile Include="Assets\Scripts\GameEventSystem\Profiles\AllGameEventsWarehouse.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\Base\BaseGameGlobalWindowSelector.cs" />
     <Compile Include="Assets\Scripts\UpgradeableSystem\UpgradeableObserverComponent.cs" />
     <Compile Include="Assets\Scripts\BuffSystem\RuntimeBuff.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\Controllers\BattleController.cs" />
+    <Compile Include="Assets\Scripts\CinematicSystem\Views\ArtCinematicsView.cs" />
     <Compile Include="Assets\Scripts\InventorySystem\BaseMouse\BaseMouseControllerPresenter.cs" />
     <Compile Include="Assets\Scripts\ShortDescriptionObject\ShortDescriptionObject.cs" />
     <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerDodgeChanceSkillComponent.cs" />
+    <Compile Include="Assets\Scripts\CinematicSystem\Views\CinematicsKeyboardInputHandlerView.cs" />
     <Compile Include="Assets\Scripts\Utilities\FadeEffectController.cs" />
     <Compile Include="Assets\Scripts\LocationSystem\GlobalWindow\LocationInfoGlobalWindow.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\Workbenches\Containers\WorkbenchesContainer.cs" />
@@ -156,6 +160,7 @@
     <Compile Include="Assets\Scripts\BattleSystem\CharacterProfile.cs" />
     <Compile Include="Assets\Scripts\[LEGACY]\Managers\BeginningScript.cs" />
     <Compile Include="Assets\Scripts\VoiceSystem\Subtitles\SubtitlesPresenter.cs" />
+    <Compile Include="Assets\Scripts\CinematicSystem\InputHandlers\ICinematicsInputHandler.cs" />
     <Compile Include="Assets\Scripts\MainMenu\MainMenuPresenter.cs" />
     <Compile Include="Assets\Scripts\[LEGACY]\Managers\TasksManager.cs" />
     <Compile Include="Assets\Scripts\BuffSystem\Containers\BuffsContainerPresenter.cs" />
@@ -236,8 +241,10 @@
     <Compile Include="Assets\Scripts\Utilities\SerializableInterface.cs" />
     <Compile Include="Assets\Scripts\InventorySystem\BaseInventoryContainer\BaseInventoryContainerSlotView.cs" />
     <Compile Include="Assets\Scripts\GameEventSystem\GameEventsExecuters\ExploreLocationGameEventsExecuter.cs" />
+    <Compile Include="Assets\Scripts\VoiceSystem\Voice\VoiceController.cs" />
     <Compile Include="Assets\Scripts\[LEGACY]\VillagePart.cs" />
     <Compile Include="Assets\Scripts\InventorySystem\BaseInventoryContainer\BaseInventoryContainer.cs" />
+    <Compile Include="Assets\Scripts\CinematicSystem\Observers\ArtCinematicsObserver.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\PlayerSystem\RuntimeBattlePlayerControllerPresenter.cs" />
     <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerCriticalChanceSkillComponent.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\Workbenches\Views\BaseWorkbenchRecipeView.cs" />
@@ -253,15 +260,16 @@
     <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerHealthRegenSkillComponent.cs" />
     <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerManaSkillComponent.cs" />
     <Compile Include="Assets\Scripts\[LEGACY]\Managers\HeroAbilityManager.cs" />
+    <Compile Include="Assets\Scripts\CinematicSystem\Observers\BaseCinematicsObserver.cs" />
     <Compile Include="Assets\Scripts\InventorySystem\BaseInventoryContainer\BaseInventoryContainerProfile.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\Recipes\CraftingRecipe.cs" />
     <Compile Include="Assets\Scripts\[LEGACY]\AnimationsScripts\PlayerActionsAnimator.cs" />
     <Compile Include="Assets\Scripts\CraftingSystem\Recipes\Views\CraftInputItemView.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\BattleActions\Implementations\BattleActionExecuter_BaseActionExecuter.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\PlayerSkillsGlobalWindow.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Managers\faderScript.cs" />
     <Compile Include="Assets\Scripts\BuffSystem\BuffsWarehouse.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\BattleActions\Views\ActionPointsBattleInteractionView.cs" />
+    <Compile Include="Assets\Scripts\VoiceSystem\Adapters\VoiceToSubtitleAdapter.cs" />
     <Compile Include="Assets\Scripts\BattleSystem\BattleActions\Implementations\BattleActionExecuter_LightStrike.cs" />
     <Compile Include="Assets\Scripts\SkillsSystem\PlayerSkillsController.cs" />
     <Compile Include="Assets\Scripts\GlobalWindows\Base\BaseGameGlobalWindow.cs" />
@@ -1240,6 +1248,14 @@
     <ProjectReference Include="Unity.Timeline.csproj">
       <Project>{611644F6-8CAC-5CEC-CEBC-9ABB7CC492AF}</Project>
       <Name>Unity.Timeline</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.InputSystem.csproj">
+      <Project>{6F83E398-ADD0-C476-8232-3F486E5A6CA4}</Project>
+      <Name>Unity.InputSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.InputSystem.ForUI.csproj">
+      <Project>{848B2BB1-17AD-8E07-9054-68A495CB2D58}</Project>
+      <Name>Unity.InputSystem.ForUI</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Services.Core.Environments.csproj">
       <Project>{EF867567-9701-A581-1E6A-DF5857FD9098}</Project>

@@ -2,16 +2,8 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class InfoGlobalWindow : MonoBehaviour, IGlobalWindow
+public class InfoGlobalWindow : BaseGameGlobalWindow
 {
-    private InfoGlobalWindowData windowData;
-    public IGlobalWindowData globalWindowData { get => windowData; }
-
-
-    private bool m_isShown;
-    public bool IsShown => m_isShown;
-
-
     [SerializeField]
     private TMP_Text m_windowTitle;
 
@@ -33,44 +25,21 @@ public class InfoGlobalWindow : MonoBehaviour, IGlobalWindow
         m_applyButton.onButtonClicked.RemoveListener(Apply);
     }
 
-
-    public void SetWindowData(IGlobalWindowData globalWindowData)
+    protected override void OnShow()
     {
-        if (globalWindowData.GetType().Equals(typeof(InfoGlobalWindowData)))
-        {
-            windowData = globalWindowData as InfoGlobalWindowData;
+        InfoGlobalWindowData data = GetConvertedWindowData<InfoGlobalWindowData>();
 
-            m_windowTitle.text = windowData.GlobalWindowTitle;
-            m_windowDescription.text = windowData.InfoMessage;
+        m_windowTitle.text = data.GlobalWindowTitle;
+        m_windowDescription.text = data.InfoMessage;
 
-            m_applyButton.SetButtonTitle(windowData.ApplyButtonText);
-        }
-    }
-
-    public void Show(IGlobalWindowData globalWindowData)
-    {
-        SetWindowData(globalWindowData);
-        Show();
-    }
-
-    public void Show()
-    {
-        this.gameObject.SetActive(true);
-    }
-
-    public void Hide()
-    {
-        this.gameObject.SetActive(false);
+        m_applyButton.SetButtonTitle(data.ApplyButtonText);
     }
 
     public void Apply()
     {
-        if (windowData != null)
+        if (GlobalWindowData != null)
         {
-            if (windowData.OnApply != null)
-            {
-                windowData.OnApply();
-            }
+            GetConvertedWindowData<InfoGlobalWindowData>()?.OnApply();
         }
 
         Hide();

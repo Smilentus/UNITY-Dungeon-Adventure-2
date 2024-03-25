@@ -22,6 +22,7 @@ public class MainMenuBootstrapper : MonoBehaviour
     private void Awake()
     {
         SaveLoadSlotsController.Instance.LoadSaveSlots();
+        ScreenFader.Instance.FadeOutScreen();
     }
 
 

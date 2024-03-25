@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a67e1e2bfbf4df34f914753d62def068, type: 3}
+  m_Name: _CinematicSequence_FirstEnter
+  m_EditorClassIdentifier: 
+  <Sequence>k__BackingField:
+  - {fileID: 11400000, guid: 124eb1f8abfb8334d96b0a5bbc7a88f5, type: 2}
+  - {fileID: 11400000, guid: bce4bdedd2340274fbfb23622adea070, type: 2}
+  - {fileID: 11400000, guid: 934354af3748a634c8d255f08f0997f3, type: 2}
+  - {fileID: 11400000, guid: cd3abb2e7909e3543af27f941e3e0c71, type: 2}
+  - {fileID: 11400000, guid: c635b47b082840a4eb2b711f10645d6c, type: 2}
+  - {fileID: 11400000, guid: a29509a4970d4f04bb5f4a6ae338b9bf, type: 2}

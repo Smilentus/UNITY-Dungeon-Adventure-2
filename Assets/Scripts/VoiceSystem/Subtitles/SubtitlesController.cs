@@ -20,36 +20,24 @@ public class SubtitlesController : MonoBehaviour
 
 
     public event Action<SubtitleViewData> onVoiceClipPlayedWithSubtitles;
+    public event Action onForceHide;
 
 
-    public void OnVoiceClipPlayed(BaseVoiceClipData voiceClipData)
+    public void ForceHide()
+    {
+        onForceHide?.Invoke();
+    }
+
+    public void OnVoiceClipPlayed(BaseVoiceClipData voiceClipData, float subtitleLength)
     {
         SubtitleViewData subtitleData = new SubtitleViewData()
         {
             subtitleAuthor = voiceClipData.VoiceAuthor.AuthorName,
             subtitleAuthorColor = voiceClipData.VoiceAuthor.SubtitleAuthorColor,
             subtitleBody = voiceClipData.SubtitlesBody,
-            subtitleLength = CalculateSubtitlesShownSeconds(voiceClipData)
+            subtitleLength = subtitleLength
         };
 
         onVoiceClipPlayedWithSubtitles?.Invoke(subtitleData);
-    }
-
-
-    private float CalculateSubtitlesShownSeconds(BaseVoiceClipData data)
-    {
-        if (data != null)
-        {
-            if (data.VoiceClip != null)
-            {
-                return data.VoiceClip.length + 0.25f;
-            }
-            else
-            {
-                return (data.SubtitlesBody.Trim().Replace(" ", "").Length * 0.05f) + 0.25f;
-            }
-        }
-
-        return 1f;
     }
 }

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class BaseVoiceSubtitlesView : MonoBehaviour
 {
+    public event System.Action<BaseVoiceSubtitlesView> onDestroyed;
+
+
     [SerializeField]
     protected TMP_Text m_subtitlesBodyTMP;
 
@@ -21,11 +24,12 @@ public class BaseVoiceSubtitlesView : MonoBehaviour
         m_fadeEffectController.onFadeIn -= OnFadedIn;
         m_fadeEffectController.onFadeOut -= OnFadedOut;
 
-
         if (delayedFadingCoroutine != null)
         {
             StopCoroutine(delayedFadingCoroutine);
         }
+
+        onDestroyed?.Invoke(this);
     }
 
 
@@ -35,8 +39,8 @@ public class BaseVoiceSubtitlesView : MonoBehaviour
 
         m_subtitlesBodyTMP.text = $"<color=#{ColorUtility.ToHtmlStringRGB(viewData.subtitleAuthorColor)}>{viewData.subtitleAuthor}</color>   {viewData.subtitleBody}";
 
-        m_fadeEffectController.onFadeOut += OnFadedOut;
-        m_fadeEffectController.FadeOut();
+        m_fadeEffectController.onFadeIn += OnFadedIn;
+        m_fadeEffectController.FadeIn();
     }
 
 
@@ -44,13 +48,13 @@ public class BaseVoiceSubtitlesView : MonoBehaviour
     {
         yield return new WaitForSeconds(_delaySeconds);
 
-        m_fadeEffectController.onFadeIn += OnFadedIn;
-        m_fadeEffectController.FadeIn();
+        m_fadeEffectController.onFadeOut += OnFadedOut;
+        m_fadeEffectController.FadeOut();
     }
 
-    private void OnFadedOut()
+    private void OnFadedIn()
     {
-        m_fadeEffectController.onFadeOut -= OnFadedOut;
+        m_fadeEffectController.onFadeIn -= OnFadedIn;
 
         if (delayedFadingCoroutine != null)
         {
@@ -60,9 +64,9 @@ public class BaseVoiceSubtitlesView : MonoBehaviour
         delayedFadingCoroutine = StartCoroutine(DelayedFadingProcessing(attachedViewData.subtitleLength));
     }
 
-    private void OnFadedIn()
+    private void OnFadedOut()
     {
-        m_fadeEffectController.onFadeIn -= OnFadedIn;
+        m_fadeEffectController.onFadeOut -= OnFadedOut;
 
         Destroy(this.gameObject);
     }

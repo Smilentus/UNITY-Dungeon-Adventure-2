@@ -1,20 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class AcceptGlobalWindow : MonoBehaviour, IGlobalWindow
+
+public class AcceptGlobalWindow : BaseGameGlobalWindow
 {
-    private AcceptGlobalWindowData windowData;
-    public IGlobalWindowData globalWindowData { get => windowData; }
-
-
-    private bool m_isShown;
-    public bool IsShown => m_isShown;
-
-
     [SerializeField]
     private TMP_Text m_windowTitle;
 
@@ -32,7 +22,7 @@ public class AcceptGlobalWindow : MonoBehaviour, IGlobalWindow
     private void OnEnable()
     {
         m_applyButton.onButtonClicked.AddListener(Apply);
-        m_closeButton.onButtonClicked.AddListener(Close);   
+        m_closeButton.onButtonClicked.AddListener(Close);
     }
 
     private void OnDisable()
@@ -41,45 +31,38 @@ public class AcceptGlobalWindow : MonoBehaviour, IGlobalWindow
         m_closeButton.onButtonClicked.RemoveListener(Close);
     }
 
-    public void SetWindowData(IGlobalWindowData globalWindowData)
+
+    protected override void OnShow()
     {
-        if (globalWindowData.GetType().Equals(typeof(AcceptGlobalWindowData)))
-        {
-            windowData = globalWindowData as AcceptGlobalWindowData;
+        AcceptGlobalWindowData data = GetConvertedWindowData<AcceptGlobalWindowData>();
 
-            m_windowTitle.text = windowData.GlobalWindowTitle;
-            m_windowDescription.text = windowData.GlobalWindowDescription;
+        m_windowTitle.text = data.GlobalWindowTitle;
+        m_windowDescription.text = data.GlobalWindowDescription;
 
-            m_applyButton.SetButtonTitle(windowData.ApplyButtonText);
-            m_closeButton.SetButtonTitle(windowData.CancelButtonText);
-        }
+        m_applyButton.SetButtonTitle(data.ApplyButtonText);
+        m_closeButton.SetButtonTitle(data.CancelButtonText);
     }
 
-    public void Show(IGlobalWindowData globalWindowData)
-    {
-        SetWindowData(globalWindowData);
-        Show();
-    }
-
-    public void Show()
-    {
-        this.gameObject.SetActive(true);
-    }
-
-    public void Hide()
-    {
-        this.gameObject.SetActive(false);
-    }
 
     public void Apply()
     {
-        windowData.OnApply();
+        AcceptGlobalWindowData data = GetConvertedWindowData<AcceptGlobalWindowData>();
+        if (data != null)
+        {
+            data?.OnApply?.Invoke();
+        }
+
         Hide();
     }
 
     public void Close()
     {
-        windowData.OnCancel();
+        AcceptGlobalWindowData data = GetConvertedWindowData<AcceptGlobalWindowData>();
+        if (data != null)
+        {
+            data?.OnCancel?.Invoke();
+        }
+
         Hide();
     }
 }
@@ -89,8 +72,8 @@ public class AcceptGlobalWindowData : IGlobalWindowData
     public string GlobalWindowTitle { get; set; } = "Подтверждение";
     public string GlobalWindowDescription { get; set; } = "Подтвердить действие?";
 
-    public Action OnApply;
-    public Action OnCancel;
+    public Action OnApply = null;
+    public Action OnCancel = null;
 
     public string ApplyButtonText = "Подтвердить";
     public string CancelButtonText = "Отменить";

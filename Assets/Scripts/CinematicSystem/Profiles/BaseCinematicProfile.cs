@@ -5,11 +5,16 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "BaseCinematicProfile", menuName = "CinematicSystem/New BaseCinematicProfile")]
 public partial class BaseCinematicProfile : ScriptableObject
 {
-    [field: SerializeField]
-    public string Title { get; protected set; }
+    [TextArea(3, 5)]
+    [SerializeField]
+    private string m_title;
+    public string Title => m_title;
 
-    [field: SerializeField]
-    public string Body { get; protected set; }
+
+    [TextArea(5, 10)]
+    [SerializeField]
+    private string m_body;
+    public string Body => m_body;
 
 
     [field: SerializeField]

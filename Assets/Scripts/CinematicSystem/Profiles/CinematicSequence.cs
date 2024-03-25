@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,5 +7,5 @@ using UnityEngine;
 public class CinematicSequence : ScriptableObject
 {
     [field: SerializeField]
-    public BaseCinematicProfile Sequence { get; private set; }
+    public List<BaseCinematicProfile> Sequence { get; private set; }
 }

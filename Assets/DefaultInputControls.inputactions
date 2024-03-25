@@ -1,0 +1,34 @@
+{
+    "name": "DefaultInputControls",
+    "maps": [
+        {
+            "name": "Game",
+            "id": "aad05cd8-2e16-45f8-bf39-8076c1bfd686",
+            "actions": [
+                {
+                    "name": "SkipCinematics",
+                    "type": "Button",
+                    "id": "e8ebe0e7-c949-467e-a2b5-816221b44e08",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "07970253-79f2-49af-abae-c3dd79b0b5d9",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkipCinematics",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

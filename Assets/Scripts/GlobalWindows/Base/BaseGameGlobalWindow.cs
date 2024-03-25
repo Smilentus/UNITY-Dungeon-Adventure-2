@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class BaseGameGlobalWindow : MonoBehaviour, IGlobalWindow
 {
-    private BaseGameGlobalWindowData windowData;
-    public IGlobalWindowData globalWindowData => windowData;
+    private IGlobalWindowData _globalWindowData;
+    public IGlobalWindowData GlobalWindowData => _globalWindowData;
 
 
-    public T GetConvertedWindowData<T>() => (T)globalWindowData;
+    public T GetConvertedWindowData<T>() => (T)GlobalWindowData;
 
 
     private bool isShown;
@@ -25,7 +25,7 @@ public class BaseGameGlobalWindow : MonoBehaviour, IGlobalWindow
 
     public void SetWindowData(IGlobalWindowData globalWindowData)
     {
-        windowData = globalWindowData as BaseGameGlobalWindowData;
+        _globalWindowData = globalWindowData;
     }
 
     public void Show(IGlobalWindowData globalWindowData)

@@ -1199,6 +1199,14 @@
       <Project>{611644F6-8CAC-5CEC-CEBC-9ABB7CC492AF}</Project>
       <Name>Unity.Timeline</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.InputSystem.csproj">
+      <Project>{6F83E398-ADD0-C476-8232-3F486E5A6CA4}</Project>
+      <Name>Unity.InputSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.InputSystem.ForUI.csproj">
+      <Project>{848B2BB1-17AD-8E07-9054-68A495CB2D58}</Project>
+      <Name>Unity.InputSystem.ForUI</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.Services.Core.Environments.csproj">
       <Project>{EF867567-9701-A581-1E6A-DF5857FD9098}</Project>
       <Name>Unity.Services.Core.Environments</Name>

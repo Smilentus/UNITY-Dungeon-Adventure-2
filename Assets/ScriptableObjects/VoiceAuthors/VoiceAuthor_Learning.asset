@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: VoiceAuthor_Learning
   m_EditorClassIdentifier: 
   <AuthorName>k__BackingField: "\u041E\u0431\u0443\u0447\u0435\u043D\u0438\u0435"
-  <SubtitleAuthorColor>k__BackingField: {r: 1, g: 0.85414684, b: 0.051886797, a: 1}
+  <SubtitleAuthorColor>k__BackingField: {r: 0.05098039, g: 0.5993303, b: 1, a: 1}

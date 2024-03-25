@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,19 +26,19 @@ public class ObtainSkillGlobalWindow : BaseGameGlobalWindow
     private Button m_closeButton;
 
     [SerializeField]
-    private Button m_applyButton;
+    private Button m_upgradeButton;
 
 
     private void OnEnable()
     {
         m_closeButton.onClick.AddListener(Hide);
-        m_applyButton.onClick.AddListener(OnApplyButtonPressed);
+        m_upgradeButton.onClick.AddListener(OnApplyButtonPressed);
     }
 
     private void OnDisable()
     {
         m_closeButton.onClick.RemoveListener(Hide);
-        m_applyButton.onClick.RemoveListener(OnApplyButtonPressed);
+        m_upgradeButton.onClick.RemoveListener(OnApplyButtonPressed);
     }
 
 
@@ -53,35 +54,63 @@ public class ObtainSkillGlobalWindow : BaseGameGlobalWindow
         PlayerSkill playerSkill = PlayerSkillsController.instance.GetPlayerSkillByGUID(data.Profile.skillGUID);
 
         int currentSkillLevel = -1;
+        bool isMaxUpgraded = false;
         List<string> deltaValues = new List<string>();
 
         if (playerSkill != null)
         {
             currentSkillLevel = playerSkill.runtimeSkillCore.UpgradeableComponent.currentLevel;
             deltaValues = playerSkill.runtimeSkillCore.GetSkillDeltaValues(currentSkillLevel + 1);
+            isMaxUpgraded = playerSkill.runtimeSkillCore.UpgradeableComponent.reachedMaxUpgrades;
         }
         else
         {
+            isMaxUpgraded = false;
             deltaValues = data.Profile.skillCorePrefab.GetSkillDeltaValues(1);
         }
 
         SkillLevelData currentLevelData = currentSkillLevel == -1 ? null : data.Profile.GetLevelData(currentSkillLevel);
         SkillLevelData nextLevelData = data.Profile.GetLevelData(currentSkillLevel + 1);
 
-        m_currentSkillView.SetData(currentLevelData, currentSkillLevel);
-        m_nextSkillView.SetData(nextLevelData, currentSkillLevel + 1, deltaValues);
+        ClearUpgradesDescription();
 
-        DrawUpgradesDescription(playerSkill);
+        if (isMaxUpgraded)
+        {
+            m_upgradeButton.gameObject.SetActive(false);
 
+            m_currentSkillView.SetData(currentLevelData, currentSkillLevel);
+            m_nextSkillView.SetData(null, 0, null);
+
+            SkillUpgradeDescriptionView view = Instantiate(m_neededUpgradePrefab, m_neededUpgradesContentParent);
+            view.SetData(new SkillUpgradeDescriptionData() 
+            {
+                Description = "Достигнут макс. уровень!",
+                IsAccomplished = true
+            });
+        }
+        else
+        {
+            m_upgradeButton.gameObject.SetActive(true);
+
+            m_currentSkillView.SetData(currentLevelData, currentSkillLevel);
+            m_nextSkillView.SetData(nextLevelData, currentSkillLevel + 1, deltaValues);
+
+            DrawUpgradesDescription(playerSkill);
+        }
     }
 
-    private void DrawUpgradesDescription(PlayerSkill playerSkill)
+    private void ClearUpgradesDescription()
     {
+        m_neededUpgradesContentParent.gameObject.SetActive(true);
+
         for (int i = m_neededUpgradesContentParent.childCount - 1; i >= 0; i--)
         {
             Destroy(m_neededUpgradesContentParent.GetChild(i).gameObject);
         }
+    }
 
+    private void DrawUpgradesDescription(PlayerSkill playerSkill)
+    {
         List<SkillUpgradeDescriptionData> skillUpgrades = new List<SkillUpgradeDescriptionData>();
 
         if (playerSkill == null)

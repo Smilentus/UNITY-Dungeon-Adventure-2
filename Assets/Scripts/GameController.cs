@@ -52,7 +52,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        FindObjectOfType<faderScript>().FadeScreenOut();
+        ScreenFader.Instance.FadeOutScreen();
     }
 
     private void Update()
@@ -131,10 +131,30 @@ public class GameController : MonoBehaviour
 
     public void ExitToMainMenu()
     {
-        SaveLoadSystemController.Instance.TrySaveGameState("AutoSave");
-        //FindObjectOfType<SavingManager>().SaveGame("AutoSave");
-        FindObjectOfType<faderScript>().FadeScreen("MenuScene");
-        Blocker.SetActive(true);
+        GlobalWindowsController.Instance.TryShowGlobalWindow(typeof(AcceptGlobalWindow), new AcceptGlobalWindowData()
+        {
+            GlobalWindowTitle = "Выход в меню",
+            GlobalWindowDescription = "Вы действительно хотите покинуть этот прекрасный игровой мир и вернуться в меню?",
+            ApplyButtonText = "Выйти в меню",
+            CancelButtonText = "Вернуться в игру",
+            OnApply = OnExitApplied
+        });
+
+        void OnExitApplied()
+        {
+            SaveLoadSystemController.Instance.TrySaveGameState("AutoSave");
+            ScreenFader.Instance.FadeInScreen();
+
+            ScreenFader.Instance.FadeEffectController.onFadeIn += OnFadeIn;
+        }
+
+        // Ладно пускай будет так...
+        void OnFadeIn()
+        {
+            ScreenFader.Instance.FadeEffectController.onFadeIn -= OnFadeIn;
+
+            SceneManager.LoadScene("MenuScene");
+        }
     }
 
     public void LoadAutoSave()

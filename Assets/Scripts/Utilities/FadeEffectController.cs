@@ -22,11 +22,9 @@ public class FadeEffectController : MonoBehaviour
 
     private Sequence faderSequence;
 
-    public void FadeIn()
-    {
-        if (faderSequence != null)
-            faderSequence.Kill();
 
+    public void ForceFadeIn()
+    {
         FaderCanvasGroup.alpha = 1;
 
         if (ChangeInteractableStates)
@@ -34,26 +32,21 @@ public class FadeEffectController : MonoBehaviour
             FaderCanvasGroup.interactable = true;
             FaderCanvasGroup.blocksRaycasts = true;
         }
-
-        faderSequence = DOTween.Sequence();
-
-        faderSequence.Append(FaderCanvasGroup.DOFade(0, FadeTimeInSeconds));
-        faderSequence.OnComplete(() => {
-
-            if (ChangeInteractableStates)
-            {
-                FaderCanvasGroup.interactable = false;
-                FaderCanvasGroup.blocksRaycasts = false;
-            }
-
-            onFadeIn?.Invoke();
-        });
-
-        faderSequence.Play();
     }
-     
 
-    public void FadeOut()
+    public void ForceFadeOut()
+    {
+        FaderCanvasGroup.alpha = 0;
+
+        if (ChangeInteractableStates)
+        {
+            FaderCanvasGroup.interactable = false;
+            FaderCanvasGroup.blocksRaycasts = false;
+        }
+    }
+
+
+    public void FadeIn()
     {
         if (faderSequence != null)
             faderSequence.Kill();
@@ -70,6 +63,36 @@ public class FadeEffectController : MonoBehaviour
 
         faderSequence.Append(FaderCanvasGroup.DOFade(1, FadeTimeInSeconds));
         faderSequence.OnComplete(() => {
+            onFadeIn?.Invoke();
+        });
+
+        faderSequence.Play();
+    }
+     
+
+    public void FadeOut()
+    {
+        if (faderSequence != null)
+            faderSequence.Kill();
+
+        FaderCanvasGroup.alpha = 1;
+
+        if (ChangeInteractableStates)
+        {
+            FaderCanvasGroup.interactable = true;
+            FaderCanvasGroup.blocksRaycasts = true;
+        }
+
+        faderSequence = DOTween.Sequence();
+
+        faderSequence.Append(FaderCanvasGroup.DOFade(0, FadeTimeInSeconds));
+        faderSequence.OnComplete(() => {
+            if (ChangeInteractableStates)
+            {
+                FaderCanvasGroup.interactable = false;
+                FaderCanvasGroup.blocksRaycasts = false;
+            }
+
             onFadeOut?.Invoke();
         });
 

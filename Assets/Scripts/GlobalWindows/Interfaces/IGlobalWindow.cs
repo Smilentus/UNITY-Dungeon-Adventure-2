@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IGlobalWindow
 {
-    public IGlobalWindowData globalWindowData { get; }
+    public IGlobalWindowData GlobalWindowData { get; }
 
     public bool IsShown { get; }
 
