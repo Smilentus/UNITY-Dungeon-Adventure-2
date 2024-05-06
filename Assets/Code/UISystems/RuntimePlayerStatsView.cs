@@ -1,3 +1,4 @@
+using System;
 using Dimasyechka.Code.GameTimeFlowSystem.Controllers;
 using Dimasyechka.Code.LocationSystem.Controllers;
 using Dimasyechka.Lubribrary.RxMV.Core;
@@ -73,21 +74,22 @@ namespace Dimasyechka.Code.UISystems
 
         private GameTimeFlowController _gameTimeFlowController;
         private LocationsController _locationsController;
+        private RuntimePlayer _runtimePlayer;
 
 
         [Inject]
-        public void Construct(GameTimeFlowController gameTimeFlowController, LocationsController locationsController)
+        public void Construct(GameTimeFlowController gameTimeFlowController, LocationsController locationsController, RuntimePlayer runtimePlayer)
         {
             _gameTimeFlowController = gameTimeFlowController;
             _locationsController = locationsController;
+            _runtimePlayer = runtimePlayer;
         }
 
 
-        protected override void OnSetupModel()
+        private void Awake()
         {
-            // ...    
+            SetupModel(_runtimePlayer);
         }
-
 
         // TODO: Переделать модель на реактивки + добавить туда сериализацию с реактивок
         private void Update()

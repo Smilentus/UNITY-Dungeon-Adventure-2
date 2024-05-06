@@ -3891,8 +3891,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c642ce41ae9a6b4c9ac4872d6adcf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _locationProfile: {fileID: 0}
-  _travelHours: 1
+  _locationProfile: {fileID: 11400000, guid: eb6615b3140bbe54aa4df96c7bc9ccfe, type: 2}
+  _travelHours: 3
 --- !u!1 &153745748
 GameObject:
   m_ObjectHideFlags: 0
@@ -5739,8 +5739,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c642ce41ae9a6b4c9ac4872d6adcf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _locationProfile: {fileID: 0}
-  _travelHours: 1
+  _locationProfile: {fileID: 11400000, guid: d34619fb7124b7345a22f7b2d61befef, type: 2}
+  _travelHours: 3
 --- !u!1 &239112670
 GameObject:
   m_ObjectHideFlags: 0
@@ -10876,12 +10876,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d797a212d1828054ea24d7610d61edc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _locationPreview: {fileID: 0}
-  _locationTitle: {fileID: 0}
-  _locationDescription: {fileID: 0}
-  _travelButtonText: {fileID: 0}
-  _travelButton: {fileID: 0}
-  _cancelButton: {fileID: 0}
+  _locationPreview: {fileID: 1585584668}
+  _locationTitle: {fileID: 1340149647}
+  _locationDescription: {fileID: 1650527779}
+  _travelButtonText: {fileID: 1171737409}
+  _travelButton: {fileID: 1191265512}
+  _cancelButton: {fileID: 1627262739}
 --- !u!1 &424059165
 GameObject:
   m_ObjectHideFlags: 0
@@ -15385,8 +15385,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c642ce41ae9a6b4c9ac4872d6adcf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _locationProfile: {fileID: 0}
-  _travelHours: 1
+  _locationProfile: {fileID: 11400000, guid: 29beb82ed03684c4bb98e1e60bfbc0ca, type: 2}
+  _travelHours: 3
 --- !u!1 &571428845
 GameObject:
   m_ObjectHideFlags: 0
@@ -24375,7 +24375,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1561713450}
   m_HandleRect: {fileID: 1561713449}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -24707,7 +24707,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 274.09995}
+  m_AnchoredPosition: {x: 0, y: 274.1001}
   m_SizeDelta: {x: 314.98, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &896862604
@@ -25296,8 +25296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c642ce41ae9a6b4c9ac4872d6adcf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _locationProfile: {fileID: 0}
-  _travelHours: 1
+  _locationProfile: {fileID: 11400000, guid: 4bfd1374f912f4843b50edd38f3095dd, type: 2}
+  _travelHours: 3
 --- !u!1 &931355763
 GameObject:
   m_ObjectHideFlags: 0
@@ -32307,8 +32307,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c642ce41ae9a6b4c9ac4872d6adcf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _locationProfile: {fileID: 0}
-  _travelHours: 1
+  _locationProfile: {fileID: 11400000, guid: 84f0cac288d096f48b612f11636156dd, type: 2}
+  _travelHours: 3
 --- !u!1 &1187193303
 GameObject:
   m_ObjectHideFlags: 0
@@ -44418,8 +44418,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c642ce41ae9a6b4c9ac4872d6adcf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _locationProfile: {fileID: 0}
-  _travelHours: 1
+  _locationProfile: {fileID: 11400000, guid: c4c2c1ee3c5daa845a49d29325353311, type: 2}
+  _travelHours: 3
 --- !u!1 &1584541375
 GameObject:
   m_ObjectHideFlags: 0
@@ -51868,8 +51868,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1018819571}
   m_HandleRect: {fileID: 1018819570}
   m_Direction: 2
-  m_Value: 1.0000008
-  m_Size: 0.688264
+  m_Value: 1.0000002
+  m_Size: 0.6877571
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -53490,8 +53490,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c642ce41ae9a6b4c9ac4872d6adcf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _locationProfile: {fileID: 0}
-  _travelHours: 1
+  _locationProfile: {fileID: 11400000, guid: 899c69f51623b714cb26d170b7198bc6, type: 2}
+  _travelHours: 3
 --- !u!1 &1835395711
 GameObject:
   m_ObjectHideFlags: 0
@@ -55501,8 +55501,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c642ce41ae9a6b4c9ac4872d6adcf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _locationProfile: {fileID: 0}
-  _travelHours: 1
+  _locationProfile: {fileID: 11400000, guid: 5e4650fde078a3243810dadcae57440e, type: 2}
+  _travelHours: 3
 --- !u!1 &1932450841
 GameObject:
   m_ObjectHideFlags: 0
@@ -62116,10 +62116,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <WorkbenchesContainer>k__BackingField: {fileID: 175886416}
-  _buttonViewPrefab: {fileID: 0}
-  _workbenchesContentParent: {fileID: 0}
-  _baseRecipeViewPrefab: {fileID: 0}
-  _recipesContentParent: {fileID: 0}
+  _buttonViewPrefab: {fileID: 5363306428582250303, guid: 0d3aa808331b05a4b9c1bf0f0a331643,
+    type: 3}
+  _workbenchesContentParent: {fileID: 172992820}
+  _baseRecipeViewPrefab: {fileID: 7015927655154628168, guid: 985989225b8511f44a7af698de184fd2,
+    type: 3}
+  _recipesContentParent: {fileID: 1085095642}
 --- !u!1 &2117041136
 GameObject:
   m_ObjectHideFlags: 0
@@ -62306,8 +62308,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c642ce41ae9a6b4c9ac4872d6adcf6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _locationProfile: {fileID: 0}
-  _travelHours: 1
+  _locationProfile: {fileID: 11400000, guid: 9a26d4c4d2a11e845b6ceb5065ecbffd, type: 2}
+  _travelHours: 3
 --- !u!1 &2122454800
 GameObject:
   m_ObjectHideFlags: 0
