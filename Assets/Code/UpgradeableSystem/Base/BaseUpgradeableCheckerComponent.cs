@@ -7,22 +7,22 @@ namespace Dimasyechka.Code.UpgradeableSystem.Base
     public class BaseUpgradeableCheckerComponent : CoreComponent, IUpgradeableChecker
     {
         [SerializeField]
-        protected int m_checkLevel = 0;
-        public int CheckLevel => m_checkLevel;
+        protected int _checkLevel = 0;
+        public int CheckLevel => _checkLevel;
 
 
         [Tooltip("True -> бесконечное увеличение уровней проверки")]
         [SerializeField]
-        protected bool m_autoRaiseCheckLevel = false;
+        protected bool _autoRaiseCheckLevel = false;
 
 
         public virtual void PostUpgrade()
         {
             ProcessUpgrade();
 
-            if (m_autoRaiseCheckLevel)
+            if (_autoRaiseCheckLevel)
             {
-                m_checkLevel++;
+                _checkLevel++;
             }
         }
 
@@ -30,7 +30,7 @@ namespace Dimasyechka.Code.UpgradeableSystem.Base
         {
             // Важно добавлять +1 к уровню, потому что мы загружаем текущий уровень навыка
             // А здесь нам необходимо устанавливать тот уровень, который мы проверяем для следующего улучшения
-            m_checkLevel = level + 1;
+            _checkLevel = level + 1;
         }
 
         public virtual string GetDescription() 

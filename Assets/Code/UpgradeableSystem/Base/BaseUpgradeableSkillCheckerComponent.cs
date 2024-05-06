@@ -1,19 +1,29 @@
 using Dimasyechka.Code.SkillsSystem.Core;
 using UnityEngine;
+using Zenject;
 
 namespace Dimasyechka.Code.UpgradeableSystem.Base
 {
     public class BaseUpgradeableSkillCheckerComponent : BaseUpgradeableCheckerComponent
     {
         [SerializeField]
-        protected int m_skillPointsCost;
+        protected int _skillPointsCost;
 
         [SerializeField]
-        protected int m_skillPointsCostRaiseValue;
+        protected int _skillPointsCostRaiseValue;
 
         [Tooltip("Увеличение цены навыка на Y каждый X уровень")]
         [SerializeField]
-        protected int m_everyLevelRaiseSkillPoints;
+        protected int _everyLevelRaiseSkillPoints;
+
+
+        protected RuntimePlayer _runtimePlayer;
+
+        [Inject]
+        public void Construct(RuntimePlayer runtimePlayer)
+        {
+            _runtimePlayer = runtimePlayer;
+        }
 
 
         public override void LoadUpgradeableLevel(int level)
@@ -28,12 +38,12 @@ namespace Dimasyechka.Code.UpgradeableSystem.Base
 
         public override string GetDescription()
         {
-            return $"Необходимо {m_skillPointsCost} ОН";
+            return $"Необходимо {_skillPointsCost} ОН";
         }
 
         public override bool CanUpgrade()
         {
-            return m_skillPointsCost <= RuntimePlayer.Instance.RuntimePlayerStats.SkillPoints;
+            return _skillPointsCost <= _runtimePlayer.RuntimePlayerStats.SkillPoints;
         }
 
         public override void PostUpgrade()
@@ -46,15 +56,15 @@ namespace Dimasyechka.Code.UpgradeableSystem.Base
 
         protected override void ProcessUpgrade()
         {
-            RuntimePlayer.Instance.RuntimePlayerStats.SkillPoints -= m_skillPointsCost;
+            _runtimePlayer.RuntimePlayerStats.SkillPoints -= _skillPointsCost;
         }
 
     
         protected void CalculateSkillCost(int skillLevel)
         {
-            if (skillLevel % m_everyLevelRaiseSkillPoints == 0)
+            if (skillLevel % _everyLevelRaiseSkillPoints == 0)
             {
-                m_skillPointsCost += m_skillPointsCostRaiseValue;
+                _skillPointsCost += _skillPointsCostRaiseValue;
             }
         }
     }

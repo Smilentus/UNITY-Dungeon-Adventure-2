@@ -15,7 +15,7 @@ namespace Dimasyechka.Code.BattleSystem.EnemiesSystem
             for (int i = 0; i < ActionPoints; i++)
             {
                 // Надо какой-то общий метод, который будет наносить урон такому-то игроку с такими-то дебафами и такими-то атаками
-                RuntimePlayer.Instance.DealDamage(characterProfile.Damage, false);
+                _runtimePlayer.DealDamage(CharacterProfile.Damage, false);
             }
         }
     }

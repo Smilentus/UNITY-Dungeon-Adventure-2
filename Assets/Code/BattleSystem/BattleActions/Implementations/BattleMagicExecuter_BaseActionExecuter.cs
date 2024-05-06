@@ -1,30 +1,42 @@
-using System;
 using Dimasyechka.Code.BattleSystem.BattleActions.Interfaces;
 using Dimasyechka.Code.BattleSystem.Controllers;
 using Dimasyechka.Code.MagicSystem.Profiles;
+using System;
 using UnityEngine;
+using Zenject;
 
 namespace Dimasyechka.Code.BattleSystem.BattleActions.Implementations
 {
-    public class BattleMagicExecuter_BaseActionExecuter : MonoBehaviour, IBattleActionExecuter
+    public class BattleMagicExecuterBaseActionExecuter : MonoBehaviour, IBattleActionExecuter
     {
         public event Action<int> OnCooldownPassed;
 
 
-        protected IBattleActionInteraction battleActionInteraction;
-        public IBattleActionInteraction BattleActionInteraction { get => battleActionInteraction; set => battleActionInteraction = value; }
+        protected IBattleActionInteraction _battleActionInteraction;
+        public IBattleActionInteraction BattleActionInteraction { get => _battleActionInteraction; set => _battleActionInteraction = value; }
 
 
-        protected BaseMagicProfile magicProfile;
+        protected BaseMagicProfile _magicProfile;
 
 
-        protected int cooldownValue;
-        public int CooldownValue => cooldownValue;
+        protected int _cooldownValue;
+        public int CooldownValue => _cooldownValue;
 
 
-        public float CooldownRatio => magicProfile != null 
-            ? (float)cooldownValue / (float)magicProfile.DefaultCooldownHours
+        public float CooldownRatio => _magicProfile != null
+            ? (float)_cooldownValue / (float)_magicProfile.DefaultCooldownHours
             : 0f;
+
+
+        protected RuntimePlayer _runtimePlayer;
+        protected BattleController _battleController;
+
+        [Inject]
+        public void Construct(RuntimePlayer runtimePlayer, BattleController battleController)
+        {
+            _runtimePlayer = runtimePlayer;
+            _battleController = battleController;
+        }
 
 
         public virtual bool CanExecuteAction()
@@ -39,19 +51,19 @@ namespace Dimasyechka.Code.BattleSystem.BattleActions.Implementations
 
         public virtual void SetInteraction(IBattleActionInteraction _interaction)
         {
-            if (battleActionInteraction == null)
+            if (_battleActionInteraction == null)
             {
-                battleActionInteraction = _interaction;
+                _battleActionInteraction = _interaction;
             }
 
-            magicProfile = _interaction as BaseMagicProfile;
+            _magicProfile = _interaction as BaseMagicProfile;
         }
 
         public virtual void EveryTurnCheck(BattleController.TurnStatus turnStatus)
         {
             if (turnStatus == BattleController.TurnStatus.PlayerTurn)
             {
-                SetSkillCooldown(cooldownValue - 1);
+                SetSkillCooldown(_cooldownValue - 1);
             }
         }
 
@@ -59,21 +71,21 @@ namespace Dimasyechka.Code.BattleSystem.BattleActions.Implementations
         {
             SpendPlayerMana();
 
-            SetSkillCooldown(magicProfile.DefaultCooldownHours);
+            SetSkillCooldown(_magicProfile.DefaultCooldownHours);
         }
 
 
         public virtual void SetSkillCooldown(int _cooldown)
         {
-            cooldownValue = _cooldown;
+            _cooldownValue = _cooldown;
 
-            OnCooldownPassed?.Invoke(cooldownValue);
+            OnCooldownPassed?.Invoke(_cooldownValue);
         }
 
 
         public virtual bool IsCooldownPassed()
         {
-            if (cooldownValue <= 0)
+            if (_cooldownValue <= 0)
             {
                 return true;
             }
@@ -85,7 +97,7 @@ namespace Dimasyechka.Code.BattleSystem.BattleActions.Implementations
 
         public virtual bool IsManaCostAvailable()
         {
-            if (RuntimePlayer.Instance.RuntimePlayerStats.Mana >= magicProfile.DefaultManaPointsCost)
+            if (_runtimePlayer.RuntimePlayerStats.Mana >= _magicProfile.DefaultManaPointsCost)
             {
                 return true;
             }
@@ -97,7 +109,7 @@ namespace Dimasyechka.Code.BattleSystem.BattleActions.Implementations
 
         public virtual void SpendPlayerMana()
         {
-            RuntimePlayer.Instance.RuntimePlayerStats.Mana -= magicProfile.DefaultManaPointsCost;
+            _runtimePlayer.RuntimePlayerStats.Mana -= _magicProfile.DefaultManaPointsCost;
         }
     }
 }

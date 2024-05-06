@@ -1,62 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Dimasyechka.Code.GameEventSystem.Controllers;
+﻿using Dimasyechka.Code.GameEventSystem.Controllers;
 using Dimasyechka.Code.GameEventSystem.Profiles;
-using Dimasyechka.Code.GameTimeFlowSystem.Controllers;
 using Dimasyechka.Code.GlobalWindows.Controllers;
 using Dimasyechka.Code.LocationSystem.GlobalWindow;
 using Dimasyechka.Code.LocationSystem.Profiles;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Dimasyechka.Code.GameTimeFlowSystem.Controllers;
 using UnityEngine;
+using Zenject;
 
 namespace Dimasyechka.Code.LocationSystem.Controllers
 {
     [System.Serializable]
     public class LocationsController : MonoBehaviour
     {
-        // ===========
-        private static LocationsController instance;
-        public static LocationsController Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = FindObjectOfType<LocationsController>(true);
-                }
-
-                return instance;
-            }
-        }
-
-
         public event Action<LocationProfile> onTravelToLocation;
         public event Action<LocationProfile> onLocationExplored;
 
 
         [Tooltip("Сюда добавляем все доступные локации в игре")]
         [SerializeField]
-        private List<LocationProfile> m_allLocations = new List<LocationProfile>();
+        private List<LocationProfile> _allLocations = new List<LocationProfile>();
 
 
-        private List<RuntimeLocationObject> m_locationObjects = new List<RuntimeLocationObject>();
+        private List<RuntimeLocationObject> _locationObjects = new List<RuntimeLocationObject>();
 
 
-        private List<LocationProfile> m_exploredLocations = new List<LocationProfile>();
+        private List<LocationProfile> _exploredLocations = new List<LocationProfile>();
         /// <summary>
         ///     Список всех изученных локаций игроком
         /// </summary>
-        public List<LocationProfile> ExploredLocations => m_exploredLocations;
+        public List<LocationProfile> ExploredLocations => _exploredLocations;
 
 
-        private LocationProfile currentLocation;
+        private LocationProfile _currentLocation;
         /// <summary>
         ///     Текущая локация на которой мы находимся
         /// </summary>
-        public LocationProfile CurrentLocation => currentLocation;
+        public LocationProfile CurrentLocation => _currentLocation;
 
 
-        private RuntimeLocationObject currentRuntimeLocationObject;
+        private RuntimeLocationObject _currentRuntimeLocationObject;
+
+
+        private GameTimeFlowController _gameTimeFlowController;
+
+        [Inject]
+        public void Construct(GameTimeFlowController gameTimeFlowController)
+        {
+            _gameTimeFlowController = gameTimeFlowController;
+        }
 
 
         private void Awake()
@@ -67,43 +61,43 @@ namespace Dimasyechka.Code.LocationSystem.Controllers
 
         public void SetLocationAfterLoading(LocationProfile loadingProfile)
         {
-            RuntimeLocationObject tempLocationObject = m_locationObjects.Find(x => x.LocationProfileReference.Equals(loadingProfile));
+            RuntimeLocationObject tempLocationObject = _locationObjects.Find(x => x.LocationProfileReference.Equals(loadingProfile));
 
             if (tempLocationObject != null)
             {
-                currentLocation = loadingProfile;
+                _currentLocation = loadingProfile;
 
-                currentRuntimeLocationObject = tempLocationObject;
+                _currentRuntimeLocationObject = tempLocationObject;
 
                 HideAllLocationObjects();
 
-                currentRuntimeLocationObject.gameObject.SetActive(true);
+                _currentRuntimeLocationObject.gameObject.SetActive(true);
             }
         }
 
 
         public void TravelToLocation(LocationProfile locationToChange, int travelTimeHours = 0)
         {
-            RuntimeLocationObject tempLocationObject = m_locationObjects
+            RuntimeLocationObject tempLocationObject = _locationObjects
                 .Where(x => x.LocationProfileReference != null)
                 .ToList()
                 .Find(x => x.LocationProfileReference == locationToChange);
 
             if (tempLocationObject != null)
             {
-                if (currentLocation != locationToChange)
+                if (_currentLocation != locationToChange)
                 {
-                    currentLocation = locationToChange;
+                    _currentLocation = locationToChange;
 
-                    currentRuntimeLocationObject = tempLocationObject;
+                    _currentRuntimeLocationObject = tempLocationObject;
 
                     HideAllLocationObjects();
 
-                    currentRuntimeLocationObject.gameObject.SetActive(true);
+                    _currentRuntimeLocationObject.gameObject.SetActive(true);
 
-                    GameTimeFlowController.Instance.AddTime(travelTimeHours);
+                    _gameTimeFlowController.AddTime(travelTimeHours);
 
-                    onTravelToLocation?.Invoke(currentLocation);
+                    onTravelToLocation?.Invoke(_currentLocation);
                 }
                 else
                 {
@@ -118,7 +112,7 @@ namespace Dimasyechka.Code.LocationSystem.Controllers
 
         private void HideAllLocationObjects()
         {
-            foreach (RuntimeLocationObject runtimeLocationObject in m_locationObjects)
+            foreach (RuntimeLocationObject runtimeLocationObject in _locationObjects)
             {
                 runtimeLocationObject.gameObject.SetActive(false);
             }
@@ -126,17 +120,17 @@ namespace Dimasyechka.Code.LocationSystem.Controllers
 
         private void GetAllRuntimeLocations()
         {
-            m_locationObjects = FindObjectsOfType<RuntimeLocationObject>(true).ToList();
+            _locationObjects = FindObjectsOfType<RuntimeLocationObject>(true).ToList();
 
-            //Debug.Log($"LocationsController => Было найдено {m_locationObjects.Count} готовых локаций на сцене!");
+            //Debug.Log($"LocationsController => Было найдено {_locationObjects.Count} готовых локаций на сцене!");
         }
 
 
         public void ExploreLocation(LocationProfile exploredLocation)
         {
-            if (!m_exploredLocations.Contains(exploredLocation))
+            if (!_exploredLocations.Contains(exploredLocation))
             {
-                m_exploredLocations.Add(exploredLocation);
+                _exploredLocations.Add(exploredLocation);
                 onLocationExplored?.Invoke(exploredLocation);
             }
             else
@@ -148,9 +142,9 @@ namespace Dimasyechka.Code.LocationSystem.Controllers
         public void ShowInfoAboutLocation(LocationProfile locationInfo, int travelHours)
         {
             GlobalWindowsController.Instance.TryShowGlobalWindow(
-                typeof(LocationInfoGlobalWindow), 
-                new LocationInfoGlobalWindowData() 
-                { 
+                typeof(LocationInfoGlobalWindow),
+                new LocationInfoGlobalWindowData()
+                {
                     LocationProfile = locationInfo,
                     TravelHours = travelHours
                 }
@@ -163,9 +157,9 @@ namespace Dimasyechka.Code.LocationSystem.Controllers
         /// </summary>
         public void ExecuteLocationEventRandomly()
         {
-            if (currentLocation != null)
+            if (_currentLocation != null)
             {
-                BaseGameEventProfile randomEvent = currentLocation.LocationEvents[UnityEngine.Random.Range(0, currentLocation.LocationEvents.Count)];
+                BaseGameEventProfile randomEvent = _currentLocation.LocationEvents[UnityEngine.Random.Range(0, _currentLocation.LocationEvents.Count)];
 
                 if (randomEvent != null)
                 {
@@ -173,7 +167,7 @@ namespace Dimasyechka.Code.LocationSystem.Controllers
                 }
                 else
                 {
-                    Debug.LogError($"Локация {currentLocation.LocationTitle} не имеет привязанных событий.");
+                    Debug.LogError($"Локация {_currentLocation.LocationTitle} не имеет привязанных событий.");
                 }
             }
         }

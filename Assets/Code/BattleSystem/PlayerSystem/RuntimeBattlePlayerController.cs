@@ -4,82 +4,80 @@ using Dimasyechka.Code.BattleSystem.BattleActions.Interfaces;
 using Dimasyechka.Code.BattleSystem.BattleActions.Profiles;
 using Dimasyechka.Code.BattleSystem.Controllers;
 using UnityEngine;
+using Zenject;
 
 namespace Dimasyechka.Code.BattleSystem.PlayerSystem
 {
     public class RuntimeBattlePlayerController : MonoBehaviour
     {
-        private static RuntimeBattlePlayerController instance;
-        public static RuntimeBattlePlayerController Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = FindObjectOfType<RuntimeBattlePlayerController>(true);
-                }
-
-                return instance;
-            }
-        }
-
-
         public event Action<int> onPlayerActionPointsChanged;
         public event Action onBattleActionsUpdated;
 
 
         [Tooltip("Количество действия на шаг боя у игрока")]
         [SerializeField]
-        private int m_defaultPlayerActionPoints = 2;
-        public int DefaultPlayerActionPoints => m_defaultPlayerActionPoints;
+        private int _defaultPlayerActionPoints = 2;
+        public int DefaultPlayerActionPoints => _defaultPlayerActionPoints;
 
 
         [SerializeField]
-        private List<BattleActionProfile> m_defaultPlayerBattleActions = new List<BattleActionProfile>();
+        private List<BattleActionProfile> _defaultPlayerBattleActions = new List<BattleActionProfile>();
 
 
-        private List<IBattleActionInteraction> defaultPlayerBattleActions = new List<IBattleActionInteraction>();
+        private List<IBattleActionInteraction> _defaultPlayerBattleInteractions = new List<IBattleActionInteraction>();
         /// <summary>
         ///     Дефолтные действия, доступные игроку во время битвы
         /// </summary>
-        public List<IBattleActionInteraction> DefaultPlayerBattleActions => defaultPlayerBattleActions;
+        public List<IBattleActionInteraction> defaultPlayerBattleInteractions => _defaultPlayerBattleInteractions;
 
 
-        private List<AvailableBattleActionData> availablePlayerBattleActions = new List<AvailableBattleActionData>();
+        private List<AvailableBattleActionData> _availablePlayerBattleActions = new List<AvailableBattleActionData>();
         /// <summary>
         ///     Доступные действия игрока во время боя (какие-то предметы, события и т.п. могут добавлять сюда свои действия)
         /// </summary>
-        public List<AvailableBattleActionData> AvailablePlayerBattleActions => availablePlayerBattleActions;
+        public List<AvailableBattleActionData> AvailablePlayerBattleActions => _availablePlayerBattleActions;
 
 
-        private int extraPlayerActionPoints = 0;
+        private int _extraPlayerActionPoints = 0;
         /// <summary>
         ///     Количество дополнительных ходов у игрока во время шага боя
         /// </summary>
-        public int ExtraPlayerActionsCounter => extraPlayerActionPoints;
+        public int ExtraPlayerActionsCounter => _extraPlayerActionPoints;
 
 
-        private int playerActionPoints = 0;
+        private int _playerActionPoints = 0;
         public int PlayerActionPoints
         { 
-            get => playerActionPoints;
+            get => _playerActionPoints;
             set 
             {
-                if (playerActionPoints < 0)
+                if (_playerActionPoints < 0)
                 {
-                    playerActionPoints = 0;
+                    _playerActionPoints = 0;
                 }
                 else
                 {
-                    playerActionPoints = value;
+                    _playerActionPoints = value;
                 }
              
-                onPlayerActionPointsChanged?.Invoke(playerActionPoints);
+                onPlayerActionPointsChanged?.Invoke(_playerActionPoints);
             }
         }   
     
 
-        public int PlayerActionPointsTotalPerRound => m_defaultPlayerActionPoints + extraPlayerActionPoints;
+        public int PlayerActionPointsTotalPerRound => _defaultPlayerActionPoints + _extraPlayerActionPoints;
+
+
+        private BattleController _battleController;
+        private RuntimePlayer _runtimePlayer;
+
+
+        [Inject]
+        public void Construct(BattleController battleController, RuntimePlayer runtimePlayer)
+        {
+            _battleController = battleController;
+            _runtimePlayer = runtimePlayer;
+        }
 
 
         private void Awake()
@@ -89,21 +87,21 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
 
         private void Start()
         {
-            BattleController.Instance.onBattleTurnStatusChanged += OnBattleTurnStatusChanged;
+            _battleController.onBattleTurnStatusChanged += OnBattleTurnStatusChanged;
         }
 
         private void OnDestroy()
         {
-            if (BattleController.Instance != null)
+            if (_battleController != null)
             {
-                BattleController.Instance.onBattleTurnStatusChanged -= OnBattleTurnStatusChanged;
+                _battleController.onBattleTurnStatusChanged -= OnBattleTurnStatusChanged;
             }
         }
 
 
         private void CreateDefaultPlayerBattleActions()
         {
-            foreach (BattleActionProfile profile in m_defaultPlayerBattleActions)
+            foreach (BattleActionProfile profile in _defaultPlayerBattleActions)
             {
                 AddDefaultBattleAction(profile);
             }
@@ -118,24 +116,24 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
         public void InitializeBattleActions()
         {
             // Очищаем существующие действия
-            for (int i = availablePlayerBattleActions.Count - 1; i >= 0; i--)
+            for (int i = _availablePlayerBattleActions.Count - 1; i >= 0; i--)
             {
-                Destroy(availablePlayerBattleActions[i].tempObject);
+                Destroy(_availablePlayerBattleActions[i].TempObject);
             }
-            availablePlayerBattleActions.Clear();
+            _availablePlayerBattleActions.Clear();
 
 
             // Заполняем новые действия для боя
-            foreach (IBattleActionInteraction profile in defaultPlayerBattleActions)
+            foreach (IBattleActionInteraction profile in _defaultPlayerBattleInteractions)
             {
                 AddAvailableBattleAction(profile);
             }
 
 
             // Активируем наши действия единожды перед каждым боем
-            foreach (AvailableBattleActionData actionData in availablePlayerBattleActions)
+            foreach (AvailableBattleActionData actionData in _availablePlayerBattleActions)
             {
-                actionData.executer.Initialize();
+                actionData.Executer.Initialize();
             }
 
 
@@ -152,9 +150,9 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
                 return;
             }
 
-            if (defaultPlayerBattleActions.Contains(interaction)) return;
+            if (_defaultPlayerBattleInteractions.Contains(interaction)) return;
 
-            defaultPlayerBattleActions.Add(interaction);
+            _defaultPlayerBattleInteractions.Add(interaction);
 
             onBattleActionsUpdated?.Invoke();
         }
@@ -166,7 +164,7 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
                 return;
             }
 
-            defaultPlayerBattleActions.Remove(interaction);
+            _defaultPlayerBattleInteractions.Remove(interaction);
 
             onBattleActionsUpdated?.Invoke();
         }
@@ -182,7 +180,7 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
 
             if (interaction.ActionExecuter != null)
             {
-                AvailableBattleActionData searching = availablePlayerBattleActions.Find(x => x.interaction == interaction);
+                AvailableBattleActionData searching = _availablePlayerBattleActions.Find(x => x.Interaction == interaction);
 
                 if (searching != null)
                 {
@@ -191,16 +189,16 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
                 }
 
                 AvailableBattleActionData availableBattleActionData = new AvailableBattleActionData();
-                availableBattleActionData.interaction = interaction;
+                availableBattleActionData.Interaction = interaction;
 
                 GameObject tempObject = new GameObject($"{interaction.ActionExecuter.Type.ToString()}");
                 tempObject.transform.SetParent(this.transform);
 
-                availableBattleActionData.tempObject = tempObject;
-                availableBattleActionData.executer = interaction.ActionExecuter.AddToGameObject(tempObject);
-                availableBattleActionData.executer.SetInteraction(interaction);
+                availableBattleActionData.TempObject = tempObject;
+                availableBattleActionData.Executer = interaction.ActionExecuter.AddToGameObject(tempObject);
+                availableBattleActionData.Executer.SetInteraction(interaction);
 
-                availablePlayerBattleActions.Add(availableBattleActionData);
+                _availablePlayerBattleActions.Add(availableBattleActionData);
             }
             else
             {
@@ -217,12 +215,12 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
                 return;
             }
 
-            AvailableBattleActionData actionData = availablePlayerBattleActions.Find(x => x.interaction == interaction);
+            AvailableBattleActionData actionData = _availablePlayerBattleActions.Find(x => x.Interaction == interaction);
 
             if (actionData != null)
             {
-                Destroy(actionData.tempObject);
-                availablePlayerBattleActions.Remove(actionData);
+                Destroy(actionData.TempObject);
+                _availablePlayerBattleActions.Remove(actionData);
 
                 onBattleActionsUpdated?.Invoke();
             }
@@ -231,20 +229,20 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
 
         public void ExecuteAction(int executerIndex)
         {
-            if (executerIndex >= 0 && executerIndex < availablePlayerBattleActions.Count)
+            if (executerIndex >= 0 && executerIndex < _availablePlayerBattleActions.Count)
             {
-                if (availablePlayerBattleActions[executerIndex].executer.CanExecuteAction())
+                if (_availablePlayerBattleActions[executerIndex].Executer.CanExecuteAction())
                 {
-                    availablePlayerBattleActions[executerIndex].executer.ExecuteAction();
+                    _availablePlayerBattleActions[executerIndex].Executer.ExecuteAction();
 
-                    RuntimePlayer.Instance.PerformHealthRegeneration();
-                    RuntimePlayer.Instance.PerformManaRegeneration();
+                    _runtimePlayer.PerformHealthRegeneration();
+                    _runtimePlayer.PerformManaRegeneration();
                     //FindObjectOfType<SkillsManager>().SkillsAction();
                     //FindObjectOfType<BuffManager>().BuffsAction();
                     //FindObjectOfType<MagicManager>().UpdateMagicCooldown();
 
-                    BattleController.Instance.CheckEndBattleConditions();
-                    BattleController.Instance.UpdateAllEnemiesUI();
+                    _battleController.CheckEndBattleConditions();
+                    _battleController.UpdateAllEnemiesUI();
                 }
             }
             else
@@ -258,13 +256,13 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
         {
             if (turnStatus == BattleController.TurnStatus.PlayerTurn)
             {
-                playerActionPoints = PlayerActionPointsTotalPerRound;
-                onPlayerActionPointsChanged?.Invoke(playerActionPoints);
+                _playerActionPoints = PlayerActionPointsTotalPerRound;
+                onPlayerActionPointsChanged?.Invoke(_playerActionPoints);
             }
 
-            foreach (AvailableBattleActionData availableBattleActionData in availablePlayerBattleActions)
+            foreach (AvailableBattleActionData availableBattleActionData in _availablePlayerBattleActions)
             {
-                availableBattleActionData.executer.EveryTurnCheck(turnStatus);
+                availableBattleActionData.Executer.EveryTurnCheck(turnStatus);
             }
 
             onBattleActionsUpdated?.Invoke();
@@ -273,12 +271,12 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
         public bool CriticalStrike()
         {
             int rndChance = UnityEngine.Random.Range(0, 101);
-            double dmg = RuntimePlayer.Instance.RuntimePlayerStats.Damage * RuntimePlayer.Instance.RuntimePlayerStats.CriticalStrikeDamageMultiplier;
+            double dmg = _runtimePlayer.RuntimePlayerStats.Damage * _runtimePlayer.RuntimePlayerStats.CriticalStrikeDamageMultiplier;
 
-            if (rndChance <= RuntimePlayer.Instance.RuntimePlayerStats.CriticalStrikeChance)
+            if (rndChance <= _runtimePlayer.RuntimePlayerStats.CriticalStrikeChance)
             {
-                BattleController.Instance.EnemiesInBattle[BattleController.Instance.EnemiesInBattle.Count - 1].Health -= dmg;
-                GameController.Instance.AddEventText(BattleController.Instance.CurrentBattleStep + " - Вы нанесли урон критическим ударом: " + dmg + " ед.");
+                _battleController.EnemiesInBattle[_battleController.EnemiesInBattle.Count - 1].Health -= dmg;
+                GameController.Instance.AddEventText(_battleController.CurrentBattleStep + " - Вы нанесли урон критическим ударом: " + dmg + " ед.");
                 return true;
             }
             return false;
@@ -287,12 +285,12 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
         // Попытка сбежать
         public void TryToEscape()
         {
-            if (UnityEngine.Random.Range(0, 101) <= 50 + RuntimePlayer.Instance.RuntimePlayerStats.Luck)
+            if (UnityEngine.Random.Range(0, 101) <= 50 + _runtimePlayer.RuntimePlayerStats.Luck)
             {
-                BattleController.Instance.IsBattle = false;
-                BattleController.Instance.IsWin = false;
+                _battleController.IsBattle = false;
+                _battleController.IsWin = false;
                 GameController.Instance.AddEventText("Вы сбежали.");
-                BattleController.Instance.EndBattle();
+                _battleController.EndBattle();
             }
             else
             {
@@ -304,8 +302,8 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
     [System.Serializable]
     public class AvailableBattleActionData
     {
-        public IBattleActionInteraction interaction;
-        public IBattleActionExecuter executer;
-        public GameObject tempObject;
+        public IBattleActionInteraction Interaction;
+        public IBattleActionExecuter Executer;
+        public GameObject TempObject;
     }
 }

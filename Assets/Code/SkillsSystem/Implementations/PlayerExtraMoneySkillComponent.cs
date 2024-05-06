@@ -17,7 +17,7 @@ namespace Dimasyechka.Code.SkillsSystem.Implementations
         {
             double delta = 0.1f;
 
-            RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMultiplier += delta;
+            _runtimePlayer.RuntimePlayerStats.ExtraMoneyMultiplier += delta;
         }
     }
 }

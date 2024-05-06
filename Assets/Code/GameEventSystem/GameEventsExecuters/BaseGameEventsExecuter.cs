@@ -11,17 +11,17 @@ namespace Dimasyechka.Code.GameEventSystem.GameEventsExecuters
         public System.Type ProfileType => typeof(BaseGameEventProfile);
 
 
-        public void TryExecuteGameEvent(BaseGameEventProfile _profile)
+        public void TryExecuteGameEvent(BaseGameEventProfile gameEventProfile)
         {
-            if (_profile.GetType().Equals(ProfileType))
+            if (gameEventProfile.GetType().Equals(ProfileType))
             {
                 GlobalWindowsController.Instance.TryShowGlobalWindow(
                     typeof(InfoGlobalWindow),
                     new InfoGlobalWindowData()
                     {
                         ApplyButtonText = "Принять",
-                        GlobalWindowTitle = _profile.EventTitle,
-                        InfoMessage = _profile.EventDescription
+                        GlobalWindowTitle = gameEventProfile.EventTitle,
+                        InfoMessage = gameEventProfile.EventDescription
                     }
                 );
             }

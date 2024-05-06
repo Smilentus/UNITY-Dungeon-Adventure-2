@@ -1,9 +1,8 @@
-﻿// Пасхалка разрабов! Ы, Гусь Шында ХунГра-Да! <-- Под кайфом наверно был, когда писал ...
-
-using System;
-using Dimasyechka.Code._LEGACY_.Managers;
+﻿using Dimasyechka.Code.BattleSystem;
 using Newtonsoft.Json;
+using System;
 using UnityEngine;
+using Zenject;
 
 namespace Dimasyechka.Code
 {
@@ -13,184 +12,179 @@ namespace Dimasyechka.Code
     /// </summary>
     public class RuntimePlayer : MonoBehaviour
     {
-        private static RuntimePlayer instance;
-        public static RuntimePlayer Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = FindObjectOfType<RuntimePlayer>(true);   
-                }
-
-                return instance;
-            }
-        }
-
-
         public event Action onRuntimePlayerStatsUpdated;
 
 
-        private RuntimePlayerStats runtimePlayerStats;
+        private RuntimePlayerStats _runtimePlayerStats;
         /// <summary>
         ///     Текущие характеристики игрового персонажа
         /// </summary>
-        public RuntimePlayerStats RuntimePlayerStats { 
+        public RuntimePlayerStats RuntimePlayerStats
+        {
             get
             {
-                return runtimePlayerStats;
+                return _runtimePlayerStats;
             }
             set
             {
-                runtimePlayerStats = value;
+                _runtimePlayerStats = value;
                 onRuntimePlayerStatsUpdated?.Invoke();
             }
         }
 
 
+        private RuntimePlayer _runtimePlayer;
+
+        [Inject]
+        public void Construct(RuntimePlayer runtimePlayer)
+        {
+            _runtimePlayer = runtimePlayer;
+        }
+
+
         private void Awake()
         {
-            runtimePlayerStats = new RuntimePlayerStats();
+            _runtimePlayerStats = new RuntimePlayerStats();
         }
 
 
         public void SetDefaultPlayerStats()
         {
-            runtimePlayerStats.Health = 100;
-            runtimePlayerStats.MaxHealth = 100;
+            _runtimePlayerStats.Health = 100;
+            _runtimePlayerStats.MaxHealth = 100;
 
-            runtimePlayerStats.PlayerName = "";
-            runtimePlayerStats.isFirstEnter = true;
-            runtimePlayerStats.MaxHealth = 100;
-            runtimePlayerStats.Health = 100;
-            runtimePlayerStats.HealthRegen = 0;
-            runtimePlayerStats.MaxMana = 0;
-            runtimePlayerStats.ManaRegen = 0;
-            runtimePlayerStats.Mana = 0;
-            runtimePlayerStats.Armor = 0;
-            runtimePlayerStats.Damage = 10;
-            runtimePlayerStats.AttackSpeed = 1;
-            runtimePlayerStats.isStun = false;
+            _runtimePlayerStats.PlayerName = "";
+            _runtimePlayerStats.IsFirstEnter = true;
+            _runtimePlayerStats.MaxHealth = 100;
+            _runtimePlayerStats.Health = 100;
+            _runtimePlayerStats.HealthRegen = 0;
+            _runtimePlayerStats.MaxMana = 0;
+            _runtimePlayerStats.ManaRegen = 0;
+            _runtimePlayerStats.Mana = 0;
+            _runtimePlayerStats.Armor = 0;
+            _runtimePlayerStats.Damage = 10;
+            _runtimePlayerStats.AttackSpeed = 1;
+            _runtimePlayerStats.IsStun = false;
 
-            runtimePlayerStats.tempDamage = 0;
-            runtimePlayerStats.tempHealth = 0;
-            runtimePlayerStats.tempMaxHealth = 0;
+            _runtimePlayerStats.TempDamage = 0;
+            _runtimePlayerStats.TempHealth = 0;
+            _runtimePlayerStats.TempMaxHealth = 0;
 
-            runtimePlayerStats.AntiHole = false;
-            runtimePlayerStats.Luck = 0;
-            runtimePlayerStats.SkillPoints = 0;
-            runtimePlayerStats.ChanceNotToDelete = 0;
-            runtimePlayerStats.ChanceToCraftTwice = 0;
-            runtimePlayerStats.openedInvCases = 19;
-            runtimePlayerStats.openedRuneCases = 0;
+            _runtimePlayerStats.AntiHole = false;
+            _runtimePlayerStats.Luck = 0;
+            _runtimePlayerStats.SkillPoints = 0;
+            _runtimePlayerStats.ChanceNotToDelete = 0;
+            _runtimePlayerStats.ChanceToCraftTwice = 0;
+            _runtimePlayerStats.OpenedInvCases = 19;
+            _runtimePlayerStats.OpenedRuneCases = 0;
 
-            runtimePlayerStats.Lvl = 1;
-            runtimePlayerStats.Exp = 0;
-            runtimePlayerStats.MaxExp = 50;
-            runtimePlayerStats.ExpMulty = 50;
-            runtimePlayerStats.Money = 0;
+            _runtimePlayerStats.Lvl = 1;
+            _runtimePlayerStats.Exp = 0;
+            _runtimePlayerStats.MaxExp = 50;
+            _runtimePlayerStats.ExpMulty = 50;
+            _runtimePlayerStats.Money = 0;
 
-            runtimePlayerStats.ExtraExpMultiplier = 0;
-            runtimePlayerStats.ExtraMoneyMultiplier = 0;
+            _runtimePlayerStats.ExtraExpMultiplier = 0;
+            _runtimePlayerStats.ExtraMoneyMultiplier = 0;
 
             // Различные шансы
-            runtimePlayerStats.DodgeChance = 10;
-            runtimePlayerStats.LightStrikeChance = 95;
-            runtimePlayerStats.MediumStrikeChance = 65;
-            runtimePlayerStats.HeavyStrikeChance = 30;
-            runtimePlayerStats.CriticalStrikeChance = 1;
-            runtimePlayerStats.CriticalStrikeDamageMultiplier = 2;
+            _runtimePlayerStats.DodgeChance = 10;
+            _runtimePlayerStats.LightStrikeChance = 95;
+            _runtimePlayerStats.MediumStrikeChance = 65;
+            _runtimePlayerStats.HeavyStrikeChance = 30;
+            _runtimePlayerStats.CriticalStrikeChance = 1;
+            _runtimePlayerStats.CriticalStrikeDamageMultiplier = 2;
 
-            runtimePlayerStats.isHadVillage = false;
+            _runtimePlayerStats.IsHadVillage = false;
 
-            runtimePlayerStats.AttackType = CharactersLibrary.CharacterAttackType.Melee;
-            runtimePlayerStats.ArmorType = CharactersLibrary.CharacterArmorType.None;
-            runtimePlayerStats.Element = CharactersLibrary.CharacterElement.None;
+            _runtimePlayerStats.AttackType = CharacterAttackType.Melee;
+            _runtimePlayerStats.ArmorType = CharacterArmorType.None;
+            _runtimePlayerStats.Element = CharacterElement.None;
         }
 
 
         // TODO: Временное решение для переработки
         private void Update()
         {
-            if (runtimePlayerStats.Health > runtimePlayerStats.MaxHealth)
+            if (_runtimePlayerStats.Health > _runtimePlayerStats.MaxHealth)
             {
-                runtimePlayerStats.Health = runtimePlayerStats.MaxHealth;
+                _runtimePlayerStats.Health = _runtimePlayerStats.MaxHealth;
             }
-            if (runtimePlayerStats.Health < 0)
+            if (_runtimePlayerStats.Health < 0)
             {
-                runtimePlayerStats.Health = 0;
+                _runtimePlayerStats.Health = 0;
             }
 
 
-            if (runtimePlayerStats.Mana >= runtimePlayerStats.MaxMana)
+            if (_runtimePlayerStats.Mana >= _runtimePlayerStats.MaxMana)
             {
-                runtimePlayerStats.Mana = runtimePlayerStats.MaxMana;
+                _runtimePlayerStats.Mana = _runtimePlayerStats.MaxMana;
             }
-            if (runtimePlayerStats.Mana < 0)
+            if (_runtimePlayerStats.Mana < 0)
             {
-                runtimePlayerStats.Mana = 0;
+                _runtimePlayerStats.Mana = 0;
             }
         }
 
 
-        public void DealDamage(double _damage, bool _ignoreArmor)
+        public void DealDamage(double damage, bool ignoreArmor)
         {
-            if (_ignoreArmor)
+            if (ignoreArmor)
             {
-                RuntimePlayer.Instance.RuntimePlayerStats.Health -= _damage;
-                GameController.Instance.AddEventText("Вы получили урон через броню: " + _damage.ToString("f2"));
+                _runtimePlayer.RuntimePlayerStats.Health -= damage;
+                GameController.Instance.AddEventText("Вы получили урон через броню: " + damage.ToString("f2"));
             }
             else
             {
-                if (_damage > RuntimePlayer.Instance.RuntimePlayerStats.Armor)
+                if (damage > _runtimePlayer.RuntimePlayerStats.Armor)
                 {
-                    RuntimePlayer.Instance.RuntimePlayerStats.Health -= (_damage - RuntimePlayer.Instance.RuntimePlayerStats.Armor);
-                    GameController.Instance.AddEventText("Вы получили урон: " + (_damage - RuntimePlayer.Instance.RuntimePlayerStats.Armor).ToString("f2"));
+                    _runtimePlayer.RuntimePlayerStats.Health -= (damage - _runtimePlayer.RuntimePlayerStats.Armor);
+                    GameController.Instance.AddEventText("Вы получили урон: " + (damage - _runtimePlayer.RuntimePlayerStats.Armor).ToString("f2"));
                 }
                 else
                     GameController.Instance.AddEventText("Броня заблокировала урон.");
             }
         }
 
-        public void GiveExperience(double _experience)
+        public void GiveExperience(double experience)
         {
             // Подсчёт доп. процентного опыта
-            double extraExp = (_experience * RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMultiplier);
+            double extraExp = (experience * _runtimePlayer.RuntimePlayerStats.ExtraExpMultiplier);
 
             // Опыт, который дадим
-            _experience += extraExp;
-            RuntimePlayer.Instance.RuntimePlayerStats.Exp += _experience;
+            experience += extraExp;
+            _runtimePlayer.RuntimePlayerStats.Exp += experience;
 
-            string info = "Получено: " + _experience.ToString("f2") + " ед. опыта!";
-            if (RuntimePlayer.Instance.RuntimePlayerStats.ExtraExpMultiplier > 0)
+            string info = "Получено: " + experience.ToString("f2") + " ед. опыта!";
+            if (_runtimePlayer.RuntimePlayerStats.ExtraExpMultiplier > 0)
             {
-                info = "Получено: " + _experience.ToString("f2") + " + (" + extraExp.ToString("f2") + ") ед. опыта.";
+                info = "Получено: " + experience.ToString("f2") + " + (" + extraExp.ToString("f2") + ") ед. опыта.";
             }
 
             GameController.Instance.AddEventText(info);
 
-            while (RuntimePlayer.Instance.RuntimePlayerStats.Exp >= RuntimePlayer.Instance.RuntimePlayerStats.MaxExp)
+            while (_runtimePlayer.RuntimePlayerStats.Exp >= _runtimePlayer.RuntimePlayerStats.MaxExp)
             {
-                RuntimePlayer.Instance.RuntimePlayerStats.Lvl++;
-                RuntimePlayer.Instance.RuntimePlayerStats.SkillPoints += 5;
-                RuntimePlayer.Instance.RuntimePlayerStats.Exp -= RuntimePlayer.Instance.RuntimePlayerStats.MaxExp;
-                RuntimePlayer.Instance.RuntimePlayerStats.MaxExp += RuntimePlayer.Instance.RuntimePlayerStats.ExpMulty;
-                RuntimePlayer.Instance.RuntimePlayerStats.ExpMulty += 1;
-                GameController.Instance.AddEventText("Новый уровень - " + RuntimePlayer.Instance.RuntimePlayerStats.Lvl + "!");
+                _runtimePlayer.RuntimePlayerStats.Lvl++;
+                _runtimePlayer.RuntimePlayerStats.SkillPoints += 5;
+                _runtimePlayer.RuntimePlayerStats.Exp -= _runtimePlayer.RuntimePlayerStats.MaxExp;
+                _runtimePlayer.RuntimePlayerStats.MaxExp += _runtimePlayer.RuntimePlayerStats.ExpMulty;
+                _runtimePlayer.RuntimePlayerStats.ExpMulty += 1;
+                GameController.Instance.AddEventText("Новый уровень - " + _runtimePlayer.RuntimePlayerStats.Lvl + "!");
             }
         }
 
-        public void GiveMoney(double _money)
+        public void GiveMoney(double money)
         {
-            double extraMoney = _money * RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMultiplier;
+            double extraMoney = money * _runtimePlayer.RuntimePlayerStats.ExtraMoneyMultiplier;
 
-            _money += extraMoney;
-            RuntimePlayer.Instance.RuntimePlayerStats.Money += (int)_money;
+            money += extraMoney;
+            _runtimePlayer.RuntimePlayerStats.Money += (int)money;
 
-            string info = "Получено: " + _money.ToString("f2") + " ед. золота!";
-            if (RuntimePlayer.Instance.RuntimePlayerStats.ExtraMoneyMultiplier > 0)
+            string info = "Получено: " + money.ToString("f2") + " ед. золота!";
+            if (_runtimePlayer.RuntimePlayerStats.ExtraMoneyMultiplier > 0)
             {
-                info = "Получено: " + _money.ToString("f2") + " + (" + extraMoney.ToString("f2") + ") ед. золота.";
+                info = "Получено: " + money.ToString("f2") + " + (" + extraMoney.ToString("f2") + ") ед. золота.";
             }
 
             GameController.Instance.AddEventText(info);
@@ -199,12 +193,12 @@ namespace Dimasyechka.Code
 
         public void PerformHealthRegeneration()
         {
-            runtimePlayerStats.Health += runtimePlayerStats.HealthRegen;
+            _runtimePlayerStats.Health += _runtimePlayerStats.HealthRegen;
         }
 
         public void PerformManaRegeneration()
         {
-            runtimePlayerStats.Mana += runtimePlayerStats.ManaRegen;
+            _runtimePlayerStats.Mana += _runtimePlayerStats.ManaRegen;
         }
     }
 
@@ -219,25 +213,25 @@ namespace Dimasyechka.Code
                 string str = "";
                 switch (Element)
                 {
-                    case CharactersLibrary.CharacterElement.Dark:
+                    case CharacterElement.Dark:
                         str = "Тьма";
                         break;
-                    case CharactersLibrary.CharacterElement.Earth:
+                    case CharacterElement.Earth:
                         str = "Земля";
                         break;
-                    case CharactersLibrary.CharacterElement.Fire:
+                    case CharacterElement.Fire:
                         str = "Огонь";
                         break;
-                    case CharactersLibrary.CharacterElement.Light:
+                    case CharacterElement.Light:
                         str = "Свет";
                         break;
-                    case CharactersLibrary.CharacterElement.None:
+                    case CharacterElement.None:
                         str = "Нет стихии";
                         break;
-                    case CharactersLibrary.CharacterElement.Water:
+                    case CharacterElement.Water:
                         str = "Вода";
                         break;
-                    case CharactersLibrary.CharacterElement.Wind:
+                    case CharacterElement.Wind:
                         str = "Воздух";
                         break;
                 }
@@ -245,7 +239,7 @@ namespace Dimasyechka.Code
             }
         }
 
-        public bool isFirstEnter;
+        public bool IsFirstEnter;
 
         public enum HeroAbility
         {
@@ -288,8 +282,8 @@ namespace Dimasyechka.Code
         public double Money;
         public double ChanceNotToDelete;
         public double ChanceToCraftTwice;
-        public int openedInvCases;
-        public int openedRuneCases;
+        public int OpenedInvCases;
+        public int OpenedRuneCases;
 
 
         public double DodgeChance;
@@ -299,11 +293,11 @@ namespace Dimasyechka.Code
         public double CriticalStrikeChance;
         public double CriticalStrikeDamageMultiplier;
 
-        public bool isDeath;
-        public bool isHadVillage;
-    
+        public bool IsDeath;
+        public bool IsHadVillage;
+
         [JsonIgnore]
-        public string abilityStr
+        public string GetAbility
         {
             get
             {
@@ -325,19 +319,19 @@ namespace Dimasyechka.Code
             }
         }
 
-        public bool isStun;
-        public double HAChargePower;
-        public double HACharge;
-        public double HAMaxCharge;
-        public int HALvl;
-        public int HAMaxLvl;
+        public bool IsStun;
+        public double HaChargePower;
+        public double HaCharge;
+        public double HaMaxCharge;
+        public int HaLvl;
+        public int HaMaxLvl;
         public HeroAbility Ability;
 
-        public CharactersLibrary.CharacterElement Element;
-        public CharactersLibrary.CharacterArmorType ArmorType;
-        public CharactersLibrary.CharacterAttackType AttackType;
+        public CharacterElement Element;
+        public CharacterArmorType ArmorType;
+        public CharacterAttackType AttackType;
 
 
-        public double tempHealth, tempMaxHealth, tempDamage, tempMaxMana, tempMana, tempAttackSpeed, tempArmor;
+        public double TempHealth, TempMaxHealth, TempDamage, TempMaxMana, TempMana, TempAttackSpeed, TempArmor;
     }
 }

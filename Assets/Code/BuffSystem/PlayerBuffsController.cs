@@ -3,39 +3,34 @@ using Dimasyechka.Code.BuffSystem.Profiles;
 using Dimasyechka.Code.GameTimeFlowSystem.Controllers;
 using Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters;
 using UnityEngine;
+using Zenject;
 
 namespace Dimasyechka.Code.BuffSystem
 {
     public class PlayerBuffsController : MonoBehaviour
     {
-        private static PlayerBuffsController instance;
-        public static PlayerBuffsController Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = FindObjectOfType<PlayerBuffsController>(true);
-                }
-
-                return instance;
-            }
-        }
-
-
         [SerializeField]
-        private BuffsContainer m_playerBuffsContainer;
-        public BuffsContainer PlayerBuffsContainer => m_playerBuffsContainer;
+        private BuffsContainer _playerBuffsContainer;
+        public BuffsContainer PlayerBuffsContainer => _playerBuffsContainer;
+
+
+        private GameTimeFlowController _gameTimeFlowController;
+
+        [Inject]
+        public void Construct(GameTimeFlowController gameTimeFlowController)
+        {
+            _gameTimeFlowController = gameTimeFlowController;
+        }
 
 
         private void Start()
         {
-            GameTimeFlowController.Instance.onTimeHoursPassed += OnTimeHoursPassed;
+            _gameTimeFlowController.onTimeHoursPassed += OnTimeHoursPassed;
         }
 
         private void OnDestroy()
         {
-            GameTimeFlowController.Instance.onTimeHoursPassed -= OnTimeHoursPassed;
+            _gameTimeFlowController.onTimeHoursPassed -= OnTimeHoursPassed;
         }
 
 
@@ -51,31 +46,31 @@ namespace Dimasyechka.Code.BuffSystem
 
         public void DisableAndRemoveAllBuffs()
         {
-            m_playerBuffsContainer.DisableAndRemoveAllBuffs();
+            _playerBuffsContainer.DisableAndRemoveAllBuffs();
         }
 
         public void LoadSaveBuffData(BuffSaveLoadData saveData)
         {
             foreach (RuntimeBuffSaveData buffSaveData in saveData.RuntimeBuffsSaveData)
             {
-                m_playerBuffsContainer.LoadBuff(BuffsWarehouse.Instance.GetBuffProfileByUID(buffSaveData.BuffUID), buffSaveData.BuffDurationHours);
+                _playerBuffsContainer.LoadBuff(BuffsWarehouse.Instance.GetBuffProfileByUID(buffSaveData.BuffUID), buffSaveData.BuffDurationHours);
             }
         }
 
 
         public void AddPlayerBuff(BuffProfile _profile)
         {
-            m_playerBuffsContainer.AddBuff(_profile);
+            _playerBuffsContainer.AddBuff(_profile);
         }
 
         public void RemovePlayerBuff(BuffProfile _profile)
         {
-            m_playerBuffsContainer.RemoveBuff(_profile);
+            _playerBuffsContainer.RemoveBuff(_profile);
         }
 
         public void UpdatePlayerBuffs()
         {
-            m_playerBuffsContainer.UpdateContainedBuffs();
+            _playerBuffsContainer.UpdateContainedBuffs();
         }
     }
 }

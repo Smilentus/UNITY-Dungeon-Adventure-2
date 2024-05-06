@@ -56,7 +56,7 @@ namespace Dimasyechka.Code.SkillsSystem.GlobalWindow
         {
             ObtainSkillGlobalWindowData data = GetConvertedWindowData<ObtainSkillGlobalWindowData>();
 
-            PlayerSkill playerSkill = PlayerSkillsController.instance.GetPlayerSkillByGUID(data.Profile.skillGUID);
+            PlayerSkill playerSkill = PlayerSkillsController.instance.GetPlayerSkillByGuid(data.Profile.skillGUID);
 
             int currentSkillLevel = -1;
             bool isMaxUpgraded = false;
@@ -64,9 +64,9 @@ namespace Dimasyechka.Code.SkillsSystem.GlobalWindow
 
             if (playerSkill != null)
             {
-                currentSkillLevel = playerSkill.runtimeSkillCore.UpgradeableComponent.currentLevel;
-                deltaValues = playerSkill.runtimeSkillCore.GetSkillDeltaValues(currentSkillLevel + 1);
-                isMaxUpgraded = playerSkill.runtimeSkillCore.UpgradeableComponent.reachedMaxUpgrades;
+                currentSkillLevel = playerSkill.RuntimeSkillCore.UpgradeableComponent.currentLevel;
+                deltaValues = playerSkill.RuntimeSkillCore.GetSkillDeltaValues(currentSkillLevel + 1);
+                isMaxUpgraded = playerSkill.RuntimeSkillCore.UpgradeableComponent.reachedMaxUpgrades;
             }
             else
             {
@@ -125,7 +125,7 @@ namespace Dimasyechka.Code.SkillsSystem.GlobalWindow
             }
             else
             {
-                skillUpgrades = playerSkill.runtimeSkillCore.UpgradeableComponent.GetUpgradeDescriptions();
+                skillUpgrades = playerSkill.RuntimeSkillCore.UpgradeableComponent.GetUpgradeDescriptions();
             }
 
             foreach (SkillUpgradeDescriptionData upgradeDescription in skillUpgrades)

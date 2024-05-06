@@ -2,6 +2,7 @@ using Dimasyechka.Code.BattleSystem.Controllers;
 using Dimasyechka.Code.GameEventSystem.Interfaces;
 using Dimasyechka.Code.GameEventSystem.Profiles;
 using UnityEngine;
+using Zenject;
 
 namespace Dimasyechka.Code.GameEventSystem.GameEventsExecuters
 {
@@ -10,12 +11,22 @@ namespace Dimasyechka.Code.GameEventSystem.GameEventsExecuters
         public System.Type ProfileType => typeof(BattleGameEventProfile);
 
 
-        public void TryExecuteGameEvent(BaseGameEventProfile _profile)
+        private BattleController _battleController;
+
+        [Inject]
+        public void Construct(BattleController battleController)
         {
-            if (_profile.GetType().Equals(ProfileType))
+            _battleController = battleController;
+        }
+
+
+
+        public void TryExecuteGameEvent(BaseGameEventProfile gameEventProfile)
+        {
+            if (gameEventProfile.GetType().Equals(ProfileType))
             {
-                BattleGameEventProfile battleGameEventProfile = _profile as BattleGameEventProfile;
-                BattleController.Instance.TryStartBattle(battleGameEventProfile.Characters);
+                BattleGameEventProfile battleGameEventProfile = gameEventProfile as BattleGameEventProfile;
+                _battleController.TryStartBattle(battleGameEventProfile.Characters);
             }
         }
     }

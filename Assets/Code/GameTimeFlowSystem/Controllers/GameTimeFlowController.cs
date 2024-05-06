@@ -1,29 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using Dimasyechka.Code._LEGACY_.Managers;
-using Dimasyechka.Code.GameTimeFlowSystem.GTFEvents;
+﻿using Dimasyechka.Code.GameTimeFlowSystem.GTFEvents;
 using Dimasyechka.Code.GameTimeFlowSystem.Profiles;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Dimasyechka.Code.GameTimeFlowSystem.Controllers
 {
     public class GameTimeFlowController : MonoBehaviour
     {
-        private static GameTimeFlowController instance;
-        public static GameTimeFlowController Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = FindObjectOfType<GameTimeFlowController>(true);
-                }
-
-                return instance;
-            }
-        }
-
-
         public event Action<int> onTimeHoursPassed;
         public event Action<int> onTimeDaysPassed;
         public event Action<int> onTimeMonthsPassed;
@@ -44,6 +29,15 @@ namespace Dimasyechka.Code.GameTimeFlowSystem.Controllers
 
 
         public int CurrentDay, CurrentMonth, CurrentYear, CurrentHour;
+
+
+        private RuntimePlayer _runtimePlayer;
+
+        [Inject]
+        public void Construct(RuntimePlayer runtimePlayer)
+        {
+            _runtimePlayer = runtimePlayer;
+        }
 
 
         public GameTimeFlowEventSaveMaskData GetSaveMaskData()
@@ -94,7 +88,7 @@ namespace Dimasyechka.Code.GameTimeFlowSystem.Controllers
         // Строка для возврата состояния суток
         public string DayStatusNow()
         {
-            if (isDay())
+            if (IsItDay())
             {
                 return "День";
             }
@@ -105,7 +99,7 @@ namespace Dimasyechka.Code.GameTimeFlowSystem.Controllers
         }
 
         // Сейчас день или нет?
-        public bool isDay()
+        public bool IsItDay()
         {
             if (CurrentHour >= 5 && CurrentHour <= 20)
             {
@@ -118,7 +112,7 @@ namespace Dimasyechka.Code.GameTimeFlowSystem.Controllers
         }
 
         // Сейчас ночь или нет?
-        public bool isNight()
+        public bool IsItNight()
         {
             if (CurrentHour < 5 && CurrentHour > 20)
             {
@@ -129,7 +123,7 @@ namespace Dimasyechka.Code.GameTimeFlowSystem.Controllers
                 return false;
             }
         }
-    
+
         // Прибавление игрового времени
         public void AddTime(int hour)
         {
@@ -138,8 +132,8 @@ namespace Dimasyechka.Code.GameTimeFlowSystem.Controllers
             // Почасовые экшоны
             for (int i = 0; i < hour; i++)
             {
-                RuntimePlayer.Instance.PerformHealthRegeneration();
-                RuntimePlayer.Instance.PerformManaRegeneration();
+                _runtimePlayer.PerformHealthRegeneration();
+                _runtimePlayer.PerformManaRegeneration();
             }
 
             onTimeHoursPassed?.Invoke(hour);
@@ -150,20 +144,20 @@ namespace Dimasyechka.Code.GameTimeFlowSystem.Controllers
                 if (CurrentHour >= 30)
                 {
                     CurrentHour -= 30;
-                
+
                     CurrentDay++;
 
                     onTimeDaysPassed?.Invoke(1);
 
-                    FindObjectOfType<PlayerVillageActivity>().GetProducedItems();
-                    if(CurrentDay > 45)
+                    //FindObjectOfType<PlayerVillageActivity>().GetProducedItems();
+                    if (CurrentDay > 45)
                     {
                         CurrentDay = 1;
                         CurrentMonth++;
 
                         onTimeMonthsPassed?.Invoke(1);
 
-                        if(CurrentMonth > 20)
+                        if (CurrentMonth > 20)
                         {
                             CurrentMonth = 1;
 

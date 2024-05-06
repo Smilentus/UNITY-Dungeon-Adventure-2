@@ -1,16 +1,25 @@
 using Dimasyechka.Code.SaveLoadSystem.Controllers;
 using Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters.Base;
+using Zenject;
 
 namespace Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters
 {
     public class PlayerSaveLoadConverter : SaveLoadBaseConverter<PlayerSaveData>
     {
+        private RuntimePlayer _runtimePlayer;
+
+        [Inject]
+        public void Construct(RuntimePlayer runtimePlayer)
+        {
+            _runtimePlayer = runtimePlayer;
+        }
+
         public override PlayerSaveData GetConverterData(string saveFileName)
         {
             PlayerSaveData playerData = new PlayerSaveData();
 
             // Сохраняем игрока
-            playerData.PlayerStats = RuntimePlayer.Instance.RuntimePlayerStats;
+            playerData.PlayerStats = _runtimePlayer.RuntimePlayerStats;
 
             return playerData;
         }
@@ -21,7 +30,7 @@ namespace Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters
 
             if (playerSaveData != null)
             {
-                RuntimePlayer.Instance.RuntimePlayerStats = playerSaveData.PlayerStats;
+                _runtimePlayer.RuntimePlayerStats = playerSaveData.PlayerStats;
             }
             else
             {
@@ -31,7 +40,7 @@ namespace Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters
 
         public override void SetDefaultData()
         {
-            RuntimePlayer.Instance.SetDefaultPlayerStats();
+            _runtimePlayer.SetDefaultPlayerStats();
         }
     }
 

@@ -5,36 +5,46 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Dimasyechka.Code.CraftingSystem.Recipes.Views
 {
     public class CraftInputItemView : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField]
-        private Image m_itemImage;
+        private Image _itemImage;
 
         [SerializeField]
-        private TMP_Text m_itemCount;
+        private TMP_Text _itemCount;
 
 
         [SerializeField]
-        private Color m_notEnoughColor;
+        private Color _notEnoughColor;
 
         [SerializeField]
-        private Color m_correctAmountColor;
+        private Color _correctAmountColor;
 
 
         private InputCraftItem _inputItem;
+
+
+        private InventoryController _inventoryController;
+
+        [Inject]
+        public void Construct(InventoryController inventoryController)
+        {
+            _inventoryController = inventoryController;
+        }
 
 
         public void SetData(InputCraftItem inputCraftItem)
         {
             _inputItem = inputCraftItem;
 
-            m_itemImage.sprite = _inputItem.InputItemProfile.ItemSprite;
+            _itemImage.sprite = _inputItem.InputItemProfile.ItemSprite;
 
             GenerateAmountString(
-                InventoryController.Instance.GetItemAmountInAnyContainer(_inputItem.InputItemProfile),
+                _inventoryController.GetItemAmountInAnyContainer(_inputItem.InputItemProfile),
                 inputCraftItem.InputItemAmount
             );
         }
@@ -44,14 +54,14 @@ namespace Dimasyechka.Code.CraftingSystem.Recipes.Views
         {
             if (current >= expected)
             {
-                m_itemCount.color = m_correctAmountColor;
+                _itemCount.color = _correctAmountColor;
             }
             else
             {
-                m_itemCount.color = m_notEnoughColor;
+                _itemCount.color = _notEnoughColor;
             }
 
-            m_itemCount.text = $"{current}/{expected}";
+            _itemCount.text = $"{current}/{expected}";
         }
 
 

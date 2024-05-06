@@ -20,7 +20,7 @@ namespace Dimasyechka.Code.BattleSystem.BattleActions.Views
         protected TMP_Text m_CooldownTMP;
 
 
-        private BattleMagicExecuter_BaseActionExecuter magicExecuter;
+        private BattleMagicExecuterBaseActionExecuter magicExecuter;
 
 
         public void SetFillAmountRatio(int _cooldown, float _ratio)
@@ -41,11 +41,11 @@ namespace Dimasyechka.Code.BattleSystem.BattleActions.Views
         {
             base.SetData(availableBattleActionData, index);
 
-            BaseMagicProfile profile = availableBattleActionData.interaction as BaseMagicProfile;
+            BaseMagicProfile profile = availableBattleActionData.Interaction as BaseMagicProfile;
 
             m_manaCostTMP.text = $"{profile.DefaultManaPointsCost} ÎÌ";
 
-            magicExecuter = availableBattleActionData.executer as BattleMagicExecuter_BaseActionExecuter;
+            magicExecuter = availableBattleActionData.Executer as BattleMagicExecuterBaseActionExecuter;
             magicExecuter.OnCooldownPassed += OnCooldownPassed;
 
             SetFillAmountRatio(magicExecuter.CooldownValue, magicExecuter.CooldownRatio);

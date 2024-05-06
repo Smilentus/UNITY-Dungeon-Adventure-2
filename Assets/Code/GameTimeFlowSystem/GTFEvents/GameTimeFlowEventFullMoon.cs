@@ -1,5 +1,3 @@
-using Dimasyechka.Code._LEGACY_.BuffSystem;
-using Dimasyechka.Code.BuffSystem.Profiles;
 using Dimasyechka.Code.GameTimeFlowSystem.Controllers;
 
 namespace Dimasyechka.Code.GameTimeFlowSystem.GTFEvents
@@ -8,7 +6,7 @@ namespace Dimasyechka.Code.GameTimeFlowSystem.GTFEvents
     {
         public override bool CanStartEvent()
         {
-            return GameTimeFlowController.Instance.CurrentMonth == 10 && GameTimeFlowController.Instance.CurrentDay < 15;
+            return _gameTimeFlowController.CurrentMonth == 10 && _gameTimeFlowController.CurrentDay < 15;
         }
 
         public override bool CanFinishEvent()
@@ -19,14 +17,14 @@ namespace Dimasyechka.Code.GameTimeFlowSystem.GTFEvents
         public override void StartEvent()
         {
             GameController.Instance.ShowMessageText(GameTimeFlowEventReference.EventDescription, "[Событие]");
-            FindObjectOfType<BuffManager>().SetBuff(BuffProfile.BuffType.FullmoonBuff);
+            //FindObjectOfType<BuffManager>().SetBuff(BuffProfile.BuffType.FullmoonBuff);
 
             base.StartEvent();
         }
 
         public override void FinishEvent()
         {
-            FindObjectOfType<BuffManager>().DeleteBuffAction(BuffProfile.BuffType.FullmoonBuff);
+            //FindObjectOfType<BuffManager>().DeleteBuffAction(BuffProfile.BuffType.FullmoonBuff);
 
             base.FinishEvent();
         }

@@ -8,16 +8,16 @@ namespace Dimasyechka.Code.BattleSystem.BattleActions.Views
     public class ActionPointsBattleInteractionView : BaseBattleInteractionView
     {
         [SerializeField]
-        protected TMP_Text m_actionPointsCostTMP;
+        protected TMP_Text _mActionPointsCostTMP;
 
 
         public override void SetData(AvailableBattleActionData availableBattleActionData, int index)
         {
             base.SetData(availableBattleActionData, index);
 
-            BattleActionProfile profile = availableBattleActionData.interaction as BattleActionProfile;
+            BattleActionProfile profile = availableBattleActionData.Interaction as BattleActionProfile;
 
-            m_actionPointsCostTMP.text = $"{profile.SpendableActions} нд";
+            _mActionPointsCostTMP.text = $"{profile.SpendableActions} нд";
         }
     }
 }

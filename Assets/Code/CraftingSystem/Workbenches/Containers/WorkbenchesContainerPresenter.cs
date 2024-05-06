@@ -2,6 +2,7 @@ using Dimasyechka.Code.CraftingSystem.Recipes;
 using Dimasyechka.Code.CraftingSystem.Workbenches.Profiles;
 using Dimasyechka.Code.CraftingSystem.Workbenches.Views;
 using UnityEngine;
+using Zenject;
 
 namespace Dimasyechka.Code.CraftingSystem.Workbenches.Containers
 {
@@ -12,17 +13,26 @@ namespace Dimasyechka.Code.CraftingSystem.Workbenches.Containers
 
 
         [SerializeField]
-        private WorkbenchButtonView m_buttonViewPrefab;
+        private WorkbenchButtonView _buttonViewPrefab;
 
         [SerializeField]
-        private Transform m_workbenchesContentParent;
+        private Transform _workbenchesContentParent;
 
 
         [SerializeField]
-        private BaseWorkbenchRecipeView m_baseRecipeViewPrefab;
+        private BaseWorkbenchRecipeView _baseRecipeViewPrefab;
 
         [SerializeField]
-        private Transform m_recipesContentParent;
+        private Transform _recipesContentParent;
+
+
+        private CraftSystem _craftSystem;
+
+        [Inject]
+        public void Construct(CraftSystem craftSystem)
+        {
+            _craftSystem = craftSystem;
+        }
 
 
         private void Awake()
@@ -52,7 +62,7 @@ namespace Dimasyechka.Code.CraftingSystem.Workbenches.Containers
         {
             for (int i = 0; i < WorkbenchesContainer.AvailableCraftingWorkbenches.Count; i++)
             {
-                WorkbenchButtonView buttonView = Instantiate(m_buttonViewPrefab, m_workbenchesContentParent);
+                WorkbenchButtonView buttonView = Instantiate(_buttonViewPrefab, _workbenchesContentParent);
 
                 buttonView.SetData(WorkbenchesContainer.AvailableCraftingWorkbenches[i], OpenWorkbench);
             }
@@ -60,9 +70,9 @@ namespace Dimasyechka.Code.CraftingSystem.Workbenches.Containers
 
         private void ClearWorkbenches()
         {
-            for (int i = m_workbenchesContentParent.childCount - 1; i >= 0; i--)
+            for (int i = _workbenchesContentParent.childCount - 1; i >= 0; i--)
             {
-                Destroy(m_workbenchesContentParent.GetChild(i).gameObject);
+                Destroy(_workbenchesContentParent.GetChild(i).gameObject);
             }
         }
 
@@ -83,7 +93,7 @@ namespace Dimasyechka.Code.CraftingSystem.Workbenches.Containers
         {
             foreach (CraftingRecipe recipe in profile.GetAllCraftingRecipes())
             {
-                BaseWorkbenchRecipeView recipeView = Instantiate(m_baseRecipeViewPrefab, m_recipesContentParent);
+                BaseWorkbenchRecipeView recipeView = Instantiate(_baseRecipeViewPrefab, _recipesContentParent);
 
                 recipeView.SetData(recipe, OnCraftRecipeButtonPressed);
             }
@@ -91,16 +101,16 @@ namespace Dimasyechka.Code.CraftingSystem.Workbenches.Containers
 
         private void ClearRecipes()
         {
-            for (int i = m_recipesContentParent.childCount - 1; i >= 0; i--)
+            for (int i = _recipesContentParent.childCount - 1; i >= 0; i--)
             {
-                Destroy(m_recipesContentParent.GetChild(i).gameObject);
+                Destroy(_recipesContentParent.GetChild(i).gameObject);
             }
         }
 
 
         private void OnCraftRecipeButtonPressed(CraftingRecipe recipe)
         {
-            CraftSystem.Instance.TryCraftRecipe(recipe);
+            _craftSystem.TryCraftRecipe(recipe);
         }
     }
 }

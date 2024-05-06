@@ -3,24 +3,33 @@ using Dimasyechka.Code.CinematicSystem.Profiles;
 using Dimasyechka.Code.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Dimasyechka.Code.CinematicSystem.Views
 {
     public class ArtCinematicsView : MonoBehaviour
     {
         [SerializeField]
-        private Image m_artImage;
+        private Image _artImage;
 
         [SerializeField]
-        private FadeEffectController m_fadeEffectController;
-
+        private FadeEffectController _fadeEffectController;
 
         private ArtCinematicsObserver _observer;
 
 
+        private Cinematics _cinematics;
+
+        [Inject]
+        public void Construct(Cinematics cinematics)
+        {
+            _cinematics = cinematics;
+        }
+
+
         private void Start()
         {
-            _observer = Cinematics.Instance.GetObserver<ArtCinematicsObserver>();
+            _observer = _cinematics.GetObserver<ArtCinematicsObserver>();
 
             if (_observer != null)
             {
@@ -28,12 +37,12 @@ namespace Dimasyechka.Code.CinematicSystem.Views
                 _observer.onCompleted += OnCompleted;
             }
 
-            m_fadeEffectController.ForceFadeOut();
+            _fadeEffectController.ForceFadeOut();
         }
 
         private void OnCompleted()
         {
-            m_fadeEffectController.ForceFadeOut();
+            _fadeEffectController.ForceFadeOut();
         }
 
         private void OnDestroy()
@@ -47,8 +56,8 @@ namespace Dimasyechka.Code.CinematicSystem.Views
 
         public void SetData(ArtCinematicProfile profile)
         {
-            m_fadeEffectController.ForceFadeIn();
-            m_artImage.sprite = profile.ArtBody;
+            _fadeEffectController.ForceFadeIn();
+            _artImage.sprite = profile.ArtBody;
         }
     }
 }

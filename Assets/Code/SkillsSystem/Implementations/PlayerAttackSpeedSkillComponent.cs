@@ -17,7 +17,7 @@ namespace Dimasyechka.Code.SkillsSystem.Implementations
         {
             double delta = 1;
 
-            RuntimePlayer.Instance.RuntimePlayerStats.AttackSpeed += delta;
+            _runtimePlayer.RuntimePlayerStats.AttackSpeed += delta;
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace Dimasyechka.Code.BattleSystem.EnemiesSystem
 {
@@ -13,11 +14,11 @@ namespace Dimasyechka.Code.BattleSystem.EnemiesSystem
 
 
         [SerializeField]
-        protected RuntimeBattleCharacterView m_characterView;
+        protected RuntimeBattleCharacterView _characterView;
 
 
         [HideInInspector()]
-        public CharacterProfile characterProfile;
+        public CharacterProfile CharacterProfile;
 
 
         // Основные переменные персонажа
@@ -30,9 +31,18 @@ namespace Dimasyechka.Code.BattleSystem.EnemiesSystem
         public int ActionPoints;
 
 
+        protected RuntimePlayer _runtimePlayer;
+
+        [Inject]
+        public void Construct(RuntimePlayer runtimePlayer)
+        {
+            _runtimePlayer = runtimePlayer;
+        }
+
+
         public virtual void CreateBattleCharacter(CharacterProfile profile)
         {
-            characterProfile = profile;
+            CharacterProfile = profile;
 
             MaxHealth = Health = profile.MaxHealth;
             MaxMana = Mana = profile.MaxMana;
@@ -46,7 +56,7 @@ namespace Dimasyechka.Code.BattleSystem.EnemiesSystem
 
             ActionPoints = profile.DefaultActionPoints;
 
-            m_characterView.DrawCharacterInfo(new CharacterDrawerData()
+            _characterView.DrawCharacterInfo(new CharacterDrawerData()
             {
                 runtimeBattleCharacter = this
             });
@@ -63,7 +73,7 @@ namespace Dimasyechka.Code.BattleSystem.EnemiesSystem
 
         public virtual void UpdateCharacterView()
         {
-            m_characterView.DrawCharacterInfo(new CharacterDrawerData()
+            _characterView.DrawCharacterInfo(new CharacterDrawerData()
             {
                 runtimeBattleCharacter = this
             });

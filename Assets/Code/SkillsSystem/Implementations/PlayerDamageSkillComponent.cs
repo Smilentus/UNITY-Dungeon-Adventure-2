@@ -17,7 +17,7 @@ namespace Dimasyechka.Code.SkillsSystem.Implementations
 
         public override void OnUpgraded(int level)
         {
-            RuntimePlayer.Instance.RuntimePlayerStats.Damage += skillCore.UpgradeableComponent.currentLevel * delta;
+            _runtimePlayer.RuntimePlayerStats.Damage += _skillCore.UpgradeableComponent.currentLevel * delta;
         }
     }
 }

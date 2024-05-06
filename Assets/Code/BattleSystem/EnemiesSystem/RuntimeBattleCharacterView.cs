@@ -23,8 +23,8 @@ namespace Dimasyechka.Code.BattleSystem.EnemiesSystem
 
         public virtual void DrawCharacterInfo(CharacterDrawerData drawerData)
         {
-            m_characterImage.texture = drawerData.runtimeBattleCharacter.characterProfile.CharacterImage;
-            m_characterName.text = $"{drawerData.runtimeBattleCharacter.characterProfile.Name}";
+            m_characterImage.texture = drawerData.runtimeBattleCharacter.CharacterProfile.CharacterImage;
+            m_characterName.text = $"{drawerData.runtimeBattleCharacter.CharacterProfile.Name}";
 
             double healthRatio = (drawerData.runtimeBattleCharacter.Health / drawerData.runtimeBattleCharacter.MaxHealth);
 

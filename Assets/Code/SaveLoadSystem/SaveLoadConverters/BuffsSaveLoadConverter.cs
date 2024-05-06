@@ -2,20 +2,30 @@ using System.Collections.Generic;
 using Dimasyechka.Code.BuffSystem;
 using Dimasyechka.Code.SaveLoadSystem.Controllers;
 using Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters.Base;
+using Zenject;
 
 namespace Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters
 {
     public class BuffsSaveLoadConverter : SaveLoadBaseConverter<BuffSaveLoadData>
     {
+        private PlayerBuffsController _playerBuffsController;
+
+        [Inject]
+        public void Construct(PlayerBuffsController playerBuffsController)
+        {
+            _playerBuffsController = playerBuffsController;
+        }
+
+
         public override BuffSaveLoadData GetConverterData(string saveFileName)
         {
             BuffSaveLoadData saveLoadData = new BuffSaveLoadData();
 
             saveLoadData.RuntimeBuffsSaveData = new List<RuntimeBuffSaveData>();
 
-            for (int i = 0; i < PlayerBuffsController.Instance.PlayerBuffsContainer.RuntimeBuffs.Count; i++)
+            for (int i = 0; i < _playerBuffsController.PlayerBuffsContainer.RuntimeBuffs.Count; i++)
             {
-                saveLoadData.RuntimeBuffsSaveData.Add(PlayerBuffsController.Instance.PlayerBuffsContainer.RuntimeBuffs[i].GetSaveBuffData());
+                saveLoadData.RuntimeBuffsSaveData.Add(_playerBuffsController.PlayerBuffsContainer.RuntimeBuffs[i].GetSaveBuffData());
             }
 
             return saveLoadData;
@@ -27,9 +37,8 @@ namespace Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters
 
             if (buffSaveLoadData != null)
             {
-                PlayerBuffsController.Instance.DisableAndRemoveAllBuffs();
-
-                PlayerBuffsController.Instance.LoadSaveBuffData(buffSaveLoadData);
+                _playerBuffsController.DisableAndRemoveAllBuffs();
+                _playerBuffsController.LoadSaveBuffData(buffSaveLoadData);
             }
             else
             {
@@ -39,7 +48,7 @@ namespace Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters
 
         public override void SetDefaultData()
         {
-            PlayerBuffsController.Instance.DisableAndRemoveAllBuffs();
+            _playerBuffsController.DisableAndRemoveAllBuffs();
         }
     }
 

@@ -9,39 +9,24 @@ namespace Dimasyechka.Code.InventorySystem
 {
     public class InventoryController : MonoBehaviour
     {
-        private static InventoryController instance;
-        public static InventoryController Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = FindObjectOfType<InventoryController>(); 
-                }
-
-                return instance;
-            }
-        }
-
-
         public event Action onInventoryContainersUpdated;
         public event Action<BaseInventoryContainer.BaseInventoryContainer> onInventoryContainerOpened;
         public event Action<BaseInventoryContainer.BaseInventoryContainer> onInventoryContainerClosed;
 
 
         [SerializeField]
-        private BaseInventoryContainerProfile m_quickSlotsContainer;
+        private BaseInventoryContainerProfile _quickSlotsContainer;
    
         [Tooltip("Уникальный контейнер, который будет динамически расширяться для мусора и предметов, которые не смогли поместиться в контейнере")]
         [SerializeField]
-        private BaseInventoryContainerProfile m_dynamicTimelyContainerProfile;
+        private BaseInventoryContainerProfile _dynamicTimelyContainerProfile;
 
 
-        private List<BaseInventoryContainer.BaseInventoryContainer> inventoryContainers = new List<BaseInventoryContainer.BaseInventoryContainer>();
+        private List<BaseInventoryContainer.BaseInventoryContainer> _inventoryContainers = new List<BaseInventoryContainer.BaseInventoryContainer>();
         /// <summary>
         ///     Все доступные инвентари игрока (сумки, рюкзаки и т.п.)
         /// </summary>
-        public List<BaseInventoryContainer.BaseInventoryContainer> InventoryContainers => inventoryContainers;
+        public List<BaseInventoryContainer.BaseInventoryContainer> InventoryContainers => _inventoryContainers;
 
 
         public List<BaseInventoryContainer.BaseInventoryContainer> OpenedContainers = new List<BaseInventoryContainer.BaseInventoryContainer>();
@@ -62,8 +47,8 @@ namespace Dimasyechka.Code.InventorySystem
         {
             mouseItemController = new BaseMouseItemController();
 
-            quickSlotsContainer = new BaseInventoryContainer.BaseInventoryContainer(m_quickSlotsContainer);
-            dynamicTimelyContainer = new BaseInventoryContainer.BaseInventoryContainer(m_dynamicTimelyContainerProfile);
+            quickSlotsContainer = new BaseInventoryContainer.BaseInventoryContainer(_quickSlotsContainer);
+            dynamicTimelyContainer = new BaseInventoryContainer.BaseInventoryContainer(_dynamicTimelyContainerProfile);
         }
 
 
@@ -172,13 +157,13 @@ namespace Dimasyechka.Code.InventorySystem
 
         public void TryAddItemToAnyContainer(BaseItemProfile _baseItemProfile, int _stack)
         {
-            if (inventoryContainers.Count == 0) { return; }
+            if (_inventoryContainers.Count == 0) { return; }
 
             BaseInventoryAdditionData additionData = new BaseInventoryAdditionData(new BaseItem.BaseItem(_baseItemProfile), _stack);
 
-            for (int i = 0; i < inventoryContainers.Count; i++)
+            for (int i = 0; i < _inventoryContainers.Count; i++)
             {
-                additionData = inventoryContainers[i].TryAddItem(additionData.BaseItem, additionData.ItemStack);
+                additionData = _inventoryContainers[i].TryAddItem(additionData.BaseItem, additionData.ItemStack);
 
                 if (additionData.ItemStack == 0)
                 {
@@ -195,7 +180,7 @@ namespace Dimasyechka.Code.InventorySystem
 
         public void AddInventoryContainer(BaseInventoryContainerProfile _baseInventoryContainerProfile)
         {
-            inventoryContainers.Add(new BaseInventoryContainer.BaseInventoryContainer(_baseInventoryContainerProfile));
+            _inventoryContainers.Add(new BaseInventoryContainer.BaseInventoryContainer(_baseInventoryContainerProfile));
 
             onInventoryContainersUpdated?.Invoke();
         }

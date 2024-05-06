@@ -3,6 +3,7 @@ using Dimasyechka.Code.GameTimeFlowSystem.Controllers;
 using Dimasyechka.Code.SaveLoadSystem.Controllers;
 using Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters.Base;
 using UnityEngine;
+using Zenject;
 
 namespace Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters
 {
@@ -12,6 +13,16 @@ namespace Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters
         private const string AutoSaveName = "Автосохранение";
         private const string RandomVisibleSaveFileName = "Новое сохранение";
 
+
+        private GameTimeFlowController _gameTimeFlowController;
+
+        [Inject]
+        public void Construct(GameTimeFlowController gameTimeFlowController)
+        {
+            _gameTimeFlowController = gameTimeFlowController;
+        }
+
+
         public override SaveLoadSlotData GetConverterData(string saveFileName)
         {
             SaveLoadSlotData saveLoadSlotData = new SaveLoadSlotData();
@@ -20,7 +31,7 @@ namespace Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters
             saveLoadSlotData.VisibleSaveFileName = saveFileName == AutoSaveFileName ? AutoSaveName : RandomVisibleSaveFileName; // Тоже не нравится :(
             saveLoadSlotData.GameVersion = Application.version.ToString();
             saveLoadSlotData.SaveDateTimeStamp = DateTime.Now.Ticks;
-            saveLoadSlotData.GameSaveDateTimeStamp = GameTimeFlowController.Instance.DateNow();
+            saveLoadSlotData.GameSaveDateTimeStamp = _gameTimeFlowController.DateNow();
 
             return saveLoadSlotData;
         }

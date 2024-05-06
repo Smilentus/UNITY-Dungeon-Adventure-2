@@ -33,7 +33,7 @@ namespace Dimasyechka.Code.SkillsSystem.Views
         {
             PlayerSkillsController.instance.onSkillUpgraded += OnSkillUpgraded;
 
-            PlayerSkill playerSkill = PlayerSkillsController.instance.GetPlayerSkillByGUID(m_obtainSkillInteraction.SkillProfile.skillGUID);
+            PlayerSkill playerSkill = PlayerSkillsController.instance.GetPlayerSkillByGuid(m_obtainSkillInteraction.SkillProfile.skillGUID);
 
             if (playerSkill == null)
             {
@@ -41,7 +41,7 @@ namespace Dimasyechka.Code.SkillsSystem.Views
             }
             else
             {
-                UpdateSkillData(m_obtainSkillInteraction.SkillProfile, playerSkill.runtimeSkillCore.UpgradeableComponent.currentLevel);
+                UpdateSkillData(m_obtainSkillInteraction.SkillProfile, playerSkill.RuntimeSkillCore.UpgradeableComponent.currentLevel);
             }
         }
 
@@ -57,9 +57,9 @@ namespace Dimasyechka.Code.SkillsSystem.Views
         // TODO: Переделать по другой архитектуре
         private void OnSkillUpgraded(PlayerSkill upgradedSkill)
         {
-            if (upgradedSkill.skillProfile.skillGUID == m_obtainSkillInteraction.SkillProfile.skillGUID)
+            if (upgradedSkill.SkillProfile.skillGUID == m_obtainSkillInteraction.SkillProfile.skillGUID)
             {
-                UpdateSkillData(upgradedSkill.skillProfile, upgradedSkill.runtimeSkillCore.UpgradeableComponent.currentLevel);
+                UpdateSkillData(upgradedSkill.SkillProfile, upgradedSkill.RuntimeSkillCore.UpgradeableComponent.currentLevel);
             }
         }
 

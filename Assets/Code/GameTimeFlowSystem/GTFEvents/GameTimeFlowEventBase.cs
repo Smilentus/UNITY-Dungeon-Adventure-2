@@ -1,6 +1,8 @@
+using Dimasyechka.Code.GameTimeFlowSystem.Controllers;
 using Dimasyechka.Code.GameTimeFlowSystem.Profiles;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 namespace Dimasyechka.Code.GameTimeFlowSystem.GTFEvents
 {
@@ -13,12 +15,22 @@ namespace Dimasyechka.Code.GameTimeFlowSystem.GTFEvents
 
 
         [SerializeField]
-        private GameTimeFlowEventProfile m_gameTimeFlowEventReference;
-        public GameTimeFlowEventProfile GameTimeFlowEventReference => m_gameTimeFlowEventReference;
+        private GameTimeFlowEventProfile _gameTimeFlowEventReference;
+        public GameTimeFlowEventProfile GameTimeFlowEventReference => _gameTimeFlowEventReference;
 
 
-        private bool m_isEventStarted = false;
-        public bool IsEventStarted => m_isEventStarted;
+        private bool _isEventStarted = false;
+        public bool IsEventStarted => _isEventStarted;
+
+
+        protected GameTimeFlowController _gameTimeFlowController;
+
+
+        [Inject]
+        public void Construct(GameTimeFlowController gameTimeFlowController)
+        {
+            _gameTimeFlowController = gameTimeFlowController;
+        }
 
 
         /// <summary>
@@ -26,7 +38,7 @@ namespace Dimasyechka.Code.GameTimeFlowSystem.GTFEvents
         /// </summary>
         public void SetMaskData()
         {
-            m_isEventStarted = true;
+            _isEventStarted = true;
         }
 
 
@@ -42,14 +54,14 @@ namespace Dimasyechka.Code.GameTimeFlowSystem.GTFEvents
 
         public virtual void StartEvent()
         {
-            m_isEventStarted = true;
-            OnEventStarted?.Invoke(m_gameTimeFlowEventReference);
+            _isEventStarted = true;
+            OnEventStarted?.Invoke(_gameTimeFlowEventReference);
         }
 
         public virtual void FinishEvent()
         {
-            m_isEventStarted = false;
-            OnEventFinished?.Invoke(m_gameTimeFlowEventReference);
+            _isEventStarted = false;
+            OnEventFinished?.Invoke(_gameTimeFlowEventReference);
         }
     }
 }

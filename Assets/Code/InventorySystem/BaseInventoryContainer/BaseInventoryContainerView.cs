@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace Dimasyechka.Code.InventorySystem.BaseInventoryContainer
 {
@@ -10,29 +11,37 @@ namespace Dimasyechka.Code.InventorySystem.BaseInventoryContainer
     public class BaseInventoryContainerView : MonoBehaviour
     {
         [SerializeField]
-        private GameObject m_viewGameObject;
+        private GameObject _viewGameObject;
 
         [SerializeField]
-        private TMP_Text m_containerNameTMP;
+        private TMP_Text _containerNameTMP;
 
 
         [SerializeField]
-        private BaseInventoryContainerSlotView m_baseInventoryContainerSlotViewPrefab;
+        private BaseInventoryContainerSlotView _baseInventoryContainerSlotViewPrefab;
 
         [SerializeField]
-        private Transform m_contentParent;
+        private Transform _contentParent;
 
 
 
-        private BaseInventoryContainer inventoryContainer;
-        public BaseInventoryContainer InventoryContainer => inventoryContainer;
+        private BaseInventoryContainer _inventoryContainer;
+        public BaseInventoryContainer InventoryContainer => _inventoryContainer;
 
 
-        private List<BaseInventoryContainerSlotView> slotViews = new List<BaseInventoryContainerSlotView>();
+        private List<BaseInventoryContainerSlotView> _slotViews = new List<BaseInventoryContainerSlotView>();
 
 
-        private bool isSlotsInstantiated;
+        private bool _isSlotsInstantiated;
 
+
+        private InventoryController _inventoryController;
+
+        [Inject]
+        public void Construct(InventoryController inventoryController)
+        {
+            _inventoryController = inventoryController;
+        }
 
         private void OnDestroy()
         {
@@ -40,9 +49,9 @@ namespace Dimasyechka.Code.InventorySystem.BaseInventoryContainer
         }
 
 
-        public void OpenContainer(BaseInventoryContainer _inventoryContainer)
+        public void OpenContainer(BaseInventoryContainer inventoryContainer)
         {
-            if (_inventoryContainer == null)
+            if (inventoryContainer == null)
             {
                 HideContainer();
                 return;
@@ -50,54 +59,54 @@ namespace Dimasyechka.Code.InventorySystem.BaseInventoryContainer
 
             ClearLastContainerData();
 
-            if (m_containerNameTMP != null)
+            if (_containerNameTMP != null)
             {
-                m_containerNameTMP.text = $"'{_inventoryContainer.InventoryContainerProfile.ContainerName}' ({_inventoryContainer.InventoryContainerProfile.ContainerCapacity} €ч.)"; // (¬местительность {_inventoryContainer.InventoryContainerProfile.ContainerCapacity} €чеек)
+                _containerNameTMP.text = $"'{inventoryContainer.InventoryContainerProfile.ContainerName}' ({inventoryContainer.InventoryContainerProfile.ContainerCapacity} €ч.)"; // (¬местительность {inventoryContainer.InventoryContainerProfile.ContainerCapacity} €чеек)
             }
 
-            this.inventoryContainer = _inventoryContainer;
+            this._inventoryContainer = inventoryContainer;
             CreateNewSlots();
 
-            this.inventoryContainer.onInventorySlotsUpdated += OnInventorySlotsUpdated;
+            this._inventoryContainer.onInventorySlotsUpdated += OnInventorySlotsUpdated;
             OnInventorySlotsUpdated();
 
-            m_viewGameObject.SetActive(true);
+            _viewGameObject.SetActive(true);
         }
 
         public void HideContainer()
         {
-            m_viewGameObject.SetActive(false);
+            _viewGameObject.SetActive(false);
         }
 
         private void OnInventorySlotsUpdated()
         {
             // ѕока что так, подумать про кэширование и прочие штуки
-            isSlotsInstantiated = false;
+            _isSlotsInstantiated = false;
             CreateNewSlots();
         }
 
         private void CreateNewSlots()
         {
-            if (isSlotsInstantiated) return;
+            if (_isSlotsInstantiated) return;
 
-            isSlotsInstantiated = true;
+            _isSlotsInstantiated = true;
 
             // ќчищаем старые слоты
-            for (int i = slotViews.Count - 1; i >= 0; i--)
+            for (int i = _slotViews.Count - 1; i >= 0; i--)
             {
-                Destroy(slotViews[i].gameObject);
+                Destroy(_slotViews[i].gameObject);
             }
-            slotViews.Clear();
+            _slotViews.Clear();
 
 
             // ƒобавл€ем слоты заново
             int slotIndex = 0;
-            foreach (BaseInventoryContainerSlot inventorySlot in inventoryContainer.InventorySlots)
+            foreach (BaseInventoryContainerSlot inventorySlot in _inventoryContainer.InventorySlots)
             {
-                BaseInventoryContainerSlotView slotView = Instantiate(m_baseInventoryContainerSlotViewPrefab, m_contentParent);
+                BaseInventoryContainerSlotView slotView = Instantiate(_baseInventoryContainerSlotViewPrefab, _contentParent);
                 slotView.SetData(inventorySlot, OnSlotPressedCallback);
             
-                slotViews.Add(slotView);
+                _slotViews.Add(slotView);
 
                 slotIndex++;
             }
@@ -105,14 +114,14 @@ namespace Dimasyechka.Code.InventorySystem.BaseInventoryContainer
 
         private void OnSlotPressedCallback(BaseInventoryContainerSlot _containerSlot)
         {
-            InventoryController.Instance.OnAnyContainerSlotPressed(inventoryContainer, _containerSlot);
+            _inventoryController.OnAnyContainerSlotPressed(_inventoryContainer, _containerSlot);
         }
 
         private void ClearLastContainerData()
         {
-            if (inventoryContainer != null)
+            if (_inventoryContainer != null)
             {
-                inventoryContainer.onInventorySlotsUpdated -= OnInventorySlotsUpdated;
+                _inventoryContainer.onInventorySlotsUpdated -= OnInventorySlotsUpdated;
             }
         }
     }

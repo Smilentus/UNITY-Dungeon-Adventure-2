@@ -2,22 +2,32 @@ using System.Collections.Generic;
 using Dimasyechka.Code.CoreComponentSystem.Core;
 using Dimasyechka.Code.CoreComponentSystem.Interfaces;
 using Dimasyechka.Code.SkillsSystem.Core;
+using Zenject;
 
 namespace Dimasyechka.Code.SkillsSystem.Implementations.Base
 {
     public abstract class BaseSkillComponent : CoreComponent
     {
-        protected SkillCore skillCore;
+        protected SkillCore _skillCore;
+
+
+        protected RuntimePlayer _runtimePlayer;
+
+        [Inject]
+        public void Construct(RuntimePlayer runtimePlayer)
+        {
+            _runtimePlayer = runtimePlayer;
+        }
 
 
         public override void InjectComponent(ICore core)
         {
             base.InjectComponent(core);
 
-            skillCore = (SkillCore)core;
+            _skillCore = (SkillCore)core;
 
-            skillCore.UpgradeableComponent.OnUpgraded += OnUpgraded;
-            skillCore.UpgradeableComponent.OnMaxUpgradesReached += OnMaxLvlReached;
+            _skillCore.UpgradeableComponent.OnUpgraded += OnUpgraded;
+            _skillCore.UpgradeableComponent.OnMaxUpgradesReached += OnMaxLvlReached;
         }
 
 
@@ -25,8 +35,8 @@ namespace Dimasyechka.Code.SkillsSystem.Implementations.Base
         {
             base.OnDestroyHandler();
 
-            skillCore.UpgradeableComponent.OnUpgraded -= OnUpgraded;
-            skillCore.UpgradeableComponent.OnMaxUpgradesReached -= OnMaxLvlReached;
+            _skillCore.UpgradeableComponent.OnUpgraded -= OnUpgraded;
+            _skillCore.UpgradeableComponent.OnMaxUpgradesReached -= OnMaxLvlReached;
         }
 
         public virtual void OnMaxLvlReached() { }

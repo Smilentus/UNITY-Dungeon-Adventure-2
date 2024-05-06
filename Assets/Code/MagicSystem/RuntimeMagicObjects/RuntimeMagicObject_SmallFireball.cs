@@ -3,7 +3,7 @@ using Dimasyechka.Code.BattleSystem.Controllers;
 
 namespace Dimasyechka.Code.MagicSystem.RuntimeMagicObjects
 {
-    public class RuntimeMagicObject_SmallFireball : BattleMagicExecuter_BaseActionExecuter
+    public class RuntimeMagicObjectSmallFireball : BattleMagicExecuterBaseActionExecuter
     {
         private float damage = 5f;
 
@@ -12,8 +12,8 @@ namespace Dimasyechka.Code.MagicSystem.RuntimeMagicObjects
         {
             base.ExecuteAction();
 
-            BattleController.Instance.EnemiesInBattle[BattleController.Instance.EnemiesInBattle.Count - 1].Health -= damage;
-            GameController.Instance.AddEventText(BattleController.Instance.CurrentBattleStep + " - Вы нанесли урон магией '" + magicProfile.InteractionTitle + "' " + damage + " ед.");
+            _battleController.EnemiesInBattle[_battleController.EnemiesInBattle.Count - 1].Health -= damage;
+            GameController.Instance.AddEventText(_battleController.CurrentBattleStep + " - Вы нанесли урон магией '" + _magicProfile.InteractionTitle + "' " + damage + " ед.");
         }
     }
 }

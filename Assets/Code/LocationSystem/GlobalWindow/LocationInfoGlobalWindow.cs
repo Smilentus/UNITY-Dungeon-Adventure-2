@@ -6,35 +6,45 @@ using Dimasyechka.Code.LocationSystem.Profiles;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Dimasyechka.Code.LocationSystem.GlobalWindow
 {
     public class LocationInfoGlobalWindow : BaseGameGlobalWindow
     {
         [SerializeField]
-        private Image m_locationPreview;
+        private Image _locationPreview;
 
         [SerializeField]
-        private TMP_Text m_locationTitle;
+        private TMP_Text _locationTitle;
 
         [SerializeField]
-        private TMP_Text m_locationDescription;
+        private TMP_Text _locationDescription;
 
         [SerializeField]
-        private TMP_Text m_travelButtonText;
+        private TMP_Text _travelButtonText;
 
 
         [SerializeField]
-        private Button m_travelButton;
+        private Button _travelButton;
 
         [SerializeField]
-        private Button m_cancelButton;
+        private Button _cancelButton;
+
+
+        private LocationsController _locationsController;
+
+        [Inject]
+        public void Construct(LocationsController locationsController)
+        {
+            _locationsController = locationsController;
+        }
 
 
         private void Awake()
         {
-            m_travelButton?.onClick.AddListener(OnTravelButton);
-            m_cancelButton?.onClick.AddListener(OnCancelButton);
+            _travelButton.onClick.AddListener(OnTravelButton);
+            _cancelButton.onClick.AddListener(OnCancelButton);
         }
 
 
@@ -44,9 +54,9 @@ namespace Dimasyechka.Code.LocationSystem.GlobalWindow
 
             if (infoData != null)
             {
-                m_locationPreview.sprite = infoData.LocationProfile.LocationPreviewSprite;
-                m_locationTitle.text = infoData.LocationProfile.LocationTitle;
-                m_locationDescription.text = infoData.LocationProfile.LocationDescription;
+                _locationPreview.sprite = infoData.LocationProfile.LocationPreviewSprite;
+                _locationTitle.text = infoData.LocationProfile.LocationTitle;
+                _locationDescription.text = infoData.LocationProfile.LocationDescription;
             }
         }
 
@@ -57,7 +67,7 @@ namespace Dimasyechka.Code.LocationSystem.GlobalWindow
 
             if (infoData != null)
             {
-                LocationsController.Instance.TravelToLocation(infoData.LocationProfile, infoData.TravelHours);
+                _locationsController.TravelToLocation(infoData.LocationProfile, infoData.TravelHours);
             }
 
             Hide();

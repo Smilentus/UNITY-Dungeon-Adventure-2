@@ -3,21 +3,34 @@ using Dimasyechka.Code.BattleSystem.BattleActions.Profiles;
 using Dimasyechka.Code.BattleSystem.Controllers;
 using Dimasyechka.Code.BattleSystem.PlayerSystem;
 using UnityEngine;
+using Zenject;
 
 namespace Dimasyechka.Code.BattleSystem.BattleActions.Implementations
 {
-    public class BattleActionExecuter_BaseActionExecuter : MonoBehaviour, IBattleActionExecuter
+    public class BattleActionExecuterBaseActionExecuter : MonoBehaviour, IBattleActionExecuter
     {
-        protected IBattleActionInteraction battleActionInteraction;
-        public IBattleActionInteraction BattleActionInteraction { get => battleActionInteraction; set => battleActionInteraction = value; }
+        protected IBattleActionInteraction _battleActionInteraction;
+        public IBattleActionInteraction BattleActionInteraction { get => _battleActionInteraction; set => _battleActionInteraction = value; }
 
 
-        protected BattleActionProfile battleActionProfile;
+        protected BattleActionProfile _battleActionProfile;
+
+        protected RuntimeBattlePlayerController _runtimeBattlePlayerController;
+        protected BattleController _battleController;
+        protected RuntimePlayer _runtimePlayer;
+
+        [Inject]
+        public void Construct(RuntimeBattlePlayerController runtimeBattlePlayerController, RuntimePlayer runtimePlayer, BattleController battleController)
+        {
+            _runtimeBattlePlayerController = runtimeBattlePlayerController;
+            _runtimePlayer = runtimePlayer;
+            _battleController = battleController;
+        }
 
 
         public virtual bool CanExecuteAction()
         {
-            return RuntimeBattlePlayerController.Instance.PlayerActionPoints >= battleActionProfile.SpendableActions;
+            return _runtimeBattlePlayerController.PlayerActionPoints >= _battleActionProfile.SpendableActions;
         }
 
         public virtual void Initialize() 
@@ -27,19 +40,19 @@ namespace Dimasyechka.Code.BattleSystem.BattleActions.Implementations
 
         public virtual void SetInteraction(IBattleActionInteraction _interaction)
         {
-            if (battleActionInteraction == null)
+            if (_battleActionInteraction == null)
             {
-                battleActionInteraction = _interaction;
+                _battleActionInteraction = _interaction;
             }
 
-            battleActionProfile = _interaction as BattleActionProfile;
+            _battleActionProfile = _interaction as BattleActionProfile;
         }
 
         public virtual void EveryTurnCheck(BattleController.TurnStatus turnStatus) { }
 
         public virtual void ExecuteAction() 
         {
-            RuntimeBattlePlayerController.Instance.PlayerActionPoints -= battleActionProfile.SpendableActions;
+            _runtimeBattlePlayerController.PlayerActionPoints -= _battleActionProfile.SpendableActions;
         }
     }
 }

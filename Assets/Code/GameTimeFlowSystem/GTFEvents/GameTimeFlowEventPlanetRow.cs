@@ -1,14 +1,10 @@
-using Dimasyechka.Code._LEGACY_.BuffSystem;
-using Dimasyechka.Code.BuffSystem.Profiles;
-using Dimasyechka.Code.GameTimeFlowSystem.Controllers;
-
 namespace Dimasyechka.Code.GameTimeFlowSystem.GTFEvents
 {
     public class GameTimeFlowEventPlanetRow : GameTimeFlowEventBase
     {
         public override bool CanStartEvent()
         {
-            return (GameTimeFlowController.Instance.CurrentYear % 10 == 0 && GameTimeFlowController.Instance.CurrentMonth == 1 && GameTimeFlowController.Instance.CurrentDay < 15);
+            return (_gameTimeFlowController.CurrentYear % 10 == 0 && _gameTimeFlowController.CurrentMonth == 1 && _gameTimeFlowController.CurrentDay < 15);
         }
 
         public override bool CanFinishEvent()
@@ -19,14 +15,14 @@ namespace Dimasyechka.Code.GameTimeFlowSystem.GTFEvents
         public override void StartEvent()
         {
             GameController.Instance.ShowMessageText(GameTimeFlowEventReference.EventDescription, "[Событие]");
-            FindObjectOfType<BuffManager>().SetBuff(BuffProfile.BuffType.PlanetRowBuff);
+            //FindObjectOfType<BuffManager>().SetBuff(BuffProfile.BuffType.PlanetRowBuff);
 
             base.StartEvent();
         }
 
         public override void FinishEvent()
         {
-            FindObjectOfType<BuffManager>().DeleteBuffAction(BuffProfile.BuffType.PlanetRowBuff);
+            //FindObjectOfType<BuffManager>().DeleteBuffAction(BuffProfile.BuffType.PlanetRowBuff);
 
             base.FinishEvent();
         }

@@ -8,43 +8,12 @@ namespace Dimasyechka.Code.CinematicSystem
 {
     public class Cinematics : MonoBehaviour, IObservable<BaseCinematicProfile>
     {
-        private static Cinematics _instance;
-        public static Cinematics Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = FindObjectOfType<Cinematics>();
-                }
-
-                return _instance;
-            }
-        }
-
-
-        public CinematicSequence sequence;
-
-
-        [ContextMenu("Debug Start")]
-        public void DebugStart()
-        {
-            StartCinematics(sequence);
-        }
-
-        [ContextMenu("Debug Next")]
-        public void DebugNext()
-        {
-            PlayNextCinematicProfile();
-        }
-
-
         public event Action<CinematicSequence> onCinematicsStarted;
         public event Action<CinematicSequence> onCinematicsEnded;
 
 
         [SerializeField]
-        private List<GameObject> ObserversGameObjects = new List<GameObject>();
+        private List<GameObject> _observersGameObjects = new List<GameObject>();
 
 
         private CinematicSequence _playingSequence;
@@ -76,7 +45,7 @@ namespace Dimasyechka.Code.CinematicSystem
 
         private void ExtractObserversFromGameObjects()
         {
-            foreach (GameObject go in ObserversGameObjects)
+            foreach (GameObject go in _observersGameObjects)
             {
                 IObserver<BaseCinematicProfile> observerComponent = null;
                 if (go.TryGetComponent<IObserver<BaseCinematicProfile>>(out observerComponent))

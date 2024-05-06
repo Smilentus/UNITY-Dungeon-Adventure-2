@@ -27,8 +27,8 @@ namespace Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters
             for (int i = 0; i < playerSkills.Length; i++)
             {
                 saveableSkills[i] = new SaveableSkillData() {
-                    skillGUID = playerSkills[i].skillProfile.skillGUID,
-                    obtainedSkillLevel = playerSkills[i].runtimeSkillCore.UpgradeableComponent.currentLevel
+                    skillGUID = playerSkills[i].SkillProfile.skillGUID,
+                    obtainedSkillLevel = playerSkills[i].RuntimeSkillCore.UpgradeableComponent.currentLevel
                 };
             }
 

@@ -10,6 +10,7 @@ using Dimasyechka.Code.Utilities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Zenject;
 
 
 // TODO: Refactoring
@@ -43,6 +44,27 @@ namespace Dimasyechka.Code
         [Header("Окно информации")]
         public GameObject Blocker;
         public GameObject DeathBox;
+
+
+        private RuntimePlayer _runtimePlayer;
+        private BattleController _battleController;
+        private LocationsController _locationsController;
+        private GameTimeFlowController _gameTimeFlowController;
+
+
+        [Inject]
+        public void Construct(
+            BattleController battleController, 
+            RuntimePlayer runtimePlayer, 
+            GameTimeFlowController gameTimeFlowController,
+            LocationsController locationsController)
+        {
+            _battleController = battleController;
+            _runtimePlayer = runtimePlayer;
+            _gameTimeFlowController = gameTimeFlowController;
+            _locationsController = locationsController;
+        }
+
 
         // Куда-то вынести отсюдАВА
         private void Awake()
@@ -103,7 +125,7 @@ namespace Dimasyechka.Code
             }
 
             GameObject newText = Instantiate(EventText, EventParent);
-            newText.GetComponent<Text>().text = "[" + GameTimeFlowController.Instance.DateNow() + "]\n" + text + "\n";
+            newText.GetComponent<Text>().text = "[" + _gameTimeFlowController.DateNow() + "]\n" + text + "\n";
             newText.transform.SetAsFirstSibling();
 
             eventScroll.normalizedPosition = new Vector2(eventScroll.normalizedPosition.x, 1);
@@ -135,7 +157,7 @@ namespace Dimasyechka.Code
         // DeathBox открытие
         public void ShowDeathBox(string deathText)
         {
-            RuntimePlayer.Instance.RuntimePlayerStats.isDeath = true;
+            _runtimePlayer.RuntimePlayerStats.IsDeath = true;
             DeathBox.SetActive(true);
             DeathBox.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = deathText;
         }
@@ -178,13 +200,13 @@ namespace Dimasyechka.Code
         // Действие при нажатии на кнопку локации
         public void PressDirectionButton(LocationProfile locationToTravel)
         {
-            LocationsController.Instance.TravelToLocation(locationToTravel, 0);
+            _locationsController.TravelToLocation(locationToTravel, 0);
         }
 
         // Ожидание X часов
         public void WaitSomeTime(int timeToWait)
         {
-            if (!BattleController.Instance.IsBattle)
+            if (!_battleController.IsBattle)
             {
                 // Время баффов
                 //FindObjectOfType<BuffManager>().ChangeBuffActionTime(timeToWait);
@@ -193,7 +215,7 @@ namespace Dimasyechka.Code
                 if (timeToWait < 0)
                     timeToWait *= -1;
 
-                GameTimeFlowController.Instance.AddTime(timeToWait);
+                _gameTimeFlowController.AddTime(timeToWait);
             }
         }
         // --------------

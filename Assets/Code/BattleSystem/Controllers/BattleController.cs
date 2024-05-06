@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using Dimasyechka.Code._LEGACY_;
-using Dimasyechka.Code.BattleSystem.EnemiesSystem;
+﻿using Dimasyechka.Code.BattleSystem.EnemiesSystem;
 using Dimasyechka.Code.BattleSystem.GlobalWindow;
 using Dimasyechka.Code.BattleSystem.PlayerSystem;
 using Dimasyechka.Code.GameTimeFlowSystem.Controllers;
 using Dimasyechka.Code.GlobalWindows.Controllers;
 using Dimasyechka.Code.SaveLoadSystem.Controllers;
+using System;
+using System.Collections.Generic;
+using Unity.Properties;
 using UnityEngine;
+using Zenject;
 
 /*
     Суть системы боя такова
@@ -32,65 +33,59 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
         }
 
         [Header("Кнопка ожидания")]
-        public GameObject waitButton;
+        public GameObject WaitButton;
 
         [Header("Аниматор начала битвы")]
-        public GameObject startBattleImage;
-        [Header("Аниматор конца битвы")]
-        public GameObject endBattleImage;
+        public GameObject StartBattleImage;
 
+        [Header("Аниматор конца битвы")]
+        public GameObject EndBattleImage;
+
+
+        [SerializeField]
+        private RuntimeBattleCharacter _defaultRuntimeBattleCharacterPrefab;
+
+        [SerializeField]
+        private Transform _enemiesSpawnArea;
+
+
+        public List<RuntimeBattleCharacter> EnemiesInBattle { get; } = new();
+
+        public List<CharacterProfile> DefeatedEnemiesInBattle { get; } = new();
+
+        public bool IsBattle { get; set; }
+
+        public bool IsWin { get; set; }
+
+        public TurnStatus CurrentTurnStatus { get; private set; }
+
+        public int CurrentBattleStep { get; private set; }
 
         // ======
-        private static BattleController instance;
-        public static BattleController Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = FindObjectOfType<BattleController>();
-                }
-                return instance;
-            }
-        }
-
 
         public event Action<bool> onBattleStatusChanged;
 
         public event Action<TurnStatus> onBattleTurnStatusChanged;
 
 
-        [SerializeField]
-        private RuntimeBattlePlayerController m_runtimeBattlePlayerController;
-
-        [SerializeField]
-        private RuntimeBattleCharacter m_defaultRuntimeBattleCharacterPrefab;
-
-        [SerializeField]
-        private Transform m_enemiesSpawnArea;
+        private RuntimePlayer _runtimePlayer;
+        private GameController _gameController;
+        private GameTimeFlowController _gameTimeFlowController;
+        private RuntimeBattlePlayerController _runtimeBattlePlayerController;
 
 
-        private List<RuntimeBattleCharacter> enemiesInBattle = new List<RuntimeBattleCharacter>();
-        public List<RuntimeBattleCharacter> EnemiesInBattle => enemiesInBattle;
-
-
-        private List<CharacterProfile> defeatedEnemiesInBattle = new List<CharacterProfile>();
-        public List<CharacterProfile> DefeatedEnemiesInBattle => defeatedEnemiesInBattle;
-
-
-        private bool isBattle;
-        public bool IsBattle { get => isBattle; set => isBattle = value; }
-
-        private bool isWin;
-        public bool IsWin { get => isWin; set => isWin = value; }
-
-
-        private TurnStatus m_currentTurnStatus;
-        public TurnStatus CurrentTurnStatus => m_currentTurnStatus;
-
-
-        private int currentBattleStep = 0;
-        public int CurrentBattleStep => currentBattleStep;
+        [Inject]
+        public void Construct(
+            RuntimePlayer runtimePlayer, 
+            RuntimeBattlePlayerController runtimeBattlePlayerController, 
+            GameTimeFlowController gameTimeFlowController,
+            GameController gameController)
+        {
+            _runtimeBattlePlayerController = runtimeBattlePlayerController;
+            _gameTimeFlowController = gameTimeFlowController;
+            _runtimePlayer = runtimePlayer;
+            _gameController = gameController;
+        }
 
 
         public void AddEnemyToBattle(CharacterProfile character)
@@ -98,16 +93,12 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
             RuntimeBattleCharacter createdEnemy;
 
             if (character.CharacterPrefab != null)
-            {
-                createdEnemy = Instantiate(character.CharacterPrefab, m_enemiesSpawnArea);
-            }
+                createdEnemy = Instantiate(character.CharacterPrefab, _enemiesSpawnArea);
             else
-            {
-                createdEnemy = Instantiate(m_defaultRuntimeBattleCharacterPrefab, m_enemiesSpawnArea);
-            }
+                createdEnemy = Instantiate(_defaultRuntimeBattleCharacterPrefab, _enemiesSpawnArea);
 
             createdEnemy.CreateBattleCharacter(character);
-            enemiesInBattle.Add(createdEnemy);
+            EnemiesInBattle.Add(createdEnemy);
         }
 
 
@@ -115,23 +106,23 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
         {
             if (CheckEndBattleConditions()) return;
 
-            if (!RuntimePlayer.Instance.RuntimePlayerStats.isStun)
+            if (!_runtimePlayer.RuntimePlayerStats.IsStun)
             {
                 UpdateAllEnemiesUI();
 
-                m_currentTurnStatus = TurnStatus.PlayerTurn;
-                onBattleTurnStatusChanged?.Invoke(m_currentTurnStatus);
+                CurrentTurnStatus = TurnStatus.PlayerTurn;
+                onBattleTurnStatusChanged?.Invoke(CurrentTurnStatus);
             }
             else
             {
-                GameController.Instance.AddEventText("Вы оглушены и не можете атаковать.");
+                _gameController.AddEventText("Вы оглушены и не можете атаковать.");
                 StartEnemiesTurn();
             }
         }
 
         public void EndPlayerTurn()
         {
-            GameController.Instance.AddEventText("Вы закончили свой ход.");
+            _gameController.AddEventText("Вы закончили свой ход.");
 
             StartEnemiesTurn();
         }
@@ -141,31 +132,25 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
         {
             if (CheckEndBattleConditions()) return;
 
-            m_currentTurnStatus = TurnStatus.EnemiesTurn;
-            onBattleTurnStatusChanged?.Invoke(m_currentTurnStatus);
+            CurrentTurnStatus = TurnStatus.EnemiesTurn;
+            onBattleTurnStatusChanged?.Invoke(CurrentTurnStatus);
 
-            for (int i = 0; i < enemiesInBattle.Count; i++)
-            {
-                enemiesInBattle[i].ProcessCharacterActions();
-            }
+            for (var i = 0; i < EnemiesInBattle.Count; i++) EnemiesInBattle[i].ProcessCharacterActions();
 
             EndEnemiesTurn();
         }
 
         public void UpdateAllEnemiesUI()
         {
-            foreach (RuntimeBattleCharacter runtimeBattleCharacter in enemiesInBattle)
-            {
-                runtimeBattleCharacter.UpdateCharacterView();
-            }
+            foreach (var runtimeBattleCharacter in EnemiesInBattle) runtimeBattleCharacter.UpdateCharacterView();
         }
 
         // Фактически здесь конец хода, потому что и игрок сходил и все противники
         private void EndEnemiesTurn()
         {
-            GameTimeFlowController.Instance.AddTime(1);
+            _gameTimeFlowController.AddTime(1);
 
-            currentBattleStep++;
+            CurrentBattleStep++;
 
             StartPlayerTurn();
         }
@@ -174,39 +159,37 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
         public bool CheckEndBattleConditions()
         {
             // Здесь все проверки после каждого действия, чтобы понять умер противник или нет
-            if (RuntimePlayer.Instance.RuntimePlayerStats.Health <= 0)
+            if (_runtimePlayer.RuntimePlayerStats.Health <= 0)
             {
-                RuntimePlayer.Instance.RuntimePlayerStats.isDeath = true;
+                _runtimePlayer.RuntimePlayerStats.IsDeath = true;
 
-                isWin = false;
+                IsWin = false;
                 EndBattle();
-                GameController.Instance.ShowDeathBox("Вы умерли во время битвы.");
+                _gameController.ShowDeathBox("Вы умерли во время битвы.");
 
                 return true;
             }
-        
 
-            for (int i = 0; i < enemiesInBattle.Count; i++)
-            {
-                if (enemiesInBattle[i].Health <= 0)
+
+            for (var i = 0; i < EnemiesInBattle.Count; i++)
+                if (EnemiesInBattle[i].Health <= 0)
                 {
-                    //Debug.Log("Противник: " + enemiesInBattle[i].characterProfile.Name + " - Повержен.");
+                    //Debug.Log("Противник: " + enemiesInBattle[i].CharacterProfile.Name + " - Повержен.");
                     // Добавляем противника в побеждённых
-                    defeatedEnemiesInBattle.Add(enemiesInBattle[i].characterProfile);
-                    Destroy(enemiesInBattle[i].gameObject);
+                    DefeatedEnemiesInBattle.Add(EnemiesInBattle[i].CharacterProfile);
+                    Destroy(EnemiesInBattle[i].gameObject);
                     // Удаляем противника из списка
-                    enemiesInBattle.RemoveAt(i);
+                    EnemiesInBattle.RemoveAt(i);
                 }
-            }
-        
-        
+
+
             // Если противников не осталось, заканчиваем бой
-            if (enemiesInBattle.Count == 0)
+            if (EnemiesInBattle.Count == 0)
             {
                 //Debug.Log("Противники закончились, мы выйграли!");
-                isWin = true;
-                GameController.Instance.Blocker.SetActive(true);
-                endBattleImage.SetActive(true);
+                IsWin = true;
+                _gameController.Blocker.SetActive(true);
+                EndBattleImage.SetActive(true);
                 EndBattle();
                 return true;
             }
@@ -217,23 +200,20 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
 
         public void TryStartBattle(List<CharacterProfile> characters)
         {
-            if (isBattle) return;
+            if (IsBattle) return;
 
             ClearBattleData();
 
-            foreach (CharacterProfile characterProfile in characters)
-            {
-                AddEnemyToBattle(characterProfile);
-            }
+            foreach (var characterProfile in characters) AddEnemyToBattle(characterProfile);
 
-            isBattle = true;
-            isWin = false;
-            currentBattleStep = 0;
+            IsBattle = true;
+            IsWin = false;
+            CurrentBattleStep = 0;
 
-            m_runtimeBattlePlayerController.InitializeBattlePlayer();
+            _runtimeBattlePlayerController.InitializeBattlePlayer();
 
             GlobalWindowsController.Instance.TryShowGlobalWindow(typeof(BattleGlobalWindow));
-        
+
             onBattleStatusChanged?.Invoke(true);
             StartPlayerTurn();
         }
@@ -241,20 +221,20 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
         public void EndBattle()
         {
             GameController.Instance.Blocker.SetActive(false);
-            endBattleImage.SetActive(false);
+            EndBattleImage.SetActive(false);
 
-            if (isWin)
+            if (IsWin)
             {
                 WinCondition();
                 SaveLoadSystemController.Instance.TrySaveGameState("AutoSave");
             }
 
-            isWin = false;
-            isBattle = false;
+            IsWin = false;
+            IsBattle = false;
 
             ClearBattleData();
 
-            waitButton.SetActive(true);
+            WaitButton.SetActive(true);
 
             GlobalWindowsController.Instance.TryHideGlobalWindow(typeof(BattleGlobalWindow));
         }
@@ -262,13 +242,13 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
         // Выдача предметов за победу
         public void WinCondition()
         {
-            RuntimePlayer.Instance.RuntimePlayerStats.isStun = false;
+            _runtimePlayer.RuntimePlayerStats.IsStun = false;
 
             // Деньги и опыт с каждого моба
-            for (int i = 0; i < defeatedEnemiesInBattle.Count; i++)
+            for (var i = 0; i < DefeatedEnemiesInBattle.Count; i++)
             {
-                RuntimePlayer.Instance.GiveMoney(defeatedEnemiesInBattle[i].Gold);
-                RuntimePlayer.Instance.GiveExperience(defeatedEnemiesInBattle[i].Exp);
+                _runtimePlayer.GiveMoney(DefeatedEnemiesInBattle[i].Gold);
+                _runtimePlayer.GiveExperience(DefeatedEnemiesInBattle[i].Exp);
             }
 
             // Добавляем игроку индивидуальные вещи моба
@@ -307,30 +287,24 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
 
         public void ForceKillAllEnemies()
         {
-            foreach (RuntimeBattleCharacter enemy in enemiesInBattle)
-            {
-                enemy.Health = -999999999;
-            }
+            foreach (var enemy in EnemiesInBattle) enemy.Health = -999999999;
 
             CheckEndBattleConditions();
         }
 
         private void ClearBattleData()
         {
-            foreach (RuntimeBattleCharacter character in enemiesInBattle)
-            {
-                Destroy(character.gameObject);
-            }
+            foreach (var character in EnemiesInBattle) Destroy(character.gameObject);
 
-            enemiesInBattle.Clear();
-            defeatedEnemiesInBattle.Clear();
+            EnemiesInBattle.Clear();
+            DefeatedEnemiesInBattle.Clear();
         }
 
         // ====
 
         // Атака противника - ДОДЕЛАТЬ КУЧУ ПРОВЕРОК !!!!!!
-        public void EnemyAIAttack()
-        {
+        //public void EnemyAIAttack()
+        //{
             //if (allEnemies.Count == 0)
             //    return;
 
@@ -376,12 +350,12 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
             //}
 
             //UIScript.Instance.UpdateEnemyUIText();
-        }
+        //}
 
 
         // Расчёт приоритета атаки противника
-        private void EnemyAICalculateChances(int c)
-        {
+        //private void EnemyAICalculateChances(int c)
+        //{
             //bool canUseMagic = false;
             //bool isAttack = false;
 
@@ -493,9 +467,10 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
             //    EnemyAttack(c, Random.Range(0, 3));
             //    isAttack = true;
             //}
-        }
-        public void UseEnemyMagic(CharacterMagic.spellType useSpell, int c, int s)
-        {
+        //}
+
+        //public void UseEnemyMagic(CharacterMagic.spellType useSpell, int c, int s)
+        //{
             //GameController.Instance.AddEventText(CurrentRound + " - Противник использовал магию: " + magicName(useSpell, allEnemies[c].Spells[s].spellPower));
             //switch(useSpell)
             //{
@@ -558,9 +533,10 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
             //        Player.Health -= (int)allEnemies[c].Spells[s].spellPower;
             //        break;
             //}
-        }
-        public void EnemyAttack(int c, int attackType)
-        {
+        //}
+
+        //public void EnemyAttack(int c, int attackType)
+        //{
             //int rndAtk = attackType;
             //if (UnityEngine.Random.Range(0, 101) > Player.DodgeChance + Player.Luck)
             //{
@@ -622,6 +598,6 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
             //    GameController.Instance.AddEventText(CurrentBattleStep + " - Вы уклонились от атаки противника.");
             //    FindObjectOfType<HeroAbilityManager>().ChargeHeroAbility(Player.HeroAbility.Ninja);
             //}
-        }
+        //}
     }
 }

@@ -17,7 +17,7 @@ namespace Dimasyechka.Code.SkillsSystem.Implementations
 
         public override void OnUpgraded(int level)
         {
-            RuntimePlayer.Instance.RuntimePlayerStats.CriticalStrikeDamageMultiplier += delta;
+            _runtimePlayer.RuntimePlayerStats.CriticalStrikeDamageMultiplier += delta;
         }
     }
 }

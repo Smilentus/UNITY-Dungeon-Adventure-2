@@ -15,9 +15,9 @@ namespace Dimasyechka.Code.SkillsSystem.Implementations
 
         public override void OnUpgraded(int level)
         {
-            double delta = skillCore.UpgradeableComponent.currentLevel * 0.5f;
+            double delta = _skillCore.UpgradeableComponent.currentLevel * 0.5f;
 
-            RuntimePlayer.Instance.RuntimePlayerStats.HealthRegen += delta;
+            _runtimePlayer.RuntimePlayerStats.HealthRegen += delta;
         }
     }
 }

@@ -3,23 +3,18 @@ using Dimasyechka.Code.GlobalWindows;
 using Dimasyechka.Code.GlobalWindows.Controllers;
 using Dimasyechka.Code.InventorySystem;
 using UnityEngine;
+using Zenject;
 
 namespace Dimasyechka.Code.CraftingSystem.Recipes
 {
     public class CraftSystem : MonoBehaviour
     {
-        private static CraftSystem _instance;
-        public static CraftSystem Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = FindObjectOfType<CraftSystem>();
-                }
+        private InventoryController _inventoryController;
 
-                return _instance;
-            }
+        [Inject]
+        public void Construct(InventoryController inventoryController)
+        {
+            _inventoryController = inventoryController;
         }
 
 
@@ -29,7 +24,7 @@ namespace Dimasyechka.Code.CraftingSystem.Recipes
             {
                 foreach (InputCraftItem inputCraftItem in craftingRecipe.InputCraftItems)
                 {
-                    if (InventoryController.Instance.TryRemoveItemFromAnyInventory(inputCraftItem.InputItemProfile, inputCraftItem.InputItemAmount))
+                    if (_inventoryController.TryRemoveItemFromAnyInventory(inputCraftItem.InputItemProfile, inputCraftItem.InputItemAmount))
                     {
                         // Всё нормально
                         Debug.Log($"Успешно удалён предмет из инвентаря для крафта");
@@ -73,7 +68,7 @@ namespace Dimasyechka.Code.CraftingSystem.Recipes
 
         private bool IsInventoryContainsItem(InputCraftItem inputCraftItem)
         {
-            return InventoryController.Instance.IsItemContainsInAnyContainer(inputCraftItem.InputItemProfile, inputCraftItem.InputItemAmount);
+            return _inventoryController.IsItemContainsInAnyContainer(inputCraftItem.InputItemProfile, inputCraftItem.InputItemAmount);
         }
     }
 }

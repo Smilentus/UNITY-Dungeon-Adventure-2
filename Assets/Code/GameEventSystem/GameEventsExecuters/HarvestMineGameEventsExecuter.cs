@@ -4,6 +4,7 @@ using Dimasyechka.Code.GameEventSystem.Profiles;
 using Dimasyechka.Code.InventorySystem;
 using Dimasyechka.Code.InventorySystem.BaseItem;
 using UnityEngine;
+using Zenject;
 
 namespace Dimasyechka.Code.GameEventSystem.GameEventsExecuters
 {
@@ -12,17 +13,26 @@ namespace Dimasyechka.Code.GameEventSystem.GameEventsExecuters
         public Type ProfileType => typeof(HarvestMineGameEventProfile);
 
 
-        public void TryExecuteGameEvent(BaseGameEventProfile _profile)
+        private InventoryController _inventoryController;
+
+        [Inject]
+        public void Construct(InventoryController inventoryController)
         {
-            if (_profile.GetType().Equals(ProfileType))
+            _inventoryController = inventoryController;
+        }
+
+
+        public void TryExecuteGameEvent(BaseGameEventProfile gameEventProfile)
+        {
+            if (gameEventProfile.GetType().Equals(ProfileType))
             {
-                HarvestMineGameEventProfile profile = _profile as HarvestMineGameEventProfile;
+                HarvestMineGameEventProfile profile = gameEventProfile as HarvestMineGameEventProfile;
 
                 foreach (BaseItemProfile harvestableProfile in profile.BaseHarvestables)
                 {
                     int randomAmount = UnityEngine.Random.Range(profile.HarvestableAmountMin, profile.HarvestableAmountMax);
 
-                    InventoryController.Instance.TryAddItemToAnyContainer(harvestableProfile, randomAmount);
+                    _inventoryController.TryAddItemToAnyContainer(harvestableProfile, randomAmount);
                 }
 
                 GameController.Instance.AddEventText($"{profile.EventTitle}");

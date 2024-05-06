@@ -1,18 +1,20 @@
-using System;
 using Dimasyechka.Code.BattleSystem.PlayerSystem;
-using TMPro;
+using Dimasyechka.Lubribrary.RxMV.UniRx.Attributes;
+using Dimasyechka.Lubribrary.RxMV.UniRx.RxLink;
+using System;
+using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Dimasyechka.Code.BattleSystem.BattleActions.Views
 {
-    public class BaseBattleInteractionView : MonoBehaviour, IPointerClickHandler
+    public class BaseBattleInteractionView : MonoBehaviour, IPointerClickHandler, IRxLinkable
     {
         public event Action<int> onPressed;
 
 
-        [SerializeField]
-        protected TMP_Text m_actionTitleTMP;
+        [RxAdaptableProperty]
+        public ReactiveProperty<string> ActionTitle = new ReactiveProperty<string>();
 
 
         protected int attachedIndex;
@@ -22,7 +24,7 @@ namespace Dimasyechka.Code.BattleSystem.BattleActions.Views
         {
             attachedIndex = index;
 
-            m_actionTitleTMP.text = availableBattleActionData.interaction.InteractionTitle;
+            ActionTitle.Value = availableBattleActionData.Interaction.InteractionTitle;
         }
 
 

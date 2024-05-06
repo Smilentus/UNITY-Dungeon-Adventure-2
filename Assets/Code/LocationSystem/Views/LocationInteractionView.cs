@@ -2,21 +2,31 @@ using Dimasyechka.Code.LocationSystem.Controllers;
 using Dimasyechka.Code.LocationSystem.Profiles;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Zenject;
 
 namespace Dimasyechka.Code.LocationSystem.Views
 {
     public class LocationInteractionView : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField]
-        private LocationProfile m_locationProfile;
+        private LocationProfile _locationProfile;
 
         [SerializeField]
-        private int m_travelHours = 1;
-    
+        private int _travelHours = 1;
+
+
+        private LocationsController _locationsController;
+
+        [Inject]
+        public void Construct(LocationsController locationsController)
+        {
+            _locationsController = locationsController;
+        }
+
     
         public void OnPointerClick(PointerEventData eventData)
         {
-            LocationsController.Instance.ShowInfoAboutLocation(m_locationProfile, m_travelHours);
+            _locationsController.ShowInfoAboutLocation(_locationProfile, _travelHours);
         }
     }
 }

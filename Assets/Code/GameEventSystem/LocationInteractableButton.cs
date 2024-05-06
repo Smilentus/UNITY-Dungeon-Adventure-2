@@ -9,24 +9,24 @@ namespace Dimasyechka.Code.GameEventSystem
     public class LocationInteractableButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
     {
         [SerializeField]
-        private LocationProfile m_LocationProfile;
+        private LocationProfile _locationProfile;
 
 
         public void Press()
         {
-            if (m_LocationProfile == null)
+            if (_locationProfile == null)
             {
                 Debug.LogError($"Локация не назначения на действие!", this.gameObject);
                 return;
             }
 
-            if (m_LocationProfile.LocationEvents.Count == 0)
+            if (_locationProfile.LocationEvents.Count == 0)
             {
                 Debug.LogError($"На локации не назначены действий!", this.gameObject);
                 return;
             }
 
-            BaseGameEventProfile baseGameEventProfile = m_LocationProfile.GetRandomLocationEvent;
+            BaseGameEventProfile baseGameEventProfile = _locationProfile.GetRandomLocationEvent;
 
             if (baseGameEventProfile == null)
             {

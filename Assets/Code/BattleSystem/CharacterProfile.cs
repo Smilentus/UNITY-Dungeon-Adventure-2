@@ -1,7 +1,6 @@
-﻿using Dimasyechka.Code._LEGACY_;
-using Dimasyechka.Code._LEGACY_.Inventory;
-using Dimasyechka.Code._LEGACY_.Managers;
-using Dimasyechka.Code.BattleSystem.EnemiesSystem;
+﻿using Dimasyechka.Code.BattleSystem.EnemiesSystem;
+using Dimasyechka.Code.InventorySystem.BaseItem;
+using Dimasyechka.Code.MagicSystem.Profiles;
 using UnityEngine;
 
 namespace Dimasyechka.Code.BattleSystem
@@ -10,40 +9,40 @@ namespace Dimasyechka.Code.BattleSystem
     public class CharacterProfile : ScriptableObject
     {
         [SerializeField]
-        private RuntimeBattleCharacter m_characterPrefab;
+        private RuntimeBattleCharacter _characterPrefab;
         /// <summary>
         ///     Ссылка на основной префаб персонажа, который спавнится во время боя
         /// </summary>
-        public RuntimeBattleCharacter CharacterPrefab => m_characterPrefab;
+        public RuntimeBattleCharacter CharacterPrefab => _characterPrefab;
 
         [Header("Стихия персонажа")]
-        public CharactersLibrary.CharacterElement Element;
-        public string elementStr
+        public CharacterElement Element;
+        public string GetElementalString
         {
             get
             {
                 string str = "";
                 switch (Element)
                 {
-                    case CharactersLibrary.CharacterElement.Dark:
+                    case CharacterElement.Dark:
                         str = "Тьма";
                         break;
-                    case CharactersLibrary.CharacterElement.Earth:
+                    case CharacterElement.Earth:
                         str = "Земля";
                         break;
-                    case CharactersLibrary.CharacterElement.Fire:
+                    case CharacterElement.Fire:
                         str = "Огонь";
                         break;
-                    case CharactersLibrary.CharacterElement.Light:
+                    case CharacterElement.Light:
                         str = "Свет";
                         break;
-                    case CharactersLibrary.CharacterElement.None:
+                    case CharacterElement.None:
                         str = "Нет стихии";
                         break;
-                    case CharactersLibrary.CharacterElement.Water:
+                    case CharacterElement.Water:
                         str = "Вода";
                         break;
-                    case CharactersLibrary.CharacterElement.Wind:
+                    case CharacterElement.Wind:
                         str = "Воздух";
                         break;
                 }
@@ -52,10 +51,10 @@ namespace Dimasyechka.Code.BattleSystem
         }
 
         [Header("Описание персонажа при встрече")]
-        public string meetingDescr;
+        public string MeetingDescr;
 
         [Header("Встретил ли игрок этого персонажа?")]
-        public bool isMeeted;
+        public bool IsMeeted;
 
         [Header("Имя")]
         public string Name;
@@ -70,7 +69,7 @@ namespace Dimasyechka.Code.BattleSystem
         public double ManaRegen;
 
         [Header("Тип защиты")]
-        public CharactersLibrary.CharacterArmorType ArmorType;
+        public CharacterArmorType ArmorType;
 
         [Header("Защита")]
         public double Armor;
@@ -79,36 +78,60 @@ namespace Dimasyechka.Code.BattleSystem
         public double MaxMana;
 
         [Header("Заклинания персонажа")]
-        public CharacterMagic[] Spells;
+        public BaseMagicProfile[] MagicProfiles;
 
         [Header("Тип атаки")]
-        public CharactersLibrary.CharacterAttackType AttackType;
-    
+        public CharacterAttackType AttackType;
+
         [Header("Скорость атаки")]
         public double AttackSpeed;
-    
+
         [Header("Урон")]
         public double Damage;
-    
+
         [Header("Шанс увернуться | <= чем указанное число")]
         public double DodgeChance;
-    
+
         [Header("Опыт")]
         public double Exp;
-    
+
         [Header("Золото")]
         public double Gold;
-    
+
         [Header("Дроп")]
-        public ItemProfile[] DropItems;
+        public BaseItemProfile[] DropItems;
 
         [Header("Текстура персонажа")]
         public Texture CharacterImage;
 
-        [HideInInspector()]
-        public int lastMagicPriority;
-
         [Header("Action Points")]
         public int DefaultActionPoints = 5;
+    }
+
+    public enum CharacterAttackType
+    {
+        None,
+        Ranged,
+        Magic,
+        Melee,
+        Throwable
+    }
+    public enum CharacterArmorType
+    {
+        None,
+        Light,
+        Medium,
+        Heavy,
+        Magic
+    }
+    public enum CharacterElement
+    {
+        None,
+        Wind,
+        Water,
+        Fire,
+        Earth,
+        Light,
+        Dark
     }
 }

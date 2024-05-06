@@ -8,29 +8,29 @@ namespace Dimasyechka.Code.GlobalWindows.Controllers
 {
     public class GlobalWindowsController : MonoBehaviour
     {
-        private static GlobalWindowsController instance;
+        private static GlobalWindowsController _instance;
         public static GlobalWindowsController Instance
         {
             get
             {
-                if (instance == null)
+                if (_instance == null)
                 {
-                    instance = FindAnyObjectByType<GlobalWindowsController>(); 
+                    _instance = FindAnyObjectByType<GlobalWindowsController>(); 
                 }
 
-                return instance;
+                return _instance;
             }
         }
 
 
         [Tooltip("—юда закидываем все окна, существующие на сцене")]
         [SerializeField]
-        private List<GameObject> windowGameObjects = new List<GameObject>();
+        private List<GameObject> _windowGameObjects = new List<GameObject>();
 
 
-        private List<IGlobalWindow> globalWindows = new List<IGlobalWindow>();
+        private List<IGlobalWindow> _globalWindows = new List<IGlobalWindow>();
 
-        private List<BaseGameGlobalWindow> baseGameGlobalWindows = new List<BaseGameGlobalWindow>();
+        private List<BaseGameGlobalWindow> _baseGameGlobalWindows = new List<BaseGameGlobalWindow>();
 
 
         private void Awake()
@@ -41,18 +41,18 @@ namespace Dimasyechka.Code.GlobalWindows.Controllers
 
         private void InitializeGlobalWindows()
         {
-            foreach (GameObject gameObject in windowGameObjects)
+            foreach (GameObject gameObject in _windowGameObjects)
             {
                 IGlobalWindow window;
                 if (gameObject.TryGetComponent<IGlobalWindow>(out window))
                 {
-                    globalWindows.Add(window);
+                    _globalWindows.Add(window);
                 }
 
                 BaseGameGlobalWindow baseGameGlobalWindow;
                 if (gameObject.TryGetComponent<BaseGameGlobalWindow>(out baseGameGlobalWindow))
                 {
-                    baseGameGlobalWindows.Add(baseGameGlobalWindow);
+                    _baseGameGlobalWindows.Add(baseGameGlobalWindow);
                 }
             }
         }
@@ -60,7 +60,7 @@ namespace Dimasyechka.Code.GlobalWindows.Controllers
 
         public void TryShowGlobalWindow(Type globalWindowType, IGlobalWindowData globalWindowData = null)
         {
-            IGlobalWindow windowToOpen = globalWindows.Find(x => x.GetType().Equals(globalWindowType));
+            IGlobalWindow windowToOpen = _globalWindows.Find(x => x.GetType().Equals(globalWindowType));
 
             if (windowToOpen != null)
             {
@@ -70,7 +70,7 @@ namespace Dimasyechka.Code.GlobalWindows.Controllers
 
         public bool IsWindowShown(Type globalWindowType)
         {
-            IGlobalWindow windowToOpen = globalWindows.Find(x => x.GetType().Equals(globalWindowType));
+            IGlobalWindow windowToOpen = _globalWindows.Find(x => x.GetType().Equals(globalWindowType));
 
             if (windowToOpen != null)
             {
@@ -82,7 +82,7 @@ namespace Dimasyechka.Code.GlobalWindows.Controllers
 
         public void TryHideGlobalWindow(Type globalWindowType)
         {
-            IGlobalWindow windowToClose = globalWindows.Find(x => x.GetType().Equals(globalWindowType));
+            IGlobalWindow windowToClose = _globalWindows.Find(x => x.GetType().Equals(globalWindowType));
 
             if (windowToClose != null)
             {
@@ -106,7 +106,7 @@ namespace Dimasyechka.Code.GlobalWindows.Controllers
 
         public void CloseEveryBaseGameGlobalWindow()
         {
-            foreach (BaseGameGlobalWindow window in baseGameGlobalWindows)
+            foreach (BaseGameGlobalWindow window in _baseGameGlobalWindows)
             {
                 window.Hide();
             }
@@ -114,7 +114,7 @@ namespace Dimasyechka.Code.GlobalWindows.Controllers
 
         public void CloseEveryBaseGameGlobalWindowExceptOne(Type globalWindowType)
         {
-            foreach (BaseGameGlobalWindow window in baseGameGlobalWindows)
+            foreach (BaseGameGlobalWindow window in _baseGameGlobalWindows)
             {
                 if (window.GetType().Equals(globalWindowType)) continue;
             
