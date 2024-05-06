@@ -9,7 +9,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>Dimasyechka</RootNamespace>
     <ProjectGuid>{63F89083-D66F-ADF3-8280-F415C38E0DFC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -60,220 +60,242 @@
     <Analyzer Include="C:\MainProgramFiles\Unity Editor Versions\2022.3.19f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\GameController.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\EnemiesSystem\RuntimeBattleCharacterView.cs" />
-    <Compile Include="Assets\Scripts\GameEventSystem\Profiles\BattleGameEventProfile.cs" />
-    <Compile Include="Assets\Scripts\MagicSystem\Views\RuntimeMagicObjectView.cs" />
-    <Compile Include="Assets\Scripts\InventorySystem\BaseInventoryContainer\BaseInventoryContainerView.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Buttons\RecipeButton.cs" />
-    <Compile Include="Assets\Scripts\InventorySystem\InventoryController.cs" />
-    <Compile Include="Assets\Scripts\UpgradeableSystem\Base\BaseUpgradeableSkillCheckerComponent.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Buttons\eventSlot.cs" />
-    <Compile Include="Assets\Scripts\InventorySystem\BaseItem\BaseItem.cs" />
-    <Compile Include="Assets\Scripts\SaveLoadSystem\Controllers\SaveLoadSlotsController.cs" />
-    <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\PlayerSaveLoadConverter.cs" />
-    <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\WorldMapSaveLoadConverter.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Managers\RunesManager.cs" />
-    <Compile Include="Assets\Scripts\GameEventSystem\Profiles\HarvestMineGameEventProfile.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Buttons\InvButton.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Buttons\TaskButton.cs" />
-    <Compile Include="Assets\Scripts\CinematicSystem\InputHandlers\CinematicsKeyboardInputHandler.cs" />
-    <Compile Include="Assets\Scripts\GameTimeFlowSystem\GTFEvents\GameTimeFlowEventFullMoon.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\PlayerSystem\RuntimeBattlePlayerController.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\BuffSystem\BuffManager.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Managers\LoadingSceneScript.cs" />
-    <Compile Include="Assets\Scripts\CoreComponentSystem\Interfaces\ICore.cs" />
-    <Compile Include="Assets\Scripts\MainMenu\MainMenuBootstrapper.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\BattleActions\Interfaces\IBattleActionInteraction.cs" />
-    <Compile Include="Assets\Scripts\SaveLoadSystem\Views\SaveLoadSlotView.cs" />
-    <Compile Include="Assets\Scripts\CoreComponentSystem\CoreComponent.cs" />
-    <Compile Include="Assets\Scripts\GlobalWindows\Base\BaseGlobalWindowButton.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Buttons\DirButton.cs" />
-    <Compile Include="Assets\Scripts\Utilities\SerializableMonoScript.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\BattleActions\Implementations\BattleActionExecuter_MediumStrike.cs" />
-    <Compile Include="Assets\Scripts\VoiceSystem\Voice\BaseVoiceClipData.cs" />
-    <Compile Include="Assets\Scripts\MagicSystem\PlayerMagicController.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerExtraExpSkillComponent.cs" />
-    <Compile Include="Assets\Scripts\InventorySystem\BaseInventoryContainer\BaseInventoryContainerButtonView.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\EnemiesSystem\RuntimeBattleCharacter.cs" />
-    <Compile Include="Assets\Scripts\CoreComponentSystem\Core.cs" />
-    <Compile Include="Assets\Scripts\CinematicSystem\Profiles\CinematicSequence.cs" />
-    <Compile Include="Assets\Scripts\GameEventSystem\GameEventsExecuters\HarvestMineGameEventsExecuter.cs" />
-    <Compile Include="Assets\Scripts\CoreComponentSystem\Interfaces\IComponent.cs" />
-    <Compile Include="Assets\Scripts\GameEventSystem\Profiles\BaseGameEventProfile.cs" />
-    <Compile Include="Assets\Scripts\RuntimePlayer.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Inventory\Inventory.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\BattleActions\Views\MagicBattleInteractionView.cs" />
-    <Compile Include="Assets\Scripts\Utilities\MonoScriptPropertyDrawer.cs" />
-    <Compile Include="Assets\Scripts\CraftingSystem\ItemFindHelpers\ItemHelpSourceData.cs" />
-    <Compile Include="Assets\Scripts\CraftingSystem\ItemFindHelpers\Views\ItemFindHelperView.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\EnemiesSystem\RuntimeBattleCharacterSimple.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerHealthSkillComponent.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Art.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerCriticalDamageComponent.cs" />
-    <Compile Include="Assets\Scripts\GameTimeFlowSystem\GameTimeFlowController.cs" />
-    <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\CraftingSystemSaveLoadConverter.cs" />
-    <Compile Include="Assets\Scripts\SaveLoadSystem\BetweenScenes\BetweenScenesLoaderAdapter.cs" />
-    <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\Interfaces\ISaveLoadConverter.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\NeededItem.cs" />
-    <Compile Include="Assets\Scripts\BuffSystem\Views\RuntimeBuffView.cs" />
-    <Compile Include="Assets\Scripts\Utilities\ScreenFader.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Skill.cs" />
-    <Compile Include="Assets\Scripts\GameEventSystem\Profiles\AllGameEventsWarehouse.cs" />
-    <Compile Include="Assets\Scripts\GlobalWindows\Base\BaseGameGlobalWindowSelector.cs" />
-    <Compile Include="Assets\Scripts\UpgradeableSystem\UpgradeableObserverComponent.cs" />
-    <Compile Include="Assets\Scripts\BuffSystem\RuntimeBuff.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\Controllers\BattleController.cs" />
-    <Compile Include="Assets\Scripts\CinematicSystem\Views\ArtCinematicsView.cs" />
-    <Compile Include="Assets\Scripts\InventorySystem\BaseMouse\BaseMouseControllerPresenter.cs" />
-    <Compile Include="Assets\Scripts\ShortDescriptionObject\ShortDescriptionObject.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerDodgeChanceSkillComponent.cs" />
-    <Compile Include="Assets\Scripts\CinematicSystem\Views\CinematicsKeyboardInputHandlerView.cs" />
-    <Compile Include="Assets\Scripts\Utilities\FadeEffectController.cs" />
-    <Compile Include="Assets\Scripts\LocationSystem\GlobalWindow\LocationInfoGlobalWindow.cs" />
-    <Compile Include="Assets\Scripts\CraftingSystem\Workbenches\Containers\WorkbenchesContainer.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Managers\MagicManager.cs" />
-    <Compile Include="Assets\Scripts\GlobalWindows\InfoGlobalWindow.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\BattleActions\Interfaces\IBattleActionExecuter.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Buttons\ButtonInteract.cs" />
-    <Compile Include="Assets\Scripts\BuffSystem\Profiles\BuffProfile.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Buttons\SkillButton.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\SkillUpgradeDescriptionView.cs" />
-    <Compile Include="Assets\Scripts\InventorySystem\BaseInventoryContainer\BaseInventoryContainerSlot.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Task.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerManaRegenSkillComponent.cs" />
-    <Compile Include="Assets\Scripts\InventorySystem\BaseItem\BaseItemProfile.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerDamageSkillComponent.cs" />
-    <Compile Include="Assets\Scripts\CraftingSystem\Recipes\CraftSystem.cs" />
-    <Compile Include="Assets\Scripts\GameEventSystem\Interfaces\IGameEventsExecuter.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\ObtainSkillDataView.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\VillageResource.cs" />
-    <Compile Include="Assets\Scripts\InventorySystem\InventoryControllerPresenter.cs" />
-    <Compile Include="Assets\Scripts\LocationSystem\RuntimeLocationObject.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Managers\PanelsManager.cs" />
-    <Compile Include="Assets\Scripts\GameEventSystem\GameEventsExecuters\BattleGameEventsExecuter.cs" />
-    <Compile Include="Assets\Scripts\GameEventSystem\GameEventsController.cs" />
-    <Compile Include="Assets\Scripts\UISystems\RuntimePlayerStatsView.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Managers\StatisticsManager.cs" />
-    <Compile Include="Assets\Scripts\CinematicSystem\Profiles\ArtCinematicProfile.cs" />
-    <Compile Include="Assets\Scripts\CinematicSystem\Cinematics.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\CharacterProfile.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Managers\BeginningScript.cs" />
-    <Compile Include="Assets\Scripts\VoiceSystem\Subtitles\SubtitlesPresenter.cs" />
-    <Compile Include="Assets\Scripts\CinematicSystem\InputHandlers\ICinematicsInputHandler.cs" />
-    <Compile Include="Assets\Scripts\MainMenu\MainMenuPresenter.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Managers\TasksManager.cs" />
-    <Compile Include="Assets\Scripts\BuffSystem\Containers\BuffsContainerPresenter.cs" />
-    <Compile Include="Assets\Scripts\GlobalWindows\GlobalWindowsController.cs" />
-    <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\BuffsSaveLoadConverter.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Buttons\PanelCraftButton.cs" />
-    <Compile Include="Assets\Scripts\GameTimeFlowSystem\GTFEvents\GameTimeFlowEventBase.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\ObtainSkillInteraction.cs" />
-    <Compile Include="Assets\Scripts\GameEventSystem\GameEventsExecuters\BaseGameEventsExecuter.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerAttackSpeedSkillComponent.cs" />
-    <Compile Include="Assets\Scripts\CraftingSystem\Recipes\CraftingRecipesWarehouse.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\CharacterMagic.cs" />
-    <Compile Include="Assets\Scripts\GlobalWindows\Interfaces\IGlobalWindow.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\PlayerSystem\BattleActionsListView.cs" />
-    <Compile Include="Assets\Scripts\SaveLoadSystem\Controllers\SaveLoadSystemController.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Managers\CraftingManager.cs" />
-    <Compile Include="Assets\Scripts\MagicSystem\RuntimeMagicObjects\RuntimeMagicObject_SmallFireball.cs" />
-    <Compile Include="Assets\Scripts\UpgradeableSystem\UpgradeableComponent.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Managers\PlayerVillageActivity.cs" />
-    <Compile Include="Assets\Scripts\InventorySystem\BaseMouse\BaseMouseItemController.cs" />
-    <Compile Include="Assets\Scripts\GameTimeFlowSystem\Profiles\GameTimeFlowEventProfile.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerLuckSkillComponent.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\neededResourceSlot.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerExtraMoneySkillComponent.cs" />
-    <Compile Include="Assets\Scripts\Utilities\MonoScriptAttribute.cs" />
-    <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\Base\SaveLoadBaseConverter.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\VillageUpgrade.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Dialog.cs" />
-    <Compile Include="Assets\Scripts\CraftingSystem\Workbenches\Containers\WorkbenchesContainerPresenter.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\BattleActions\Implementations\BattleMagicExecuter_BaseActionExecuter.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\GlobalWindow\ObtainSkillGlobalWindow.cs" />
-    <Compile Include="Assets\Scripts\BuffSystem\Containers\BuffsContainer.cs" />
-    <Compile Include="Assets\Scripts\CraftingSystem\Workbenches\Views\WorkbenchButtonView.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\BattleActions\Views\BaseBattleInteractionView.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Managers\ArtAndVideoManager.cs" />
-    <Compile Include="Assets\Scripts\GlobalWindows\AcceptGlobalWindow.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\SkillProfile.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Magic.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\neededItemSlot.cs" />
-    <Compile Include="Assets\Scripts\InventorySystem\BaseItem\BaseItemView.cs" />
-    <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\PlayerStructuresSaveLoadConverter.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\producingItem.cs" />
-    <Compile Include="Assets\Scripts\CraftingSystem\GlobalWindow\ItemDescriptionGlobalWindow.cs" />
-    <Compile Include="Assets\Scripts\LocationSystem\LocationInteractionView.cs" />
-    <Compile Include="Assets\Scripts\InventorySystem\GlobalWindow\InventoryGlobalWindow.cs" />
-    <Compile Include="Assets\Scripts\CraftingSystem\GlobalWindow\CraftingGlobalWindow.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\BattleActions\Implementations\BattleActionExecuter_HeavyStrike.cs" />
-    <Compile Include="Assets\Scripts\GlobalWindows\Invokers\GameGlobalWindowInvoker.cs" />
-    <Compile Include="Assets\Scripts\VoiceSystem\Subtitles\BaseVoiceSubtitlesView.cs" />
-    <Compile Include="Assets\Scripts\GameEventSystem\Profiles\ExploreLocationGameEventProfile.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\GlobalWindow\BattleGlobalWindow.cs" />
-    <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\SaveLoadSlotDataConverter.cs" />
-    <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\InventorySaveLoadConverter.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Recipe.cs" />
-    <Compile Include="Assets\Scripts\LocationSystem\LocationsController.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\Base\BaseSkillComponent.cs" />
-    <Compile Include="Assets\Scripts\MagicSystem\Profiles\BaseMagicProfile.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Inventory\ItemProfile.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\Presenters\BattleControllerPresenter.cs" />
-    <Compile Include="Assets\Scripts\LocationSystem\Profiles\LocationProfile.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Managers\CharactersLibrary.cs" />
-    <Compile Include="Assets\Scripts\GameEventSystem\LocationInteractableButton.cs" />
-    <Compile Include="Assets\Scripts\MagicSystem\Containers\MagicContainer.cs" />
-    <Compile Include="Assets\Scripts\GlobalWindows\WorldMapGlobalWindow.cs" />
-    <Compile Include="Assets\Scripts\SaveLoadSystem\GlobalWindow\SaveLoadSlotsGlobalWindow.cs" />
-    <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\GameTimeFlowEventsSaveLoadConverter.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\SkillCore.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Buttons\BuffButton.cs" />
-    <Compile Include="Assets\Scripts\SaveLoadSystem\BetweenScenes\BetweenScenesLoadableData.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Managers\SkillsManager.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Buttons\AbilityButton.cs" />
-    <Compile Include="Assets\Scripts\VoiceSystem\Voice\VoiceAuthor.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\ObtainSkillInteractionView.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\SkillsWarehouse.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Buttons\MagicSlotButton.cs" />
-    <Compile Include="Assets\Scripts\GameTimeFlowSystem\GTFEvents\GameTimeFlowEventPlanetRow.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Managers\StorytellerManager.cs" />
-    <Compile Include="Assets\Scripts\Utilities\SerializableInterface.cs" />
-    <Compile Include="Assets\Scripts\InventorySystem\BaseInventoryContainer\BaseInventoryContainerSlotView.cs" />
-    <Compile Include="Assets\Scripts\GameEventSystem\GameEventsExecuters\ExploreLocationGameEventsExecuter.cs" />
-    <Compile Include="Assets\Scripts\VoiceSystem\Voice\VoiceController.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\VillagePart.cs" />
-    <Compile Include="Assets\Scripts\InventorySystem\BaseInventoryContainer\BaseInventoryContainer.cs" />
-    <Compile Include="Assets\Scripts\CinematicSystem\Observers\ArtCinematicsObserver.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\PlayerSystem\RuntimeBattlePlayerControllerPresenter.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerCriticalChanceSkillComponent.cs" />
-    <Compile Include="Assets\Scripts\CraftingSystem\Workbenches\Views\BaseWorkbenchRecipeView.cs" />
-    <Compile Include="Assets\Scripts\CinematicSystem\Profiles\BaseCinematicProfile.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\BattleActions\Profiles\BattleActionProfile.cs" />
-    <Compile Include="Assets\Scripts\UpgradeableSystem\Interfaces\IUpgradeableChecker.cs" />
-    <Compile Include="Assets\Scripts\SaveLoadSystem\SaveLoadConverters\PlayerSkillsSaveLoadConverter.cs" />
-    <Compile Include="Assets\Scripts\BuffSystem\PlayerBuffsController.cs" />
-    <Compile Include="Assets\Scripts\UpgradeableSystem\Base\BaseUpgradeableCheckerComponent.cs" />
-    <Compile Include="Assets\Scripts\VoiceSystem\Subtitles\SubtitlesController.cs" />
-    <Compile Include="Assets\Scripts\CraftingSystem\ItemFindHelpers\ItemHelpSource.cs" />
-    <Compile Include="Assets\Scripts\CraftingSystem\Workbenches\Profiles\CraftingWorkbenchProfile.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerHealthRegenSkillComponent.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerManaSkillComponent.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\Managers\HeroAbilityManager.cs" />
-    <Compile Include="Assets\Scripts\CinematicSystem\Observers\BaseCinematicsObserver.cs" />
-    <Compile Include="Assets\Scripts\InventorySystem\BaseInventoryContainer\BaseInventoryContainerProfile.cs" />
-    <Compile Include="Assets\Scripts\CraftingSystem\Recipes\CraftingRecipe.cs" />
-    <Compile Include="Assets\Scripts\[LEGACY]\AnimationsScripts\PlayerActionsAnimator.cs" />
-    <Compile Include="Assets\Scripts\CraftingSystem\Recipes\Views\CraftInputItemView.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\BattleActions\Implementations\BattleActionExecuter_BaseActionExecuter.cs" />
-    <Compile Include="Assets\Scripts\GlobalWindows\PlayerSkillsGlobalWindow.cs" />
-    <Compile Include="Assets\Scripts\BuffSystem\BuffsWarehouse.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\BattleActions\Views\ActionPointsBattleInteractionView.cs" />
-    <Compile Include="Assets\Scripts\VoiceSystem\Adapters\VoiceToSubtitleAdapter.cs" />
-    <Compile Include="Assets\Scripts\BattleSystem\BattleActions\Implementations\BattleActionExecuter_LightStrike.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\PlayerSkillsController.cs" />
-    <Compile Include="Assets\Scripts\GlobalWindows\Base\BaseGameGlobalWindow.cs" />
-    <Compile Include="Assets\Scripts\SkillsSystem\Implementations\PlayerArmorSkillComponent.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Implementations\PlayerDamageSkillComponent.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Managers\PlayerVillageActivity.cs" />
+    <Compile Include="Assets\Code\CraftingSystem\Workbenches\Views\WorkbenchButtonView.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\Utilities\DisposablesStorage.cs" />
+    <Compile Include="Assets\Code\GlobalWindows\PlayerSkillsGlobalWindow.cs" />
+    <Compile Include="Assets\Code\BattleSystem\BattleActions\Interfaces\IBattleActionExecuter.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Implementations\Base\BaseSkillComponent.cs" />
+    <Compile Include="Assets\Code\UISystems\RuntimePlayerStatsView.cs" />
+    <Compile Include="Assets\Code\BattleSystem\Presenters\BattleControllerPresenter.cs" />
+    <Compile Include="Assets\Code\BattleSystem\BattleActions\Views\BaseBattleInteractionView.cs" />
+    <Compile Include="Assets\Code\CinematicSystem\InputHandlers\CinematicsKeyboardInputHandler.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Buttons\InvButton.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Buttons\AbilityButton.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\NeededItem.cs" />
+    <Compile Include="Assets\Code\InventorySystem\BaseItem\BaseItemView.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\VillageUpgrade.cs" />
+    <Compile Include="Assets\Code\GameEventSystem\Profiles\ExploreLocationGameEventProfile.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Managers\SkillsManager.cs" />
+    <Compile Include="Assets\Code\CraftingSystem\Workbenches\Containers\WorkbenchesContainer.cs" />
+    <Compile Include="Assets\Code\LocationSystem\GlobalWindow\LocationInfoGlobalWindow.cs" />
+    <Compile Include="Assets\Code\VoiceSystem\Voice\VoiceController.cs" />
+    <Compile Include="Assets\Code\MonoInstallers\ServicesMonoInstaller.cs" />
+    <Compile Include="Assets\Code\SaveLoadSystem\SaveLoadConverters\PlayerSkillsSaveLoadConverter.cs" />
+    <Compile Include="Assets\Code\GlobalWindows\Controllers\GlobalWindowsController.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\neededItemSlot.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Controllers\PlayerSkillsController.cs" />
+    <Compile Include="Assets\Code\UpgradeableSystem\Interfaces\IUpgradeableChecker.cs" />
+    <Compile Include="Assets\Code\InventorySystem\InventoryController.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\Core\IViewModel.cs" />
+    <Compile Include="Assets\Code\GameTimeFlowSystem\Profiles\GameTimeFlowEventProfile.cs" />
+    <Compile Include="Assets\Code\SaveLoadSystem\SaveLoadConverters\Interfaces\ISaveLoadConverter.cs" />
+    <Compile Include="Assets\Code\VoiceSystem\Voice\BaseVoiceClipData.cs" />
+    <Compile Include="Assets\Code\GameEventSystem\GameEventsExecuters\ExploreLocationGameEventsExecuter.cs" />
+    <Compile Include="Assets\Code\Utilities\FadeEffectController.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\UniRx\RxLink\IRxLinkable.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\neededResourceSlot.cs" />
+    <Compile Include="Assets\Code\SaveLoadSystem\GlobalWindow\SaveLoadSlotsGlobalWindow.cs" />
+    <Compile Include="Assets\Code\MainMenu\MainMenuBootstrapper.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Managers\CharactersLibrary.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Managers\PanelsManager.cs" />
+    <Compile Include="Assets\Code\GameController.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Implementations\PlayerManaRegenSkillComponent.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\Utilities\IDisposablesStorage.cs" />
+    <Compile Include="Assets\Code\GameEventSystem\GameEventsExecuters\BattleGameEventsExecuter.cs" />
+    <Compile Include="Assets\Code\GlobalWindows\Interfaces\IGlobalWindow.cs" />
+    <Compile Include="Assets\Code\InventorySystem\BaseInventoryContainer\BaseInventoryContainerProfile.cs" />
+    <Compile Include="Assets\Code\LocationSystem\RuntimeLocationObject.cs" />
+    <Compile Include="Assets\Code\VoiceSystem\Subtitles\SubtitlesPresenter.cs" />
+    <Compile Include="Assets\Code\CraftingSystem\ItemFindHelpers\Views\ItemFindHelperView.cs" />
+    <Compile Include="Assets\Code\CraftingSystem\Workbenches\Containers\WorkbenchesContainerPresenter.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Implementations\PlayerDodgeChanceSkillComponent.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Managers\StorytellerManager.cs" />
+    <Compile Include="Assets\Code\LocationSystem\Profiles\LocationProfile.cs" />
+    <Compile Include="Assets\Code\BuffSystem\RuntimeBuff.cs" />
+    <Compile Include="Assets\Code\GameEventSystem\Profiles\BattleGameEventProfile.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\UniRx\ReflectionCollectors\UniRxMethodsReflectiveCollector.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Managers\MagicManager.cs" />
+    <Compile Include="Assets\Code\CoreComponentSystem\Interfaces\IComponent.cs" />
+    <Compile Include="Assets\Code\SaveLoadSystem\SaveLoadConverters\Base\SaveLoadBaseConverter.cs" />
+    <Compile Include="Assets\Code\BuffSystem\Containers\BuffsContainer.cs" />
+    <Compile Include="Assets\Code\GameTimeFlowSystem\GTFEvents\GameTimeFlowEventPlanetRow.cs" />
+    <Compile Include="Assets\Code\BattleSystem\BattleActions\Interfaces\IBattleActionInteraction.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Buttons\SkillButton.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Core\SkillCore.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\UniRx\Adapters\Base\BaseRxAdapter.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\GlobalWindow\ObtainSkillGlobalWindow.cs" />
+    <Compile Include="Assets\Code\SaveLoadSystem\Controllers\SaveLoadSlotsController.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Dialog.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Views\SkillUpgradeDescriptionView.cs" />
+    <Compile Include="Assets\Code\BattleSystem\BattleActions\Implementations\BattleActionExecuter_HeavyStrike.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Inventory\ItemProfile.cs" />
+    <Compile Include="Assets\Code\LocationSystem\Controllers\LocationsController.cs" />
+    <Compile Include="Assets\Code\InventorySystem\InventoryControllerPresenter.cs" />
+    <Compile Include="Assets\Code\SaveLoadSystem\SaveLoadConverters\CraftingSystemSaveLoadConverter.cs" />
+    <Compile Include="Assets\Code\SaveLoadSystem\BetweenScenes\BetweenScenesLoadableData.cs" />
+    <Compile Include="Assets\Code\SaveLoadSystem\SaveLoadConverters\BuffsSaveLoadConverter.cs" />
+    <Compile Include="Assets\Code\BattleSystem\Controllers\BattleController.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Inventory\Inventory.cs" />
+    <Compile Include="Assets\Code\GameTimeFlowSystem\GTFEvents\GameTimeFlowEventBase.cs" />
+    <Compile Include="Assets\Code\CinematicSystem\Profiles\BaseCinematicProfile.cs" />
+    <Compile Include="Assets\Code\UpgradeableSystem\Base\BaseUpgradeableSkillCheckerComponent.cs" />
+    <Compile Include="Assets\Code\CinematicSystem\InputHandlers\ICinematicsInputHandler.cs" />
+    <Compile Include="Assets\Code\BuffSystem\Profiles\BuffProfile.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Implementations\PlayerExtraExpSkillComponent.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Managers\ArtAndVideoManager.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\BuffSystem\BuffManager.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\Core\BaseRxView.cs" />
+    <Compile Include="Assets\Code\CinematicSystem\Views\CinematicsKeyboardInputHandlerView.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Implementations\PlayerExtraMoneySkillComponent.cs" />
+    <Compile Include="Assets\Code\VoiceSystem\Subtitles\SubtitlesController.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Implementations\PlayerAttackSpeedSkillComponent.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\Utilities\UniRxReflectionField.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Implementations\PlayerArmorSkillComponent.cs" />
+    <Compile Include="Assets\Code\GameEventSystem\Profiles\HarvestMineGameEventProfile.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Buttons\MagicSlotButton.cs" />
+    <Compile Include="Assets\Code\SaveLoadSystem\SaveLoadConverters\InventorySaveLoadConverter.cs" />
+    <Compile Include="Assets\Code\SaveLoadSystem\SaveLoadConverters\WorldMapSaveLoadConverter.cs" />
+    <Compile Include="Assets\Code\SaveLoadSystem\Views\SaveLoadSlotView.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Managers\StatisticsManager.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Buttons\DirButton.cs" />
+    <Compile Include="Assets\Code\GameEventSystem\GameEventsExecuters\HarvestMineGameEventsExecuter.cs" />
+    <Compile Include="Assets\Code\GlobalWindows\Base\BaseGameGlobalWindow.cs" />
+    <Compile Include="Assets\Code\BuffSystem\PlayerBuffsController.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Buttons\eventSlot.cs" />
+    <Compile Include="Assets\Code\VoiceSystem\Subtitles\BaseVoiceSubtitlesView.cs" />
+    <Compile Include="Assets\Code\BattleSystem\BattleActions\Implementations\BattleActionExecuter_BaseActionExecuter.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Task.cs" />
+    <Compile Include="Assets\Code\UpgradeableSystem\UpgradeableObserverComponent.cs" />
+    <Compile Include="Assets\Code\CoreComponentSystem\Core\Core.cs" />
+    <Compile Include="Assets\Code\BattleSystem\PlayerSystem\RuntimeBattlePlayerControllerPresenter.cs" />
+    <Compile Include="Assets\Code\CinematicSystem\Profiles\CinematicSequence.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Implementations\PlayerCriticalChanceSkillComponent.cs" />
+    <Compile Include="Assets\Code\SaveLoadSystem\SaveLoadConverters\PlayerStructuresSaveLoadConverter.cs" />
+    <Compile Include="Assets\Code\SaveLoadSystem\SaveLoadConverters\GameTimeFlowEventsSaveLoadConverter.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Managers\CraftingManager.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\VillagePart.cs" />
+    <Compile Include="Assets\Code\GameEventSystem\Profiles\AllGameEventsWarehouse.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\UniRx\Extensions\ReactivePropertyExtensions.cs" />
+    <Compile Include="Assets\Code\CinematicSystem\Profiles\ArtCinematicProfile.cs" />
+    <Compile Include="Assets\Code\CoreComponentSystem\Core\CoreComponent.cs" />
+    <Compile Include="Assets\Code\GlobalWindows\WorldMapGlobalWindow.cs" />
+    <Compile Include="Assets\Code\MainMenu\MainMenuPresenter.cs" />
+    <Compile Include="Assets\Code\MagicSystem\Views\RuntimeMagicObjectView.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\Utilities\ParentComponentsExtractor.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Implementations\PlayerHealthRegenSkillComponent.cs" />
+    <Compile Include="Assets\Code\BattleSystem\CharacterProfile.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Implementations\PlayerCriticalDamageComponent.cs" />
+    <Compile Include="Assets\Code\GameEventSystem\LocationInteractableButton.cs" />
+    <Compile Include="Assets\Code\CraftingSystem\GlobalWindow\ItemDescriptionGlobalWindow.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Interactions\ObtainSkillInteraction.cs" />
+    <Compile Include="Assets\Code\CinematicSystem\Observers\BaseCinematicsObserver.cs" />
+    <Compile Include="Assets\Code\MagicSystem\RuntimeMagicObjects\RuntimeMagicObject_SmallFireball.cs" />
+    <Compile Include="Assets\Code\CinematicSystem\Views\ArtCinematicsView.cs" />
+    <Compile Include="Assets\Code\ShortDescriptionObject\ShortDescriptionObject.cs" />
+    <Compile Include="Assets\Code\UpgradeableSystem\UpgradeableComponent.cs" />
+    <Compile Include="Assets\Code\CoreComponentSystem\Interfaces\ICore.cs" />
+    <Compile Include="Assets\Code\BuffSystem\BuffsWarehouse.cs" />
+    <Compile Include="Assets\Code\SaveLoadSystem\SaveLoadConverters\PlayerSaveLoadConverter.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Managers\HeroAbilityManager.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Managers\BeginningScript.cs" />
+    <Compile Include="Assets\Code\LocationSystem\Views\LocationInteractionView.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\UniRx\ReflectionCollectors\Storages\ReflectionStorage.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Magic.cs" />
+    <Compile Include="Assets\Code\GameEventSystem\GameEventsExecuters\BaseGameEventsExecuter.cs" />
+    <Compile Include="Assets\Code\BattleSystem\PlayerSystem\RuntimeBattlePlayerController.cs" />
+    <Compile Include="Assets\Code\BattleSystem\BattleActions\Implementations\BattleActionExecuter_LightStrike.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Core\SkillsWarehouse.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Views\ObtainSkillDataView.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\UniRx\ReflectionCollectors\Base\ReflectiveCollector.cs" />
+    <Compile Include="Assets\Code\InventorySystem\BaseMouse\BaseMouseControllerPresenter.cs" />
+    <Compile Include="Assets\Code\CinematicSystem\Cinematics.cs" />
+    <Compile Include="Assets\Code\GlobalWindows\InfoGlobalWindow.cs" />
+    <Compile Include="Assets\Code\CraftingSystem\GlobalWindow\CraftingGlobalWindow.cs" />
+    <Compile Include="Assets\Code\BattleSystem\EnemiesSystem\RuntimeBattleCharacterView.cs" />
+    <Compile Include="Assets\Code\CraftingSystem\Workbenches\Views\BaseWorkbenchRecipeView.cs" />
+    <Compile Include="Assets\Code\InventorySystem\BaseInventoryContainer\BaseInventoryContainerButtonView.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Art.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\UniRx\Adapters\TextMeshProUguiRxAdapter.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\UniRx\Adapters\Base\BaseComponentRxAdapter.cs" />
+    <Compile Include="Assets\Code\GameEventSystem\Interfaces\IGameEventsExecuter.cs" />
+    <Compile Include="Assets\Code\BattleSystem\EnemiesSystem\RuntimeBattleCharacterSimple.cs" />
+    <Compile Include="Assets\Code\Utilities\SerializableInterface.cs" />
+    <Compile Include="Assets\Code\InventorySystem\GlobalWindow\InventoryGlobalWindow.cs" />
+    <Compile Include="Assets\Code\Utilities\MonoScriptPropertyDrawer.cs" />
+    <Compile Include="Assets\Code\GlobalWindows\Base\BaseGameGlobalWindowSelector.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\UniRx\ReflectionCollectors\UniRxCollectionReflectiveCollector.cs" />
+    <Compile Include="Assets\Code\Utilities\SerializableMonoScript.cs" />
+    <Compile Include="Assets\Code\RuntimePlayer.cs" />
+    <Compile Include="Assets\Code\BattleSystem\GlobalWindow\BattleGlobalWindow.cs" />
+    <Compile Include="Assets\Code\GameTimeFlowSystem\GTFEvents\GameTimeFlowEventFullMoon.cs" />
+    <Compile Include="Assets\Code\GlobalWindows\AcceptGlobalWindow.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\UniRx\Attributes\UniRxAttributes.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\CharacterMagic.cs" />
+    <Compile Include="Assets\Code\BattleSystem\BattleActions\Implementations\BattleActionExecuter_MediumStrike.cs" />
+    <Compile Include="Assets\Code\CraftingSystem\Recipes\CraftSystem.cs" />
+    <Compile Include="Assets\Code\MagicSystem\Controllers\PlayerMagicController.cs" />
+    <Compile Include="Assets\Code\GlobalWindows\Invokers\GameGlobalWindowInvoker.cs" />
+    <Compile Include="Assets\Code\SaveLoadSystem\SaveLoadConverters\SaveLoadSlotDataConverter.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Views\ObtainSkillInteractionView.cs" />
+    <Compile Include="Assets\Code\MagicSystem\Profiles\BaseMagicProfile.cs" />
+    <Compile Include="Assets\Code\BuffSystem\Containers\BuffsContainerPresenter.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\Utilities\UniRxViewConnectorField.cs" />
+    <Compile Include="Assets\Code\BattleSystem\BattleActions\Profiles\BattleActionProfile.cs" />
+    <Compile Include="Assets\Code\CinematicSystem\Observers\ArtCinematicsObserver.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\UniRx\ReflectionCollectors\UniRxPropertiesReflectiveCollector.cs" />
+    <Compile Include="Assets\Code\InventorySystem\BaseMouse\BaseMouseItemController.cs" />
+    <Compile Include="Assets\Code\BattleSystem\BattleActions\Views\ActionPointsBattleInteractionView.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\UniRx\ReflectionCollectors\UniRxCommandReflectiveCollector.cs" />
+    <Compile Include="Assets\Code\Utilities\ScreenFader.cs" />
+    <Compile Include="Assets\Code\CraftingSystem\Recipes\Views\CraftInputItemView.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Implementations\PlayerLuckSkillComponent.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Skill.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Buttons\ButtonInteract.cs" />
+    <Compile Include="Assets\Code\VoiceSystem\Voice\VoiceAuthor.cs" />
+    <Compile Include="Assets\Code\InventorySystem\BaseInventoryContainer\BaseInventoryContainerSlotView.cs" />
+    <Compile Include="Assets\Code\BattleSystem\BattleActions\Implementations\BattleMagicExecuter_BaseActionExecuter.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Implementations\PlayerHealthSkillComponent.cs" />
+    <Compile Include="Assets\Code\BattleSystem\EnemiesSystem\RuntimeBattleCharacter.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Managers\TasksManager.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\VillageResource.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Core\SkillProfile.cs" />
+    <Compile Include="Assets\Code\GameTimeFlowSystem\Controllers\GameTimeFlowController.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Buttons\BuffButton.cs" />
+    <Compile Include="Assets\Code\SaveLoadSystem\Controllers\SaveLoadSystemController.cs" />
+    <Compile Include="Assets\Code\GameEventSystem\Controllers\GameEventsController.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Managers\RunesManager.cs" />
+    <Compile Include="Assets\Code\CraftingSystem\ItemFindHelpers\ItemHelpSourceData.cs" />
+    <Compile Include="Assets\Code\BattleSystem\BattleActions\Views\MagicBattleInteractionView.cs" />
+    <Compile Include="Assets\Code\InventorySystem\BaseItem\BaseItem.cs" />
+    <Compile Include="Assets\Code\InventorySystem\BaseInventoryContainer\BaseInventoryContainer.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\producingItem.cs" />
+    <Compile Include="Assets\Code\InventorySystem\BaseInventoryContainer\BaseInventoryContainerView.cs" />
+    <Compile Include="Assets\Code\InventorySystem\BaseInventoryContainer\BaseInventoryContainerSlot.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\UniRx\RxLink\MonoRxLinker.cs" />
+    <Compile Include="Assets\Code\CraftingSystem\ItemFindHelpers\ItemHelpSource.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\AnimationsScripts\PlayerActionsAnimator.cs" />
+    <Compile Include="Assets\Code\GlobalWindows\Base\BaseGlobalWindowButton.cs" />
+    <Compile Include="Assets\Code\CraftingSystem\Recipes\CraftingRecipesWarehouse.cs" />
+    <Compile Include="Assets\Code\BuffSystem\Views\RuntimeBuffView.cs" />
+    <Compile Include="Assets\Code\SaveLoadSystem\BetweenScenes\BetweenScenesLoaderAdapter.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Recipe.cs" />
+    <Compile Include="Assets\Code\MagicSystem\Containers\MagicContainer.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Buttons\PanelCraftButton.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Implementations\PlayerManaSkillComponent.cs" />
+    <Compile Include="Assets\Code\GameEventSystem\Profiles\BaseGameEventProfile.cs" />
+    <Compile Include="Assets\Code\Utilities\MonoScriptAttribute.cs" />
+    <Compile Include="Assets\Code\UpgradeableSystem\Base\BaseUpgradeableCheckerComponent.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Buttons\TaskButton.cs" />
+    <Compile Include="Assets\Code\BattleSystem\PlayerSystem\BattleActionsListView.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\Core\MonoViewModel.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Managers\LoadingSceneScript.cs" />
+    <Compile Include="Assets\Code\InventorySystem\BaseItem\BaseItemProfile.cs" />
+    <Compile Include="Assets\Code\CraftingSystem\Workbenches\Profiles\CraftingWorkbenchProfile.cs" />
+    <Compile Include="Assets\Code\CraftingSystem\Recipes\CraftingRecipe.cs" />
+    <Compile Include="Assets\Code\VoiceSystem\Adapters\VoiceToSubtitleAdapter.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Buttons\RecipeButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -637,6 +659,26 @@
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
       <HintPath>Library\PackageCache\com.unity.analytics@3.8.1\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Zenject.ReflectionBaking.Mono.Cecil.Rocks">
+      <HintPath>Assets\Plugins\Zenject\OptionalExtras\ReflectionBaking\Lib\Zenject.ReflectionBaking.Mono.Cecil.Rocks.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Zenject.ReflectionBaking.Mono.Cecil.Pdb">
+      <HintPath>Assets\Plugins\Zenject\OptionalExtras\ReflectionBaking\Lib\Zenject.ReflectionBaking.Mono.Cecil.Pdb.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Zenject-usage">
+      <HintPath>Assets\Plugins\Zenject\Source\Usage\Zenject-usage.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Zenject.ReflectionBaking.Mono.Cecil">
+      <HintPath>Assets\Plugins\Zenject\OptionalExtras\ReflectionBaking\Lib\Zenject.ReflectionBaking.Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Zenject.ReflectionBaking.Mono.Cecil.Mdb">
+      <HintPath>Assets\Plugins\Zenject\OptionalExtras\ReflectionBaking\Lib\Zenject.ReflectionBaking.Mono.Cecil.Mdb.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Android.Types">
@@ -1151,16 +1193,16 @@
       <HintPath>C:\MainProgramFiles\Unity Editor Versions\2022.3.19f1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
@@ -1185,6 +1227,70 @@
       <Project>{5007C38F-51B3-64D1-9582-111AF5E336B2}</Project>
       <Name>Unity.AI.Navigation</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Analytics.DataPrivacy.csproj">
+      <Project>{01681CD7-2EFD-B957-ED2A-D98671190C5F}</Project>
+      <Name>Unity.Analytics.DataPrivacy</Name>
+    </ProjectReference>
+    <ProjectReference Include="Zenject.csproj">
+      <Project>{A3461B17-0210-668F-3FFC-8BBED6590F97}</Project>
+      <Name>Zenject</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityUIExtensions.editor.csproj">
+      <Project>{4DDCC8D6-9BEE-3CD3-DB2B-A747C8633277}</Project>
+      <Name>UnityUIExtensions.editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Services.Core.csproj">
+      <Project>{CE99699A-94ED-F724-A1C0-73281D3D65A5}</Project>
+      <Name>Unity.Services.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Rider.Editor.csproj">
+      <Project>{12E4A22B-198C-B917-7642-1849334ECBF9}</Project>
+      <Name>Unity.Rider.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniRx.csproj">
+      <Project>{61A572D1-D6DD-6C63-637A-D6A151523785}</Project>
+      <Name>UniRx</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Services.Core.Environments.csproj">
+      <Project>{EF867567-9701-A581-1E6A-DF5857FD9098}</Project>
+      <Name>Unity.Services.Core.Environments</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.SecurityCore.csproj">
+      <Project>{77357676-E83B-4027-FBBA-BEDC693CFC93}</Project>
+      <Name>UnityEngine.Purchasing.SecurityCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.Codeless.csproj">
+      <Project>{A0E9F856-1A7F-EBDB-9710-D03329E4C1FB}</Project>
+      <Name>UnityEngine.Purchasing.Codeless</Name>
+    </ProjectReference>
+    <ProjectReference Include="Zenject-PoolMonitor-Editor.csproj">
+      <Project>{AC1D68DF-95AA-C551-9F37-585191E12AD8}</Project>
+      <Name>Zenject-PoolMonitor-Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.TextMeshPro.csproj">
+      <Project>{CE1F4080-077E-5E77-4970-BFE91618173D}</Project>
+      <Name>Unity.TextMeshPro</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEditor.Purchasing.csproj">
+      <Project>{30DDC51F-3832-CE7F-86AC-85F34B2530AE}</Project>
+      <Name>UnityEditor.Purchasing</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Services.Core.Analytics.csproj">
+      <Project>{6B534FE3-B255-F8A3-8E1D-317B9788EC6A}</Project>
+      <Name>Unity.Services.Core.Analytics</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.AI.Navigation.Editor.ConversionSystem.csproj">
+      <Project>{234B9608-6EA5-284F-DF43-39E9FEDBA7E9}</Project>
+      <Name>Unity.AI.Navigation.Editor.ConversionSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VSCode.Editor.csproj">
+      <Project>{113E6D5F-7395-9334-DD05-6C0C9063D393}</Project>
+      <Name>Unity.VSCode.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.csproj">
+      <Project>{34ED3932-0C4F-2346-885F-FD832468297C}</Project>
+      <Name>UnityEngine.Purchasing</Name>
+    </ProjectReference>
     <ProjectReference Include="UnityEngine.XR.LegacyInputHelpers.csproj">
       <Project>{4CA7CE5F-A125-F425-99E4-3D6A7A58693C}</Project>
       <Name>UnityEngine.XR.LegacyInputHelpers</Name>
@@ -1192,6 +1298,10 @@
     <ProjectReference Include="Unity.Mediation.csproj">
       <Project>{3CD57AA0-F174-8871-F764-CB1174CB14EE}</Project>
       <Name>Unity.Mediation</Name>
+    </ProjectReference>
+    <ProjectReference Include="Zenject-Editor.csproj">
+      <Project>{A6E6FE79-2654-573E-A076-1DE7EFAEBBDA}</Project>
+      <Name>Zenject-Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.PlasticSCM.Editor.csproj">
       <Project>{6CDCAF0E-D81A-92E6-ECF5-69DFBBF2C4F2}</Project>
@@ -1201,17 +1311,9 @@
       <Project>{D728F99F-9520-D438-F054-ABF1913BABEE}</Project>
       <Name>UnityEngine.Purchasing.SecurityStub</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Analytics.DataPrivacy.csproj">
-      <Project>{01681CD7-2EFD-B957-ED2A-D98671190C5F}</Project>
-      <Name>Unity.Analytics.DataPrivacy</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.Timeline.Editor.csproj">
       <Project>{C140630C-94EB-FB33-FC16-46444975D079}</Project>
       <Name>Unity.Timeline.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityUIExtensions.editor.csproj">
-      <Project>{4DDCC8D6-9BEE-3CD3-DB2B-A747C8633277}</Project>
-      <Name>UnityUIExtensions.editor</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.SpatialTracking.csproj">
       <Project>{95646543-3935-0546-7C31-BACC366C3C09}</Project>
@@ -1233,13 +1335,13 @@
       <Project>{0DD7D36C-5FAC-62B4-DF6E-ECCA273439CB}</Project>
       <Name>Analytics</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Rider.Editor.csproj">
-      <Project>{12E4A22B-198C-B917-7642-1849334ECBF9}</Project>
-      <Name>Unity.Rider.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="UnityEditor.XR.LegacyInputHelpers.csproj">
       <Project>{6A0C635B-BE4B-2639-8453-B3B5C3A7EBB7}</Project>
       <Name>UnityEditor.XR.LegacyInputHelpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="Zenject-ReflectionBaking-Editor.csproj">
+      <Project>{BA181C4B-9059-78A9-AA9B-3B73D69FD67C}</Project>
+      <Name>Zenject-ReflectionBaking-Editor</Name>
     </ProjectReference>
     <ProjectReference Include="UnityUIExtensions.csproj">
       <Project>{8F09AF94-99CC-8E3C-5CF9-ED6AED2B8D45}</Project>
@@ -1257,41 +1359,13 @@
       <Project>{848B2BB1-17AD-8E07-9054-68A495CB2D58}</Project>
       <Name>Unity.InputSystem.ForUI</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Services.Core.Environments.csproj">
-      <Project>{EF867567-9701-A581-1E6A-DF5857FD9098}</Project>
-      <Name>Unity.Services.Core.Environments</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.Services.Analytics.csproj">
       <Project>{359B2F9D-EF0F-DF77-8F24-B680E22F4335}</Project>
       <Name>Unity.Services.Analytics</Name>
     </ProjectReference>
-    <ProjectReference Include="UnityEngine.Purchasing.SecurityCore.csproj">
-      <Project>{77357676-E83B-4027-FBBA-BEDC693CFC93}</Project>
-      <Name>UnityEngine.Purchasing.SecurityCore</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.AI.Navigation.Updater.csproj">
       <Project>{4DF1EA53-A32B-3C8D-2355-5BBE317877F2}</Project>
       <Name>Unity.AI.Navigation.Updater</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.Purchasing.Codeless.csproj">
-      <Project>{A0E9F856-1A7F-EBDB-9710-D03329E4C1FB}</Project>
-      <Name>UnityEngine.Purchasing.Codeless</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Services.Core.csproj">
-      <Project>{CE99699A-94ED-F724-A1C0-73281D3D65A5}</Project>
-      <Name>Unity.Services.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.TextMeshPro.csproj">
-      <Project>{CE1F4080-077E-5E77-4970-BFE91618173D}</Project>
-      <Name>Unity.TextMeshPro</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEditor.Purchasing.csproj">
-      <Project>{30DDC51F-3832-CE7F-86AC-85F34B2530AE}</Project>
-      <Name>UnityEditor.Purchasing</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Services.Core.Analytics.csproj">
-      <Project>{6B534FE3-B255-F8A3-8E1D-317B9788EC6A}</Project>
-      <Name>Unity.Services.Core.Analytics</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
       <Project>{B8B576F8-23FA-161A-1C1A-A57A05BF4441}</Project>
@@ -1300,18 +1374,6 @@
     <ProjectReference Include="Unity.AI.Navigation.Editor.csproj">
       <Project>{2179891A-4A95-E131-EAFD-9D9B684CA3CD}</Project>
       <Name>Unity.AI.Navigation.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.AI.Navigation.Editor.ConversionSystem.csproj">
-      <Project>{234B9608-6EA5-284F-DF43-39E9FEDBA7E9}</Project>
-      <Name>Unity.AI.Navigation.Editor.ConversionSystem</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.VSCode.Editor.csproj">
-      <Project>{113E6D5F-7395-9334-DD05-6C0C9063D393}</Project>
-      <Name>Unity.VSCode.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.Purchasing.csproj">
-      <Project>{34ED3932-0C4F-2346-885F-FD832468297C}</Project>
-      <Name>UnityEngine.Purchasing</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

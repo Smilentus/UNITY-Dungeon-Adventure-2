@@ -9,7 +9,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>Dimasyechka</RootNamespace>
     <ProjectGuid>{18990DB1-1984-C162-A0C7-A9CB6B3D06B3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -60,7 +60,8 @@
     <Analyzer Include="C:\MainProgramFiles\Unity Editor Versions\2022.3.19f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\[LEGACY]\Editor\ItemEditor.cs" />
+    <Compile Include="Assets\Code\[LEGACY]\Editor\ItemEditor.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\Editor\RxAdapterInspectorFieldProperty.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.collab-proxy@2.2.0\Lib\Editor\PlasticSCM\Localization\commontypes.ko.txt" />
@@ -571,6 +572,26 @@
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
       <HintPath>Library\PackageCache\com.unity.analytics@3.8.1\AnalyticsStandardEvents\Unity.Analytics.StandardEvents.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Zenject.ReflectionBaking.Mono.Cecil.Rocks">
+      <HintPath>Assets\Plugins\Zenject\OptionalExtras\ReflectionBaking\Lib\Zenject.ReflectionBaking.Mono.Cecil.Rocks.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Zenject.ReflectionBaking.Mono.Cecil.Pdb">
+      <HintPath>Assets\Plugins\Zenject\OptionalExtras\ReflectionBaking\Lib\Zenject.ReflectionBaking.Mono.Cecil.Pdb.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Zenject-usage">
+      <HintPath>Assets\Plugins\Zenject\Source\Usage\Zenject-usage.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Zenject.ReflectionBaking.Mono.Cecil">
+      <HintPath>Assets\Plugins\Zenject\OptionalExtras\ReflectionBaking\Lib\Zenject.ReflectionBaking.Mono.Cecil.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Zenject.ReflectionBaking.Mono.Cecil.Mdb">
+      <HintPath>Assets\Plugins\Zenject\OptionalExtras\ReflectionBaking\Lib\Zenject.ReflectionBaking.Mono.Cecil.Mdb.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="nunit.framework">
@@ -1089,16 +1110,16 @@
       <HintPath>C:\MainProgramFiles\Unity Editor Versions\2022.3.19f1\Editor\Data\UnityReferenceAssemblies\unity-4.8-api\Facades\System.Xml.XPath.XDocument.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
@@ -1135,6 +1156,70 @@
       <Project>{5007C38F-51B3-64D1-9582-111AF5E336B2}</Project>
       <Name>Unity.AI.Navigation</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Analytics.DataPrivacy.csproj">
+      <Project>{01681CD7-2EFD-B957-ED2A-D98671190C5F}</Project>
+      <Name>Unity.Analytics.DataPrivacy</Name>
+    </ProjectReference>
+    <ProjectReference Include="Zenject.csproj">
+      <Project>{A3461B17-0210-668F-3FFC-8BBED6590F97}</Project>
+      <Name>Zenject</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityUIExtensions.editor.csproj">
+      <Project>{4DDCC8D6-9BEE-3CD3-DB2B-A747C8633277}</Project>
+      <Name>UnityUIExtensions.editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Services.Core.csproj">
+      <Project>{CE99699A-94ED-F724-A1C0-73281D3D65A5}</Project>
+      <Name>Unity.Services.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Rider.Editor.csproj">
+      <Project>{12E4A22B-198C-B917-7642-1849334ECBF9}</Project>
+      <Name>Unity.Rider.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniRx.csproj">
+      <Project>{61A572D1-D6DD-6C63-637A-D6A151523785}</Project>
+      <Name>UniRx</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Services.Core.Environments.csproj">
+      <Project>{EF867567-9701-A581-1E6A-DF5857FD9098}</Project>
+      <Name>Unity.Services.Core.Environments</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.SecurityCore.csproj">
+      <Project>{77357676-E83B-4027-FBBA-BEDC693CFC93}</Project>
+      <Name>UnityEngine.Purchasing.SecurityCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.Codeless.csproj">
+      <Project>{A0E9F856-1A7F-EBDB-9710-D03329E4C1FB}</Project>
+      <Name>UnityEngine.Purchasing.Codeless</Name>
+    </ProjectReference>
+    <ProjectReference Include="Zenject-PoolMonitor-Editor.csproj">
+      <Project>{AC1D68DF-95AA-C551-9F37-585191E12AD8}</Project>
+      <Name>Zenject-PoolMonitor-Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.TextMeshPro.csproj">
+      <Project>{CE1F4080-077E-5E77-4970-BFE91618173D}</Project>
+      <Name>Unity.TextMeshPro</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEditor.Purchasing.csproj">
+      <Project>{30DDC51F-3832-CE7F-86AC-85F34B2530AE}</Project>
+      <Name>UnityEditor.Purchasing</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Services.Core.Analytics.csproj">
+      <Project>{6B534FE3-B255-F8A3-8E1D-317B9788EC6A}</Project>
+      <Name>Unity.Services.Core.Analytics</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.AI.Navigation.Editor.ConversionSystem.csproj">
+      <Project>{234B9608-6EA5-284F-DF43-39E9FEDBA7E9}</Project>
+      <Name>Unity.AI.Navigation.Editor.ConversionSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VSCode.Editor.csproj">
+      <Project>{113E6D5F-7395-9334-DD05-6C0C9063D393}</Project>
+      <Name>Unity.VSCode.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.csproj">
+      <Project>{34ED3932-0C4F-2346-885F-FD832468297C}</Project>
+      <Name>UnityEngine.Purchasing</Name>
+    </ProjectReference>
     <ProjectReference Include="UnityEngine.XR.LegacyInputHelpers.csproj">
       <Project>{4CA7CE5F-A125-F425-99E4-3D6A7A58693C}</Project>
       <Name>UnityEngine.XR.LegacyInputHelpers</Name>
@@ -1142,6 +1227,10 @@
     <ProjectReference Include="Unity.Mediation.csproj">
       <Project>{3CD57AA0-F174-8871-F764-CB1174CB14EE}</Project>
       <Name>Unity.Mediation</Name>
+    </ProjectReference>
+    <ProjectReference Include="Zenject-Editor.csproj">
+      <Project>{A6E6FE79-2654-573E-A076-1DE7EFAEBBDA}</Project>
+      <Name>Zenject-Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.PlasticSCM.Editor.csproj">
       <Project>{6CDCAF0E-D81A-92E6-ECF5-69DFBBF2C4F2}</Project>
@@ -1151,17 +1240,9 @@
       <Project>{D728F99F-9520-D438-F054-ABF1913BABEE}</Project>
       <Name>UnityEngine.Purchasing.SecurityStub</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Analytics.DataPrivacy.csproj">
-      <Project>{01681CD7-2EFD-B957-ED2A-D98671190C5F}</Project>
-      <Name>Unity.Analytics.DataPrivacy</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.Timeline.Editor.csproj">
       <Project>{C140630C-94EB-FB33-FC16-46444975D079}</Project>
       <Name>Unity.Timeline.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityUIExtensions.editor.csproj">
-      <Project>{4DDCC8D6-9BEE-3CD3-DB2B-A747C8633277}</Project>
-      <Name>UnityUIExtensions.editor</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.SpatialTracking.csproj">
       <Project>{95646543-3935-0546-7C31-BACC366C3C09}</Project>
@@ -1183,13 +1264,13 @@
       <Project>{0DD7D36C-5FAC-62B4-DF6E-ECCA273439CB}</Project>
       <Name>Analytics</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Rider.Editor.csproj">
-      <Project>{12E4A22B-198C-B917-7642-1849334ECBF9}</Project>
-      <Name>Unity.Rider.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="UnityEditor.XR.LegacyInputHelpers.csproj">
       <Project>{6A0C635B-BE4B-2639-8453-B3B5C3A7EBB7}</Project>
       <Name>UnityEditor.XR.LegacyInputHelpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="Zenject-ReflectionBaking-Editor.csproj">
+      <Project>{BA181C4B-9059-78A9-AA9B-3B73D69FD67C}</Project>
+      <Name>Zenject-ReflectionBaking-Editor</Name>
     </ProjectReference>
     <ProjectReference Include="UnityUIExtensions.csproj">
       <Project>{8F09AF94-99CC-8E3C-5CF9-ED6AED2B8D45}</Project>
@@ -1207,41 +1288,13 @@
       <Project>{848B2BB1-17AD-8E07-9054-68A495CB2D58}</Project>
       <Name>Unity.InputSystem.ForUI</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Services.Core.Environments.csproj">
-      <Project>{EF867567-9701-A581-1E6A-DF5857FD9098}</Project>
-      <Name>Unity.Services.Core.Environments</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.Services.Analytics.csproj">
       <Project>{359B2F9D-EF0F-DF77-8F24-B680E22F4335}</Project>
       <Name>Unity.Services.Analytics</Name>
     </ProjectReference>
-    <ProjectReference Include="UnityEngine.Purchasing.SecurityCore.csproj">
-      <Project>{77357676-E83B-4027-FBBA-BEDC693CFC93}</Project>
-      <Name>UnityEngine.Purchasing.SecurityCore</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.AI.Navigation.Updater.csproj">
       <Project>{4DF1EA53-A32B-3C8D-2355-5BBE317877F2}</Project>
       <Name>Unity.AI.Navigation.Updater</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.Purchasing.Codeless.csproj">
-      <Project>{A0E9F856-1A7F-EBDB-9710-D03329E4C1FB}</Project>
-      <Name>UnityEngine.Purchasing.Codeless</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Services.Core.csproj">
-      <Project>{CE99699A-94ED-F724-A1C0-73281D3D65A5}</Project>
-      <Name>Unity.Services.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.TextMeshPro.csproj">
-      <Project>{CE1F4080-077E-5E77-4970-BFE91618173D}</Project>
-      <Name>Unity.TextMeshPro</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEditor.Purchasing.csproj">
-      <Project>{30DDC51F-3832-CE7F-86AC-85F34B2530AE}</Project>
-      <Name>UnityEditor.Purchasing</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Services.Core.Analytics.csproj">
-      <Project>{6B534FE3-B255-F8A3-8E1D-317B9788EC6A}</Project>
-      <Name>Unity.Services.Core.Analytics</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
       <Project>{B8B576F8-23FA-161A-1C1A-A57A05BF4441}</Project>
@@ -1250,18 +1303,6 @@
     <ProjectReference Include="Unity.AI.Navigation.Editor.csproj">
       <Project>{2179891A-4A95-E131-EAFD-9D9B684CA3CD}</Project>
       <Name>Unity.AI.Navigation.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.AI.Navigation.Editor.ConversionSystem.csproj">
-      <Project>{234B9608-6EA5-284F-DF43-39E9FEDBA7E9}</Project>
-      <Name>Unity.AI.Navigation.Editor.ConversionSystem</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.VSCode.Editor.csproj">
-      <Project>{113E6D5F-7395-9334-DD05-6C0C9063D393}</Project>
-      <Name>Unity.VSCode.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.Purchasing.csproj">
-      <Project>{34ED3932-0C4F-2346-885F-FD832468297C}</Project>
-      <Name>UnityEngine.Purchasing</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
