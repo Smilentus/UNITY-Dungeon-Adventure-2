@@ -135,8 +135,6 @@ namespace Dimasyechka.Code
         /// <summary>
         /// 0 - Событие. 1 - Информация.
         /// </summary>
-        /// <param name="message"></param>
-        /// <param name="action"></param>
         public void ShowMessageText(string message, string title = "[Информация]")
         {
             Blocker.SetActive(true);
@@ -157,7 +155,6 @@ namespace Dimasyechka.Code
         // DeathBox открытие
         public void ShowDeathBox(string deathText)
         {
-            _runtimePlayer.RuntimePlayerStats.IsDeath = true;
             DeathBox.SetActive(true);
             DeathBox.transform.GetChild(0).GetChild(1).GetComponent<Text>().text = deathText;
         }

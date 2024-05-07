@@ -1,6 +1,5 @@
-﻿using Dimasyechka.Code.BattleSystem;
-using Newtonsoft.Json;
-using System;
+﻿using System;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -15,7 +14,7 @@ namespace Dimasyechka.Code
         public event Action onRuntimePlayerStatsUpdated;
 
 
-        private RuntimePlayerStats _runtimePlayerStats;
+        private RuntimePlayerStats _runtimePlayerStats = new RuntimePlayerStats();
         /// <summary>
         ///     Текущие характеристики игрового персонажа
         /// </summary>
@@ -42,88 +41,75 @@ namespace Dimasyechka.Code
         }
 
 
-        private void Awake()
+        // TODO: Временное решение для переработки
+        private void Update()
         {
-            _runtimePlayerStats = new RuntimePlayerStats();
+            if (_runtimePlayerStats.Health.Value > _runtimePlayerStats.MaxHealth.Value)
+            {
+                _runtimePlayerStats.Health.Value = _runtimePlayerStats.MaxHealth.Value;
+            }
+            if (_runtimePlayerStats.Health.Value < 0)
+            {
+                _runtimePlayerStats.Health.Value = 0;
+            }
+
+
+            if (_runtimePlayerStats.Mana.Value >= _runtimePlayerStats.MaxMana.Value)
+            {
+                _runtimePlayerStats.Mana.Value = _runtimePlayerStats.MaxMana.Value;
+            }
+            if (_runtimePlayerStats.Mana.Value < 0)
+            {
+                _runtimePlayerStats.Mana.Value = 0;
+            }
         }
 
 
         public void SetDefaultPlayerStats()
         {
-            _runtimePlayerStats.Health = 100;
-            _runtimePlayerStats.MaxHealth = 100;
+            //_runtimePlayerStats.IsStun = false;
+            //_runtimePlayerStats.IsFirstEnter = true;
+            //_runtimePlayerStats.AntiHole = false;
+            //_runtimePlayerStats.ChanceNotToDelete = 0;
+            //_runtimePlayerStats.ChanceToCraftTwice = 0;
+            //_runtimePlayerStats.OpenedInvCases = 19;
+            //_runtimePlayerStats.OpenedRuneCases = 0;
+            //_runtimePlayerStats.IsHadVillage = false;
+            ////_runtimePlayerStats.AttackType.Value = CharacterAttackType.Melee;
+            //_runtimePlayerStats.ArmorType.Value = CharacterArmorType.None;
+            //_runtimePlayerStats.Element.Value = CharacterElement.None;
+            
+            _runtimePlayerStats.Health.Value = 100;
+            _runtimePlayerStats.MaxHealth.Value = 100;
+            _runtimePlayerStats.HealthRegen.Value = 0;
 
-            _runtimePlayerStats.PlayerName = "";
-            _runtimePlayerStats.IsFirstEnter = true;
-            _runtimePlayerStats.MaxHealth = 100;
-            _runtimePlayerStats.Health = 100;
-            _runtimePlayerStats.HealthRegen = 0;
-            _runtimePlayerStats.MaxMana = 0;
-            _runtimePlayerStats.ManaRegen = 0;
-            _runtimePlayerStats.Mana = 0;
-            _runtimePlayerStats.Armor = 0;
-            _runtimePlayerStats.Damage = 10;
-            _runtimePlayerStats.AttackSpeed = 1;
-            _runtimePlayerStats.IsStun = false;
+            _runtimePlayerStats.Mana.Value = 0;
+            _runtimePlayerStats.MaxMana.Value = 0;
+            _runtimePlayerStats.ManaRegen.Value = 0;
 
-            _runtimePlayerStats.TempDamage = 0;
-            _runtimePlayerStats.TempHealth = 0;
-            _runtimePlayerStats.TempMaxHealth = 0;
+            _runtimePlayerStats.Armor.Value = 0;
+            _runtimePlayerStats.Damage.Value = 10;
+            _runtimePlayerStats.AttackSpeed.Value = 1;
 
-            _runtimePlayerStats.AntiHole = false;
-            _runtimePlayerStats.Luck = 0;
-            _runtimePlayerStats.SkillPoints = 0;
-            _runtimePlayerStats.ChanceNotToDelete = 0;
-            _runtimePlayerStats.ChanceToCraftTwice = 0;
-            _runtimePlayerStats.OpenedInvCases = 19;
-            _runtimePlayerStats.OpenedRuneCases = 0;
-
-            _runtimePlayerStats.Lvl = 1;
-            _runtimePlayerStats.Exp = 0;
-            _runtimePlayerStats.MaxExp = 50;
-            _runtimePlayerStats.ExpMulty = 50;
-            _runtimePlayerStats.Money = 0;
-
-            _runtimePlayerStats.ExtraExpMultiplier = 0;
-            _runtimePlayerStats.ExtraMoneyMultiplier = 0;
-
-            // Различные шансы
-            _runtimePlayerStats.DodgeChance = 10;
-            _runtimePlayerStats.LightStrikeChance = 95;
-            _runtimePlayerStats.MediumStrikeChance = 65;
-            _runtimePlayerStats.HeavyStrikeChance = 30;
-            _runtimePlayerStats.CriticalStrikeChance = 1;
-            _runtimePlayerStats.CriticalStrikeDamageMultiplier = 2;
-
-            _runtimePlayerStats.IsHadVillage = false;
-
-            _runtimePlayerStats.AttackType = CharacterAttackType.Melee;
-            _runtimePlayerStats.ArmorType = CharacterArmorType.None;
-            _runtimePlayerStats.Element = CharacterElement.None;
-        }
+            _runtimePlayerStats.Luck.Value = 0;
+            _runtimePlayerStats.SkillPoints.Value = 0;
 
 
-        // TODO: Временное решение для переработки
-        private void Update()
-        {
-            if (_runtimePlayerStats.Health > _runtimePlayerStats.MaxHealth)
-            {
-                _runtimePlayerStats.Health = _runtimePlayerStats.MaxHealth;
-            }
-            if (_runtimePlayerStats.Health < 0)
-            {
-                _runtimePlayerStats.Health = 0;
-            }
+            _runtimePlayerStats.Lvl.Value = 1;
+            _runtimePlayerStats.Exp.Value = 0;
+            _runtimePlayerStats.MaxExp.Value = 50;
+            _runtimePlayerStats.ExpMulty.Value = 50;
+            _runtimePlayerStats.Money.Value = 0;
 
+            _runtimePlayerStats.ExtraExpMultiplier.Value = 0;
+            _runtimePlayerStats.ExtraMoneyMultiplier.Value = 0;
 
-            if (_runtimePlayerStats.Mana >= _runtimePlayerStats.MaxMana)
-            {
-                _runtimePlayerStats.Mana = _runtimePlayerStats.MaxMana;
-            }
-            if (_runtimePlayerStats.Mana < 0)
-            {
-                _runtimePlayerStats.Mana = 0;
-            }
+            _runtimePlayerStats.DodgeChance.Value = 10;
+            _runtimePlayerStats.LightStrikeChance.Value = 95;
+            _runtimePlayerStats.MediumStrikeChance.Value = 65;
+            _runtimePlayerStats.HeavyStrikeChance.Value = 30;
+            _runtimePlayerStats.CriticalStrikeChance.Value = 1;
+            _runtimePlayerStats.CriticalStrikeDamageMultiplier.Value = 2;
         }
 
 
@@ -131,15 +117,15 @@ namespace Dimasyechka.Code
         {
             if (ignoreArmor)
             {
-                _runtimePlayer.RuntimePlayerStats.Health -= damage;
+                _runtimePlayer.RuntimePlayerStats.Health.Value -= damage;
                 GameController.Instance.AddEventText("Вы получили урон через броню: " + damage.ToString("f2"));
             }
             else
             {
-                if (damage > _runtimePlayer.RuntimePlayerStats.Armor)
+                if (damage > _runtimePlayer.RuntimePlayerStats.Armor.Value)
                 {
-                    _runtimePlayer.RuntimePlayerStats.Health -= (damage - _runtimePlayer.RuntimePlayerStats.Armor);
-                    GameController.Instance.AddEventText("Вы получили урон: " + (damage - _runtimePlayer.RuntimePlayerStats.Armor).ToString("f2"));
+                    _runtimePlayer.RuntimePlayerStats.Health.Value -= (damage - _runtimePlayer.RuntimePlayerStats.Armor.Value);
+                    GameController.Instance.AddEventText("Вы получили урон: " + (damage - _runtimePlayer.RuntimePlayerStats.Armor.Value).ToString("f2"));
                 }
                 else
                     GameController.Instance.AddEventText("Броня заблокировала урон.");
@@ -149,40 +135,40 @@ namespace Dimasyechka.Code
         public void GiveExperience(double experience)
         {
             // Подсчёт доп. процентного опыта
-            double extraExp = (experience * _runtimePlayer.RuntimePlayerStats.ExtraExpMultiplier);
+            double extraExp = (experience * _runtimePlayer.RuntimePlayerStats.ExtraExpMultiplier.Value);
 
             // Опыт, который дадим
             experience += extraExp;
-            _runtimePlayer.RuntimePlayerStats.Exp += experience;
+            _runtimePlayer.RuntimePlayerStats.Exp.Value += experience;
 
             string info = "Получено: " + experience.ToString("f2") + " ед. опыта!";
-            if (_runtimePlayer.RuntimePlayerStats.ExtraExpMultiplier > 0)
+            if (_runtimePlayer.RuntimePlayerStats.ExtraExpMultiplier.Value > 0)
             {
                 info = "Получено: " + experience.ToString("f2") + " + (" + extraExp.ToString("f2") + ") ед. опыта.";
             }
 
             GameController.Instance.AddEventText(info);
 
-            while (_runtimePlayer.RuntimePlayerStats.Exp >= _runtimePlayer.RuntimePlayerStats.MaxExp)
+            while (_runtimePlayer.RuntimePlayerStats.Exp.Value >= _runtimePlayer.RuntimePlayerStats.MaxExp.Value)
             {
-                _runtimePlayer.RuntimePlayerStats.Lvl++;
-                _runtimePlayer.RuntimePlayerStats.SkillPoints += 5;
-                _runtimePlayer.RuntimePlayerStats.Exp -= _runtimePlayer.RuntimePlayerStats.MaxExp;
-                _runtimePlayer.RuntimePlayerStats.MaxExp += _runtimePlayer.RuntimePlayerStats.ExpMulty;
-                _runtimePlayer.RuntimePlayerStats.ExpMulty += 1;
-                GameController.Instance.AddEventText("Новый уровень - " + _runtimePlayer.RuntimePlayerStats.Lvl + "!");
+                _runtimePlayer.RuntimePlayerStats.Lvl.Value++;
+                _runtimePlayer.RuntimePlayerStats.SkillPoints.Value += 5;
+                _runtimePlayer.RuntimePlayerStats.Exp.Value -= _runtimePlayer.RuntimePlayerStats.MaxExp.Value;
+                _runtimePlayer.RuntimePlayerStats.MaxExp.Value += _runtimePlayer.RuntimePlayerStats.ExpMulty.Value;
+                _runtimePlayer.RuntimePlayerStats.ExpMulty.Value += 1;
+                GameController.Instance.AddEventText("Новый уровень - " + _runtimePlayer.RuntimePlayerStats.Lvl.Value + "!");
             }
         }
 
         public void GiveMoney(double money)
         {
-            double extraMoney = money * _runtimePlayer.RuntimePlayerStats.ExtraMoneyMultiplier;
+            double extraMoney = money * _runtimePlayer.RuntimePlayerStats.ExtraMoneyMultiplier.Value;
 
             money += extraMoney;
-            _runtimePlayer.RuntimePlayerStats.Money += (int)money;
+            _runtimePlayer.RuntimePlayerStats.Money.Value += (int)money;
 
             string info = "Получено: " + money.ToString("f2") + " ед. золота!";
-            if (_runtimePlayer.RuntimePlayerStats.ExtraMoneyMultiplier > 0)
+            if (_runtimePlayer.RuntimePlayerStats.ExtraMoneyMultiplier.Value > 0)
             {
                 info = "Получено: " + money.ToString("f2") + " + (" + extraMoney.ToString("f2") + ") ед. золота.";
             }
@@ -193,145 +179,59 @@ namespace Dimasyechka.Code
 
         public void PerformHealthRegeneration()
         {
-            _runtimePlayerStats.Health += _runtimePlayerStats.HealthRegen;
+            _runtimePlayerStats.Health.Value += _runtimePlayerStats.HealthRegen.Value;
         }
 
         public void PerformManaRegeneration()
         {
-            _runtimePlayerStats.Mana += _runtimePlayerStats.ManaRegen;
+            _runtimePlayerStats.Mana.Value += _runtimePlayerStats.ManaRegen.Value;
         }
     }
+
 
     [System.Serializable]
     public class RuntimePlayerStats
     {
-        [JsonIgnore]
-        public string elementStr
-        {
-            get
-            {
-                string str = "";
-                switch (Element)
-                {
-                    case CharacterElement.Dark:
-                        str = "Тьма";
-                        break;
-                    case CharacterElement.Earth:
-                        str = "Земля";
-                        break;
-                    case CharacterElement.Fire:
-                        str = "Огонь";
-                        break;
-                    case CharacterElement.Light:
-                        str = "Свет";
-                        break;
-                    case CharacterElement.None:
-                        str = "Нет стихии";
-                        break;
-                    case CharacterElement.Water:
-                        str = "Вода";
-                        break;
-                    case CharacterElement.Wind:
-                        str = "Воздух";
-                        break;
-                }
-                return str;
-            }
-        }
+        public ReactiveProperty<double> Health = new ReactiveProperty<double>();
+        public ReactiveProperty<double> HealthRegen = new ReactiveProperty<double>();
+        public ReactiveProperty<double> MaxHealth = new ReactiveProperty<double>();
 
-        public bool IsFirstEnter;
+        public double HealthRatio => MaxHealth.Value != 0 ? Health.Value / MaxHealth.Value : 0;
 
-        public enum HeroAbility
-        {
-            None,
-            Warrior,
-            Mage,
-            Ninja,
-            Archer,
-            Explosioner
-        }
+        public ReactiveProperty<double> Mana = new ReactiveProperty<double>();
+        public ReactiveProperty<double> ManaRegen = new ReactiveProperty<double>();
+        public ReactiveProperty<double> MaxMana = new ReactiveProperty<double>();
 
-        public string PlayerName;
+        public double ManaRatio => MaxMana.Value != 0 ? Mana.Value / MaxMana.Value : 0;
 
-        public double Health;
-        public double MaxHealth;
-        public double HealthRegen;
+        public ReactiveProperty<double> Damage = new ReactiveProperty<double>();
+        public ReactiveProperty<double> Armor = new ReactiveProperty<double>();
 
-        public double Armor;
+        public ReactiveProperty<double> AttackSpeed = new ReactiveProperty<double>();
 
-        public double Mana;
-        public double MaxMana;
-        public double ManaRegen;
+        public ReactiveProperty<double> Lvl = new ReactiveProperty<double>();
+        public ReactiveProperty<double> Exp = new ReactiveProperty<double>();
+        public ReactiveProperty<double> MaxExp = new ReactiveProperty<double>();
 
-        public double AttackSpeed;
-        public double Damage;
+        public double ExpRatio => MaxExp.Value != 0 ? Exp.Value / MaxExp.Value : 0;
 
+        public ReactiveProperty<double> ExpMulty = new ReactiveProperty<double>();
+        public ReactiveProperty<double> ExtraExpMultiplier = new ReactiveProperty<double>();
 
-        public double Lvl;
-        public double Exp;
-        public double MaxExp;
-        public double ExpMulty;
+        public ReactiveProperty<double> Luck = new ReactiveProperty<double>();
 
-        public double ExtraExpMultiplier;
-        public double ExtraMoneyMultiplier;
-        public int SkillPoints;
+        public ReactiveProperty<double> Money = new ReactiveProperty<double>();
+        public ReactiveProperty<double> ExtraMoneyMultiplier = new ReactiveProperty<double>();
 
+        public ReactiveProperty<int> SkillPoints = new ReactiveProperty<int>();
 
-        public bool AntiHole;
-        public double Luck;
-        public double Money;
-        public double ChanceNotToDelete;
-        public double ChanceToCraftTwice;
-        public int OpenedInvCases;
-        public int OpenedRuneCases;
+        public ReactiveProperty<double> DodgeChance = new ReactiveProperty<double>();
 
+        public ReactiveProperty<double> LightStrikeChance = new ReactiveProperty<double>();
+        public ReactiveProperty<double> MediumStrikeChance = new ReactiveProperty<double>();
+        public ReactiveProperty<double> HeavyStrikeChance = new ReactiveProperty<double>();
 
-        public double DodgeChance;
-        public double LightStrikeChance;
-        public double MediumStrikeChance;
-        public double HeavyStrikeChance;
-        public double CriticalStrikeChance;
-        public double CriticalStrikeDamageMultiplier;
-
-        public bool IsDeath;
-        public bool IsHadVillage;
-
-        [JsonIgnore]
-        public string GetAbility
-        {
-            get
-            {
-                switch (Ability)
-                {
-                    case HeroAbility.Archer:
-                        return "Лучник";
-                    case HeroAbility.Warrior:
-                        return "Воин";
-                    case HeroAbility.Explosioner:
-                        return "Подрывник";
-                    case HeroAbility.Mage:
-                        return "Маг";
-                    case HeroAbility.Ninja:
-                        return "Ниндзя";
-                    default:
-                        return "";
-                }
-            }
-        }
-
-        public bool IsStun;
-        public double HaChargePower;
-        public double HaCharge;
-        public double HaMaxCharge;
-        public int HaLvl;
-        public int HaMaxLvl;
-        public HeroAbility Ability;
-
-        public CharacterElement Element;
-        public CharacterArmorType ArmorType;
-        public CharacterAttackType AttackType;
-
-
-        public double TempHealth, TempMaxHealth, TempDamage, TempMaxMana, TempMana, TempAttackSpeed, TempArmor;
+        public ReactiveProperty<double> CriticalStrikeChance = new ReactiveProperty<double>();
+        public ReactiveProperty<double> CriticalStrikeDamageMultiplier = new ReactiveProperty<double>();
     }
 }

@@ -97,7 +97,7 @@ namespace Dimasyechka.Code.BattleSystem.BattleActions.Implementations
 
         public virtual bool IsManaCostAvailable()
         {
-            if (_runtimePlayer.RuntimePlayerStats.Mana >= _magicProfile.DefaultManaPointsCost)
+            if (_runtimePlayer.RuntimePlayerStats.Mana.Value >= _magicProfile.DefaultManaPointsCost)
             {
                 return true;
             }
@@ -109,7 +109,7 @@ namespace Dimasyechka.Code.BattleSystem.BattleActions.Implementations
 
         public virtual void SpendPlayerMana()
         {
-            _runtimePlayer.RuntimePlayerStats.Mana -= _magicProfile.DefaultManaPointsCost;
+            _runtimePlayer.RuntimePlayerStats.Mana.Value -= _magicProfile.DefaultManaPointsCost;
         }
     }
 }

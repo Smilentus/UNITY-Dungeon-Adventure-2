@@ -43,7 +43,12 @@ namespace Dimasyechka.Code.GlobalWindows
         {
             if (GlobalWindowData != null)
             {
-                GetConvertedWindowData<InfoGlobalWindowData>()?.OnApply();
+                InfoGlobalWindowData data = GetConvertedWindowData<InfoGlobalWindowData>();
+                
+                if (data != null)
+                {
+                    data.OnApply?.Invoke();
+                }
             }
 
             Hide();

@@ -271,9 +271,9 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
         public bool CriticalStrike()
         {
             int rndChance = UnityEngine.Random.Range(0, 101);
-            double dmg = _runtimePlayer.RuntimePlayerStats.Damage * _runtimePlayer.RuntimePlayerStats.CriticalStrikeDamageMultiplier;
+            double dmg = _runtimePlayer.RuntimePlayerStats.Damage.Value * _runtimePlayer.RuntimePlayerStats.CriticalStrikeDamageMultiplier.Value;
 
-            if (rndChance <= _runtimePlayer.RuntimePlayerStats.CriticalStrikeChance)
+            if (rndChance <= _runtimePlayer.RuntimePlayerStats.CriticalStrikeChance.Value)
             {
                 _battleController.EnemiesInBattle[_battleController.EnemiesInBattle.Count - 1].Health -= dmg;
                 GameController.Instance.AddEventText(_battleController.CurrentBattleStep + " - Вы нанесли урон критическим ударом: " + dmg + " ед.");
@@ -285,7 +285,7 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
         // Попытка сбежать
         public void TryToEscape()
         {
-            if (UnityEngine.Random.Range(0, 101) <= 50 + _runtimePlayer.RuntimePlayerStats.Luck)
+            if (UnityEngine.Random.Range(0, 101) <= 50 + _runtimePlayer.RuntimePlayerStats.Luck.Value)
             {
                 _battleController.IsBattle = false;
                 _battleController.IsWin = false;

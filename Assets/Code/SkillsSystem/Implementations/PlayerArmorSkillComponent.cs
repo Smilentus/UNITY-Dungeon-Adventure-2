@@ -17,7 +17,7 @@ namespace Dimasyechka.Code.SkillsSystem.Implementations
         {
             double delta = 1f;
 
-            _runtimePlayer.RuntimePlayerStats.Armor += delta;
+            _runtimePlayer.RuntimePlayerStats.Armor.Value += delta;
         }
     }
 }

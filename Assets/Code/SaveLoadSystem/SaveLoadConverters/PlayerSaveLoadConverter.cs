@@ -19,7 +19,7 @@ namespace Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters
             PlayerSaveData playerData = new PlayerSaveData();
 
             // Сохраняем игрока
-            playerData.PlayerStats = _runtimePlayer.RuntimePlayerStats;
+            playerData.RuntimePlayerStatsSnapshot = _runtimePlayer.RuntimePlayerStats;
 
             return playerData;
         }
@@ -30,7 +30,7 @@ namespace Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters
 
             if (playerSaveData != null)
             {
-                _runtimePlayer.RuntimePlayerStats = playerSaveData.PlayerStats;
+                _runtimePlayer.RuntimePlayerStats = playerSaveData.RuntimePlayerStatsSnapshot;
             }
             else
             {
@@ -47,6 +47,6 @@ namespace Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters
     [System.Serializable]
     public class PlayerSaveData
     {
-        public RuntimePlayerStats PlayerStats;
+        public RuntimePlayerStats RuntimePlayerStatsSnapshot;
     }
 }

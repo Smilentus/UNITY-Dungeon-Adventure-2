@@ -17,7 +17,7 @@ namespace Dimasyechka.Code.SkillsSystem.Implementations
         {
             double delta = _skillCore.UpgradeableComponent.currentLevel * 0.5f;
 
-            _runtimePlayer.RuntimePlayerStats.HealthRegen += delta;
+            _runtimePlayer.RuntimePlayerStats.HealthRegen.Value += delta;
         }
     }
 }

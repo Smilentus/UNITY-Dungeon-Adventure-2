@@ -2076,90 +2076,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 65798505}
   m_CullTransparentMesh: 0
---- !u!1 &67893736
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 67893737}
-  - component: {fileID: 67893738}
-  m_Layer: 0
-  m_Name: RuntimePlayerStatsView
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &67893737
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 67893736}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1070176247}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &67893738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 67893736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c56ea8242dd4c24fb6302ccff62b825, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CurrentDateTime:
-    value: 
-  PlayerHealth:
-    value: 
-  PlayerMana:
-    value: 
-  PlayerLevel:
-    value: 
-  PlayerHealthRegen:
-    value: 
-  PlayerManaRegen:
-    value: 
-  PlayerDamage:
-    value: 
-  PlayerAttackSpeed:
-    value: 
-  PlayerArmor:
-    value: 
-  PlayerElemental:
-    value: 
-  PlayerGold:
-    value: 
-  PlayerExperience:
-    value: 
-  PlayerExtraExperience:
-    value: 
-  PlayerExtraMoney:
-    value: 
-  CurrentLocation:
-    value: 
-  DodgeChance:
-    value: 
-  PlayerLuck:
-    value: 
-  PlayerCriticalChance:
-    value: 
-  PlayerCriticalDamage:
-    value: 
-  PlayerSkillPoints:
-    value: 
 --- !u!1 &79364835
 GameObject:
   m_ObjectHideFlags: 0
@@ -2732,13 +2648,14 @@ GameObject:
   - component: {fileID: 99851083}
   - component: {fileID: 99851084}
   - component: {fileID: 99851085}
+  - component: {fileID: 99851086}
   m_Layer: 5
   m_Name: ElementText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &99851080
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2754,9 +2671,9 @@ RectTransform:
   - {fileID: 1755991990}
   m_Father: {fileID: 452508735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 182.61002, y: -206}
   m_SizeDelta: {x: 285.22003, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &99851083
@@ -2872,6 +2789,53 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &99851086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 99851079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 360847768}
+  _component: {fileID: 99851085}
+  _text:
+    ReflectiveNames:
+    - CurrentLocation (String)
+    - CurrentDateTime (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: -1
+    SelectedName: None
+  _useMultipleText: 0
+  _multipleTextFormat: 
+  _multipleText: []
 --- !u!1 &100542115
 GameObject:
   m_ObjectHideFlags: 0
@@ -3054,7 +3018,6 @@ GameObject:
   m_Component:
   - component: {fileID: 118105619}
   - component: {fileID: 118105621}
-  - component: {fileID: 118105622}
   - component: {fileID: 118105620}
   m_Layer: 5
   m_Name: Icon
@@ -3117,19 +3080,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 118105618}
   m_CullTransparentMesh: 0
---- !u!114 &118105622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 118105618}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb12b70f5f4829f45916e0c6ab73cfcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_shortDescription: 
 --- !u!1 &119576004
 GameObject:
   m_ObjectHideFlags: 0
@@ -7059,22 +7009,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a6efd74d95e574ab5d0042d2ad8871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalColor:
-    r: 0
-    g: 0
-    b: 0
-    a: 0
-  hoverColor:
-    r: 0.77205884
-    g: 0.77205884
-    b: 0.77205884
-    a: 1
-  pressedColor:
-    r: 0.58823526
-    g: 0.58823526
-    b: 0.58823526
-    a: 1
-  isHover: 0
 --- !u!114 &280170146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8998,6 +8932,7 @@ GameObject:
   - component: {fileID: 360847765}
   - component: {fileID: 360847767}
   - component: {fileID: 360847766}
+  - component: {fileID: 360847768}
   m_Layer: 5
   m_Name: LeftActionPanel (PlayerInfo)
   m_TagString: Untagged
@@ -9065,6 +9000,179 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 360847764}
+  m_CullTransparentMesh: 0
+--- !u!114 &360847768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360847764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c56ea8242dd4c24fb6302ccff62b825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentLocation:
+    value: 
+  PlayerHealthRatio:
+    value: 0
+  PlayerManaRatio:
+    value: 0
+  PlayerExpRatio:
+    value: 0
+  PlayerHealth:
+    value: 0
+  PlayerMaxHealth:
+    value: 0
+  PlayerHealthRegen:
+    value: 0
+  PlayerMana:
+    value: 0
+  PlayerMaxMana:
+    value: 0
+  PlayerManaRegen:
+    value: 0
+  PlayerLevel:
+    value: 0
+  PlayerExp:
+    value: 0
+  PlayerMaxExp:
+    value: 0
+  PlayerExtraExp:
+    value: 0
+  PlayerDamage:
+    value: 0
+  PlayerAttackSpeed:
+    value: 0
+  PlayerArmor:
+    value: 0
+  PlayerMoney:
+    value: 0
+  PlayerExtraMoney:
+    value: 0
+  DodgeChance:
+    value: 0
+  PlayerLuck:
+    value: 0
+  PlayerCriticalChance:
+    value: 0
+  PlayerCriticalDamage:
+    value: 0
+--- !u!1 &360931223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 360931224}
+  - component: {fileID: 360931227}
+  - component: {fileID: 360931226}
+  - component: {fileID: 360931225}
+  m_Layer: 5
+  m_Name: Bar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &360931224
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360931223}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1623004936}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &360931225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360931223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976878bb7690eea44bd40d8409ed5552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 360847768}
+  _component: {fileID: 360931226}
+  _sprite:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _material:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _fillAmount:
+    ReflectiveNames:
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    SelectedIndex: 0
+    SelectedName: PlayerManaRatio (Single)
+  _raycastTarget:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+--- !u!114 &360931226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360931223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0.36189914, b: 0.7372549, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 2d2cd7fbd994807479c6fb40d5757011, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 0
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &360931227
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360931223}
   m_CullTransparentMesh: 0
 --- !u!1 &362077262
 GameObject:
@@ -9701,81 +9809,6 @@ MonoBehaviour:
       m_Calls: []
   m_buttonTitle: {fileID: 1725689327}
   m_buttonReference: {fileID: 373330001}
---- !u!1 &377649188
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 377649189}
-  - component: {fileID: 377649191}
-  - component: {fileID: 377649190}
-  m_Layer: 5
-  m_Name: Fill
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &377649189
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 377649188}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 504316125}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &377649190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 377649188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.6102941, g: 0.06731184, b: 0.06731184, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &377649191
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 377649188}
-  m_CullTransparentMesh: 0
 --- !u!1 &378364823
 GameObject:
   m_ObjectHideFlags: 0
@@ -11586,7 +11619,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1333427782}
   m_Father: {fileID: 1872206118}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
@@ -12451,6 +12485,7 @@ GameObject:
   - component: {fileID: 478552712}
   - component: {fileID: 478552714}
   - component: {fileID: 478552715}
+  - component: {fileID: 478552716}
   m_Layer: 5
   m_Name: ManaText
   m_TagString: Untagged
@@ -12575,6 +12610,104 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &478552716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 478552711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 360847768}
+  _component: {fileID: 478552715}
+  _text:
+    ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: -1
+    SelectedName: 
+  _useMultipleText: 1
+  _multipleTextFormat: "\u041E\u041C: {0}/{1}"
+  _multipleText:
+  - ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 7
+    SelectedName: PlayerMana (Double)
+  - ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 8
+    SelectedName: PlayerMaxMana (Double)
 --- !u!1 &481920105
 GameObject:
   m_ObjectHideFlags: 0
@@ -13242,42 +13375,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498236281}
   m_CullTransparentMesh: 0
---- !u!1 &504316124
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 504316125}
-  m_Layer: 5
-  m_Name: Fill Area
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &504316125
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 504316124}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 377649189}
-  m_Father: {fileID: 919622817}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.25}
-  m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0.0025177002, y: 0}
-  m_SizeDelta: {x: -0.0049744, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &506562200
 GameObject:
   m_ObjectHideFlags: 0
@@ -15597,7 +15694,6 @@ GameObject:
   m_Component:
   - component: {fileID: 574695913}
   - component: {fileID: 574695915}
-  - component: {fileID: 574695916}
   - component: {fileID: 574695914}
   m_Layer: 5
   m_Name: Icon
@@ -15660,19 +15756,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 574695912}
   m_CullTransparentMesh: 0
---- !u!114 &574695916
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 574695912}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb12b70f5f4829f45916e0c6ab73cfcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_shortDescription: 
 --- !u!1 &575884511
 GameObject:
   m_ObjectHideFlags: 0
@@ -16488,6 +16571,7 @@ GameObject:
   - component: {fileID: 610941188}
   - component: {fileID: 610941190}
   - component: {fileID: 610941191}
+  - component: {fileID: 610941192}
   m_Layer: 5
   m_Name: LvlText
   m_TagString: Untagged
@@ -16612,6 +16696,78 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &610941192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 610941187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 360847768}
+  _component: {fileID: 610941191}
+  _text:
+    ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: -1
+    SelectedName: 
+  _useMultipleText: 1
+  _multipleTextFormat: "\u0423\u0440\u0432.: {0}"
+  _multipleText:
+  - ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 8
+    SelectedName: PlayerLevel (Double)
 --- !u!1 &613188527
 GameObject:
   m_ObjectHideFlags: 0
@@ -18495,81 +18651,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 661973347}
   m_CullTransparentMesh: 0
---- !u!1 &666612383
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 666612384}
-  - component: {fileID: 666612386}
-  - component: {fileID: 666612385}
-  m_Layer: 5
-  m_Name: Fill
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &666612384
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666612383}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1174986527}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &666612385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666612383}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.051092133, g: 0.77205884, b: 0.14556356, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &666612386
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666612383}
-  m_CullTransparentMesh: 0
 --- !u!1 &674422900
 GameObject:
   m_ObjectHideFlags: 0
@@ -18930,81 +19011,6 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 680775672}
-  m_CullTransparentMesh: 0
---- !u!1 &682792835
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 682792836}
-  - component: {fileID: 682792838}
-  - component: {fileID: 682792837}
-  m_Layer: 5
-  m_Name: Fill
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &682792836
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 682792835}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1221980188}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &682792837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 682792835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.12683822, g: 0.20849383, b: 0.75, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &682792838
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 682792835}
   m_CullTransparentMesh: 0
 --- !u!1 &686892163
 GameObject:
@@ -19597,6 +19603,7 @@ GameObject:
   - component: {fileID: 702110364}
   - component: {fileID: 702110365}
   - component: {fileID: 702110366}
+  - component: {fileID: 702110367}
   m_Layer: 5
   m_Name: LuckText
   m_TagString: Untagged
@@ -19739,6 +19746,78 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &702110367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702110360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 360847768}
+  _component: {fileID: 702110366}
+  _text:
+    ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 20
+    SelectedName: PlayerLuck (Double)
+  _useMultipleText: 1
+  _multipleTextFormat: "\u0423\u0434\u0430\u0447\u0430: {0}%"
+  _multipleText:
+  - ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 20
+    SelectedName: PlayerLuck (Double)
 --- !u!1 &702284806
 GameObject:
   m_ObjectHideFlags: 0
@@ -20492,6 +20571,7 @@ GameObject:
   - component: {fileID: 762848468}
   - component: {fileID: 762848467}
   - component: {fileID: 762848469}
+  - component: {fileID: 762848470}
   m_Layer: 5
   m_Name: ExpModText
   m_TagString: Untagged
@@ -20630,6 +20710,78 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &762848470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 762848463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 360847768}
+  _component: {fileID: 762848469}
+  _text:
+    ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 13
+    SelectedName: PlayerExtraExp (Double)
+  _useMultipleText: 1
+  _multipleTextFormat: "\u0414\u043E\u043F. \u043E\u043F\u044B\u0442: {0}%"
+  _multipleText:
+  - ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 13
+    SelectedName: PlayerExtraExp (Double)
 --- !u!1 &773736937
 GameObject:
   m_ObjectHideFlags: 0
@@ -21182,6 +21334,7 @@ GameObject:
   - component: {fileID: 782148403}
   - component: {fileID: 782148404}
   - component: {fileID: 782148405}
+  - component: {fileID: 782148406}
   m_Layer: 5
   m_Name: CriticalDamageText
   m_TagString: Untagged
@@ -21321,6 +21474,78 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &782148406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 782148399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 360847768}
+  _component: {fileID: 782148405}
+  _text:
+    ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 22
+    SelectedName: PlayerCriticalDamage (Double)
+  _useMultipleText: 1
+  _multipleTextFormat: "\u041A\u0440\u0438\u0442. \u0443\u0440\u043E\u043D: {0}%"
+  _multipleText:
+  - ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 22
+    SelectedName: PlayerCriticalDamage (Double)
 --- !u!1 &786418219
 GameObject:
   m_ObjectHideFlags: 0
@@ -21744,22 +21969,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a6efd74d95e574ab5d0042d2ad8871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalColor:
-    r: 0
-    g: 0
-    b: 0
-    a: 0
-  hoverColor:
-    r: 0.6572291
-    g: 0.9852941
-    b: 0.49989188
-    a: 1
-  pressedColor:
-    r: 0.4394446
-    g: 0.6911765
-    b: 0.31509516
-    a: 1
-  isHover: 0
 --- !u!114 &797691771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22854,8 +23063,9 @@ GameObject:
   - component: {fileID: 828806130}
   - component: {fileID: 828806129}
   - component: {fileID: 828806128}
+  - component: {fileID: 828806132}
   m_Layer: 5
-  m_Name: DateBackground
+  m_Name: CurrentDateTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22949,6 +23159,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 828806126}
   m_CullTransparentMesh: 0
+--- !u!114 &828806132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828806126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d6e70db8a3927b4cadfce6704285fc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentDateTime:
+    value: 
 --- !u!1 &829887548
 GameObject:
   m_ObjectHideFlags: 0
@@ -24707,7 +24931,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 274.1001}
+  m_AnchoredPosition: {x: 0, y: 274.10004}
   m_SizeDelta: {x: 314.98, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &896862604
@@ -25110,9 +25334,8 @@ GameObject:
   m_Component:
   - component: {fileID: 919622817}
   - component: {fileID: 919622819}
-  - component: {fileID: 919622818}
   m_Layer: 5
-  m_Name: HealthSlider
+  m_Name: PlayerHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25131,7 +25354,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1204299372}
-  - {fileID: 504316125}
   - {fileID: 1907366690}
   - {fileID: 1983832023}
   m_Father: {fileID: 360847765}
@@ -25141,57 +25363,6 @@ RectTransform:
   m_AnchoredPosition: {x: 180.96094, y: -160}
   m_SizeDelta: {x: 277.6, y: 48.7939}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &919622818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919622816}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Highlighted
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
-  m_FillRect: {fileID: 377649189}
-  m_HandleRect: {fileID: 0}
-  m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 100
-  m_WholeNumbers: 1
-  m_Value: 0
-  m_OnValueChanged:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &919622819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28335,6 +28506,7 @@ GameObject:
   - component: {fileID: 1029406663}
   - component: {fileID: 1029406665}
   - component: {fileID: 1029406666}
+  - component: {fileID: 1029406667}
   m_Layer: 5
   m_Name: AttackSpeedText
   m_TagString: Untagged
@@ -28476,6 +28648,78 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1029406667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029406660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 360847768}
+  _component: {fileID: 1029406666}
+  _text:
+    ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 15
+    SelectedName: PlayerAttackSpeed (Double)
+  _useMultipleText: 1
+  _multipleTextFormat: "\u0421\u043A\u043E\u0440\u043E\u0441\u0442\u044C: {0} "
+  _multipleText:
+  - ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 15
+    SelectedName: PlayerAttackSpeed (Double)
 --- !u!1 &1036634186
 GameObject:
   m_ObjectHideFlags: 0
@@ -28740,7 +28984,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1041556580}
   - component: {fileID: 1041556582}
-  - component: {fileID: 1041556583}
   - component: {fileID: 1041556581}
   m_Layer: 5
   m_Name: Icon
@@ -28803,19 +29046,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1041556579}
   m_CullTransparentMesh: 0
---- !u!114 &1041556583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1041556579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb12b70f5f4829f45916e0c6ab73cfcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_shortDescription: 
 --- !u!1 &1041855612
 GameObject:
   m_ObjectHideFlags: 0
@@ -29497,7 +29727,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2063408259}
-  - {fileID: 67893737}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1075606836
@@ -30932,7 +31161,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1140579103}
   - component: {fileID: 1140579105}
-  - component: {fileID: 1140579106}
   - component: {fileID: 1140579104}
   m_Layer: 5
   m_Name: Icon
@@ -30995,19 +31223,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140579102}
   m_CullTransparentMesh: 0
---- !u!114 &1140579106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1140579102}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb12b70f5f4829f45916e0c6ab73cfcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_shortDescription: 
 --- !u!1 &1145647189
 GameObject:
   m_ObjectHideFlags: 0
@@ -31427,22 +31642,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a6efd74d95e574ab5d0042d2ad8871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalColor:
-    r: 0
-    g: 0
-    b: 0
-    a: 0
-  hoverColor:
-    r: 0.8161765
-    g: 0.12002597
-    b: 0.12002597
-    a: 1
-  pressedColor:
-    r: 0.58823526
-    g: 0.15570934
-    b: 0.15570934
-    a: 1
-  isHover: 0
 --- !u!114 &1159219230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31818,6 +32017,7 @@ GameObject:
   - component: {fileID: 1167486985}
   - component: {fileID: 1167486987}
   - component: {fileID: 1167486988}
+  - component: {fileID: 1167486989}
   m_Layer: 5
   m_Name: ArmorText
   m_TagString: Untagged
@@ -31960,6 +32160,78 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1167486989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167486982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 360847768}
+  _component: {fileID: 1167486988}
+  _text:
+    ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 16
+    SelectedName: PlayerArmor (Double)
+  _useMultipleText: 1
+  _multipleTextFormat: "\u0417\u0430\u0449\u0438\u0442\u0430: {0}"
+  _multipleText:
+  - ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 16
+    SelectedName: PlayerArmor (Double)
 --- !u!1 &1171677429
 GameObject:
   m_ObjectHideFlags: 0
@@ -32185,42 +32457,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &1174986526
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1174986527}
-  m_Layer: 5
-  m_Name: Fill Area
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1174986527
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174986526}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 666612384}
-  m_Father: {fileID: 1872206118}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.25}
-  m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0.0025177002, y: 0}
-  m_SizeDelta: {x: -0.0049744, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1184930720
 GameObject:
   m_ObjectHideFlags: 0
@@ -33253,7 +33489,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1857190413}
   m_Father: {fileID: 919622817}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
@@ -33623,7 +33860,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1220709083}
-  - component: {fileID: 1220709086}
   - component: {fileID: 1220709085}
   - component: {fileID: 1220709084}
   m_Layer: 5
@@ -33687,19 +33923,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1220709082}
   m_CullTransparentMesh: 0
---- !u!114 &1220709086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1220709082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb12b70f5f4829f45916e0c6ab73cfcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_shortDescription: 
 --- !u!1 &1221783900
 GameObject:
   m_ObjectHideFlags: 0
@@ -33775,42 +33998,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1221783900}
   m_CullTransparentMesh: 1
---- !u!1 &1221980187
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1221980188}
-  m_Layer: 5
-  m_Name: Fill Area
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1221980188
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1221980187}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 682792836}
-  m_Father: {fileID: 1292014478}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.25}
-  m_AnchorMax: {x: 1, y: 0.75}
-  m_AnchoredPosition: {x: 0.0025177002, y: 0}
-  m_SizeDelta: {x: -0.0049744, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1222726170
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35864,9 +36051,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1292014478}
   - component: {fileID: 1292014480}
-  - component: {fileID: 1292014479}
   m_Layer: 5
-  m_Name: ManaSlider
+  m_Name: PlayerMana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35885,7 +36071,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1623004936}
-  - {fileID: 1221980188}
   - {fileID: 478552712}
   - {fileID: 2027234148}
   m_Father: {fileID: 360847765}
@@ -35895,57 +36080,6 @@ RectTransform:
   m_AnchoredPosition: {x: 180.96094, y: -210}
   m_SizeDelta: {x: 277.611, y: 48.14}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1292014479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1292014477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Highlighted
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
-  m_FillRect: {fileID: 682792836}
-  m_HandleRect: {fileID: 0}
-  m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 100
-  m_WholeNumbers: 1
-  m_Value: 0
-  m_OnValueChanged:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1292014480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37611,6 +37745,121 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1330451922}
   m_CullTransparentMesh: 0
+--- !u!1 &1333427781
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1333427782}
+  - component: {fileID: 1333427785}
+  - component: {fileID: 1333427784}
+  - component: {fileID: 1333427783}
+  m_Layer: 5
+  m_Name: Bar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1333427782
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333427781}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 448797024}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1333427783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333427781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976878bb7690eea44bd40d8409ed5552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 360847768}
+  _component: {fileID: 1333427784}
+  _sprite:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _material:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _fillAmount:
+    ReflectiveNames:
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    SelectedIndex: 1
+    SelectedName: PlayerExpRatio (Single)
+  _raycastTarget:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+--- !u!114 &1333427784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333427781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.26329815, g: 0.7169812, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 2d2cd7fbd994807479c6fb40d5757011, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 0
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1333427785
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333427781}
+  m_CullTransparentMesh: 0
 --- !u!1 &1334030987
 GameObject:
   m_ObjectHideFlags: 0
@@ -37830,6 +38079,7 @@ GameObject:
   - component: {fileID: 1358411276}
   - component: {fileID: 1358411278}
   - component: {fileID: 1358411279}
+  - component: {fileID: 1358411280}
   m_Layer: 5
   m_Name: GoldText
   m_TagString: Untagged
@@ -37971,6 +38221,78 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1358411280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358411273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 360847768}
+  _component: {fileID: 1358411279}
+  _text:
+    ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 17
+    SelectedName: PlayerMoney (Double)
+  _useMultipleText: 1
+  _multipleTextFormat: "\u0417\u043E\u043B\u043E\u0442\u043E: {0} \u0435\u0434."
+  _multipleText:
+  - ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 17
+    SelectedName: PlayerMoney (Double)
 --- !u!1 &1359245386
 GameObject:
   m_ObjectHideFlags: 0
@@ -39888,7 +40210,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e660e623bf35c904c82bb3c7de286dbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
 --- !u!1 &1418594395
 GameObject:
   m_ObjectHideFlags: 0
@@ -43366,6 +43687,7 @@ GameObject:
   - component: {fileID: 1547953913}
   - component: {fileID: 1547953915}
   - component: {fileID: 1547953916}
+  - component: {fileID: 1547953917}
   m_Layer: 5
   m_Name: DodgeChanceText
   m_TagString: Untagged
@@ -43505,6 +43827,78 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1547953917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547953910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 360847768}
+  _component: {fileID: 1547953916}
+  _text:
+    ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 19
+    SelectedName: DodgeChance (Double)
+  _useMultipleText: 1
+  _multipleTextFormat: "\u0423\u043A\u043B\u043E\u043D\u0435\u043D\u0438\u0435: {0}%"
+  _multipleText:
+  - ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 19
+    SelectedName: DodgeChance (Double)
 --- !u!1 &1549773339
 GameObject:
   m_ObjectHideFlags: 0
@@ -43623,7 +44017,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1550627332}
   - component: {fileID: 1550627334}
-  - component: {fileID: 1550627335}
   - component: {fileID: 1550627333}
   m_Layer: 5
   m_Name: Icon
@@ -43686,19 +44079,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1550627331}
   m_CullTransparentMesh: 0
---- !u!114 &1550627335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1550627331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb12b70f5f4829f45916e0c6ab73cfcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_shortDescription: 
 --- !u!1 &1552546469
 GameObject:
   m_ObjectHideFlags: 0
@@ -44600,7 +44980,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1591224373}
   - component: {fileID: 1591224376}
-  - component: {fileID: 1591224375}
   - component: {fileID: 1591224374}
   m_Layer: 5
   m_Name: Icon
@@ -44655,19 +45034,6 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &1591224375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1591224372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb12b70f5f4829f45916e0c6ab73cfcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_shortDescription: 
 --- !u!222 &1591224376
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -45111,7 +45477,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1604157949}
   - component: {fileID: 1604157951}
-  - component: {fileID: 1604157952}
   - component: {fileID: 1604157950}
   m_Layer: 5
   m_Name: Icon
@@ -45174,19 +45539,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1604157948}
   m_CullTransparentMesh: 0
---- !u!114 &1604157952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1604157948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb12b70f5f4829f45916e0c6ab73cfcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_shortDescription: 
 --- !u!1 &1606297006
 GameObject:
   m_ObjectHideFlags: 0
@@ -45199,6 +45551,7 @@ GameObject:
   - component: {fileID: 1606297010}
   - component: {fileID: 1606297011}
   - component: {fileID: 1606297012}
+  - component: {fileID: 1606297013}
   m_Layer: 5
   m_Name: ManaRegenText
   m_TagString: Untagged
@@ -45339,6 +45692,78 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1606297013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606297006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 360847768}
+  _component: {fileID: 1606297012}
+  _text:
+    ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 9
+    SelectedName: PlayerManaRegen (Double)
+  _useMultipleText: 1
+  _multipleTextFormat: "\u0412\u043E\u0441\u0441\u0442. \u041E\u041C: {0} \u0435\u0434."
+  _multipleText:
+  - ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 9
+    SelectedName: PlayerManaRegen (Double)
 --- !u!1 &1607536099
 GameObject:
   m_ObjectHideFlags: 0
@@ -45686,7 +46111,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 360931224}
   m_Father: {fileID: 1292014478}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
@@ -46668,7 +47094,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1639508995}
   - component: {fileID: 1639508997}
-  - component: {fileID: 1639508998}
   - component: {fileID: 1639508996}
   m_Layer: 5
   m_Name: Icon
@@ -46731,19 +47156,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1639508994}
   m_CullTransparentMesh: 0
---- !u!114 &1639508998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1639508994}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb12b70f5f4829f45916e0c6ab73cfcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_shortDescription: 
 --- !u!1 &1641032210
 GameObject:
   m_ObjectHideFlags: 0
@@ -49385,6 +49797,7 @@ GameObject:
   - component: {fileID: 1739915130}
   - component: {fileID: 1739915133}
   - component: {fileID: 1739915134}
+  - component: {fileID: 1739915135}
   m_Layer: 5
   m_Name: CurrentDateText
   m_TagString: Untagged
@@ -49508,6 +49921,30 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1739915135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739915129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 828806132}
+  _component: {fileID: 1739915134}
+  _text:
+    ReflectiveNames:
+    - CurrentDateTime (String)
+    SelectedIndex: 0
+    SelectedName: CurrentDateTime (String)
+  _useMultipleText: 0
+  _multipleTextFormat: 
+  _multipleText: []
 --- !u!1 &1743022497
 GameObject:
   m_ObjectHideFlags: 0
@@ -49875,22 +50312,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a6efd74d95e574ab5d0042d2ad8871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalColor:
-    r: 0
-    g: 0
-    b: 0
-    a: 0
-  hoverColor:
-    r: 1
-    g: 0.9760649
-    b: 0.13235295
-    a: 1
-  pressedColor:
-    r: 0.7352941
-    g: 0.7176799
-    b: 0.08650518
-    a: 1
-  isHover: 0
 --- !u!114 &1748623450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50129,7 +50550,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1755991990}
   - component: {fileID: 1755991992}
-  - component: {fileID: 1755991993}
   - component: {fileID: 1755991991}
   m_Layer: 5
   m_Name: Icon
@@ -50192,19 +50612,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1755991989}
   m_CullTransparentMesh: 0
---- !u!114 &1755991993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1755991989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb12b70f5f4829f45916e0c6ab73cfcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_shortDescription: 
 --- !u!1 &1761813212
 GameObject:
   m_ObjectHideFlags: 0
@@ -50257,22 +50664,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a6efd74d95e574ab5d0042d2ad8871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalColor:
-    r: 0
-    g: 0
-    b: 0
-    a: 0
-  hoverColor:
-    r: 0
-    g: 0.66896534
-    b: 1
-    a: 1
-  pressedColor:
-    r: 0.06466261
-    g: 0.47493383
-    b: 0.6764706
-    a: 1
-  isHover: 0
 --- !u!114 &1761813215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50490,8 +50881,10 @@ GameObject:
   - component: {fileID: 1777110862}
   - component: {fileID: 1777110860}
   - component: {fileID: 1777110863}
+  - component: {fileID: 1777110864}
+  - component: {fileID: 1777110865}
   m_Layer: 5
-  m_Name: CurrentLocationText
+  m_Name: CurrentLocation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50629,6 +51022,44 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1777110864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777110858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 1777110865}
+  _component: {fileID: 1777110863}
+  _text:
+    ReflectiveNames:
+    - CurrentLocation (String)
+    SelectedIndex: 0
+    SelectedName: CurrentLocation (String)
+  _useMultipleText: 0
+  _multipleTextFormat: 
+  _multipleText: []
+--- !u!114 &1777110865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1777110858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44d9cc2f3c6f72848bc8913eaf684cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentLocation:
+    value: 
 --- !u!1 &1777344029
 GameObject:
   m_ObjectHideFlags: 0
@@ -51869,7 +52300,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1018819570}
   m_Direction: 2
   m_Value: 1.0000002
-  m_Size: 0.6877571
+  m_Size: 0.74443203
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -53131,6 +53562,7 @@ GameObject:
   - component: {fileID: 1830852772}
   - component: {fileID: 1830852773}
   - component: {fileID: 1830852774}
+  - component: {fileID: 1830852775}
   m_Layer: 5
   m_Name: HealthRegenText
   m_TagString: Untagged
@@ -53271,6 +53703,78 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1830852775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830852768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 360847768}
+  _component: {fileID: 1830852774}
+  _text:
+    ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 6
+    SelectedName: PlayerHealthRegen (Double)
+  _useMultipleText: 1
+  _multipleTextFormat: "\u0412\u043E\u0441\u0441\u0442. \u041E\u0417: {0} \u0435\u0434."
+  _multipleText:
+  - ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 6
+    SelectedName: PlayerHealthRegen (Double)
 --- !u!1 &1831568910
 GameObject:
   m_ObjectHideFlags: 0
@@ -53799,6 +54303,121 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &1857190412
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1857190413}
+  - component: {fileID: 1857190416}
+  - component: {fileID: 1857190415}
+  - component: {fileID: 1857190414}
+  m_Layer: 5
+  m_Name: Bar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1857190413
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857190412}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1204299372}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1857190414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857190412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976878bb7690eea44bd40d8409ed5552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 360847768}
+  _component: {fileID: 1857190415}
+  _sprite:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _material:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _fillAmount:
+    ReflectiveNames:
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    SelectedIndex: 2
+    SelectedName: PlayerHealthRatio (Single)
+  _raycastTarget:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+--- !u!114 &1857190415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857190412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.735849, g: 0.006537098, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 2d2cd7fbd994807479c6fb40d5757011, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 0
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1857190416
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857190412}
+  m_CullTransparentMesh: 0
 --- !u!1 &1869158559
 GameObject:
   m_ObjectHideFlags: 0
@@ -54012,9 +54631,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1872206118}
   - component: {fileID: 1872206120}
-  - component: {fileID: 1872206119}
   m_Layer: 5
-  m_Name: LvlSlider
+  m_Name: PlayerLvl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54033,7 +54651,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 448797024}
-  - {fileID: 1174986527}
   - {fileID: 610941188}
   - {fileID: 1220709083}
   m_Father: {fileID: 360847765}
@@ -54043,57 +54660,6 @@ RectTransform:
   m_AnchoredPosition: {x: 180.96094, y: -111.5}
   m_SizeDelta: {x: 277.61, y: 48.14}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1872206119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1872206117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Highlighted
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
-  m_FillRect: {fileID: 666612384}
-  m_HandleRect: {fileID: 0}
-  m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 100
-  m_WholeNumbers: 1
-  m_Value: 0
-  m_OnValueChanged:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1872206120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54289,13 +54855,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ee429767a3c42458e836a26cdd992e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_gameTimeFlowEventBaseControllers:
-  - {fileID: 1457066813}
-  - {fileID: 112136787}
-  m_availableGameTimeFlowEvents:
-  - {fileID: 11400000, guid: adc370b8cd4556849bbafc521fb94839, type: 2}
-  - {fileID: 11400000, guid: bf8d47c7b385a9e40b10f246b5360739, type: 2}
-  - {fileID: 11400000, guid: c08531ee9e05d3c44a7fe7b73f293afd, type: 2}
+  _gameTimeFlowEventBaseControllers: []
+  _availableGameTimeFlowEvents: []
   CurrentDay: 0
   CurrentMonth: 0
   CurrentYear: 0
@@ -54388,6 +54949,7 @@ GameObject:
   - component: {fileID: 1890667572}
   - component: {fileID: 1890667573}
   - component: {fileID: 1890667574}
+  - component: {fileID: 1890667575}
   m_Layer: 5
   m_Name: DamageText
   m_TagString: Untagged
@@ -54531,6 +55093,78 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1890667575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1890667568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 360847768}
+  _component: {fileID: 1890667574}
+  _text:
+    ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 14
+    SelectedName: PlayerDamage (Double)
+  _useMultipleText: 1
+  _multipleTextFormat: "\u0423\u0440\u043E\u043D: {0}"
+  _multipleText:
+  - ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 14
+    SelectedName: PlayerDamage (Double)
 --- !u!1 &1897388223
 GameObject:
   m_ObjectHideFlags: 0
@@ -55168,6 +55802,7 @@ GameObject:
   - component: {fileID: 1907366690}
   - component: {fileID: 1907366692}
   - component: {fileID: 1907366693}
+  - component: {fileID: 1907366694}
   m_Layer: 5
   m_Name: HealthText
   m_TagString: Untagged
@@ -55292,6 +55927,104 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1907366694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907366689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 360847768}
+  _component: {fileID: 1907366693}
+  _text:
+    ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: -1
+    SelectedName: 
+  _useMultipleText: 1
+  _multipleTextFormat: "\u041E\u0417: {0}/{1}"
+  _multipleText:
+  - ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 22
+    SelectedName: PlayerHealth (Double)
+  - ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 5
+    SelectedName: PlayerMaxHealth (Double)
 --- !u!1 &1909410126
 GameObject:
   m_ObjectHideFlags: 0
@@ -55592,7 +56325,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1938226438}
   - component: {fileID: 1938226441}
-  - component: {fileID: 1938226440}
   - component: {fileID: 1938226439}
   m_Layer: 5
   m_Name: Icon
@@ -55647,19 +56379,6 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!114 &1938226440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1938226437}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb12b70f5f4829f45916e0c6ab73cfcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_shortDescription: 
 --- !u!222 &1938226441
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -56345,6 +57064,7 @@ GameObject:
   - component: {fileID: 1968655647}
   - component: {fileID: 1968655646}
   - component: {fileID: 1968655648}
+  - component: {fileID: 1968655649}
   m_Layer: 5
   m_Name: MoneyModText
   m_TagString: Untagged
@@ -56483,6 +57203,79 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1968655649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968655642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 360847768}
+  _component: {fileID: 1968655648}
+  _text:
+    ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 18
+    SelectedName: PlayerExtraMoney (Double)
+  _useMultipleText: 1
+  _multipleTextFormat: "\u0414\u043E\u043F. \u0437\u043E\u043B\u043E\u0442\u043E:
+    {0}%"
+  _multipleText:
+  - ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 18
+    SelectedName: PlayerExtraMoney (Double)
 --- !u!1 &1971484990
 GameObject:
   m_ObjectHideFlags: 0
@@ -57572,7 +58365,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1983832023}
-  - component: {fileID: 1983832026}
   - component: {fileID: 1983832025}
   - component: {fileID: 1983832024}
   m_Layer: 5
@@ -57636,19 +58428,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1983832022}
   m_CullTransparentMesh: 0
---- !u!114 &1983832026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1983832022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb12b70f5f4829f45916e0c6ab73cfcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_shortDescription: 
 --- !u!1 &1991688919
 GameObject:
   m_ObjectHideFlags: 0
@@ -57754,7 +58533,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1992081034}
   - component: {fileID: 1992081036}
-  - component: {fileID: 1992081037}
   - component: {fileID: 1992081035}
   m_Layer: 5
   m_Name: Icon
@@ -57817,19 +58595,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1992081033}
   m_CullTransparentMesh: 0
---- !u!114 &1992081037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1992081033}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb12b70f5f4829f45916e0c6ab73cfcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_shortDescription: 
 --- !u!1 &1996278033
 GameObject:
   m_ObjectHideFlags: 0
@@ -58312,8 +59077,9 @@ GameObject:
   - component: {fileID: 2006244831}
   - component: {fileID: 2006244832}
   - component: {fileID: 2006244833}
+  - component: {fileID: 2006244834}
   m_Layer: 5
-  m_Name: CriticalDamageChanceText
+  m_Name: CriticalChanceText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58451,6 +59217,78 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2006244834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006244827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 360847768}
+  _component: {fileID: 2006244833}
+  _text:
+    ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 21
+    SelectedName: PlayerCriticalChance (Double)
+  _useMultipleText: 1
+  _multipleTextFormat: "\u041A\u0440\u0438\u0442. \u0448\u0430\u043D\u0441: {0}%"
+  _multipleText:
+  - ReflectiveNames:
+    - CurrentLocation (String)
+    - PlayerManaRatio (Single)
+    - PlayerExpRatio (Single)
+    - PlayerHealthRatio (Single)
+    - PlayerMaxHealth (Double)
+    - PlayerHealthRegen (Double)
+    - PlayerMana (Double)
+    - PlayerMaxMana (Double)
+    - PlayerManaRegen (Double)
+    - PlayerLevel (Double)
+    - PlayerExp (Double)
+    - PlayerMaxExp (Double)
+    - PlayerExtraExp (Double)
+    - PlayerDamage (Double)
+    - PlayerAttackSpeed (Double)
+    - PlayerArmor (Double)
+    - PlayerMoney (Double)
+    - PlayerExtraMoney (Double)
+    - DodgeChance (Double)
+    - PlayerLuck (Double)
+    - PlayerCriticalChance (Double)
+    - PlayerCriticalDamage (Double)
+    - PlayerHealth (Double)
+    SelectedIndex: 21
+    SelectedName: PlayerCriticalChance (Double)
 --- !u!1001 &2009792936
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58745,7 +59583,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2011158073}
   - component: {fileID: 2011158075}
-  - component: {fileID: 2011158076}
   - component: {fileID: 2011158074}
   m_Layer: 5
   m_Name: Icon
@@ -58808,19 +59645,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2011158072}
   m_CullTransparentMesh: 0
---- !u!114 &2011158076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2011158072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb12b70f5f4829f45916e0c6ab73cfcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_shortDescription: 
 --- !u!1 &2011919582
 GameObject:
   m_ObjectHideFlags: 0
@@ -59091,7 +59915,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2027234148}
-  - component: {fileID: 2027234151}
   - component: {fileID: 2027234150}
   - component: {fileID: 2027234149}
   m_Layer: 5
@@ -59155,19 +59978,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2027234147}
   m_CullTransparentMesh: 0
---- !u!114 &2027234151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2027234147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb12b70f5f4829f45916e0c6ab73cfcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_shortDescription: 
 --- !u!1 &2028432621
 GameObject:
   m_ObjectHideFlags: 0
@@ -59268,7 +60078,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2029140569}
   - component: {fileID: 2029140571}
-  - component: {fileID: 2029140572}
   - component: {fileID: 2029140570}
   m_Layer: 5
   m_Name: Icon
@@ -59331,19 +60140,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2029140568}
   m_CullTransparentMesh: 0
---- !u!114 &2029140572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2029140568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb12b70f5f4829f45916e0c6ab73cfcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_shortDescription: 
 --- !u!1 &2036383190
 GameObject:
   m_ObjectHideFlags: 0

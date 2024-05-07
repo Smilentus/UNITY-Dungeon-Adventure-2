@@ -17,7 +17,7 @@ namespace Dimasyechka.Code.SkillsSystem.Implementations
         {
             double delta = 0.1f;
 
-            _runtimePlayer.RuntimePlayerStats.Luck += delta;
+            _runtimePlayer.RuntimePlayerStats.Luck.Value += delta;
         }
     }
 }

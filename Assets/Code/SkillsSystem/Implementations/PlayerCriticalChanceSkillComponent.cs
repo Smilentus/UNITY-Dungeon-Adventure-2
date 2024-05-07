@@ -17,7 +17,7 @@ namespace Dimasyechka.Code.SkillsSystem.Implementations
         {
             double delta = 1.5f;
 
-            _runtimePlayer.RuntimePlayerStats.CriticalStrikeChance += delta;
+            _runtimePlayer.RuntimePlayerStats.CriticalStrikeChance.Value += delta;
         }
     }
 }

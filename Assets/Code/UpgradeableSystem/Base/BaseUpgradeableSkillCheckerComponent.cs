@@ -43,7 +43,7 @@ namespace Dimasyechka.Code.UpgradeableSystem.Base
 
         public override bool CanUpgrade()
         {
-            return _skillPointsCost <= _runtimePlayer.RuntimePlayerStats.SkillPoints;
+            return _skillPointsCost <= _runtimePlayer.RuntimePlayerStats.SkillPoints.Value;
         }
 
         public override void PostUpgrade()
@@ -56,7 +56,7 @@ namespace Dimasyechka.Code.UpgradeableSystem.Base
 
         protected override void ProcessUpgrade()
         {
-            _runtimePlayer.RuntimePlayerStats.SkillPoints -= _skillPointsCost;
+            _runtimePlayer.RuntimePlayerStats.SkillPoints.Value -= _skillPointsCost;
         }
 
     

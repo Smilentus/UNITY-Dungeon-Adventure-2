@@ -17,8 +17,8 @@ namespace Dimasyechka.Code.SkillsSystem.Implementations
         {
             double delta = level * 5;
 
-            _runtimePlayer.RuntimePlayerStats.MaxMana += delta;
-            _runtimePlayer.RuntimePlayerStats.Mana += delta;
+            _runtimePlayer.RuntimePlayerStats.MaxMana.Value += delta;
+            _runtimePlayer.RuntimePlayerStats.Mana.Value += delta;
         }
     }
 }

@@ -75,6 +75,16 @@ namespace Dimasyechka.Lubribrary.RxMV.UniRx.ReflectionCollectors.Storages
             return output.ToArray();
         }
 
+        public void InvokeDelegate<T>(string key, T value)
+        {
+            Dictionary<string, Action<T>> delegates = GetDelegates<T>();
+            
+            if (delegates.ContainsKey(key))
+            {
+                delegates[key].Invoke(value);
+            }
+        }
+
 
         protected T GetReflectiveCollector<T>() where T : ReflectiveCollector
         {

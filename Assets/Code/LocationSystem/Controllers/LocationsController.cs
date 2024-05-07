@@ -41,6 +41,9 @@ namespace Dimasyechka.Code.LocationSystem.Controllers
         public LocationProfile CurrentLocation => _currentLocation;
 
 
+        public string CurrentLocationTitle => _currentLocation != null ? _currentLocation.LocationTitle : "[null]";
+
+
         private RuntimeLocationObject _currentRuntimeLocationObject;
 
 

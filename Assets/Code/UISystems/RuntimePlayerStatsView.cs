@@ -1,8 +1,8 @@
-using System;
 using Dimasyechka.Code.GameTimeFlowSystem.Controllers;
 using Dimasyechka.Code.LocationSystem.Controllers;
 using Dimasyechka.Lubribrary.RxMV.Core;
 using Dimasyechka.Lubribrary.RxMV.UniRx.Attributes;
+using Dimasyechka.Lubribrary.RxMV.UniRx.Extensions;
 using UniRx;
 using Zenject;
 
@@ -12,139 +12,154 @@ namespace Dimasyechka.Code.UISystems
     public class RuntimePlayerStatsView : MonoViewModel<RuntimePlayer>
     {
         [RxAdaptableProperty]
-        public ReactiveProperty<string> CurrentDateTime = new ReactiveProperty<string>();
-
-        [RxAdaptableProperty]
-        public ReactiveProperty<string> PlayerHealth = new ReactiveProperty<string>();
-
-        [RxAdaptableProperty]
-        public ReactiveProperty<string> PlayerMana = new ReactiveProperty<string>();
-
-        [RxAdaptableProperty]
-        public ReactiveProperty<string> PlayerLevel = new ReactiveProperty<string>();
-
-        [RxAdaptableProperty]
-        public ReactiveProperty<string> PlayerHealthRegen = new ReactiveProperty<string>();
-
-        [RxAdaptableProperty]
-        public ReactiveProperty<string> PlayerManaRegen = new ReactiveProperty<string>();
-
-        [RxAdaptableProperty]
-        public ReactiveProperty<string> PlayerDamage = new ReactiveProperty<string>();
-
-        [RxAdaptableProperty]
-        public ReactiveProperty<string> PlayerAttackSpeed = new ReactiveProperty<string>();
-
-        [RxAdaptableProperty]
-        public ReactiveProperty<string> PlayerArmor = new ReactiveProperty<string>();
-
-        [RxAdaptableProperty]
-        public ReactiveProperty<string> PlayerElemental = new ReactiveProperty<string>();
-
-        [RxAdaptableProperty]
-        public ReactiveProperty<string> PlayerGold = new ReactiveProperty<string>();
-
-        [RxAdaptableProperty]
-        public ReactiveProperty<string> PlayerExperience = new ReactiveProperty<string>();
-
-        [RxAdaptableProperty]
-        public ReactiveProperty<string> PlayerExtraExperience = new ReactiveProperty<string>();
-
-        [RxAdaptableProperty]
-        public ReactiveProperty<string> PlayerExtraMoney = new ReactiveProperty<string>();
-
-        [RxAdaptableProperty]
         public ReactiveProperty<string> CurrentLocation = new ReactiveProperty<string>();
 
-        [RxAdaptableProperty]
-        public ReactiveProperty<string> DodgeChance = new ReactiveProperty<string>();
 
         [RxAdaptableProperty]
-        public ReactiveProperty<string> PlayerLuck = new ReactiveProperty<string>();
+        public ReactiveProperty<float> PlayerHealthRatio = new ReactiveProperty<float>(-1);
 
         [RxAdaptableProperty]
-        public ReactiveProperty<string> PlayerCriticalChance = new ReactiveProperty<string>();
+        public ReactiveProperty<float> PlayerManaRatio = new ReactiveProperty<float>(-1);
 
         [RxAdaptableProperty]
-        public ReactiveProperty<string> PlayerCriticalDamage = new ReactiveProperty<string>();
+        public ReactiveProperty<float> PlayerExpRatio = new ReactiveProperty<float>(-1);
+
 
         [RxAdaptableProperty]
-        public ReactiveProperty<string> PlayerSkillPoints = new ReactiveProperty<string>();
+        public ReactiveProperty<double> PlayerHealth = new ReactiveProperty<double>(-1);
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<double> PlayerMaxHealth = new ReactiveProperty<double>(-1);
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<double> PlayerHealthRegen = new ReactiveProperty<double>(-1);
 
 
-        private GameTimeFlowController _gameTimeFlowController;
-        private LocationsController _locationsController;
-        private RuntimePlayer _runtimePlayer;
+        [RxAdaptableProperty]
+        public ReactiveProperty<double> PlayerMana = new ReactiveProperty<double>(-1);
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<double> PlayerMaxMana = new ReactiveProperty<double>(-1);
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<double> PlayerManaRegen = new ReactiveProperty<double>(-1);
+
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<double> PlayerLevel = new ReactiveProperty<double>(-1);
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<double> PlayerExp = new ReactiveProperty<double>(-1);
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<double> PlayerMaxExp = new ReactiveProperty<double>(-1);
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<double> PlayerExtraExp = new ReactiveProperty<double>(-1);
+
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<double> PlayerDamage = new ReactiveProperty<double>(-1);
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<double> PlayerAttackSpeed = new ReactiveProperty<double>(-1);
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<double> PlayerArmor = new ReactiveProperty<double>(-1);
+
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<double> PlayerMoney = new ReactiveProperty<double>(-1);
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<double> PlayerExtraMoney = new ReactiveProperty<double>(-1);
+
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<double> DodgeChance = new ReactiveProperty<double>(-1);
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<double> PlayerLuck = new ReactiveProperty<double>(-1);
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<double> PlayerCriticalChance = new ReactiveProperty<double>(-1);
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<double> PlayerCriticalDamage = new ReactiveProperty<double>(-1);
 
 
         [Inject]
-        public void Construct(GameTimeFlowController gameTimeFlowController, LocationsController locationsController, RuntimePlayer runtimePlayer)
+        public void Construct(RuntimePlayer runtimePlayer)
         {
-            _gameTimeFlowController = gameTimeFlowController;
-            _locationsController = locationsController;
-            _runtimePlayer = runtimePlayer;
+            ZenjectModel(runtimePlayer);
         }
 
 
-        private void Awake()
+        protected override void OnSetupModel()
         {
-            SetupModel(_runtimePlayer);
+            SubscribeHealthValues();
+            SubscribeManaValues();
+            SubscribeExpValues();
+
+            SubscribeOffensiveValues();
+
+            SubscribeMiscValues();
+
+            SubscribeChancesValues();
         }
 
-        // TODO: Переделать модель на реактивки + добавить туда сериализацию с реактивок
-        private void Update()
+        private void SubscribeChancesValues()
         {
-            UpdateTexts();
-            UpdateSliders();
+            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.DodgeChance.SubscribeToEachOther(DodgeChance));
+            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.CriticalStrikeChance.SubscribeToEachOther(PlayerCriticalChance));
+            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.CriticalStrikeDamageMultiplier.SubscribeToEachOther(PlayerCriticalDamage));
         }
 
-
-
-        private void UpdateTexts()
+        private void SubscribeMiscValues()
         {
-            PlayerSkillPoints.Value = Model.RuntimePlayerStats.SkillPoints.ToString();
-            CurrentDateTime.Value = $"{_gameTimeFlowController.DateNow()}\n{_gameTimeFlowController.DayStatusNow()}";
-
-            PlayerHealth.Value = $"{Model.RuntimePlayerStats.Health.ToString("f2")}/{Model.RuntimePlayerStats.MaxHealth.ToString("f2")} ОЗ";
-            PlayerHealthRegen.Value = $"Реген. {Model.RuntimePlayerStats.HealthRegen.ToString("f2")} ОЗ";
-
-            PlayerLevel.Value = $"Урв. {Model.RuntimePlayerStats.Lvl}";
-
-            PlayerMana.Value = $"{Model.RuntimePlayerStats.Mana.ToString("f2")}/{Model.RuntimePlayerStats.MaxMana.ToString("f2")} ОМ";
-            PlayerManaRegen.Value = $"Реген. {Model.RuntimePlayerStats.ManaRegen.ToString("f2")} ОМ";
-
-            PlayerDamage.Value = $"Урон {Model.RuntimePlayerStats.Damage.ToString("f2")} ед.";
-            PlayerAttackSpeed.Value = $"Скорость {Model.RuntimePlayerStats.AttackSpeed.ToString("f2")} ед.";
-            PlayerArmor.Value = $"Защита {Model.RuntimePlayerStats.Armor.ToString("f2")} ед.";
-
-            PlayerElemental.Value = $"{Model.RuntimePlayerStats.elementStr}";
-
-            PlayerGold.Value = $"Золото {Model.RuntimePlayerStats.Money.ToString("f0")} ед.";
-            PlayerExtraExperience.Value = $"Доп. опыт {(Model.RuntimePlayerStats.ExtraExpMultiplier * 100).ToString("f2")}%";
-            PlayerExtraMoney.Value = $"Доп. золото {(Model.RuntimePlayerStats.ExtraMoneyMultiplier * 100).ToString("f2")}%";
-
-            CurrentLocation.Value = $"Локация {(_locationsController.CurrentLocation == null ? "Неизвестно" : _locationsController.CurrentLocation.LocationTitle)}";
-
-            DodgeChance.Value = $"Уклонение {Model.RuntimePlayerStats.DodgeChance.ToString("f2")}%";
-            PlayerLuck.Value = $"Удача {Model.RuntimePlayerStats.Luck.ToString("f2")}%";
-
-            PlayerCriticalChance.Value = $"Крит. шанс {Model.RuntimePlayerStats.CriticalStrikeChance.ToString("f2")}%";
-            PlayerCriticalDamage.Value = $"Крит. урон {(Model.RuntimePlayerStats.CriticalStrikeDamageMultiplier * 100).ToString("f2")}%";
+            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.Money.SubscribeToEachOther(PlayerMoney));
+            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.ExtraMoneyMultiplier.SubscribeToEachOther(PlayerExtraMoney));
+            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.Luck.SubscribeToEachOther(PlayerLuck));
         }
 
-        private void UpdateSliders()
+        private void SubscribeOffensiveValues()
         {
-            //m_playerHealthSlider.maxValue = (float)Model.RuntimePlayerStats.MaxHealth;
-            //m_playerHealthSlider.minValue = 0;
-            //m_playerHealthSlider.value = (float)Model.RuntimePlayerStats.Health;
+            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.Damage.SubscribeToEachOther(PlayerDamage));
+            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.Armor.SubscribeToEachOther(PlayerArmor));
+            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.AttackSpeed.SubscribeToEachOther(PlayerAttackSpeed));
+        }
 
-            //m_playerLevelSlider.maxValue = (float)Model.RuntimePlayerStats.MaxExp;
-            //m_playerLevelSlider.minValue = 0;
-            //m_playerLevelSlider.value = (float)Model.RuntimePlayerStats.Exp;
+        private void SubscribeExpValues()
+        {
+            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.MaxExp.SubscribeToEachOther(PlayerExp));
+            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.Exp.Subscribe(x =>
+            {
+                PlayerExp.Value = x;
+                PlayerExpRatio.Value = (float)Model.RuntimePlayerStats.ExpRatio;
+            }));
+            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.ExtraExpMultiplier.SubscribeToEachOther(PlayerExtraExp));
+        }
 
-            //m_playerManaSlider.maxValue = (float)Model.RuntimePlayerStats.MaxMana;
-            //m_playerManaSlider.minValue = 0;
-            //m_playerManaSlider.value = (float)Model.RuntimePlayerStats.Mana;
+        private void SubscribeManaValues()
+        {
+            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.MaxMana.SubscribeToEachOther(PlayerMaxMana));
+            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.ManaRegen.SubscribeToEachOther(PlayerManaRegen));
+            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.Mana.Subscribe(x =>
+            {
+                PlayerMana.Value = x;
+                PlayerManaRatio.Value = (float)Model.RuntimePlayerStats.ManaRatio;
+            }));
+        }
+
+        private void SubscribeHealthValues()
+        {
+            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.MaxHealth.SubscribeToEachOther(PlayerMaxHealth));
+            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.HealthRegen.SubscribeToEachOther(PlayerHealthRegen));
+            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.Health.Subscribe(x =>
+            {
+                PlayerHealth.Value = x;
+                PlayerHealthRatio.Value = (float)Model.RuntimePlayerStats.HealthRatio;
+            }));
         }
     }
 }

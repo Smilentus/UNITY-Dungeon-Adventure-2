@@ -107,7 +107,7 @@ namespace Dimasyechka.Code.SkillsSystem.Controllers
 
         public bool IsPlayerHaveEnoughSkillPoints(int upgradeCost)
         {
-            return upgradeCost <= _runtimePlayer.RuntimePlayerStats.SkillPoints;
+            return upgradeCost <= _runtimePlayer.RuntimePlayerStats.SkillPoints.Value;
         }
 
 

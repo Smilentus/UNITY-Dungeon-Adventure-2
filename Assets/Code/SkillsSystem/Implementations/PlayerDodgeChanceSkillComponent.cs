@@ -18,7 +18,7 @@ namespace Dimasyechka.Code.SkillsSystem.Implementations
 
         public override void OnUpgraded(int level)
         {
-            _runtimePlayer.RuntimePlayerStats.DodgeChance += delta;
+            _runtimePlayer.RuntimePlayerStats.DodgeChance.Value += delta;
         }
     }
 }

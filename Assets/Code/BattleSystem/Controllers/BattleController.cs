@@ -106,18 +106,18 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
         {
             if (CheckEndBattleConditions()) return;
 
-            if (!_runtimePlayer.RuntimePlayerStats.IsStun)
-            {
+            //if (!_runtimePlayer.RuntimePlayerStats.IsStun)
+            //{
                 UpdateAllEnemiesUI();
 
                 CurrentTurnStatus = TurnStatus.PlayerTurn;
                 onBattleTurnStatusChanged?.Invoke(CurrentTurnStatus);
-            }
-            else
-            {
-                _gameController.AddEventText("Вы оглушены и не можете атаковать.");
-                StartEnemiesTurn();
-            }
+            //}
+            //else
+            //{
+            //    _gameController.AddEventText("Вы оглушены и не можете атаковать.");
+            //    StartEnemiesTurn();
+            //}
         }
 
         public void EndPlayerTurn()
@@ -159,10 +159,8 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
         public bool CheckEndBattleConditions()
         {
             // Здесь все проверки после каждого действия, чтобы понять умер противник или нет
-            if (_runtimePlayer.RuntimePlayerStats.Health <= 0)
+            if (_runtimePlayer.RuntimePlayerStats.Health.Value <= 0)
             {
-                _runtimePlayer.RuntimePlayerStats.IsDeath = true;
-
                 IsWin = false;
                 EndBattle();
                 _gameController.ShowDeathBox("Вы умерли во время битвы.");
@@ -242,8 +240,6 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
         // Выдача предметов за победу
         public void WinCondition()
         {
-            _runtimePlayer.RuntimePlayerStats.IsStun = false;
-
             // Деньги и опыт с каждого моба
             for (var i = 0; i < DefeatedEnemiesInBattle.Count; i++)
             {
@@ -252,37 +248,7 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
             }
 
             // Добавляем игроку индивидуальные вещи моба
-            //for (int j = 0; j < defeatedEnemiesInBattle.Count; j++)
-            //{
-            //    for (int i = 0; i < defeatedEnemiesInBattle[j].DropItems.Length; i++)
-            //    {
-            //        int stack;
-            //        try
-            //        {
-            //            Debug.Log(defeatedEnemiesInBattle[j].DropItems[i].Name + " - " + defeatedEnemiesInBattle[j].DropItems[i].DropStack + " - " + defeatedEnemiesInBattle[j].DropItems[i].ItemID);
-            //            stack = UnityEngine.Random.Range(1, defeatedEnemiesInBattle[j].DropItems[i].DropStack);
-            //            //Debug.Log("Стак - " + stack);
-            //            FindObjectOfType<Inventory>().AddItem(defeatedEnemiesInBattle[j].DropItems[i].ItemID, stack);
-            //        }
-            //        catch (System.Exception e)
-            //        {
-            //            Debug.Log("Произошла ошибка при дропе вещи с моба - " + e.Message);
-            //        }
-            //    }
-            //}
-
-
             // Дроп с локации
-            //if (LocationsController.Instance.CurrentLocation != null)
-            //{
-            //    for (int i = 0; i < LocationsController.Instance.CurrentLocation.DroppableItems.Count; i++)
-            //    {
-            //        if (UnityEngine.Random.Range(0, 101) <= LocationsController.Instance.CurrentLocation.DroppableItems[i].ChanceToFind + RuntimePlayer.Instance.RuntimePlayerStats.Luck)
-            //        {
-            //            FindObjectOfType<Inventory>().AddItem(LocationsController.Instance.CurrentLocation.DroppableItems[i].ItemID, 1);
-            //        }
-            //    }
-            //}
         }
 
         public void ForceKillAllEnemies()

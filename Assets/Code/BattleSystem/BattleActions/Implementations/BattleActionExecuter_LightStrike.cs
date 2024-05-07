@@ -9,14 +9,14 @@ namespace Dimasyechka.Code.BattleSystem.BattleActions.Implementations
             if (!_runtimeBattlePlayerController.CriticalStrike())
             {
                 // Атакуем Х раз от скорости атаки
-                for (int i = 0; i < _runtimePlayer.RuntimePlayerStats.AttackSpeed; i++)
+                for (int i = 0; i < _runtimePlayer.RuntimePlayerStats.AttackSpeed.Value; i++)
                 {
-                    double dmg = _runtimePlayer.RuntimePlayerStats.Damage / 2;
+                    double dmg = _runtimePlayer.RuntimePlayerStats.Damage.Value / 2;
 
                     // Проверка уклонения противника
-                    if (UnityEngine.Random.Range(0, 101) + _runtimePlayer.RuntimePlayerStats.Luck > _battleController.EnemiesInBattle[_battleController.EnemiesInBattle.Count - 1].DodgeChance)
+                    if (UnityEngine.Random.Range(0, 101) + _runtimePlayer.RuntimePlayerStats.Luck.Value > _battleController.EnemiesInBattle[_battleController.EnemiesInBattle.Count - 1].DodgeChance)
                     {
-                        if (UnityEngine.Random.Range(0, 101) <= _runtimePlayer.RuntimePlayerStats.LightStrikeChance + _runtimePlayer.RuntimePlayerStats.Luck)
+                        if (UnityEngine.Random.Range(0, 101) <= _runtimePlayer.RuntimePlayerStats.LightStrikeChance.Value + _runtimePlayer.RuntimePlayerStats.Luck.Value)
                         {
                             if (dmg > _battleController.EnemiesInBattle[_battleController.EnemiesInBattle.Count - 1].Armor)
                             {

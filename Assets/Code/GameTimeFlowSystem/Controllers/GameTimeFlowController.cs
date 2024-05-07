@@ -16,16 +16,16 @@ namespace Dimasyechka.Code.GameTimeFlowSystem.Controllers
 
 
         [SerializeField]
-        private List<GameTimeFlowEventBase> m_gameTimeFlowEventBaseControllers = new List<GameTimeFlowEventBase>();
+        private List<GameTimeFlowEventBase> _gameTimeFlowEventBaseControllers = new List<GameTimeFlowEventBase>();
 
 
         [SerializeField]
-        private List<GameTimeFlowEventProfile> m_availableGameTimeFlowEvents = new List<GameTimeFlowEventProfile>();
-        public List<GameTimeFlowEventProfile> AvailableGameTimeFlowEvents => m_availableGameTimeFlowEvents;
+        private List<GameTimeFlowEventProfile> _availableGameTimeFlowEvents = new List<GameTimeFlowEventProfile>();
+        public List<GameTimeFlowEventProfile> AvailableGameTimeFlowEvents => _availableGameTimeFlowEvents;
 
 
-        private List<GameTimeFlowEventProfile> currentGameTimeEvents = new List<GameTimeFlowEventProfile>();
-        public List<GameTimeFlowEventProfile> CurrentGameTimeFlowEvents => currentGameTimeEvents;
+        private List<GameTimeFlowEventProfile> _currentGameTimeEvents = new List<GameTimeFlowEventProfile>();
+        public List<GameTimeFlowEventProfile> CurrentGameTimeFlowEvents => _currentGameTimeEvents;
 
 
         public int CurrentDay, CurrentMonth, CurrentYear, CurrentHour;
@@ -50,7 +50,7 @@ namespace Dimasyechka.Code.GameTimeFlowSystem.Controllers
             maskData.CurrentHour = CurrentHour;
 
             maskData.ActiveGameTimeFlowEventGUIDs = new List<string>();
-            foreach (GameTimeFlowEventBase controller in m_gameTimeFlowEventBaseControllers)
+            foreach (GameTimeFlowEventBase controller in _gameTimeFlowEventBaseControllers)
             {
                 if (controller.IsEventStarted)
                 {
@@ -69,7 +69,7 @@ namespace Dimasyechka.Code.GameTimeFlowSystem.Controllers
 
             foreach (string eventGUID in maskData.ActiveGameTimeFlowEventGUIDs)
             {
-                GameTimeFlowEventBase controller = m_gameTimeFlowEventBaseControllers.Find(x => x.GameTimeFlowEventReference.EventUID == eventGUID);
+                GameTimeFlowEventBase controller = _gameTimeFlowEventBaseControllers.Find(x => x.GameTimeFlowEventReference.EventUID == eventGUID);
 
                 if (controller != null)
                 {
@@ -175,24 +175,24 @@ namespace Dimasyechka.Code.GameTimeFlowSystem.Controllers
 
         public void ForceFinishGameTimeFlowEvent(string eventUID)
         {
-            GameTimeFlowEventBase controller = m_gameTimeFlowEventBaseControllers.Find(x => x.GameTimeFlowEventReference.EventUID == eventUID);
+            GameTimeFlowEventBase controller = _gameTimeFlowEventBaseControllers.Find(x => x.GameTimeFlowEventReference.EventUID == eventUID);
             if (controller != null)
             {
                 controller.FinishEvent();
 
-                currentGameTimeEvents.Remove(controller.GameTimeFlowEventReference);
+                _currentGameTimeEvents.Remove(controller.GameTimeFlowEventReference);
             }
         }
 
         public void ForceFinishAllGameTimeFlowEvents()
         {
-            foreach (GameTimeFlowEventBase controller in m_gameTimeFlowEventBaseControllers)
+            foreach (GameTimeFlowEventBase controller in _gameTimeFlowEventBaseControllers)
             {
                 if (controller.IsEventStarted)
                 {
                     controller.FinishEvent();
 
-                    currentGameTimeEvents.Remove(controller.GameTimeFlowEventReference);
+                    _currentGameTimeEvents.Remove(controller.GameTimeFlowEventReference);
                 }
             }
         }
@@ -200,17 +200,17 @@ namespace Dimasyechka.Code.GameTimeFlowSystem.Controllers
         // Случайный ивент связанный с временем
         public void CheckTimeFlowEvents()
         {
-            foreach (GameTimeFlowEventBase controller in m_gameTimeFlowEventBaseControllers)
+            foreach (GameTimeFlowEventBase controller in _gameTimeFlowEventBaseControllers)
             {
                 if (controller.IsEventStarted && controller.CanFinishEvent())
                 {
-                    currentGameTimeEvents.Remove(controller.GameTimeFlowEventReference);
+                    _currentGameTimeEvents.Remove(controller.GameTimeFlowEventReference);
                     controller.FinishEvent();
                 }
 
                 if (!controller.IsEventStarted && controller.CanStartEvent())
                 {
-                    currentGameTimeEvents.Add(controller.GameTimeFlowEventReference);
+                    _currentGameTimeEvents.Add(controller.GameTimeFlowEventReference);
                     controller.StartEvent();
                 }
             }
@@ -218,7 +218,7 @@ namespace Dimasyechka.Code.GameTimeFlowSystem.Controllers
 
         public void SetTimeFlowEvents(List<GameTimeFlowEventProfile> gameTimeFlowEvents)
         {
-            m_availableGameTimeFlowEvents = gameTimeFlowEvents;
+            _availableGameTimeFlowEvents = gameTimeFlowEvents;
         }
     }
 
