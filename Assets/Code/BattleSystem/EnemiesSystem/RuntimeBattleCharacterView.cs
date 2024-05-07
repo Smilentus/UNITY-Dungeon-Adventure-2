@@ -8,33 +8,33 @@ namespace Dimasyechka.Code.BattleSystem.EnemiesSystem
     {
         [Header("Base References")]
         [SerializeField]
-        protected RawImage m_characterImage;
+        protected RawImage _characterImage;
 
         [SerializeField]
-        protected TMP_Text m_characterName;
+        protected TMP_Text _characterName;
 
 
         [SerializeField]
-        protected TMP_Text m_characterHealthText;
+        protected TMP_Text _characterHealthText;
 
         [SerializeField]
-        protected Image m_characterHealthBar;
+        protected Image _characterHealthBar;
 
 
         public virtual void DrawCharacterInfo(CharacterDrawerData drawerData)
         {
-            m_characterImage.texture = drawerData.runtimeBattleCharacter.CharacterProfile.CharacterImage;
-            m_characterName.text = $"{drawerData.runtimeBattleCharacter.CharacterProfile.Name}";
+            _characterImage.texture = drawerData.RuntimeBattleCharacter.CharacterProfile.CharacterImage;
+            _characterName.text = $"{drawerData.RuntimeBattleCharacter.CharacterProfile.Name}";
 
-            double healthRatio = (drawerData.runtimeBattleCharacter.Health / drawerData.runtimeBattleCharacter.MaxHealth);
+            double healthRatio = (drawerData.RuntimeBattleCharacter.Health / drawerData.RuntimeBattleCharacter.MaxHealth);
 
-            m_characterHealthText.text = $"{drawerData.runtimeBattleCharacter.Health.ToString("f0")}/{drawerData.runtimeBattleCharacter.MaxHealth.ToString("f0")}  ({(healthRatio * 100f).ToString("f2")})%";
-            m_characterHealthBar.fillAmount = (float)healthRatio;
+            _characterHealthText.text = $"{drawerData.RuntimeBattleCharacter.Health.ToString("f0")}/{drawerData.RuntimeBattleCharacter.MaxHealth.ToString("f0")}  ({(healthRatio * 100f).ToString("f2")})%";
+            _characterHealthBar.fillAmount = (float)healthRatio;
         }
     }
 
     public class CharacterDrawerData
     {
-        public RuntimeBattleCharacter runtimeBattleCharacter;
+        public RuntimeBattleCharacter RuntimeBattleCharacter;
     }
 }

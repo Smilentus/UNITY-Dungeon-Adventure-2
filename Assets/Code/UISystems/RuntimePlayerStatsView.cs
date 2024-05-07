@@ -100,11 +100,8 @@ namespace Dimasyechka.Code.UISystems
             SubscribeHealthValues();
             SubscribeManaValues();
             SubscribeExpValues();
-
             SubscribeOffensiveValues();
-
             SubscribeMiscValues();
-
             SubscribeChancesValues();
         }
 
@@ -131,7 +128,8 @@ namespace Dimasyechka.Code.UISystems
 
         private void SubscribeExpValues()
         {
-            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.MaxExp.SubscribeToEachOther(PlayerExp));
+            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.Lvl.SubscribeToEachOther(PlayerLevel));
+            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.MaxExp.SubscribeToEachOther(PlayerMaxExp));
             _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.Exp.Subscribe(x =>
             {
                 PlayerExp.Value = x;

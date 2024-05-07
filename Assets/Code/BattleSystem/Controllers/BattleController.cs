@@ -4,9 +4,9 @@ using Dimasyechka.Code.BattleSystem.PlayerSystem;
 using Dimasyechka.Code.GameTimeFlowSystem.Controllers;
 using Dimasyechka.Code.GlobalWindows.Controllers;
 using Dimasyechka.Code.SaveLoadSystem.Controllers;
+using Dimasyechka.Code.ZenjectFactories;
 using System;
 using System.Collections.Generic;
-using Unity.Properties;
 using UnityEngine;
 using Zenject;
 
@@ -26,21 +26,15 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
 {
     public class BattleController : MonoBehaviour
     {
+        public event Action<bool> onBattleStatusChanged;
+        public event Action<TurnStatus> onBattleTurnStatusChanged;
+
+
         public enum TurnStatus
         {
             PlayerTurn,
             EnemiesTurn
         }
-
-        [Header("Кнопка ожидания")]
-        public GameObject WaitButton;
-
-        [Header("Аниматор начала битвы")]
-        public GameObject StartBattleImage;
-
-        [Header("Аниматор конца битвы")]
-        public GameObject EndBattleImage;
-
 
         [SerializeField]
         private RuntimeBattleCharacter _defaultRuntimeBattleCharacterPrefab;
@@ -61,12 +55,6 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
 
         public int CurrentBattleStep { get; private set; }
 
-        // ======
-
-        public event Action<bool> onBattleStatusChanged;
-
-        public event Action<TurnStatus> onBattleTurnStatusChanged;
-
 
         private RuntimePlayer _runtimePlayer;
         private GameController _gameController;
@@ -74,30 +62,36 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
         private RuntimeBattlePlayerController _runtimeBattlePlayerController;
 
 
+        private RuntimeBattleCharacterFactory _runtimeBattleCharacterFactory;
+
+
         [Inject]
         public void Construct(
-            RuntimePlayer runtimePlayer, 
-            RuntimeBattlePlayerController runtimeBattlePlayerController, 
+            RuntimePlayer runtimePlayer,
+            RuntimeBattlePlayerController runtimeBattlePlayerController,
             GameTimeFlowController gameTimeFlowController,
-            GameController gameController)
+            GameController gameController,
+            RuntimeBattleCharacterFactory runtimeBattleCharacterFactory)
         {
             _runtimeBattlePlayerController = runtimeBattlePlayerController;
             _gameTimeFlowController = gameTimeFlowController;
             _runtimePlayer = runtimePlayer;
             _gameController = gameController;
+
+            _runtimeBattleCharacterFactory = runtimeBattleCharacterFactory;
         }
 
 
-        public void AddEnemyToBattle(CharacterProfile character)
+        public void AddEnemyToBattle(CharacterProfile characterProfile)
         {
             RuntimeBattleCharacter createdEnemy;
 
-            if (character.CharacterPrefab != null)
-                createdEnemy = Instantiate(character.CharacterPrefab, _enemiesSpawnArea);
+            if (characterProfile.CharacterPrefab != null)
+                createdEnemy = _runtimeBattleCharacterFactory.InstantiateCharacter(characterProfile.CharacterPrefab, _enemiesSpawnArea);
             else
-                createdEnemy = Instantiate(_defaultRuntimeBattleCharacterPrefab, _enemiesSpawnArea);
+                createdEnemy = _runtimeBattleCharacterFactory.InstantiateCharacter(_defaultRuntimeBattleCharacterPrefab, _enemiesSpawnArea);
 
-            createdEnemy.CreateBattleCharacter(character);
+            createdEnemy.CreateBattleCharacter(characterProfile);
             EnemiesInBattle.Add(createdEnemy);
         }
 
@@ -108,10 +102,10 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
 
             //if (!_runtimePlayer.RuntimePlayerStats.IsStun)
             //{
-                UpdateAllEnemiesUI();
+            UpdateAllEnemiesUI();
 
-                CurrentTurnStatus = TurnStatus.PlayerTurn;
-                onBattleTurnStatusChanged?.Invoke(CurrentTurnStatus);
+            CurrentTurnStatus = TurnStatus.PlayerTurn;
+            onBattleTurnStatusChanged?.Invoke(CurrentTurnStatus);
             //}
             //else
             //{
@@ -187,7 +181,6 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
                 //Debug.Log("Противники закончились, мы выйграли!");
                 IsWin = true;
                 _gameController.Blocker.SetActive(true);
-                EndBattleImage.SetActive(true);
                 EndBattle();
                 return true;
             }
@@ -219,7 +212,6 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
         public void EndBattle()
         {
             GameController.Instance.Blocker.SetActive(false);
-            EndBattleImage.SetActive(false);
 
             if (IsWin)
             {
@@ -231,8 +223,6 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
             IsBattle = false;
 
             ClearBattleData();
-
-            WaitButton.SetActive(true);
 
             GlobalWindowsController.Instance.TryHideGlobalWindow(typeof(BattleGlobalWindow));
         }
@@ -271,299 +261,308 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
         // Атака противника - ДОДЕЛАТЬ КУЧУ ПРОВЕРОК !!!!!!
         //public void EnemyAIAttack()
         //{
-            //if (allEnemies.Count == 0)
-            //    return;
+        //if (allEnemies.Count == 0)
+        //    return;
 
-            //if (allEnemies[allEnemies.Count - 1].Health <= 0)
-            //    CheckEnemyDeath();
-            //else
-            //{
-            //    for (int c = 0; c < allEnemies.Count; c++)
-            //    {
-            //        if (!allEnemies[c].isStun)
-            //        {
-            //            // Если противник ближник и стоит первый
-            //            // Или если противник дальник, маг, бросатель и стоит на любой линии
-            //            if ((allEnemies[c].AttackType == CharactersLibrary.CharacterAttackType.Melee && c == allEnemies.Count - 1)
-            //                || allEnemies[c].AttackType == CharactersLibrary.CharacterAttackType.Ranged
-            //                || allEnemies[c].AttackType == CharactersLibrary.CharacterAttackType.Throwable
-            //                || allEnemies[c].AttackType == CharactersLibrary.CharacterAttackType.Magic)
-            //            {
-            //                // То противник атакует
-            //                for (int i = 0; i < allEnemies[c].AttackSpeed; i++)
-            //                {
-            //                    EnemyAICalculateChances(c);
+        //if (allEnemies[allEnemies.Count - 1].Health <= 0)
+        //    CheckEnemyDeath();
+        //else
+        //{
+        //    for (int c = 0; c < allEnemies.Count; c++)
+        //    {
+        //        if (!allEnemies[c].isStun)
+        //        {
+        //            // Если противник ближник и стоит первый
+        //            // Или если противник дальник, маг, бросатель и стоит на любой линии
+        //            if ((allEnemies[c].AttackType == CharactersLibrary.CharacterAttackType.Melee && c == allEnemies.Count - 1)
+        //                || allEnemies[c].AttackType == CharactersLibrary.CharacterAttackType.Ranged
+        //                || allEnemies[c].AttackType == CharactersLibrary.CharacterAttackType.Throwable
+        //                || allEnemies[c].AttackType == CharactersLibrary.CharacterAttackType.Magic)
+        //            {
+        //                // То противник атакует
+        //                for (int i = 0; i < allEnemies[c].AttackSpeed; i++)
+        //                {
+        //                    EnemyAICalculateChances(c);
 
-            //                    if (Player.Health <= 0)
-            //                        break;
-            //                }
-            //            }
+        //                    if (Player.Health <= 0)
+        //                        break;
+        //                }
+        //            }
 
-            //            CharacterAfterAttackEffect(1);
+        //            CharacterAfterAttackEffect(1);
 
-            //            if (Player.Health <= 0)
-            //                break;
-            //        }
-            //        else
-            //        {
-            //            GameController.Instance.AddEventText("Противник был оглушён и не смог атаковать.");
-            //        }
-            //    }
+        //            if (Player.Health <= 0)
+        //                break;
+        //        }
+        //        else
+        //        {
+        //            GameController.Instance.AddEventText("Противник был оглушён и не смог атаковать.");
+        //        }
+        //    }
 
-            //    CheckPlayerDeath();
+        //    CheckPlayerDeath();
 
-            //    CurrentRound++;
-            //}
+        //    CurrentRound++;
+        //}
 
-            //UIScript.Instance.UpdateEnemyUIText();
+        //UIScript.Instance.UpdateEnemyUIText();
         //}
 
 
         // Расчёт приоритета атаки противника
         //private void EnemyAICalculateChances(int c)
         //{
-            //bool canUseMagic = false;
-            //bool isAttack = false;
+        //bool canUseMagic = false;
+        //bool isAttack = false;
 
-            //// Может ли противник использовать магию?
-            //if (allEnemies[c].MaxMana > 0 && allEnemies[c].Spells.Length > 0)
-            //{
-            //    canUseMagic = true;
-            //}
+        //// Может ли противник использовать магию?
+        //if (allEnemies[c].MaxMana > 0 && allEnemies[c].Spells.Length > 0)
+        //{
+        //    canUseMagic = true;
+        //}
 
-            //// Самое первое - проверка можно ли убить СЛАБЫМ ударом и приблизит ли это к победе?
-            //if (allEnemies[c].Damage / 2 >= Player.Health + Player.Armor)
-            //{
-            //    EnemyAttack(c, 0);
-            //    isAttack = true;
-            //}
-            //// Самое первое - проверка можно ли убить СРЕДНИМ ударом и приблизит ли это к победе?
-            //else if (allEnemies[c].Damage >= Player.Health + Player.Armor)
-            //{
-            //    EnemyAttack(c, 1);
-            //    isAttack = true;
-            //}
-            //// Самое первое - проверка можно ли убить СИЛЬНЫМ ударом и приблизит ли это к победе?
-            //else if (allEnemies[c].Damage * 2 >= Player.Health + Player.Armor)
-            //{
-            //    // Если мы можем использовать боевую магию, то используем её, 
-            //    // т.к. шансы на сильный удар крайне малы и могут не удовлетворить нас
-            //    for (int i = 0; i < allEnemies[c].Spells.Length; i++)
-            //    {
-            //        if (allEnemies[c].Mana >= allEnemies[c].Spells[i].manaCost)
-            //        {
-            //            // Если противнику хватает маны и заклинание наносит больше, чем ...
-            //            // ... здоровье игрока, то используем боевую магию
-            //            if (allEnemies[c].Spells[i].spellPower >= Player.Health ||
-            //               (allEnemies[c].Spells[i].spellPower >= Player.Health * 0.7f))
-            //            {
-            //                switch (allEnemies[c].Spells[i].currentSpell)
-            //                {
-            //                    case CharacterMagic.spellType.MagicFireball:
-            //                        UseEnemyMagic(CharacterMagic.spellType.MagicFireball, c, i);
-            //                        isAttack = true;
-            //                        break;
-            //                    case CharacterMagic.spellType.MagicThunder:
-            //                        UseEnemyMagic(CharacterMagic.spellType.MagicThunder, c, i);
-            //                        isAttack = true;
-            //                        break;
-            //                }
-            //                break;
-            //            }
-            //        }
-            //    }
+        //// Самое первое - проверка можно ли убить СЛАБЫМ ударом и приблизит ли это к победе?
+        //if (allEnemies[c].Damage / 2 >= Player.Health + Player.Armor)
+        //{
+        //    EnemyAttack(c, 0);
+        //    isAttack = true;
+        //}
+        //// Самое первое - проверка можно ли убить СРЕДНИМ ударом и приблизит ли это к победе?
+        //else if (allEnemies[c].Damage >= Player.Health + Player.Armor)
+        //{
+        //    EnemyAttack(c, 1);
+        //    isAttack = true;
+        //}
+        //// Самое первое - проверка можно ли убить СИЛЬНЫМ ударом и приблизит ли это к победе?
+        //else if (allEnemies[c].Damage * 2 >= Player.Health + Player.Armor)
+        //{
+        //    // Если мы можем использовать боевую магию, то используем её, 
+        //    // т.к. шансы на сильный удар крайне малы и могут не удовлетворить нас
+        //    for (int i = 0; i < allEnemies[c].Spells.Length; i++)
+        //    {
+        //        if (allEnemies[c].Mana >= allEnemies[c].Spells[i].manaCost)
+        //        {
+        //            // Если противнику хватает маны и заклинание наносит больше, чем ...
+        //            // ... здоровье игрока, то используем боевую магию
+        //            if (allEnemies[c].Spells[i].spellPower >= Player.Health ||
+        //               (allEnemies[c].Spells[i].spellPower >= Player.Health * 0.7f))
+        //            {
+        //                switch (allEnemies[c].Spells[i].currentSpell)
+        //                {
+        //                    case CharacterMagic.spellType.MagicFireball:
+        //                        UseEnemyMagic(CharacterMagic.spellType.MagicFireball, c, i);
+        //                        isAttack = true;
+        //                        break;
+        //                    case CharacterMagic.spellType.MagicThunder:
+        //                        UseEnemyMagic(CharacterMagic.spellType.MagicThunder, c, i);
+        //                        isAttack = true;
+        //                        break;
+        //                }
+        //                break;
+        //            }
+        //        }
+        //    }
 
-            //    // Если магию не использовали, то бьём сильный удар
-            //    if (!isAttack)
-            //    {
-            //        EnemyAttack(c, 2);
-            //        isAttack = true;
-            //    }
-            //}
+        //    // Если магию не использовали, то бьём сильный удар
+        //    if (!isAttack)
+        //    {
+        //        EnemyAttack(c, 2);
+        //        isAttack = true;
+        //    }
+        //}
 
-            //// Если убили игрока, то выходим из битвы
-            //if (Player.Health <= 0)
-            //{
-            //    return;
-            //}
+        //// Если убили игрока, то выходим из битвы
+        //if (Player.Health <= 0)
+        //{
+        //    return;
+        //}
 
-            //// Используем магию по приоритетам у противника
-            //// Если противник может использовать магию, то используем это...
-            //if (canUseMagic)
-            //{
-            //    for(int i = 0; i < allEnemies[c].Spells.Length; i++)
-            //    {
-            //        if (allEnemies[c].lastMagicPriority == allEnemies[c].Spells[i].usePriority)
-            //        {
-            //            if (allEnemies[c].Mana >= allEnemies[c].Spells[i].manaCost)
-            //            {
-            //                allEnemies[c].Mana -= allEnemies[c].Spells[i].manaCost;
-            //                UseEnemyMagic(allEnemies[c].Spells[i].currentSpell, c, i);
-            //                canUseMagic = false;
-            //                allEnemies[c].lastMagicPriority++;
-            //                // Использовали магию - уходим из цикла ...
-            //                break;
-            //            }
-            //        }
-            //        else
-            //        {
-            //            for (int l = 0; l < allEnemies[c].Spells.Length; l++)
-            //            {
-            //                if (allEnemies[c].Mana >= allEnemies[c].Spells[l].manaCost)
-            //                {
-            //                    allEnemies[c].Mana -= allEnemies[c].Spells[l].manaCost;
-            //                    UseEnemyMagic(allEnemies[c].Spells[l].currentSpell, c, l);
-            //                    canUseMagic = false;
-            //                    allEnemies[c].lastMagicPriority++;
-            //                    // Использовали магию - уходим из цикла ...
-            //                    break;
-            //                }
-            //            }
-            //        }
+        //// Используем магию по приоритетам у противника
+        //// Если противник может использовать магию, то используем это...
+        //if (canUseMagic)
+        //{
+        //    for(int i = 0; i < allEnemies[c].Spells.Length; i++)
+        //    {
+        //        if (allEnemies[c].lastMagicPriority == allEnemies[c].Spells[i].usePriority)
+        //        {
+        //            if (allEnemies[c].Mana >= allEnemies[c].Spells[i].manaCost)
+        //            {
+        //                allEnemies[c].Mana -= allEnemies[c].Spells[i].manaCost;
+        //                UseEnemyMagic(allEnemies[c].Spells[i].currentSpell, c, i);
+        //                canUseMagic = false;
+        //                allEnemies[c].lastMagicPriority++;
+        //                // Использовали магию - уходим из цикла ...
+        //                break;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            for (int l = 0; l < allEnemies[c].Spells.Length; l++)
+        //            {
+        //                if (allEnemies[c].Mana >= allEnemies[c].Spells[l].manaCost)
+        //                {
+        //                    allEnemies[c].Mana -= allEnemies[c].Spells[l].manaCost;
+        //                    UseEnemyMagic(allEnemies[c].Spells[l].currentSpell, c, l);
+        //                    canUseMagic = false;
+        //                    allEnemies[c].lastMagicPriority++;
+        //                    // Использовали магию - уходим из цикла ...
+        //                    break;
+        //                }
+        //            }
+        //        }
 
-            //        // Если это последнее заклинание в списке, то обнуляем приоритеты
-            //        if (i == allEnemies[c].Spells.Length)
-            //            allEnemies[c].lastMagicPriority = 0;
-            //    }
-            //}
+        //        // Если это последнее заклинание в списке, то обнуляем приоритеты
+        //        if (i == allEnemies[c].Spells.Length)
+        //            allEnemies[c].lastMagicPriority = 0;
+        //    }
+        //}
 
-            //// Если ничего так и не сделали, то просто атакуем случайной атакой
-            //if(!isAttack && !canUseMagic)
-            //{
-            //    EnemyAttack(c, Random.Range(0, 3));
-            //    isAttack = true;
-            //}
+        //// Если ничего так и не сделали, то просто атакуем случайной атакой
+        //if(!isAttack && !canUseMagic)
+        //{
+        //    EnemyAttack(c, Random.Range(0, 3));
+        //    isAttack = true;
+        //}
         //}
 
         //public void UseEnemyMagic(CharacterMagic.spellType useSpell, int c, int s)
         //{
-            //GameController.Instance.AddEventText(CurrentRound + " - Противник использовал магию: " + magicName(useSpell, allEnemies[c].Spells[s].spellPower));
-            //switch(useSpell)
-            //{
-            //    case CharacterMagic.spellType.MagicFireball:
-            //        Player.Health -= (int)allEnemies[c].Spells[s].spellPower;
-            //        break;
-            //    case CharacterMagic.spellType.MagicHealthHeal:
-            //        allEnemies[c].Health += allEnemies[c].Spells[s].spellPower;
-            //        if(allEnemies[c].Health > allEnemies[c].MaxHealth)
-            //        {
-            //            allEnemies[c].Health = allEnemies[c].MaxHealth;
-            //        }
-            //        break;
-            //    case CharacterMagic.spellType.MagicHealthSteal:
-            //        allEnemies[c].Health += allEnemies[c].Spells[s].spellPower;
-            //        if (allEnemies[c].Health > allEnemies[c].MaxHealth)
-            //        {
-            //            allEnemies[c].Health = allEnemies[c].MaxHealth;
-            //        }
-            //        Player.Health -= (int)allEnemies[c].Spells[s].spellPower;
-            //        break;
-            //    case CharacterMagic.spellType.MagicManaHeal:
-            //        allEnemies[c].Mana += (int)allEnemies[c].Spells[s].spellPower;
-            //        if (allEnemies[c].Mana > allEnemies[c].MaxMana)
-            //        {
-            //            allEnemies[c].Mana = allEnemies[c].MaxMana;
-            //        }
-            //        break;
-            //    case CharacterMagic.spellType.MagicManaSteal:
-            //        if(Player.Mana > 0)
-            //        {
-            //            if (allEnemies[c].Spells[s].spellPower >= Player.Mana)
-            //            {
-            //                allEnemies[c].Mana += (int)allEnemies[c].Spells[s].spellPower;
-            //                Player.Mana -= (int)allEnemies[c].Spells[s].spellPower;
-            //            }
-            //            else
-            //            {
-            //                allEnemies[c].Mana += Player.Mana;
-            //                Player.Mana = 0;
-            //            }
-            //            // Защита
-            //            if (allEnemies[c].Mana > allEnemies[c].MaxMana)
-            //            {
-            //                allEnemies[c].Mana = allEnemies[c].MaxMana;
-            //            }
-            //        }
-            //        break;
-            //    case CharacterMagic.spellType.MagicShield:
-            //        FindObjectOfType<BuffManager>().SetBuffToEnemy(Buff.BuffType.Magic_Shield);
-            //        break;
-            //    case CharacterMagic.spellType.MagicSpawn:
-            //        for(int i = 0; i < allEnemies[c].Spells[s].spellPower; i++)
-            //            AddEnemyToBattle(CharactersLibrary.CharacterType.SkeletWarrior);
-            //        break;
-            //    case CharacterMagic.spellType.MagicStun:
-            //        FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.Magic_Stun);
-            //        break;
-            //    case CharacterMagic.spellType.MagicThunder:
-            //        Player.Health -= (int)allEnemies[c].Spells[s].spellPower;
-            //        break;
-            //}
+        //GameController.Instance.AddEventText(CurrentRound + " - Противник использовал магию: " + magicName(useSpell, allEnemies[c].Spells[s].spellPower));
+        //switch(useSpell)
+        //{
+        //    case CharacterMagic.spellType.MagicFireball:
+        //        Player.Health -= (int)allEnemies[c].Spells[s].spellPower;
+        //        break;
+        //    case CharacterMagic.spellType.MagicHealthHeal:
+        //        allEnemies[c].Health += allEnemies[c].Spells[s].spellPower;
+        //        if(allEnemies[c].Health > allEnemies[c].MaxHealth)
+        //        {
+        //            allEnemies[c].Health = allEnemies[c].MaxHealth;
+        //        }
+        //        break;
+        //    case CharacterMagic.spellType.MagicHealthSteal:
+        //        allEnemies[c].Health += allEnemies[c].Spells[s].spellPower;
+        //        if (allEnemies[c].Health > allEnemies[c].MaxHealth)
+        //        {
+        //            allEnemies[c].Health = allEnemies[c].MaxHealth;
+        //        }
+        //        Player.Health -= (int)allEnemies[c].Spells[s].spellPower;
+        //        break;
+        //    case CharacterMagic.spellType.MagicManaHeal:
+        //        allEnemies[c].Mana += (int)allEnemies[c].Spells[s].spellPower;
+        //        if (allEnemies[c].Mana > allEnemies[c].MaxMana)
+        //        {
+        //            allEnemies[c].Mana = allEnemies[c].MaxMana;
+        //        }
+        //        break;
+        //    case CharacterMagic.spellType.MagicManaSteal:
+        //        if(Player.Mana > 0)
+        //        {
+        //            if (allEnemies[c].Spells[s].spellPower >= Player.Mana)
+        //            {
+        //                allEnemies[c].Mana += (int)allEnemies[c].Spells[s].spellPower;
+        //                Player.Mana -= (int)allEnemies[c].Spells[s].spellPower;
+        //            }
+        //            else
+        //            {
+        //                allEnemies[c].Mana += Player.Mana;
+        //                Player.Mana = 0;
+        //            }
+        //            // Защита
+        //            if (allEnemies[c].Mana > allEnemies[c].MaxMana)
+        //            {
+        //                allEnemies[c].Mana = allEnemies[c].MaxMana;
+        //            }
+        //        }
+        //        break;
+        //    case CharacterMagic.spellType.MagicShield:
+        //        FindObjectOfType<BuffManager>().SetBuffToEnemy(Buff.BuffType.Magic_Shield);
+        //        break;
+        //    case CharacterMagic.spellType.MagicSpawn:
+        //        for(int i = 0; i < allEnemies[c].Spells[s].spellPower; i++)
+        //            AddEnemyToBattle(CharactersLibrary.CharacterType.SkeletWarrior);
+        //        break;
+        //    case CharacterMagic.spellType.MagicStun:
+        //        FindObjectOfType<BuffManager>().SetBuff(Buff.BuffType.Magic_Stun);
+        //        break;
+        //    case CharacterMagic.spellType.MagicThunder:
+        //        Player.Health -= (int)allEnemies[c].Spells[s].spellPower;
+        //        break;
+        //}
         //}
 
         //public void EnemyAttack(int c, int attackType)
         //{
-            //int rndAtk = attackType;
-            //if (UnityEngine.Random.Range(0, 101) > Player.DodgeChance + Player.Luck)
-            //{
-            //    CharacterBeforeAttackEffect(1);
-            //    switch (rndAtk)
-            //    {
-            //        // Слабый удар
-            //        case 0:
-            //            if (UnityEngine.Random.Range(0, 101) <= 95)
-            //            {
-            //                double dmg = allEnemies[c].Damage / 2 - Player.Armor;
-            //                if (allEnemies[c].Damage / 2 > Player.Armor)
-            //                {
-            //                    Player.Health -= dmg;
-            //                    GameController.Instance.AddEventText(CurrentBattleStep + " - Противник атаковал слабым ударом и нанёс " + dmg + " ед. урона.");
-            //                }
-            //                else
-            //                    GameController.Instance.AddEventText(CurrentBattleStep + " - Броня защитила Вас.");
-            //            }
-            //            else
-            //                GameController.Instance.AddEventText(CurrentBattleStep + " - Противник промахнулся");
-            //            break;
-            //        // Средний удар
-            //        case 1:
-            //            if (UnityEngine.Random.Range(0, 101) <= 65)
-            //            {
-            //                double dmg = allEnemies[c].Damage - Player.Armor;
-            //                if (allEnemies[c].Damage > Player.Armor)
-            //                {
-            //                    Player.Health -= dmg;
-            //                    GameController.Instance.AddEventText(CurrentBattleStep + " - Противник атаковал средним ударом и нанёс " + dmg + " ед. урона.");
-            //                }
-            //                else
-            //                    GameController.Instance.AddEventText(CurrentBattleStep + " - Броня защитила Вас.");
-            //            }
-            //            else
-            //                GameController.Instance.AddEventText(CurrentBattleStep + " - Противник промахнулся");
-            //            break;
-            //        // Сильный удар
-            //        case 2:
-            //            if (UnityEngine.Random.Range(0, 101) <= 30)
-            //            {
-            //                double dmg = allEnemies[c].Damage * 2 - Player.Armor;
-            //                if (allEnemies[c].Damage * 2 > Player.Armor)
-            //                {
-            //                    Player.Health -= dmg;
-            //                    GameController.Instance.AddEventText(CurrentBattleStep + " - Противник атаковал сильным ударом и нанёс " + dmg + " ед. урона.");
-            //                }
-            //                else
-            //                    GameController.Instance.AddEventText(CurrentBattleStep + " - Броня защитила Вас.");
-            //            }
-            //            else
-            //                GameController.Instance.AddEventText(CurrentBattleStep + " - Противник промахнулся");
-            //            break;
-            //    }
-            //}
-            //else
-            //{
-            //    GameController.Instance.AddEventText(CurrentBattleStep + " - Вы уклонились от атаки противника.");
-            //    FindObjectOfType<HeroAbilityManager>().ChargeHeroAbility(Player.HeroAbility.Ninja);
-            //}
+        //int rndAtk = attackType;
+        //if (UnityEngine.Random.Range(0, 101) > Player.DodgeChance + Player.Luck)
+        //{
+        //    CharacterBeforeAttackEffect(1);
+        //    switch (rndAtk)
+        //    {
+        //        // Слабый удар
+        //        case 0:
+        //            if (UnityEngine.Random.Range(0, 101) <= 95)
+        //            {
+        //                double dmg = allEnemies[c].Damage / 2 - Player.Armor;
+        //                if (allEnemies[c].Damage / 2 > Player.Armor)
+        //                {
+        //                    Player.Health -= dmg;
+        //                    GameController.Instance.AddEventText(CurrentBattleStep + " - Противник атаковал слабым ударом и нанёс " + dmg + " ед. урона.");
+        //                }
+        //                else
+        //                    GameController.Instance.AddEventText(CurrentBattleStep + " - Броня защитила Вас.");
+        //            }
+        //            else
+        //                GameController.Instance.AddEventText(CurrentBattleStep + " - Противник промахнулся");
+        //            break;
+        //        // Средний удар
+        //        case 1:
+        //            if (UnityEngine.Random.Range(0, 101) <= 65)
+        //            {
+        //                double dmg = allEnemies[c].Damage - Player.Armor;
+        //                if (allEnemies[c].Damage > Player.Armor)
+        //                {
+        //                    Player.Health -= dmg;
+        //                    GameController.Instance.AddEventText(CurrentBattleStep + " - Противник атаковал средним ударом и нанёс " + dmg + " ед. урона.");
+        //                }
+        //                else
+        //                    GameController.Instance.AddEventText(CurrentBattleStep + " - Броня защитила Вас.");
+        //            }
+        //            else
+        //                GameController.Instance.AddEventText(CurrentBattleStep + " - Противник промахнулся");
+        //            break;
+        //        // Сильный удар
+        //        case 2:
+        //            if (UnityEngine.Random.Range(0, 101) <= 30)
+        //            {
+        //                double dmg = allEnemies[c].Damage * 2 - Player.Armor;
+        //                if (allEnemies[c].Damage * 2 > Player.Armor)
+        //                {
+        //                    Player.Health -= dmg;
+        //                    GameController.Instance.AddEventText(CurrentBattleStep + " - Противник атаковал сильным ударом и нанёс " + dmg + " ед. урона.");
+        //                }
+        //                else
+        //                    GameController.Instance.AddEventText(CurrentBattleStep + " - Броня защитила Вас.");
+        //            }
+        //            else
+        //                GameController.Instance.AddEventText(CurrentBattleStep + " - Противник промахнулся");
+        //            break;
+        //    }
         //}
+        //else
+        //{
+        //    GameController.Instance.AddEventText(CurrentBattleStep + " - Вы уклонились от атаки противника.");
+        //    FindObjectOfType<HeroAbilityManager>().ChargeHeroAbility(Player.HeroAbility.Ninja);
+        //}
+        //}
+    }
+
+
+    public class RuntimeBattleCharacterFactory : DiContainerFactory
+    {
+        public RuntimeBattleCharacter InstantiateCharacter(RuntimeBattleCharacter characterPrefab, Transform spawnPoint)
+        {
+            return _diContainer.InstantiatePrefabForComponent<RuntimeBattleCharacter>(characterPrefab, spawnPoint);
+        }
     }
 }

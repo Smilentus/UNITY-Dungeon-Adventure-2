@@ -20,29 +20,29 @@ namespace Dimasyechka.Code.Utilities
 
 
         [SerializeField]
-        private FadeEffectController m_fadeEffectController;
-        public FadeEffectController FadeEffectController => m_fadeEffectController;
+        private FadeEffectController _fadeEffectController;
+        public FadeEffectController FadeEffectController => _fadeEffectController;
 
 
         public void ForceFadeIn()
         {
-            m_fadeEffectController.ForceFadeIn();
+            _fadeEffectController.ForceFadeIn();
         }
 
         public void ForceFadeOut()
         {
-            m_fadeEffectController.ForceFadeOut();
+            _fadeEffectController.ForceFadeOut();
         }
 
 
         public void FadeInScreen()
         {
-            m_fadeEffectController.FadeIn();
+            _fadeEffectController.FadeIn();
         }
 
         public void FadeOutScreen()
         {
-            m_fadeEffectController.FadeOut();
+            _fadeEffectController.FadeOut();
         }
     }
 }

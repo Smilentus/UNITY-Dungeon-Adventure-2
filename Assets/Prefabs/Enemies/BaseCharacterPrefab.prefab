@@ -546,10 +546,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dae17f228305ee42b8218a6edc3a5fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterImage: {fileID: 7599934002126588211}
-  m_characterName: {fileID: 7599934002022935526}
-  m_characterHealthText: {fileID: 8173825482074443289}
-  m_characterHealthBar: {fileID: 8119416752649700222}
+  _characterImage: {fileID: 7599934002126588211}
+  _characterName: {fileID: 7599934002022935526}
+  _characterHealthText: {fileID: 8173825482074443289}
+  _characterHealthBar: {fileID: 8119416752649700222}
 --- !u!114 &3577424941674110224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -562,8 +562,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10db82f9c82adcc4cbabcceb4b7e234d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_characterView: {fileID: 7599934001978210214}
-  characterProfile: {fileID: 0}
+  _characterView: {fileID: 7599934001978210214}
+  CharacterProfile: {fileID: 0}
   MaxHealth: 0
   Health: 0
   MaxMana: 0

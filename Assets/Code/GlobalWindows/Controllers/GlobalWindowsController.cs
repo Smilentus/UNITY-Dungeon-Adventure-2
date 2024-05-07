@@ -1,7 +1,7 @@
-using System;
-using System.Collections.Generic;
 using Dimasyechka.Code.GlobalWindows.Base;
 using Dimasyechka.Code.GlobalWindows.Interfaces;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Dimasyechka.Code.GlobalWindows.Controllers
@@ -15,7 +15,7 @@ namespace Dimasyechka.Code.GlobalWindows.Controllers
             {
                 if (_instance == null)
                 {
-                    _instance = FindAnyObjectByType<GlobalWindowsController>(); 
+                    _instance = FindAnyObjectByType<GlobalWindowsController>();
                 }
 
                 return _instance;
@@ -95,7 +95,7 @@ namespace Dimasyechka.Code.GlobalWindows.Controllers
         {
             if (IsWindowShown(globalWindowType))
             {
-                TryHideGlobalWindow(globalWindowType);  
+                TryHideGlobalWindow(globalWindowType);
             }
             else
             {
@@ -117,8 +117,22 @@ namespace Dimasyechka.Code.GlobalWindows.Controllers
             foreach (BaseGameGlobalWindow window in _baseGameGlobalWindows)
             {
                 if (window.GetType().Equals(globalWindowType)) continue;
-            
+
                 window.Hide();
+            }
+        }
+
+
+        [ContextMenu("CollectAllGlobalWindowsAtScene")]
+        public void CollectAllGlobalWindowsAtScene()
+        {
+            _windowGameObjects.Clear();
+
+            BaseGameGlobalWindow[] globalWindows = FindObjectsOfType<BaseGameGlobalWindow>(true);
+
+            for (int i = 0; i < globalWindows.Length; i++)
+            {
+                _windowGameObjects.Add(globalWindows[i].gameObject);
             }
         }
     }

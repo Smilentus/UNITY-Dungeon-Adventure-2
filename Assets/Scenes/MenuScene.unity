@@ -2029,7 +2029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c211200e8010dd94db4e645d6f3748ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_fadeEffectController: {fileID: 2048113034}
+  _fadeEffectController: {fileID: 2048113034}
 --- !u!114 &2107455221
 MonoBehaviour:
   m_ObjectHideFlags: 0

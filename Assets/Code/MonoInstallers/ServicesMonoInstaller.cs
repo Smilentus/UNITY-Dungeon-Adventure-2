@@ -77,6 +77,8 @@ namespace Dimasyechka.Code.MonoInstallers
         private void BindBattleController()
         {
             Container.Bind<BattleController>().FromInstance(_battleController).AsSingle();
+            Container.Bind<RuntimeBattleCharacterFactory>().FromNew().AsSingle();
+            Container.Bind<RuntimeBattleActionFactory>().FromNew().AsSingle();
         }
 
         private void BindRuntimeBattlePlayerController()

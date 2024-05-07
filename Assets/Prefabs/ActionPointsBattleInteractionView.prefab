@@ -35,7 +35,6 @@ RectTransform:
   - {fileID: 2135886484390532183}
   - {fileID: 2135886483366431099}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -112,8 +111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bd392e38160a4c4c9cd0d7f98080846, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_actionTitleTMP: {fileID: 2135886484390532180}
-  m_actionPointsCostTMP: {fileID: 2135886483366431096}
+  ActionTitle:
+    value: 
+  SpendableActions:
+    value: 0
 --- !u!1 &2135886483366431098
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,6 +126,7 @@ GameObject:
   - component: {fileID: 2135886483366431099}
   - component: {fileID: 2135886483366431097}
   - component: {fileID: 2135886483366431096}
+  - component: {fileID: 6603818845728104998}
   m_Layer: 5
   m_Name: ActionPoints
   m_TagString: Untagged
@@ -145,7 +147,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2135886482872828813}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -249,6 +250,36 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6603818845728104998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135886483366431098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 2135886482872828802}
+  _component: {fileID: 2135886483366431096}
+  _text:
+    ReflectiveNames:
+    - ActionTitle (String)
+    - SpendableActions (Int32)
+    SelectedIndex: -1
+    SelectedName: 
+  _useMultipleText: 1
+  _multipleTextFormat: "\u041E\u0414: {0}"
+  _multipleText:
+  - ReflectiveNames:
+    - ActionTitle (String)
+    - SpendableActions (Int32)
+    SelectedIndex: 1
+    SelectedName: SpendableActions (Int32)
 --- !u!1 &2135886484390532182
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,6 +291,7 @@ GameObject:
   - component: {fileID: 2135886484390532183}
   - component: {fileID: 2135886484390532181}
   - component: {fileID: 2135886484390532180}
+  - component: {fileID: 8462800655699067284}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -280,7 +312,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2135886482872828813}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -384,3 +415,28 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8462800655699067284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135886484390532182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 2135886482872828802}
+  _component: {fileID: 2135886484390532180}
+  _text:
+    ReflectiveNames:
+    - ActionTitle (String)
+    - SpendableActions (Int32)
+    SelectedIndex: 0
+    SelectedName: ActionTitle (String)
+  _useMultipleText: 0
+  _multipleTextFormat: 
+  _multipleText: []

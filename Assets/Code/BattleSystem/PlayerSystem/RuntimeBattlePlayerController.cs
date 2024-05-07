@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using Dimasyechka.Code.BattleSystem.BattleActions.Interfaces;
 using Dimasyechka.Code.BattleSystem.BattleActions.Profiles;
 using Dimasyechka.Code.BattleSystem.Controllers;
+using Dimasyechka.Code.BattleSystem.EnemiesSystem;
+using Dimasyechka.Code.Utilities;
+using Dimasyechka.Code.ZenjectFactories;
 using UnityEngine;
 using Zenject;
 
@@ -71,12 +74,18 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
         private BattleController _battleController;
         private RuntimePlayer _runtimePlayer;
 
+        private RuntimeBattleActionFactory _runtimeBattleActionFactory;
 
         [Inject]
-        public void Construct(BattleController battleController, RuntimePlayer runtimePlayer)
+        public void Construct(
+            BattleController battleController, 
+            RuntimePlayer runtimePlayer, 
+            RuntimeBattleActionFactory runtimeBattleActionFactory)
         {
             _battleController = battleController;
             _runtimePlayer = runtimePlayer;
+
+            _runtimeBattleActionFactory = runtimeBattleActionFactory;
         }
 
 
@@ -191,11 +200,11 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
                 AvailableBattleActionData availableBattleActionData = new AvailableBattleActionData();
                 availableBattleActionData.Interaction = interaction;
 
-                GameObject tempObject = new GameObject($"{interaction.ActionExecuter.Type.ToString()}");
-                tempObject.transform.SetParent(this.transform);
+                GameObject tempObject = _runtimeBattleActionFactory.InstantiateBattleAction(interaction.ActionExecuter.Type.ToString(), this.transform);
+                Component executerComponent = _runtimeBattleActionFactory.AddComponent(tempObject, interaction.ActionExecuter);
 
                 availableBattleActionData.TempObject = tempObject;
-                availableBattleActionData.Executer = interaction.ActionExecuter.AddToGameObject(tempObject);
+                availableBattleActionData.Executer = executerComponent.GetComponent<IBattleActionExecuter>();
                 availableBattleActionData.Executer.SetInteraction(interaction);
 
                 _availablePlayerBattleActions.Add(availableBattleActionData);
@@ -282,7 +291,6 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
             return false;
         }
 
-        // Попытка сбежать
         public void TryToEscape()
         {
             if (UnityEngine.Random.Range(0, 101) <= 50 + _runtimePlayer.RuntimePlayerStats.Luck.Value)
@@ -305,5 +313,21 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
         public IBattleActionInteraction Interaction;
         public IBattleActionExecuter Executer;
         public GameObject TempObject;
+    }
+
+    public class RuntimeBattleActionFactory : DiContainerFactory
+    {
+        public GameObject InstantiateBattleAction(string objectName, Transform spawnPoint)
+        {
+            GameObject gameObject = _diContainer.Instantiate<GameObject>();
+            gameObject.transform.SetParent(spawnPoint);
+            gameObject.name = objectName;
+            return gameObject;
+        }
+
+        public Component AddComponent(GameObject gameObject, SerializableMonoScript serializableMonoScript)
+        {
+            return _diContainer.InstantiateComponent(serializableMonoScript.Type, gameObject);
+        }
     }
 }

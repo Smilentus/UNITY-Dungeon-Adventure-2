@@ -58,7 +58,7 @@ namespace Dimasyechka.Code.BattleSystem.EnemiesSystem
 
             _characterView.DrawCharacterInfo(new CharacterDrawerData()
             {
-                runtimeBattleCharacter = this
+                RuntimeBattleCharacter = this
             });
 
             UpdateCharacterView();
@@ -75,7 +75,7 @@ namespace Dimasyechka.Code.BattleSystem.EnemiesSystem
         {
             _characterView.DrawCharacterInfo(new CharacterDrawerData()
             {
-                runtimeBattleCharacter = this
+                RuntimeBattleCharacter = this
             });
         }
     }

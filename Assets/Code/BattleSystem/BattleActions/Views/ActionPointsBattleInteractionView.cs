@@ -1,14 +1,14 @@
 using Dimasyechka.Code.BattleSystem.BattleActions.Profiles;
 using Dimasyechka.Code.BattleSystem.PlayerSystem;
-using TMPro;
-using UnityEngine;
+using Dimasyechka.Lubribrary.RxMV.UniRx.Attributes;
+using UniRx;
 
 namespace Dimasyechka.Code.BattleSystem.BattleActions.Views
 {
     public class ActionPointsBattleInteractionView : BaseBattleInteractionView
     {
-        [SerializeField]
-        protected TMP_Text _mActionPointsCostTMP;
+        [RxAdaptableProperty]
+        public ReactiveProperty<int> SpendableActions = new ReactiveProperty<int>();
 
 
         public override void SetData(AvailableBattleActionData availableBattleActionData, int index)
@@ -17,7 +17,10 @@ namespace Dimasyechka.Code.BattleSystem.BattleActions.Views
 
             BattleActionProfile profile = availableBattleActionData.Interaction as BattleActionProfile;
 
-            _mActionPointsCostTMP.text = $"{profile.SpendableActions} нд";
+            if (profile != null)
+            {
+                SpendableActions.Value = profile.SpendableActions;
+            }
         }
     }
 }

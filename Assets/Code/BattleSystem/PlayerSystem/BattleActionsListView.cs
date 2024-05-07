@@ -11,7 +11,7 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
         private Transform _contentParent;
 
 
-        private Action<int> onCallbackAction;
+        private Action<int> _onCallbackAction;
 
 
         public void UpdateData(List<AvailableBattleActionData> availableBattleActions)
@@ -33,14 +33,14 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
 
         public void SetPressedCallback(Action<int> callback)
         {
-            onCallbackAction = callback;
+            _onCallbackAction = callback;
         }
 
         private void OnViewActionPressed(int pressedIndex)
         {
-            if (onCallbackAction != null)
+            if (_onCallbackAction != null)
             {
-                onCallbackAction(pressedIndex);
+                _onCallbackAction(pressedIndex);
             }
         }
     }

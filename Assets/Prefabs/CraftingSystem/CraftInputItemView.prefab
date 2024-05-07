@@ -111,10 +111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05cc4628dbb882c4faf2e5a4b19bcf77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_itemImage: {fileID: 2258407561489116303}
-  m_itemCount: {fileID: 5134803669272241557}
-  m_notEnoughColor: {r: 1, g: 0, b: 0, a: 1}
-  m_correctAmountColor: {r: 0, g: 0.7830189, b: 0.2517944, a: 1}
+  _itemImage: {fileID: 2258407561489116303}
+  _itemCount: {fileID: 5134803669272241557}
+  _notEnoughColor: {r: 0, g: 0, b: 0, a: 0}
+  _correctAmountColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &2904258279566124203
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 13.95
+  m_fontSize: 10
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
