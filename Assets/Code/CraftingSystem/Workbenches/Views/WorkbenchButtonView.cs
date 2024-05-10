@@ -1,67 +1,68 @@
-using System;
 using Dimasyechka.Code.CraftingSystem.Workbenches.Profiles;
-using TMPro;
+using Dimasyechka.Lubribrary.RxMV.Core;
+using Dimasyechka.Lubribrary.RxMV.UniRx.Attributes;
+using System;
+using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace Dimasyechka.Code.CraftingSystem.Workbenches.Views
 {
-    public class WorkbenchButtonView : MonoBehaviour, IPointerClickHandler
+    public class WorkbenchButtonView : MonoViewModel<CraftingWorkbenchProfile>, IPointerClickHandler
     {
-        [Header("Colorizer")]
-        [SerializeField]
-        private Image m_containerHighlighter;
+        [RxAdaptableProperty]
+        public ReactiveProperty<Sprite> ContainerIcon = new ReactiveProperty<Sprite>();
 
-        [SerializeField]
-        private Color m_defaultColor;
+        [RxAdaptableProperty]
+        public ReactiveProperty<Color> ActiveColor = new ReactiveProperty<Color>();
 
-        [SerializeField]
-        private Color m_selectedColor;
+        [RxAdaptableProperty]
+        public ReactiveProperty<string> ContainerTitle = new ReactiveProperty<string>();
 
 
-        [Header("Inner References")]
-        [SerializeField]
-        protected Image m_containerIcon;
+        private Action<CraftingWorkbenchProfile> _pressCallback;
+
 
         [SerializeField]
-        protected TMP_Text m_containerTitle;
+        private Color _highlightedColor;
+
+        [SerializeField]
+        private Color _defaultColor;
 
 
-        private CraftingWorkbenchProfile _profile;
-        private Action<CraftingWorkbenchProfile> _handler;
+        private bool _isOpened;
+        public bool IsOpened => _isOpened;
 
 
-        private bool isOpened;
-        public bool IsOpened => isOpened;
-
-
-        public void SetData(CraftingWorkbenchProfile profile, Action<CraftingWorkbenchProfile> callback)
+        protected override void OnSetupModel()
         {
-            _handler = callback;
-
-            _profile = profile;
-
-            m_containerIcon.sprite = _profile.WorkbenchMiniSprite;
+            ContainerIcon.Value = Model.WorkbenchMiniSprite;
+            ContainerTitle.Value = Model.WorkbenchName;
         }
 
-        public void SetOpenStatus(bool _isOpened)
-        {
-            isOpened = _isOpened;
 
-            if (isOpened)
+        public void SetPressCallback(Action<CraftingWorkbenchProfile> callback)
+        {
+            _pressCallback = callback;
+        }
+
+        public void SetOpenStatus(bool isOpened)
+        {
+            _isOpened = isOpened;
+
+            if (_isOpened)
             {
-                m_containerHighlighter.color = m_selectedColor;
+                ActiveColor.Value = _highlightedColor;
             }
             else
             {
-                m_containerHighlighter.color = m_defaultColor;
+                ActiveColor.Value = _defaultColor;
             }
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            _handler?.Invoke(_profile);
+            _pressCallback?.Invoke(Model);
         }
     }
 }

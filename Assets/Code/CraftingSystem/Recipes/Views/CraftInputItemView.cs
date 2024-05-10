@@ -1,21 +1,28 @@
 using Dimasyechka.Code.CraftingSystem.GlobalWindow;
 using Dimasyechka.Code.GlobalWindows.Controllers;
 using Dimasyechka.Code.InventorySystem;
-using TMPro;
+using Dimasyechka.Lubribrary.RxMV.Core;
+using Dimasyechka.Lubribrary.RxMV.UniRx.Attributes;
+using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Dimasyechka.Code.CraftingSystem.Recipes.Views
 {
-    public class CraftInputItemView : MonoBehaviour, IPointerClickHandler
+    public class CraftInputItemView : MonoViewModel<InputCraftItem>, IPointerClickHandler
     {
-        [SerializeField]
-        private Image _itemImage;
+        [RxAdaptableProperty]
+        public ReactiveProperty<Sprite> ItemIcon = new ReactiveProperty<Sprite>();
 
-        [SerializeField]
-        private TMP_Text _itemCount;
+        [RxAdaptableProperty]
+        public ReactiveProperty<int> CurrentItemAmount = new ReactiveProperty<int>();
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<int> ExpectedItemAmount = new ReactiveProperty<int>();
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<Color> AmountColor = new ReactiveProperty<Color>();
 
 
         [SerializeField]
@@ -23,9 +30,6 @@ namespace Dimasyechka.Code.CraftingSystem.Recipes.Views
 
         [SerializeField]
         private Color _correctAmountColor;
-
-
-        private InputCraftItem _inputItem;
 
 
         private InventoryController _inventoryController;
@@ -37,15 +41,13 @@ namespace Dimasyechka.Code.CraftingSystem.Recipes.Views
         }
 
 
-        public void SetData(InputCraftItem inputCraftItem)
+        protected override void OnSetupModel()
         {
-            _inputItem = inputCraftItem;
-
-            _itemImage.sprite = _inputItem.InputItemProfile.ItemSprite;
+            ItemIcon.Value = Model.InputItemProfile.ItemSprite;
 
             GenerateAmountString(
-                _inventoryController.GetItemAmountInAnyContainer(_inputItem.InputItemProfile),
-                inputCraftItem.InputItemAmount
+                _inventoryController.GetItemAmountInAnyContainer(Model.InputItemProfile),
+                Model.InputItemAmount
             );
         }
 
@@ -54,25 +56,25 @@ namespace Dimasyechka.Code.CraftingSystem.Recipes.Views
         {
             if (current >= expected)
             {
-                _itemCount.color = _correctAmountColor;
+                AmountColor.Value = _correctAmountColor;
             }
             else
             {
-                _itemCount.color = _notEnoughColor;
+                AmountColor.Value = _notEnoughColor;
             }
 
-            _itemCount.text = $"{current}/{expected}";
+            CurrentItemAmount.Value = current;
+            ExpectedItemAmount.Value = expected;
         }
 
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            Debug.Log("Clicked");
             GlobalWindowsController.Instance.TryShowGlobalWindow(
                 typeof(ItemDescriptionGlobalWindow),
                 new ItemDescriptionGlobalWindowData()
                 {
-                    ItemProfile = _inputItem.InputItemProfile
+                    ItemProfile = Model.InputItemProfile
                 }
             );
         }

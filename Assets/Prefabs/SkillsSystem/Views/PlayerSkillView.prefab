@@ -35,7 +35,6 @@ RectTransform:
   - {fileID: 6196372859980894291}
   - {fileID: 6196372860135364825}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -92,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3956f527fdb7d41b483a6330739c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_skillProfile: {fileID: 0}
+  _skillProfile: {fileID: 0}
 --- !u!114 &8011224098499492634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,9 +104,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9178f1da25156d42bbeb04e5b79b588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_obtainSkillInteraction: {fileID: 6196372859406324276}
-  m_skillTitle: {fileID: 4065483773207520490}
-  m_skillIcon: {fileID: 3206619887270417889}
+  _obtainSkillInteraction: {fileID: 6196372859406324276}
+  SkillTitle:
+    value: 
+  SkillIcon:
+    value: {fileID: 0}
 --- !u!1 &6196372859980894288
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,6 +120,7 @@ GameObject:
   - component: {fileID: 6196372859980894291}
   - component: {fileID: 6196372859980894301}
   - component: {fileID: 3206619887270417889}
+  - component: {fileID: 4307157850717168923}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -139,7 +141,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6196372859406324265}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -184,6 +185,43 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4307157850717168923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6196372859980894288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976878bb7690eea44bd40d8409ed5552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 8011224098499492634}
+  _component: {fileID: 3206619887270417889}
+  _sprite:
+    ReflectiveNames:
+    - SkillIcon (Sprite)
+    SelectedIndex: 0
+    SelectedName: SkillIcon (Sprite)
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _material:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _fillAmount:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _raycastTarget:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
 --- !u!1 &6196372860135364830
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,6 +233,7 @@ GameObject:
   - component: {fileID: 6196372860135364825}
   - component: {fileID: 6196372860135364827}
   - component: {fileID: 4065483773207520490}
+  - component: {fileID: 6480592912119678549}
   m_Layer: 5
   m_Name: Level
   m_TagString: Untagged
@@ -215,7 +254,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6196372859406324265}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -320,3 +358,27 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6480592912119678549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6196372860135364830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 8011224098499492634}
+  _component: {fileID: 4065483773207520490}
+  _text:
+    ReflectiveNames:
+    - SkillTitle (String)
+    SelectedIndex: 0
+    SelectedName: SkillTitle (String)
+  _useMultipleText: 0
+  _multipleTextFormat: 
+  _multipleText: []

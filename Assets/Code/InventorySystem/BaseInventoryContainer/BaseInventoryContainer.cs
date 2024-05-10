@@ -28,22 +28,22 @@ TODO и т.п.:
         public event Action onInventorySlotsUpdated;
 
 
-        protected List<BaseInventoryContainerSlot> m_inventorySlots;
-        public List<BaseInventoryContainerSlot> InventorySlots => m_inventorySlots;
+        protected List<BaseInventoryContainerSlot> _inventorySlots;
+        public List<BaseInventoryContainerSlot> InventorySlots => _inventorySlots;
 
 
-        private int inventoryCapacity;
-        public int InventoryCapacity => inventoryCapacity;
+        private int _inventoryCapacity;
+        public int InventoryCapacity => _inventoryCapacity;
 
 
-        protected BaseInventoryContainerProfile inventoryContainerProfile;
-        public BaseInventoryContainerProfile InventoryContainerProfile => inventoryContainerProfile;
+        protected BaseInventoryContainerProfile _inventoryContainerProfile;
+        public BaseInventoryContainerProfile InventoryContainerProfile => _inventoryContainerProfile;
 
 
-        public BaseInventoryContainer(BaseInventoryContainerProfile _profile)
+        public BaseInventoryContainer(BaseInventoryContainerProfile profile)
         {
-            inventoryContainerProfile = _profile;
-            inventoryCapacity = _profile.ContainerCapacity;
+            _inventoryContainerProfile = profile;
+            _inventoryCapacity = profile.ContainerCapacity;
 
             CreateNewInventorySlots(); // Ухади отсюдава (TODO)
         }
@@ -51,15 +51,15 @@ TODO и т.п.:
 
         protected virtual void CreateNewInventorySlots()
         {
-            if (inventoryCapacity == -1)
+            if (_inventoryCapacity == -1)
             {
-                inventoryCapacity = 0;
+                _inventoryCapacity = 0;
             }
 
-            m_inventorySlots = new List<BaseInventoryContainerSlot>(inventoryCapacity);
-            for (int i = 0; i < inventoryCapacity; i++)
+            _inventorySlots = new List<BaseInventoryContainerSlot>(_inventoryCapacity);
+            for (int i = 0; i < _inventoryCapacity; i++)
             {
-                m_inventorySlots.Add(new BaseInventoryContainerSlot());
+                _inventorySlots.Add(new BaseInventoryContainerSlot());
             }
         }
 
@@ -69,18 +69,18 @@ TODO и т.п.:
         ///     Предмет пытается добавиться в контейнер до тех пор, пока всё количество не получится уместить.
         ///     Если же места в контейнере недостаточно или он заполнился, функция возвращает предмет, который она не смогла поместить и его остаточное количество.
         /// </summary>
-        /// <param name="_baseItemToAdd">
+        /// <param name="baseItemToAdd">
         ///     Добавляемый предмет
         /// </param>
-        /// <param name="_stack">
+        /// <param name="stack">
         ///     Добавляемое количество предмета
         /// </param>
         /// <returns>
         ///     Добавляемый предмет и то количество, которое мы не смогли разместить в текущем контейнере
         /// </returns>
-        public virtual BaseInventoryAdditionData TryAddItem(BaseItem.BaseItem _baseItemToAdd, int _stack)
+        public virtual BaseInventoryAdditionData TryAddItem(BaseItem.BaseItem baseItemToAdd, int stack)
         {
-            int unplacedStacks = _stack;
+            int unplacedStacks = stack;
 
             int emptySlotIndex = -1;
             int replenishItemIndex = -1;
@@ -89,7 +89,7 @@ TODO и т.п.:
 
             while (isContainerAvailable)
             {
-                replenishItemIndex = GetNearestSlotWithItemStackDelta(_baseItemToAdd);
+                replenishItemIndex = GetNearestSlotWithItemStackDelta(baseItemToAdd);
                 if (replenishItemIndex == -1)
                 {
                     emptySlotIndex = GetNearestEmptySlotIndex();
@@ -99,8 +99,8 @@ TODO и т.п.:
                     }
                     else
                     {
-                        m_inventorySlots[emptySlotIndex].SetItem(_baseItemToAdd);
-                        unplacedStacks = m_inventorySlots[emptySlotIndex].AddItemStack(unplacedStacks);
+                        _inventorySlots[emptySlotIndex].SetItem(baseItemToAdd);
+                        unplacedStacks = _inventorySlots[emptySlotIndex].AddItemStack(unplacedStacks);
 
                         if (unplacedStacks == 0)
                         {
@@ -110,7 +110,7 @@ TODO и т.п.:
                 }
                 else
                 {
-                    unplacedStacks = m_inventorySlots[replenishItemIndex].AddItemStack(unplacedStacks);
+                    unplacedStacks = _inventorySlots[replenishItemIndex].AddItemStack(unplacedStacks);
 
                     if (unplacedStacks == 0)
                     {
@@ -121,7 +121,7 @@ TODO и т.п.:
 
             onInventorySlotsUpdated?.Invoke();
 
-            return new BaseInventoryAdditionData(_baseItemToAdd, unplacedStacks);
+            return new BaseInventoryAdditionData(baseItemToAdd, unplacedStacks);
         }
 
         public bool IsContainsItem(BaseItemProfile profile, int amount = 1)
@@ -133,7 +133,7 @@ TODO и т.п.:
         {
             int itemsAmount = 0;
 
-            foreach (BaseInventoryContainerSlot itemSlot in m_inventorySlots)
+            foreach (BaseInventoryContainerSlot itemSlot in _inventorySlots)
             {
                 if (itemSlot.IsSlotEmpty) continue;
 
@@ -151,7 +151,7 @@ TODO и т.п.:
         {
             int leftAmount = amount;
 
-            foreach (BaseInventoryContainerSlot slot in m_inventorySlots)
+            foreach (BaseInventoryContainerSlot slot in _inventorySlots)
             {
                 if (leftAmount <= 0) break;
                 if (slot.IsSlotEmpty) continue;
@@ -174,23 +174,23 @@ TODO и т.п.:
 
         protected int GetNearestEmptySlotIndex()
         {
-            for (int i = 0; i < m_inventorySlots.Count; i++)
+            for (int i = 0; i < _inventorySlots.Count; i++)
             {
-                if (m_inventorySlots[i].IsSlotEmpty) return i;
+                if (_inventorySlots[i].IsSlotEmpty) return i;
             }
 
             return -1;
         }
 
-        protected int GetNearestSlotWithItemStackDelta(BaseItem.BaseItem _baseItem)
+        protected int GetNearestSlotWithItemStackDelta(BaseItem.BaseItem baseItem)
         {
-            for (int i = 0; i < m_inventorySlots.Count; i++)
+            for (int i = 0; i < _inventorySlots.Count; i++)
             {
-                if (m_inventorySlots[i].IsSlotEmpty || m_inventorySlots[i].DeltaStack == 0) continue;
+                if (_inventorySlots[i].IsSlotEmpty || _inventorySlots[i].DeltaStack == 0) continue;
 
-                if (m_inventorySlots[i].SlotItem.BaseItemProfile == _baseItem.BaseItemProfile)
+                if (_inventorySlots[i].SlotItem.BaseItemProfile == baseItem.BaseItemProfile)
                 {
-                    if (m_inventorySlots[i].DeltaStack > 0)
+                    if (_inventorySlots[i].DeltaStack > 0)
                         return i;
                 }
             }
@@ -201,9 +201,9 @@ TODO и т.п.:
 
         public virtual BaseItem.BaseItem GetItemAtSlot(int slotIndex)
         {
-            if (slotIndex >= 0 && slotIndex < m_inventorySlots.Count)
+            if (slotIndex >= 0 && slotIndex < _inventorySlots.Count)
             {
-                return m_inventorySlots[slotIndex].SlotItem;
+                return _inventorySlots[slotIndex].SlotItem;
             }
             else
             {
@@ -244,10 +244,10 @@ TODO и т.п.:
         public int ItemStack { get; set; }
 
 
-        public BaseInventoryAdditionData(BaseItem.BaseItem _baseItem, int _stack)
+        public BaseInventoryAdditionData(BaseItem.BaseItem baseItem, int stack)
         {
-            this.BaseItem = _baseItem;
-            this.ItemStack = _stack;
+            this.BaseItem = baseItem;
+            this.ItemStack = stack;
         }
     }
 }

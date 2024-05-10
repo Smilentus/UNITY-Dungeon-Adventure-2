@@ -1,26 +1,31 @@
 using Dimasyechka.Code.UpgradeableSystem;
-using TMPro;
+using Dimasyechka.Lubribrary.RxMV.Core;
+using Dimasyechka.Lubribrary.RxMV.UniRx.Attributes;
+using UniRx;
 using UnityEngine;
 
 namespace Dimasyechka.Code.SkillsSystem.Views
 {
-    public class SkillUpgradeDescriptionView : MonoBehaviour
+    public class SkillUpgradeDescriptionView : MonoViewModel<SkillUpgradeDescriptionData>
     {
+        [RxAdaptableProperty]
+        public ReactiveProperty<string> Description = new ReactiveProperty<string>();
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<Color> ActiveColor = new ReactiveProperty<Color>();
+
+
         [SerializeField]
-        private TMP_Text m_descriptionTMP;
+        private Color _notEnoughColor;
 
         [SerializeField]
-        private Color m_notEnoughColor;
-
-        [SerializeField]
-        private Color m_accomplishedColor;
+        private Color _accomplishedColor;
 
 
-        public void SetData(SkillUpgradeDescriptionData description)
+        protected override void OnSetupModel()
         {
-            m_descriptionTMP.text = description.Description;
-    
-            m_descriptionTMP.color = description.IsAccomplished ? m_accomplishedColor : m_notEnoughColor;
+            Description.Value = Model.Description;
+            ActiveColor.Value = Model.IsAccomplished ? _accomplishedColor : _notEnoughColor;
         }
     }
 }

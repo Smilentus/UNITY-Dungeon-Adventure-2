@@ -1,5 +1,8 @@
+using Dimasyechka.Code.ZenjectFactories;
+using Dimasyechka.Lubribrary.RxMV.UniRx.Attributes;
 using System.Collections.Generic;
-using TMPro;
+using Dimasyechka.Lubribrary.RxMV.UniRx.RxLink;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -8,13 +11,14 @@ namespace Dimasyechka.Code.InventorySystem.BaseInventoryContainer
     /// <summary>
     ///     ќтрисовывает основной интерфейс контейнера (слоты и т.п. в конкретном контейнере)
     /// </summary>
-    public class BaseInventoryContainerView : MonoBehaviour
+    public class BaseInventoryContainerView : MonoBehaviour, IRxLinkable
     {
-        [SerializeField]
-        private GameObject _viewGameObject;
+        [RxAdaptableProperty]
+        public ReactiveProperty<bool> IsContainerActive = new ReactiveProperty<bool>();
 
-        [SerializeField]
-        private TMP_Text _containerNameTMP;
+        [RxAdaptableProperty]
+        public ReactiveProperty<string> ContainerTitle = new ReactiveProperty<string>();
+
 
 
         [SerializeField]
@@ -36,11 +40,13 @@ namespace Dimasyechka.Code.InventorySystem.BaseInventoryContainer
 
 
         private InventoryController _inventoryController;
+        private BaseInventoryContainerSlotViewFactory _factory;
 
         [Inject]
-        public void Construct(InventoryController inventoryController)
+        public void Construct(InventoryController inventoryController, BaseInventoryContainerSlotViewFactory factory)
         {
             _inventoryController = inventoryController;
+            _factory = factory;
         }
 
         private void OnDestroy()
@@ -59,10 +65,8 @@ namespace Dimasyechka.Code.InventorySystem.BaseInventoryContainer
 
             ClearLastContainerData();
 
-            if (_containerNameTMP != null)
-            {
-                _containerNameTMP.text = $"'{inventoryContainer.InventoryContainerProfile.ContainerName}' ({inventoryContainer.InventoryContainerProfile.ContainerCapacity} €ч.)"; // (¬местительность {inventoryContainer.InventoryContainerProfile.ContainerCapacity} €чеек)
-            }
+            ContainerTitle.Value =
+                $"'{inventoryContainer.InventoryContainerProfile.ContainerName}' ({inventoryContainer.InventoryContainerProfile.ContainerCapacity} €ч.)"; // (¬местительность {inventoryContainer.InventoryContainerProfile.ContainerCapacity} €чеек
 
             this._inventoryContainer = inventoryContainer;
             CreateNewSlots();
@@ -70,12 +74,12 @@ namespace Dimasyechka.Code.InventorySystem.BaseInventoryContainer
             this._inventoryContainer.onInventorySlotsUpdated += OnInventorySlotsUpdated;
             OnInventorySlotsUpdated();
 
-            _viewGameObject.SetActive(true);
+            IsContainerActive.Value = true;
         }
 
         public void HideContainer()
         {
-            _viewGameObject.SetActive(false);
+            IsContainerActive.Value = false;
         }
 
         private void OnInventorySlotsUpdated()
@@ -91,7 +95,6 @@ namespace Dimasyechka.Code.InventorySystem.BaseInventoryContainer
 
             _isSlotsInstantiated = true;
 
-            // ќчищаем старые слоты
             for (int i = _slotViews.Count - 1; i >= 0; i--)
             {
                 Destroy(_slotViews[i].gameObject);
@@ -99,22 +102,22 @@ namespace Dimasyechka.Code.InventorySystem.BaseInventoryContainer
             _slotViews.Clear();
 
 
-            // ƒобавл€ем слоты заново
             int slotIndex = 0;
             foreach (BaseInventoryContainerSlot inventorySlot in _inventoryContainer.InventorySlots)
             {
-                BaseInventoryContainerSlotView slotView = Instantiate(_baseInventoryContainerSlotViewPrefab, _contentParent);
-                slotView.SetData(inventorySlot, OnSlotPressedCallback);
-            
+                BaseInventoryContainerSlotView slotView = _factory.InstantiateForComponent(_baseInventoryContainerSlotViewPrefab.gameObject, _contentParent);
+                slotView.SetupModel(inventorySlot);
+                slotView.SetPressCallback(OnSlotPressedCallback);
+
                 _slotViews.Add(slotView);
 
                 slotIndex++;
             }
         }
 
-        private void OnSlotPressedCallback(BaseInventoryContainerSlot _containerSlot)
+        private void OnSlotPressedCallback(BaseInventoryContainerSlot containerSlot)
         {
-            _inventoryController.OnAnyContainerSlotPressed(_inventoryContainer, _containerSlot);
+            _inventoryController.OnAnyContainerSlotPressed(_inventoryContainer, containerSlot);
         }
 
         private void ClearLastContainerData()
@@ -125,4 +128,7 @@ namespace Dimasyechka.Code.InventorySystem.BaseInventoryContainer
             }
         }
     }
+
+
+    public class BaseInventoryContainerSlotViewFactory : DiContainerCreationFactory<BaseInventoryContainerSlotView> { }
 }

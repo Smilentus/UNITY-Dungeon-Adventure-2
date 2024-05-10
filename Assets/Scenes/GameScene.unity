@@ -352,8 +352,9 @@ GameObject:
   - component: {fileID: 17608096}
   - component: {fileID: 17608095}
   - component: {fileID: 17608097}
+  - component: {fileID: 17608098}
   m_Layer: 5
-  m_Name: RightActionPanel (ExtraSlots)
+  m_Name: QuickSlotsPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -426,10 +427,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb54c193cd83184383c293fed61e218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _viewGameObject: {fileID: 0}
-  _containerNameTMP: {fileID: 0}
-  _baseInventoryContainerSlotViewPrefab: {fileID: 0}
-  _contentParent: {fileID: 0}
+  IsContainerActive:
+    value: 0
+  ContainerTitle:
+    value: 
+  _baseInventoryContainerSlotViewPrefab: {fileID: 4148479547740217397, guid: afe6253f2335e6d4799ef36fff0b17cd,
+    type: 3}
+  _contentParent: {fileID: 2117041137}
+--- !u!114 &17608098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17608093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d58a53b749619244821aadfcbdcf263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _quickSlotsView: {fileID: 17608097}
 --- !u!1 &18062236
 GameObject:
   m_ObjectHideFlags: 0
@@ -2709,6 +2726,10 @@ MonoBehaviour:
     _useAutoCollectionMode: 1
     _extractedComponent: {fileID: 360847768}
   _component: {fileID: 99851085}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
   _text:
     ReflectiveNames:
     - CurrentLocation (String)
@@ -4308,6 +4329,7 @@ GameObject:
   - component: {fileID: 171758261}
   - component: {fileID: 171758260}
   - component: {fileID: 171758259}
+  - component: {fileID: 171758262}
   m_Layer: 5
   m_Name: ItemIcon
   m_TagString: Untagged
@@ -4392,6 +4414,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 171758257}
   m_CullTransparentMesh: 1
+--- !u!114 &171758262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171758257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976878bb7690eea44bd40d8409ed5552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 984768202}
+  _component: {fileID: 171758260}
+  _sprite:
+    ReflectiveNames:
+    - SkillIcon (Sprite)
+    SelectedIndex: 0
+    SelectedName: SkillIcon (Sprite)
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _material:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _fillAmount:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _raycastTarget:
+    ReflectiveNames:
+    - IsSkillEnabled (Boolean)
+    SelectedIndex: -1
+    SelectedName: 
 --- !u!1 &172364679
 GameObject:
   m_ObjectHideFlags: 0
@@ -4780,6 +4840,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: ManaRegen
       objectReference: {fileID: 0}
+    - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
+        type: 3}
+      propertyPath: _skillProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 670d2b8d5570fab438a638d1ff7a0f8d,
+        type: 2}
     - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
         type: 3}
       propertyPath: m_skillProfile
@@ -7516,6 +7582,8 @@ GameObject:
   - component: {fileID: 323137779}
   - component: {fileID: 323137781}
   - component: {fileID: 323137780}
+  - component: {fileID: 323137782}
+  - component: {fileID: 323137783}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -7539,8 +7607,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 87.895, y: -136.175}
-  m_SizeDelta: {x: 165.79, y: 22.35}
+  m_AnchoredPosition: {x: 87.325, y: -136.175}
+  m_SizeDelta: {x: 164.65, y: 22.35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &323137780
 MonoBehaviour:
@@ -7565,7 +7633,8 @@ MonoBehaviour:
   m_text: "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u043D\u0430\u0432\u044B\u043A\u0430"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fb666cbc18528f0428e6a238d179cb85, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: -3464836046680742372, guid: fb666cbc18528f0428e6a238d179cb85,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7628,7 +7697,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &323137781
@@ -7639,6 +7708,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 323137778}
   m_CullTransparentMesh: 1
+--- !u!114 &323137782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323137778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 984768202}
+  _component: {fileID: 323137780}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _text:
+    ReflectiveNames:
+    - SkillDescription (String)
+    - SkillTitle (String)
+    - SkillLevel (Int32)
+    SelectedIndex: 0
+    SelectedName: SkillDescription (String)
+  _useMultipleText: 0
+  _multipleTextFormat: 
+  _multipleText: []
+--- !u!114 &323137783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 323137778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e273533e0cfb64a81ba65709806d04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 984768202}
+  _activeState:
+    ReflectiveNames:
+    - IsSkillEnabled (Boolean)
+    SelectedIndex: 0
+    SelectedName: IsSkillEnabled (Boolean)
+  _tag:
+    ReflectiveNames:
+    - SkillDescription (String)
+    - SkillTitle (String)
+    SelectedIndex: -1
+    SelectedName: 
+  _layer:
+    ReflectiveNames:
+    - SkillLevel (Int32)
+    SelectedIndex: -1
+    SelectedName: 
 --- !u!1 &323837191
 GameObject:
   m_ObjectHideFlags: 0
@@ -7969,6 +8099,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: AttackSpeed
       objectReference: {fileID: 0}
+    - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
+        type: 3}
+      propertyPath: _skillProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 4b043a8ea45a5ee4789eef0f8112daf4,
+        type: 2}
     - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
         type: 3}
       propertyPath: m_skillProfile
@@ -8332,6 +8468,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: Luck
       objectReference: {fileID: 0}
+    - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
+        type: 3}
+      propertyPath: _skillProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: e900cf934c3b24c409c7404b551f249c,
+        type: 2}
     - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
         type: 3}
       propertyPath: m_skillProfile
@@ -9888,6 +10030,7 @@ GameObject:
   - component: {fileID: 407947896}
   - component: {fileID: 407947898}
   - component: {fileID: 407947897}
+  - component: {fileID: 407947899}
   m_Layer: 5
   m_Name: ItemName
   m_TagString: Untagged
@@ -9937,7 +10080,8 @@ MonoBehaviour:
   m_text: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043D\u0430\u0432\u044B\u043A\u0430"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fb666cbc18528f0428e6a238d179cb85, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: -3464836046680742372, guid: fb666cbc18528f0428e6a238d179cb85,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10000,7 +10144,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &407947898
@@ -10011,6 +10155,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 407947895}
   m_CullTransparentMesh: 1
+--- !u!114 &407947899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407947895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 984768202}
+  _component: {fileID: 407947897}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _text:
+    ReflectiveNames:
+    - SkillDescription (String)
+    - SkillTitle (String)
+    - SkillLevel (Int32)
+    SelectedIndex: 1
+    SelectedName: SkillTitle (String)
+  _useMultipleText: 0
+  _multipleTextFormat: 
+  _multipleText: []
 --- !u!1 &410275527
 GameObject:
   m_ObjectHideFlags: 0
@@ -12021,6 +12195,10 @@ MonoBehaviour:
     _useAutoCollectionMode: 1
     _extractedComponent: {fileID: 360847768}
   _component: {fileID: 478552715}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
   _text:
     ReflectiveNames:
     - CurrentLocation (String)
@@ -12692,7 +12870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3956f527fdb7d41b483a6330739c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_skillProfile: {fileID: 0}
+  _skillProfile: {fileID: 0}
 --- !u!114 &506562207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12735,9 +12913,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9178f1da25156d42bbeb04e5b79b588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_obtainSkillInteraction: {fileID: 0}
-  m_skillTitle: {fileID: 0}
-  m_skillIcon: {fileID: 0}
+  _obtainSkillInteraction: {fileID: 0}
+  SkillTitle:
+    value: 
+  SkillIcon:
+    value: {fileID: 0}
 --- !u!1 &510067846
 GameObject:
   m_ObjectHideFlags: 0
@@ -14625,7 +14805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3956f527fdb7d41b483a6330739c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_skillProfile: {fileID: 0}
+  _skillProfile: {fileID: 0}
 --- !u!114 &571428852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14668,9 +14848,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9178f1da25156d42bbeb04e5b79b588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_obtainSkillInteraction: {fileID: 0}
-  m_skillTitle: {fileID: 0}
-  m_skillIcon: {fileID: 0}
+  _obtainSkillInteraction: {fileID: 0}
+  SkillTitle:
+    value: 
+  SkillIcon:
+    value: {fileID: 0}
 --- !u!1 &571994106
 GameObject:
   m_ObjectHideFlags: 0
@@ -15378,7 +15560,7 @@ GameObject:
   - component: {fileID: 607070366}
   - component: {fileID: 607070365}
   m_Layer: 5
-  m_Name: CurrentSkill (1)
+  m_Name: NextSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15728,6 +15910,10 @@ MonoBehaviour:
     _useAutoCollectionMode: 1
     _extractedComponent: {fileID: 360847768}
   _component: {fileID: 610941191}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
   _text:
     ReflectiveNames:
     - CurrentLocation (String)
@@ -17035,6 +17221,7 @@ GameObject:
   - component: {fileID: 652571167}
   - component: {fileID: 652571169}
   - component: {fileID: 652571168}
+  - component: {fileID: 652571170}
   m_Layer: 5
   m_Name: ItemName
   m_TagString: Untagged
@@ -17084,7 +17271,8 @@ MonoBehaviour:
   m_text: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u043D\u0430\u0432\u044B\u043A\u0430"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fb666cbc18528f0428e6a238d179cb85, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: -3464836046680742372, guid: fb666cbc18528f0428e6a238d179cb85,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -17147,7 +17335,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &652571169
@@ -17158,6 +17346,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 652571166}
   m_CullTransparentMesh: 1
+--- !u!114 &652571170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 652571166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 1002607203}
+  _component: {fileID: 652571168}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _text:
+    ReflectiveNames:
+    - SkillDescription (String)
+    - SkillTitle (String)
+    - SkillLevel (Int32)
+    SelectedIndex: 1
+    SelectedName: SkillTitle (String)
+  _useMultipleText: 0
+  _multipleTextFormat: 
+  _multipleText: []
 --- !u!1 &652737463
 GameObject:
   m_ObjectHideFlags: 0
@@ -18546,9 +18764,9 @@ RectTransform:
   - {fileID: 2029140569}
   m_Father: {fileID: 452508735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 182.61002, y: -243}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 285.22003, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &702110364
@@ -18682,6 +18900,10 @@ MonoBehaviour:
     _useAutoCollectionMode: 1
     _extractedComponent: {fileID: 360847768}
   _component: {fileID: 702110366}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
   _text:
     ReflectiveNames:
     - CurrentLocation (String)
@@ -19127,6 +19349,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
         type: 3}
+      propertyPath: _skillProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 37f58b73733a4a44db06302194625ee8,
+        type: 2}
+    - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
+        type: 3}
       propertyPath: m_skillProfile
       value: 
       objectReference: {fileID: 11400000, guid: 37f58b73733a4a44db06302194625ee8,
@@ -19233,6 +19461,7 @@ MonoBehaviour:
   _craftSystem: {fileID: 175886417}
   _saveLoadSystemController: {fileID: 14778010}
   _locationsController: {fileID: 2144082185}
+  _playerSkillsController: {fileID: 1166087851}
 --- !u!1 &751414891
 GameObject:
   m_ObjectHideFlags: 0
@@ -19482,9 +19711,9 @@ RectTransform:
   - {fileID: 1938226438}
   m_Father: {fileID: 452508735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 182.61002, y: -391}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 285.22003, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &762848467
@@ -19614,6 +19843,10 @@ MonoBehaviour:
     _useAutoCollectionMode: 1
     _extractedComponent: {fileID: 360847768}
   _component: {fileID: 762848469}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
   _text:
     ReflectiveNames:
     - CurrentLocation (String)
@@ -20245,9 +20478,9 @@ RectTransform:
   - {fileID: 1604157949}
   m_Father: {fileID: 452508735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 182.61002, y: -280}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 285.22003, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &782148403
@@ -20378,6 +20611,10 @@ MonoBehaviour:
     _useAutoCollectionMode: 1
     _extractedComponent: {fileID: 360847768}
   _component: {fileID: 782148405}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
   _text:
     ReflectiveNames:
     - CurrentLocation (String)
@@ -20493,13 +20730,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fc53c60ddbc4ac4b8660d35ed5fc131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_buttonViewPrefab: {fileID: 3306891936853958045, guid: 69f405d032058ce4b995fd17a98230ea,
+  _buttonViewPrefab: {fileID: 3306891936853958045, guid: 69f405d032058ce4b995fd17a98230ea,
     type: 3}
-  m_containerButtonsParent: {fileID: 336170487}
-  m_containerViewPrefab: {fileID: 6053850214903974178, guid: 0a8fd4444e1ec454ca6b0847e79606f2,
+  _containerButtonsParent: {fileID: 336170487}
+  _containerViewPrefab: {fileID: 6053850214903974178, guid: 0a8fd4444e1ec454ca6b0847e79606f2,
     type: 3}
-  m_containerViewsParent: {fileID: 2036383191}
-  m_quickSlotsContainer: {fileID: 17608097}
+  _containerViewsParent: {fileID: 2036383191}
 --- !u!114 &786418224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21706,7 +21942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3956f527fdb7d41b483a6330739c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_skillProfile: {fileID: 0}
+  _skillProfile: {fileID: 0}
 --- !u!114 &816360987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21749,9 +21985,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9178f1da25156d42bbeb04e5b79b588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_obtainSkillInteraction: {fileID: 0}
-  m_skillTitle: {fileID: 0}
-  m_skillIcon: {fileID: 0}
+  _obtainSkillInteraction: {fileID: 0}
+  SkillTitle:
+    value: 
+  SkillIcon:
+    value: {fileID: 0}
 --- !u!1 &819670013
 GameObject:
   m_ObjectHideFlags: 0
@@ -23073,7 +23311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3956f527fdb7d41b483a6330739c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_skillProfile: {fileID: 0}
+  _skillProfile: {fileID: 0}
 --- !u!114 &867856499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23116,9 +23354,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9178f1da25156d42bbeb04e5b79b588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_obtainSkillInteraction: {fileID: 0}
-  m_skillTitle: {fileID: 0}
-  m_skillIcon: {fileID: 0}
+  _obtainSkillInteraction: {fileID: 0}
+  SkillTitle:
+    value: 
+  SkillIcon:
+    value: {fileID: 0}
 --- !u!1 &869931961
 GameObject:
   m_ObjectHideFlags: 0
@@ -23359,7 +23599,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1561713450}
   m_HandleRect: {fileID: 1561713449}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -23691,7 +23931,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 274.10007}
+  m_AnchoredPosition: {x: 0, y: 274.10004}
   m_SizeDelta: {x: 314.98, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &896862604
@@ -25298,6 +25538,7 @@ GameObject:
   - component: {fileID: 976747090}
   - component: {fileID: 976747089}
   - component: {fileID: 976747088}
+  - component: {fileID: 976747091}
   m_Layer: 5
   m_Name: ItemIcon
   m_TagString: Untagged
@@ -25382,6 +25623,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 976747086}
   m_CullTransparentMesh: 1
+--- !u!114 &976747091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976747086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976878bb7690eea44bd40d8409ed5552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 1002607203}
+  _component: {fileID: 976747089}
+  _sprite:
+    ReflectiveNames:
+    - SkillIcon (Sprite)
+    SelectedIndex: 0
+    SelectedName: SkillIcon (Sprite)
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _material:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _fillAmount:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _raycastTarget:
+    ReflectiveNames:
+    - IsSkillEnabled (Boolean)
+    SelectedIndex: -1
+    SelectedName: 
 --- !u!1 &978542175
 GameObject:
   m_ObjectHideFlags: 0
@@ -25483,7 +25762,7 @@ GameObject:
   - component: {fileID: 984768203}
   - component: {fileID: 984768202}
   m_Layer: 5
-  m_Name: CurrentSkillView (1)
+  m_Name: NextSkillView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25522,10 +25801,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cde55e03531af7547854ed71acfd904f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_skillPreview: {fileID: 171758260}
-  m_skillLevel: {fileID: 0}
-  m_skillTitle: {fileID: 407947897}
-  m_skillDescription: {fileID: 323137780}
+  SkillIcon:
+    value: {fileID: 0}
+  SkillTitle:
+    value: 
+  SkillLevel:
+    value: 0
+  SkillDescription:
+    value: 
+  IsSkillEnabled:
+    value: 0
 --- !u!114 &984768203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25631,7 +25916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd316b42d55340945bbce1c968e98a37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultPlayerActionPoints: 2
+  _defaultPlayerActionPoints: 5
   _defaultPlayerBattleActions:
   - {fileID: 11400000, guid: 1db9ca322acfbdf4bb320e1f95e65f9c, type: 2}
   - {fileID: 11400000, guid: a6885dfa90377ef48b59e0e84c4a7837, type: 2}
@@ -26191,10 +26476,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cde55e03531af7547854ed71acfd904f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_skillPreview: {fileID: 976747089}
-  m_skillLevel: {fileID: 0}
-  m_skillTitle: {fileID: 652571168}
-  m_skillDescription: {fileID: 2021650926}
+  SkillIcon:
+    value: {fileID: 0}
+  SkillTitle:
+    value: 
+  SkillLevel:
+    value: 0
+  SkillDescription:
+    value: 
+  IsSkillEnabled:
+    value: 0
 --- !u!1 &1010164901
 GameObject:
   m_ObjectHideFlags: 0
@@ -26207,6 +26498,7 @@ GameObject:
   - component: {fileID: 1010164905}
   - component: {fileID: 1010164904}
   - component: {fileID: 1010164903}
+  - component: {fileID: 1010164906}
   m_Layer: 5
   m_Name: IconAndName
   m_TagString: Untagged
@@ -26293,6 +26585,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1010164901}
   m_CullTransparentMesh: 1
+--- !u!114 &1010164906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010164901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e273533e0cfb64a81ba65709806d04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 1002607203}
+  _activeState:
+    ReflectiveNames:
+    - IsSkillEnabled (Boolean)
+    SelectedIndex: 0
+    SelectedName: IsSkillEnabled (Boolean)
+  _tag:
+    ReflectiveNames:
+    - SkillDescription (String)
+    - SkillTitle (String)
+    SelectedIndex: -1
+    SelectedName: 
+  _layer:
+    ReflectiveNames:
+    - SkillLevel (Int32)
+    SelectedIndex: -1
+    SelectedName: 
 --- !u!1 &1012155869
 GameObject:
   m_ObjectHideFlags: 0
@@ -26440,6 +26763,7 @@ GameObject:
   - component: {fileID: 1014086808}
   - component: {fileID: 1014086807}
   - component: {fileID: 1014086806}
+  - component: {fileID: 1014086809}
   m_Layer: 5
   m_Name: IconAndName
   m_TagString: Untagged
@@ -26526,6 +26850,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1014086804}
   m_CullTransparentMesh: 1
+--- !u!114 &1014086809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014086804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e273533e0cfb64a81ba65709806d04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 984768202}
+  _activeState:
+    ReflectiveNames:
+    - IsSkillEnabled (Boolean)
+    SelectedIndex: 0
+    SelectedName: IsSkillEnabled (Boolean)
+  _tag:
+    ReflectiveNames:
+    - SkillDescription (String)
+    - SkillTitle (String)
+    SelectedIndex: -1
+    SelectedName: 
+  _layer:
+    ReflectiveNames:
+    - SkillLevel (Int32)
+    SelectedIndex: -1
+    SelectedName: 
 --- !u!1 &1016197758
 GameObject:
   m_ObjectHideFlags: 0
@@ -27097,9 +27452,9 @@ RectTransform:
   - {fileID: 1992081034}
   m_Father: {fileID: 452508735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 182.61002, y: -95}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 285.22003, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1029406665
@@ -27224,6 +27579,10 @@ MonoBehaviour:
     _useAutoCollectionMode: 1
     _extractedComponent: {fileID: 360847768}
   _component: {fileID: 1029406666}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
   _text:
     ReflectiveNames:
     - CurrentLocation (String)
@@ -28158,6 +28517,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: CriticalChance
       objectReference: {fileID: 0}
+    - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
+        type: 3}
+      propertyPath: _skillProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 61474db1fdfab2c468f5e2219cdbc73f,
+        type: 2}
     - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
         type: 3}
       propertyPath: m_skillProfile
@@ -29858,7 +30223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3956f527fdb7d41b483a6330739c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_skillProfile: {fileID: 0}
+  _skillProfile: {fileID: 0}
 --- !u!114 &1150725830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29901,9 +30266,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9178f1da25156d42bbeb04e5b79b588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_obtainSkillInteraction: {fileID: 0}
-  m_skillTitle: {fileID: 0}
-  m_skillIcon: {fileID: 0}
+  _obtainSkillInteraction: {fileID: 0}
+  SkillTitle:
+    value: 
+  SkillIcon:
+    value: {fileID: 0}
 --- !u!1 &1151845322
 GameObject:
   m_ObjectHideFlags: 0
@@ -30522,9 +30889,9 @@ RectTransform:
   - {fileID: 1041556580}
   m_Father: {fileID: 452508735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 182.61002, y: -58}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 285.22003, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1167486985
@@ -30658,6 +31025,10 @@ MonoBehaviour:
     _useAutoCollectionMode: 1
     _extractedComponent: {fileID: 360847768}
   _component: {fileID: 1167486988}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
   _text:
     ReflectiveNames:
     - CurrentLocation (String)
@@ -32520,6 +32891,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
         type: 3}
+      propertyPath: _skillProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: c56e9913a7ec792498246b297e9207c5,
+        type: 2}
+    - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
+        type: 3}
       propertyPath: m_skillProfile
       value: 
       objectReference: {fileID: 11400000, guid: c56e9913a7ec792498246b297e9207c5,
@@ -34085,6 +34462,10 @@ MonoBehaviour:
     _useAutoCollectionMode: 1
     _extractedComponent: {fileID: 2131596134}
   _component: {fileID: 1283617527}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
   _text:
     ReflectiveNames:
     - TurnStatus (String)
@@ -34235,7 +34616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c04e466269a562d4ca1562cb322123c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _quickSlotsContainer: {fileID: 11400000, guid: 84ccf2a86da30e446bf421e5f3abac67,
+  _quickSlotsContainerProfile: {fileID: 11400000, guid: 84ccf2a86da30e446bf421e5f3abac67,
     type: 2}
   _dynamicTimelyContainerProfile: {fileID: 11400000, guid: 5239dddd067b4714ea46a422bb6d654f,
     type: 2}
@@ -35476,6 +35857,7 @@ GameObject:
   - component: {fileID: 1315507621}
   - component: {fileID: 1315507620}
   - component: {fileID: 1315507619}
+  - component: {fileID: 1315507622}
   m_Layer: 5
   m_Name: CloseButton
   m_TagString: Untagged
@@ -35585,6 +35967,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1315507616}
   m_CullTransparentMesh: 0
+--- !u!114 &1315507622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315507616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab53b914a300b94ea3c2c180924fe37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 1616123281}
+  _component: {fileID: 1315507619}
+  _interactable:
+    ReflectiveNames:
+    - IsUpgradeButtonAvailable (Boolean)
+    SelectedIndex: -1
+    SelectedName: 
+  _onClickHandler:
+    ReflectiveNames:
+    - OnHidePressed (void)
+    - OnApplyButtonPressed (void)
+    SelectedIndex: 0
+    SelectedName: OnHidePressed (void)
 --- !u!1 &1316102000
 GameObject:
   m_ObjectHideFlags: 0
@@ -36425,9 +36834,9 @@ RectTransform:
   - {fileID: 2011158073}
   m_Father: {fileID: 452508735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 182.61002, y: -206}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 285.22003, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1358411278
@@ -36552,6 +36961,10 @@ MonoBehaviour:
     _useAutoCollectionMode: 1
     _extractedComponent: {fileID: 360847768}
   _component: {fileID: 1358411279}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
   _text:
     ReflectiveNames:
     - CurrentLocation (String)
@@ -37488,7 +37901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3956f527fdb7d41b483a6330739c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_skillProfile: {fileID: 0}
+  _skillProfile: {fileID: 0}
 --- !u!114 &1386192343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37531,9 +37944,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9178f1da25156d42bbeb04e5b79b588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_obtainSkillInteraction: {fileID: 0}
-  m_skillTitle: {fileID: 0}
-  m_skillIcon: {fileID: 0}
+  _obtainSkillInteraction: {fileID: 0}
+  SkillTitle:
+    value: 
+  SkillIcon:
+    value: {fileID: 0}
 --- !u!1 &1386308836
 GameObject:
   m_ObjectHideFlags: 0
@@ -37862,6 +38277,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
         type: 3}
+      propertyPath: _skillProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 7f4b67d4d65f4a840ad53c80db9353cc,
+        type: 2}
+    - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
+        type: 3}
       propertyPath: m_skillProfile
       value: 
       objectReference: {fileID: 11400000, guid: 7f4b67d4d65f4a840ad53c80db9353cc,
@@ -37889,6 +38310,7 @@ GameObject:
   - component: {fileID: 1398584555}
   - component: {fileID: 1398584554}
   - component: {fileID: 1398584553}
+  - component: {fileID: 1398584556}
   m_Layer: 5
   m_Name: UpgradeButton
   m_TagString: Untagged
@@ -37998,6 +38420,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398584550}
   m_CullTransparentMesh: 0
+--- !u!114 &1398584556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398584550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab53b914a300b94ea3c2c180924fe37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 1616123281}
+  _component: {fileID: 1398584553}
+  _interactable:
+    ReflectiveNames:
+    - IsUpgradeButtonAvailable (Boolean)
+    SelectedIndex: -1
+    SelectedName: 
+  _onClickHandler:
+    ReflectiveNames:
+    - OnHidePressed (void)
+    - OnApplyButtonPressed (void)
+    SelectedIndex: 1
+    SelectedName: OnApplyButtonPressed (void)
 --- !u!1 &1399888245
 GameObject:
   m_ObjectHideFlags: 0
@@ -41278,7 +41727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3956f527fdb7d41b483a6330739c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_skillProfile: {fileID: 0}
+  _skillProfile: {fileID: 0}
 --- !u!114 &1529497925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41321,9 +41770,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9178f1da25156d42bbeb04e5b79b588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_obtainSkillInteraction: {fileID: 0}
-  m_skillTitle: {fileID: 0}
-  m_skillIcon: {fileID: 0}
+  _obtainSkillInteraction: {fileID: 0}
+  SkillTitle:
+    value: 
+  SkillIcon:
+    value: {fileID: 0}
 --- !u!1 &1536400458
 GameObject:
   m_ObjectHideFlags: 0
@@ -41664,7 +42115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3956f527fdb7d41b483a6330739c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_skillProfile: {fileID: 0}
+  _skillProfile: {fileID: 0}
 --- !u!114 &1546726541
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41707,9 +42158,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9178f1da25156d42bbeb04e5b79b588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_obtainSkillInteraction: {fileID: 0}
-  m_skillTitle: {fileID: 0}
-  m_skillIcon: {fileID: 0}
+  _obtainSkillInteraction: {fileID: 0}
+  SkillTitle:
+    value: 
+  SkillIcon:
+    value: {fileID: 0}
 --- !u!1 &1547953910
 GameObject:
   m_ObjectHideFlags: 0
@@ -41753,9 +42206,9 @@ RectTransform:
   - {fileID: 574695913}
   m_Father: {fileID: 452508735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 182.61002, y: -354}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 285.22003, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1547953915
@@ -41878,6 +42331,10 @@ MonoBehaviour:
     _useAutoCollectionMode: 1
     _extractedComponent: {fileID: 360847768}
   _component: {fileID: 1547953916}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
   _text:
     ReflectiveNames:
     - CurrentLocation (String)
@@ -43497,9 +43954,9 @@ RectTransform:
   - {fileID: 1550627332}
   m_Father: {fileID: 452508735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 182.61002, y: -169}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 285.22003, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1606297010
@@ -43631,6 +44088,10 @@ MonoBehaviour:
     _useAutoCollectionMode: 1
     _extractedComponent: {fileID: 360847768}
   _component: {fileID: 1606297012}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
   _text:
     ReflectiveNames:
     - CurrentLocation (String)
@@ -43825,13 +44286,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f888d79711f2f7408508d880a4dc242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_currentSkillView: {fileID: 1002607203}
-  m_nextSkillView: {fileID: 984768202}
-  m_neededUpgradePrefab: {fileID: 9216012927982724797, guid: 84d92ded472258b46b408c2030bc78e6,
+  _currentSkillView: {fileID: 1002607203}
+  _nextSkillView: {fileID: 984768202}
+  _neededUpgradePrefab: {fileID: 9216012927982724797, guid: 84d92ded472258b46b408c2030bc78e6,
     type: 3}
-  m_neededUpgradesContentParent: {fileID: 1200300533}
-  m_closeButton: {fileID: 1315507619}
-  m_upgradeButton: {fileID: 1398584553}
+  _neededUpgradesContentParent: {fileID: 1200300533}
+  IsUpgradeButtonAvailable:
+    value: 0
 --- !u!114 &1616123282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43988,6 +44449,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthRegen
       objectReference: {fileID: 0}
+    - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
+        type: 3}
+      propertyPath: _skillProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: e28ee40765f4904498291834cc1e712f,
+        type: 2}
     - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
         type: 3}
       propertyPath: m_skillProfile
@@ -44833,7 +45300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3956f527fdb7d41b483a6330739c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_skillProfile: {fileID: 0}
+  _skillProfile: {fileID: 0}
 --- !u!114 &1638553638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44876,9 +45343,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9178f1da25156d42bbeb04e5b79b588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_obtainSkillInteraction: {fileID: 0}
-  m_skillTitle: {fileID: 0}
-  m_skillIcon: {fileID: 0}
+  _obtainSkillInteraction: {fileID: 0}
+  SkillTitle:
+    value: 
+  SkillIcon:
+    value: {fileID: 0}
 --- !u!1 &1638988329
 GameObject:
   m_ObjectHideFlags: 0
@@ -46756,6 +47225,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
         type: 3}
+      propertyPath: _skillProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: a5d751f738e4a6f43885e556fecdf8de,
+        type: 2}
+    - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
+        type: 3}
       propertyPath: m_skillProfile
       value: 
       objectReference: {fileID: 11400000, guid: a5d751f738e4a6f43885e556fecdf8de,
@@ -46832,7 +47307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3956f527fdb7d41b483a6330739c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_skillProfile: {fileID: 0}
+  _skillProfile: {fileID: 0}
 --- !u!114 &1712769058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46875,9 +47350,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9178f1da25156d42bbeb04e5b79b588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_obtainSkillInteraction: {fileID: 0}
-  m_skillTitle: {fileID: 0}
-  m_skillIcon: {fileID: 0}
+  _obtainSkillInteraction: {fileID: 0}
+  SkillTitle:
+    value: 
+  SkillIcon:
+    value: {fileID: 0}
 --- !u!1 &1713407751
 GameObject:
   m_ObjectHideFlags: 0
@@ -47573,6 +48050,10 @@ MonoBehaviour:
     _useAutoCollectionMode: 1
     _extractedComponent: {fileID: 828806132}
   _component: {fileID: 1739915134}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
   _text:
     ReflectiveNames:
     - CurrentDateTime (String)
@@ -48642,6 +49123,10 @@ MonoBehaviour:
     _useAutoCollectionMode: 1
     _extractedComponent: {fileID: 1777110865}
   _component: {fileID: 1777110863}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
   _text:
     ReflectiveNames:
     - CurrentLocation (String)
@@ -51077,9 +51562,9 @@ RectTransform:
   - {fileID: 1639508995}
   m_Father: {fileID: 452508735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 182.61002, y: -132}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 285.22003, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1830852772
@@ -51211,6 +51696,10 @@ MonoBehaviour:
     _useAutoCollectionMode: 1
     _extractedComponent: {fileID: 360847768}
   _component: {fileID: 1830852774}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
   _text:
     ReflectiveNames:
     - CurrentLocation (String)
@@ -51655,6 +52144,8 @@ GameObject:
   - component: {fileID: 1846585183}
   - component: {fileID: 1846585186}
   - component: {fileID: 1846585187}
+  - component: {fileID: 1846585189}
+  - component: {fileID: 1846585188}
   m_Layer: 5
   m_Name: SkillScoreText
   m_TagString: Untagged
@@ -51779,6 +52270,52 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1846585188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846585182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 1846585189}
+  _component: {fileID: 1846585187}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _text:
+    ReflectiveNames:
+    - SkillPoints (Int32)
+    SelectedIndex: -1
+    SelectedName: None
+  _useMultipleText: 1
+  _multipleTextFormat: "\u041E\u041D: {0}"
+  _multipleText:
+  - ReflectiveNames:
+    - SkillPoints (Int32)
+    SelectedIndex: 0
+    SelectedName: SkillPoints (Int32)
+--- !u!114 &1846585189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846585182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a602fb9444a17a46be5dc5ce1d745c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SkillPoints:
+    value: 0
 --- !u!1 &1857190412
 GameObject:
   m_ObjectHideFlags: 0
@@ -52436,9 +52973,9 @@ RectTransform:
   - {fileID: 1140579103}
   m_Father: {fileID: 452508735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 182.61002, y: -21}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 285.22003, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1890667572
@@ -52573,6 +53110,10 @@ MonoBehaviour:
     _useAutoCollectionMode: 1
     _extractedComponent: {fileID: 360847768}
   _component: {fileID: 1890667574}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
   _text:
     ReflectiveNames:
     - CurrentLocation (String)
@@ -53359,6 +53900,10 @@ MonoBehaviour:
     _useAutoCollectionMode: 1
     _extractedComponent: {fileID: 360847768}
   _component: {fileID: 1907366693}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
   _text:
     ReflectiveNames:
     - CurrentLocation (String)
@@ -54127,6 +54672,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
         type: 3}
+      propertyPath: _skillProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: ac7fb07444eae974c9bbf2f455d066e6,
+        type: 2}
+    - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
+        type: 3}
       propertyPath: m_skillProfile
       value: 
       objectReference: {fileID: 11400000, guid: ac7fb07444eae974c9bbf2f455d066e6,
@@ -54471,9 +55022,9 @@ RectTransform:
   - {fileID: 1591224373}
   m_Father: {fileID: 452508735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 182.61002, y: -428}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 285.22003, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1968655646
@@ -54603,6 +55154,10 @@ MonoBehaviour:
     _useAutoCollectionMode: 1
     _extractedComponent: {fileID: 360847768}
   _component: {fileID: 1968655648}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
   _text:
     ReflectiveNames:
     - CurrentLocation (String)
@@ -56332,9 +56887,9 @@ RectTransform:
   - {fileID: 118105619}
   m_Father: {fileID: 452508735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 182.61002, y: -317}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 285.22003, y: 22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2006244831
@@ -56465,6 +57020,10 @@ MonoBehaviour:
     _useAutoCollectionMode: 1
     _extractedComponent: {fileID: 360847768}
   _component: {fileID: 2006244833}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
   _text:
     ReflectiveNames:
     - CurrentLocation (String)
@@ -56639,6 +57198,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: ExtraMoney
       objectReference: {fileID: 0}
+    - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
+        type: 3}
+      propertyPath: _skillProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: f6f228f2adbe3404c8034ae43c0d39ab,
+        type: 2}
     - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
         type: 3}
       propertyPath: m_skillProfile
@@ -56950,6 +57515,8 @@ GameObject:
   - component: {fileID: 2021650925}
   - component: {fileID: 2021650927}
   - component: {fileID: 2021650926}
+  - component: {fileID: 2021650928}
+  - component: {fileID: 2021650929}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -56973,8 +57540,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 87.895, y: -136.175}
-  m_SizeDelta: {x: 165.79, y: 22.35}
+  m_AnchoredPosition: {x: 87.325, y: -136.175}
+  m_SizeDelta: {x: 164.65, y: 22.35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2021650926
 MonoBehaviour:
@@ -56999,7 +57566,8 @@ MonoBehaviour:
   m_text: "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u043D\u0430\u0432\u044B\u043A\u0430"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fb666cbc18528f0428e6a238d179cb85, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: -3464836046680742372, guid: fb666cbc18528f0428e6a238d179cb85,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -57062,7 +57630,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &2021650927
@@ -57073,6 +57641,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2021650924}
   m_CullTransparentMesh: 1
+--- !u!114 &2021650928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021650924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 1002607203}
+  _component: {fileID: 2021650926}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _text:
+    ReflectiveNames:
+    - SkillDescription (String)
+    - SkillTitle (String)
+    - SkillLevel (Int32)
+    SelectedIndex: 0
+    SelectedName: SkillDescription (String)
+  _useMultipleText: 0
+  _multipleTextFormat: 
+  _multipleText: []
+--- !u!114 &2021650929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021650924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e273533e0cfb64a81ba65709806d04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 1002607203}
+  _activeState:
+    ReflectiveNames:
+    - IsSkillEnabled (Boolean)
+    SelectedIndex: 0
+    SelectedName: IsSkillEnabled (Boolean)
+  _tag:
+    ReflectiveNames:
+    - SkillDescription (String)
+    - SkillTitle (String)
+    SelectedIndex: -1
+    SelectedName: 
+  _layer:
+    ReflectiveNames:
+    - SkillLevel (Int32)
+    SelectedIndex: -1
+    SelectedName: 
 --- !u!1 &2026027605
 GameObject:
   m_ObjectHideFlags: 0
@@ -58830,7 +59459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e3956f527fdb7d41b483a6330739c18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_skillProfile: {fileID: 0}
+  _skillProfile: {fileID: 0}
 --- !u!114 &2072812092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58873,9 +59502,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9178f1da25156d42bbeb04e5b79b588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_obtainSkillInteraction: {fileID: 0}
-  m_skillTitle: {fileID: 0}
-  m_skillIcon: {fileID: 0}
+  _obtainSkillInteraction: {fileID: 0}
+  SkillTitle:
+    value: 
+  SkillIcon:
+    value: {fileID: 0}
 --- !u!1 &2073352979
 GameObject:
   m_ObjectHideFlags: 0
@@ -59028,6 +59659,10 @@ MonoBehaviour:
     _useAutoCollectionMode: 1
     _extractedComponent: {fileID: 388624874}
   _component: {fileID: 2073352981}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
   _text:
     ReflectiveNames:
     - TotalPlayerActionPoints (Int32)
@@ -59560,6 +60195,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
         type: 3}
+      propertyPath: _skillProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 0888b691547fa2048aa53e04c811a176,
+        type: 2}
+    - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
+        type: 3}
       propertyPath: m_skillProfile
       value: 
       objectReference: {fileID: 11400000, guid: 0888b691547fa2048aa53e04c811a176,
@@ -59985,7 +60626,7 @@ GameObject:
   - component: {fileID: 2117041138}
   - component: {fileID: 2117041142}
   m_Layer: 5
-  m_Name: ExtraSlots
+  m_Name: Content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61164,6 +61805,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: MaxHealth
       objectReference: {fileID: 0}
+    - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
+        type: 3}
+      propertyPath: _skillProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 545ec38b80147d547a9681e26db20a66,
+        type: 2}
     - target: {fileID: 6196372859406324276, guid: 21f293437644fae40bc4f40b6e942c57,
         type: 3}
       propertyPath: m_skillProfile

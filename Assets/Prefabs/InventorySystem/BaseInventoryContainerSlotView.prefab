@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 960258616990735234}
   - component: {fileID: 2570546591891258646}
   - component: {fileID: 1852933825200756800}
+  - component: {fileID: 5988703771352023406}
   m_Layer: 5
   m_Name: ItemImage
   m_TagString: Untagged
@@ -31,7 +32,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4150128834550905228}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -76,6 +76,44 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5988703771352023406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711171004491251762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976878bb7690eea44bd40d8409ed5552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 4148479547740217397}
+  _component: {fileID: 1852933825200756800}
+  _sprite:
+    ReflectiveNames:
+    - ItemIcon (Sprite)
+    SelectedIndex: 0
+    SelectedName: ItemIcon (Sprite)
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _material:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _fillAmount:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _raycastTarget:
+    ReflectiveNames:
+    - IsIconAvailable (Boolean)
+    SelectedIndex: -1
+    SelectedName: 
 --- !u!1 &4215458682651202870
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +150,6 @@ RectTransform:
   - {fileID: 5345274547580719333}
   - {fileID: 4150805048076028044}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -169,9 +206,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6343fe82e1d59e047bafc867346a31f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_itemImage: {fileID: 1852933825200756800}
-  m_itemName: {fileID: 0}
-  m_itemStack: {fileID: 5345274547580719332}
+  ItemName:
+    value: 
+  ItemIcon:
+    value: {fileID: 0}
+  IsIconAvailable:
+    value: 0
+  ItemStack:
+    value: 0
 --- !u!114 &2856022043787454412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,7 +265,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4150805048076028044}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -297,7 +338,6 @@ RectTransform:
   m_Children:
   - {fileID: 4150531945381687340}
   m_Father: {fileID: 4150128834550905228}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -350,6 +390,7 @@ GameObject:
   - component: {fileID: 5345274547580719333}
   - component: {fileID: 5345274547580719335}
   - component: {fileID: 5345274547580719332}
+  - component: {fileID: 1451099232619290321}
   m_Layer: 5
   m_Name: StackText
   m_TagString: Untagged
@@ -370,7 +411,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4150128834550905228}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -475,3 +515,32 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1451099232619290321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5345274547580719354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 4148479547740217397}
+  _component: {fileID: 5345274547580719332}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _text:
+    ReflectiveNames:
+    - ItemName (String)
+    - ItemStack (Int32)
+    SelectedIndex: 1
+    SelectedName: ItemStack (Int32)
+  _useMultipleText: 0
+  _multipleTextFormat: 
+  _multipleText: []

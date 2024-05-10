@@ -1,86 +1,89 @@
-using System;
 using Dimasyechka.Code.CraftingSystem.Recipes;
 using Dimasyechka.Code.CraftingSystem.Recipes.Views;
-using TMPro;
+using Dimasyechka.Code.ZenjectFactories;
+using Dimasyechka.Lubribrary.RxMV.Core;
+using Dimasyechka.Lubribrary.RxMV.UniRx.Attributes;
+using System;
+using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
+using Zenject;
 
 namespace Dimasyechka.Code.CraftingSystem.Workbenches.Views
 {
-    public class BaseWorkbenchRecipeView : MonoBehaviour
+    public class BaseWorkbenchRecipeView : MonoViewModel<CraftingRecipe>
     {
-        [SerializeField]
-        private Image m_recipePreview;
+        [RxAdaptableProperty]
+        public ReactiveProperty<Sprite> RecipePreview = new ReactiveProperty<Sprite>();
 
-        [SerializeField]
-        private TMP_Text m_recipeNameTMP;
+        [RxAdaptableProperty]
+        public ReactiveProperty<string> RecipeName = new ReactiveProperty<string>();
 
-        [SerializeField]
-        private TMP_Text m_recipeOutputTMP;
-
-        [SerializeField]
-        private Button m_craftButton;
+        [RxAdaptableProperty]
+        public ReactiveProperty<string> RecipeOutput = new ReactiveProperty<string>();
 
 
         [SerializeField]
-        private CraftInputItemView m_craftInputItemView;
+        private CraftInputItemView _craftInputItemView;
 
         [SerializeField]
-        private Transform m_inputItemsContentParent;
+        private Transform _inputItemsContentParent;
 
 
-        private CraftingRecipe _recipe;
-        private Action<CraftingRecipe> _handler;
+        private Action<CraftingRecipe> _pressCallback;
 
 
-        private void OnEnable()
+        private CraftInputItemViewFactory _factory;
+
+        [Inject]
+        public void Construct(CraftInputItemViewFactory factory)
         {
-            m_craftButton?.onClick.AddListener(OnCraftButtonPressed);
-        }
-
-        private void OnDisable()
-        {
-            m_craftButton?.onClick.RemoveListener(OnCraftButtonPressed);
+            _factory = factory;
         }
 
 
-        public void SetData(CraftingRecipe craftingRecipe, Action<CraftingRecipe> callback)
+        protected override void OnSetupModel()
         {
-            _handler = callback;
+            RecipeName.Value = Model.RecipeName;
 
-            _recipe = craftingRecipe;
-
-            m_recipeNameTMP.text = _recipe.RecipeName;
-
-            m_recipePreview.sprite = _recipe.CraftedItem.ItemSprite;
-            m_recipeOutputTMP.text = _recipe.CraftedItemAmount.ToString();
+            RecipePreview.Value = Model.CraftedItem.ItemSprite;
+            RecipeOutput.Value = Model.CraftedItemAmount.ToString();
 
             PlaceInputCraftItems();
+        }
+
+
+        public void SetPressCallback(Action<CraftingRecipe> callback)
+        {
+            _pressCallback = callback;
         }
 
         private void PlaceInputCraftItems()
         {
             ClearInputCraftItems();
-        
-            for (int i = 0; i < _recipe.InputCraftItems.Count; i++)
-            {
-                CraftInputItemView inputView = Instantiate(m_craftInputItemView, m_inputItemsContentParent);
 
-                inputView.SetData(_recipe.InputCraftItems[i]);
+            for (int i = 0; i < Model.InputCraftItems.Count; i++)
+            {
+                CraftInputItemView inputView = _factory.InstantiateForComponent(_craftInputItemView.gameObject, _inputItemsContentParent);
+
+                inputView.SetupModel(Model.InputCraftItems[i]);
             }
         }
 
         private void ClearInputCraftItems()
         {
-            for (int i = m_inputItemsContentParent.childCount - 1; i >= 0; i--) 
+            for (int i = _inputItemsContentParent.childCount - 1; i >= 0; i--)
             {
-                Destroy(m_inputItemsContentParent.GetChild(i).gameObject);
+                Destroy(_inputItemsContentParent.GetChild(i).gameObject);
             }
         }
 
-        private void OnCraftButtonPressed()
+        [RxAdaptableMethod]
+        public void OnCraftButtonPressed()
         {
-            _handler?.Invoke(_recipe);
+            _pressCallback?.Invoke(Model);
         }
     }
+
+
+    public class CraftInputItemViewFactory : DiContainerCreationFactory<CraftInputItemView> { }
 }

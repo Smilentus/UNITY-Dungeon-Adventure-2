@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8896497847257466613
 CanvasRenderer:
@@ -111,10 +111,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05cc4628dbb882c4faf2e5a4b19bcf77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemImage: {fileID: 2258407561489116303}
-  _itemCount: {fileID: 5134803669272241557}
-  _notEnoughColor: {r: 0, g: 0, b: 0, a: 0}
-  _correctAmountColor: {r: 0, g: 0, b: 0, a: 0}
+  ItemIcon:
+    value: {fileID: 0}
+  CurrentItemAmount:
+    value: 0
+  ExpectedItemAmount:
+    value: 0
+  AmountColor:
+    value: {r: 0, g: 0, b: 0, a: 0}
+  _notEnoughColor: {r: 0.5943396, g: 0, b: 0, a: 1}
+  _correctAmountColor: {r: 0, g: 0.6981132, b: 0.0049084085, a: 1}
 --- !u!1 &2904258279566124203
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,6 +132,7 @@ GameObject:
   - component: {fileID: 46426232152381072}
   - component: {fileID: 4919523699289419618}
   - component: {fileID: 5134803669272241557}
+  - component: {fileID: 4698017327801614690}
   m_Layer: 5
   m_Name: ItemAmount
   m_TagString: Untagged
@@ -208,7 +215,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
+  m_fontSize: 15.2
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -250,6 +257,46 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4698017327801614690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2904258279566124203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 5754418381826968159}
+  _component: {fileID: 5134803669272241557}
+  _color:
+    ReflectiveNames:
+    - AmountColor (Color)
+    SelectedIndex: 0
+    SelectedName: AmountColor (Color)
+  _text:
+    ReflectiveNames:
+    - ExpectedItemAmount (Int32)
+    - CurrentItemAmount (Int32)
+    SelectedIndex: -1
+    SelectedName: 
+  _useMultipleText: 1
+  _multipleTextFormat: '{0}/{1}'
+  _multipleText:
+  - ReflectiveNames:
+    - ExpectedItemAmount (Int32)
+    - CurrentItemAmount (Int32)
+    SelectedIndex: 1
+    SelectedName: CurrentItemAmount (Int32)
+  - ReflectiveNames:
+    - ExpectedItemAmount (Int32)
+    - CurrentItemAmount (Int32)
+    SelectedIndex: 0
+    SelectedName: ExpectedItemAmount (Int32)
 --- !u!1 &3275912959450217254
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,6 +308,7 @@ GameObject:
   - component: {fileID: 5528130620510969772}
   - component: {fileID: 1001981748487053894}
   - component: {fileID: 2258407561489116303}
+  - component: {fileID: 2910987689508854545}
   m_Layer: 5
   m_Name: Sprite
   m_TagString: Untagged
@@ -325,6 +373,44 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2910987689508854545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3275912959450217254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976878bb7690eea44bd40d8409ed5552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 5754418381826968159}
+  _component: {fileID: 2258407561489116303}
+  _sprite:
+    ReflectiveNames:
+    - ItemIcon (Sprite)
+    SelectedIndex: 0
+    SelectedName: ItemIcon (Sprite)
+  _color:
+    ReflectiveNames:
+    - AmountColor (Color)
+    SelectedIndex: -1
+    SelectedName: 
+  _material:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _fillAmount:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _raycastTarget:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
 --- !u!1 &5675407146858375095
 GameObject:
   m_ObjectHideFlags: 0

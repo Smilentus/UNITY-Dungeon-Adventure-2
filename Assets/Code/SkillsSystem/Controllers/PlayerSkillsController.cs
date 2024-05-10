@@ -1,6 +1,7 @@
+using Dimasyechka.Code.SkillsSystem.Core;
+using Dimasyechka.Code.ZenjectFactories;
 using System;
 using System.Collections.Generic;
-using Dimasyechka.Code.SkillsSystem.Core;
 using UnityEngine;
 using Zenject;
 
@@ -8,21 +9,6 @@ namespace Dimasyechka.Code.SkillsSystem.Controllers
 {
     public class PlayerSkillsController : MonoBehaviour
     {
-        private static PlayerSkillsController m_instance;
-        public static PlayerSkillsController instance
-        {
-            get
-            {
-                if (m_instance == null)
-                {
-                    m_instance = FindObjectOfType<PlayerSkillsController>();
-                }
-
-                return m_instance;
-            }
-        }
-
-
         public event Action<PlayerSkill> onSkillObtained;
         public event Action<PlayerSkill> onSkillUpgraded;
 
@@ -35,27 +21,53 @@ namespace Dimasyechka.Code.SkillsSystem.Controllers
         private SkillsWarehouse _skillsWarehouse;
 
 
-        private List<PlayerSkill> _playerSkills = new List<PlayerSkill>();
+        private List<PlayerSkill> _runtimePlayerSkills = new List<PlayerSkill>();
+
+        private SkillCore _temporalUpgradeable;
 
 
         private RuntimePlayer _runtimePlayer;
+        private SkillCoreFactory _skillCoreFactory;
 
         [Inject]
-        public void Construct(RuntimePlayer runtimePlayer)
+        public void Construct(RuntimePlayer runtimePlayer, SkillCoreFactory skillCoreFactory)
         {
             _runtimePlayer = runtimePlayer;
+            _skillCoreFactory = skillCoreFactory;
         }
 
 
         public PlayerSkill[] GetPlayerSkills()
         {
-            return _playerSkills.ToArray();
+            return _runtimePlayerSkills.ToArray();
         }
 
         public PlayerSkill GetPlayerSkillByGuid(string skillGUID)
         {
-            return _playerSkills.Find(x => x.SkillProfile.skillGUID == skillGUID);
+            return _runtimePlayerSkills.Find(x => x.SkillProfile.skillGUID == skillGUID);
         }
+
+
+        public SkillCore GetUpgradeableSkillCore(SkillProfile skillProfile)
+        {
+            if (IsPlayerHaveSkill(skillProfile))
+            {
+                PlayerSkill runtimeObtainedSkill = GetPlayerSkillByGuid(skillProfile.skillGUID);
+                if (runtimeObtainedSkill != null)
+                {
+                    return runtimeObtainedSkill.RuntimeSkillCore;
+                }
+                else
+                {
+                    return CreateTemporalUpgradeable(skillProfile);
+                }
+            }
+            else
+            {
+                return CreateTemporalUpgradeable(skillProfile);
+            }
+        }
+
 
         public int GetPlayerSkillLevelByGuid(string skillGUID)
         {
@@ -85,23 +97,34 @@ namespace Dimasyechka.Code.SkillsSystem.Controllers
             }
             else
             {
-                if (skillProfile.skillCorePrefab.UpgradeableComponent.CanUpgradeLevel(1))
-                {
-                    PlayerSkill playerSkill = AddNewSkill(skillProfile);
+                PlayerSkill playerSkill = AddNewSkill(skillProfile);
 
-                    return playerSkill != null;
-                }
-                else
-                {
-                    return false;
-                }
+                return playerSkill != null;
             }
+        }
+
+
+        // Костыль, хочется систему переделать
+        public SkillCore CreateTemporalUpgradeable(SkillProfile profile)
+        {
+            SkillCore skillCore = _skillCoreFactory.InstantiateForComponent(profile.skillCorePrefab.gameObject, null);
+
+            skillCore.name += "_TemporalUpgradeable";
+            _temporalUpgradeable = skillCore;
+
+            return skillCore;
+        }
+
+        // Второй костыль, ноги же две у нас
+        public void DestroyTemporalUpgradeable()
+        {
+            Destroy(_temporalUpgradeable.gameObject);
         }
 
 
         public bool IsPlayerHaveSkill(SkillProfile skillProfile)
         {
-            PlayerSkill playerSkill = _playerSkills.Find(x => x.SkillProfile == skillProfile);
+            PlayerSkill playerSkill = _runtimePlayerSkills.Find(x => x.SkillProfile == skillProfile);
             return playerSkill != null;
         }
 
@@ -111,9 +134,9 @@ namespace Dimasyechka.Code.SkillsSystem.Controllers
         }
 
 
-        public void LoadSkill(string skillGUID, int obtainedLevel)
+        public void LoadSkill(string skillGuid, int obtainedLevel)
         {
-            SkillProfile skillProfile = _skillsWarehouse.GetSkillProfileByGUID(skillGUID);
+            SkillProfile skillProfile = _skillsWarehouse.GetSkillProfileByGuid(skillGuid);
 
             if (skillProfile != null)
             {
@@ -126,13 +149,13 @@ namespace Dimasyechka.Code.SkillsSystem.Controllers
             }
             else
             {
-                Debug.LogError($"Не был найден навык {skillGUID} в общем хранилище");
+                Debug.LogError($"Не был найден навык {skillGuid} в общем хранилище");
             }
         }
 
         public PlayerSkill AddNewSkill(SkillProfile skillProfile)
         {
-            PlayerSkill contains = _playerSkills.Find(x => x.SkillProfile == skillProfile);
+            PlayerSkill contains = _runtimePlayerSkills.Find(x => x.SkillProfile == skillProfile);
             if (contains != null)
             {
                 Debug.LogWarning($"Данный навык уже добавлен игроку!");
@@ -140,7 +163,9 @@ namespace Dimasyechka.Code.SkillsSystem.Controllers
             }
 
 
-            SkillCore inGameSkillObject = Instantiate(skillProfile.skillCorePrefab, _skillsParent);
+            SkillCore inGameSkillObject = _skillCoreFactory.InstantiateForComponent(
+                skillProfile.skillCorePrefab.gameObject,
+                _skillsParent);
 
             PlayerSkill playerSkill = new PlayerSkill()
             {
@@ -148,20 +173,17 @@ namespace Dimasyechka.Code.SkillsSystem.Controllers
                 RuntimeSkillCore = inGameSkillObject
             };
 
-
-            _playerSkills.Add(playerSkill);
+            _runtimePlayerSkills.Add(playerSkill);
             onSkillObtained?.Invoke(playerSkill);
 
-
             TryUpgradeSkill(skillProfile);
-
 
             return playerSkill;
         }
 
         public bool TryUpgradeSkill(SkillProfile skillProfile)
         {
-            PlayerSkill playerSkill = _playerSkills.Find(x => x.SkillProfile == skillProfile);
+            PlayerSkill playerSkill = _runtimePlayerSkills.Find(x => x.SkillProfile == skillProfile);
 
             if (playerSkill != null)
             {
@@ -180,6 +202,8 @@ namespace Dimasyechka.Code.SkillsSystem.Controllers
             }
         }
     }
+
+    public class SkillCoreFactory : DiContainerCreationFactory<SkillCore> { }
 
     public class PlayerSkill
     {

@@ -16,9 +16,8 @@ MonoBehaviour:
   m_skillCorePrefab: {fileID: 5562409851931198464, guid: 0e6d5b275c64d714a95d1102fb21f746,
     type: 3}
   m_skillLevelDatas:
-  - m_passSkillLevel: 0
-    m_skillLevelTitle: "\u0423\u0432\u0435\u043B\u0438\u0447\u0435\u043D\u0438\u0435
-      \u0432\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F
+  - _passSkillLevel: 0
+    _skillLevelTitle: "\u0412\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u0438\u043D\u0435
       \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F"
-    m_skillLevelDescription: 
-    m_skillLevelIcon: {fileID: 21300000, guid: ff008ac3cbed39a469a86335e6b440ee, type: 3}
+    _skillLevelDescription: 
+    _skillLevelIcon: {fileID: 21300000, guid: 08eae71b02e09764cb5ca6ddcddb5ec5, type: 3}

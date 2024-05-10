@@ -3,10 +3,14 @@ using Dimasyechka.Code.BattleSystem.PlayerSystem;
 using Dimasyechka.Code.BuffSystem;
 using Dimasyechka.Code.CinematicSystem;
 using Dimasyechka.Code.CraftingSystem.Recipes;
+using Dimasyechka.Code.CraftingSystem.Workbenches.Containers;
+using Dimasyechka.Code.CraftingSystem.Workbenches.Views;
 using Dimasyechka.Code.GameTimeFlowSystem.Controllers;
 using Dimasyechka.Code.InventorySystem;
+using Dimasyechka.Code.InventorySystem.BaseInventoryContainer;
 using Dimasyechka.Code.LocationSystem.Controllers;
 using Dimasyechka.Code.SaveLoadSystem.Controllers;
+using Dimasyechka.Code.SkillsSystem.Controllers;
 using UnityEngine;
 using Zenject;
 
@@ -48,6 +52,9 @@ namespace Dimasyechka.Code.MonoInstallers
         [SerializeField]
         private LocationsController _locationsController;
 
+        [SerializeField]
+        private PlayerSkillsController _playerSkillsController;
+
 
         public override void InstallBindings()
         {
@@ -62,6 +69,13 @@ namespace Dimasyechka.Code.MonoInstallers
             BindBattleController();
             BindGameController();
             BindLocationsController();
+            BindPlayerSkills();
+        }
+
+        private void BindPlayerSkills()
+        {
+            Container.Bind<PlayerSkillsController>().FromInstance(_playerSkillsController).AsSingle();
+            Container.Bind<SkillCoreFactory>().FromNew().AsSingle();
         }
 
         private void BindLocationsController()
@@ -109,11 +123,17 @@ namespace Dimasyechka.Code.MonoInstallers
         private void BindInventoryController()
         {
             Container.Bind<InventoryController>().FromInstance(_inventoryController).AsSingle();
+            Container.Bind<BaseInventoryContainerViewFactory>().FromNew().AsSingle();
+            Container.Bind<BaseInventoryContainerSlotViewFactory>().FromNew().AsSingle();
+            Container.Bind<BaseInventoryContainerButtonViewFactory>().FromNew().AsSingle();
         }
 
         private void BindCraftSystem()
         {
             Container.Bind<CraftSystem>().FromInstance(_craftSystem).AsSingle();
+            Container.Bind<CraftInputItemViewFactory>().FromNew().AsSingle();
+            Container.Bind<WorkbenchButtonViewFactory>().FromNew().AsSingle();
+            Container.Bind<BaseWorkbenchRecipeViewFactory>().FromNew().AsSingle();
         }
 
         private void BindSaveLoadSystem()

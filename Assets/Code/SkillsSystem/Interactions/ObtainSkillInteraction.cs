@@ -4,18 +4,28 @@ using Dimasyechka.Code.SkillsSystem.Core;
 using Dimasyechka.Code.SkillsSystem.GlobalWindow;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Zenject;
 
 namespace Dimasyechka.Code.SkillsSystem.Interactions
 {
     public class ObtainSkillInteraction : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField]
-        protected SkillProfile m_skillProfile;
-        public SkillProfile SkillProfile { get => m_skillProfile; set => m_skillProfile = value; }
+        protected SkillProfile _skillProfile;
+        public SkillProfile SkillProfile { get => _skillProfile; set => _skillProfile = value; }
 
 
-        private bool isObtained = false;
-        public bool IsObtained => isObtained;
+        private bool _isObtained = false;
+        public bool IsObtained => _isObtained;
+
+
+        private PlayerSkillsController _playerSkillsController;
+
+        [Inject]
+        public void Construct(PlayerSkillsController playerSkillsController)
+        {
+            _playerSkillsController = playerSkillsController;
+        }
 
 
         /// <summary>
@@ -23,7 +33,7 @@ namespace Dimasyechka.Code.SkillsSystem.Interactions
         /// </summary>
         public void Interaction()
         {
-            if (m_skillProfile == null)
+            if (_skillProfile == null)
             {
                 Debug.Log($"Отсутствует профиль навыка!", this.gameObject);
                 return;
@@ -31,13 +41,13 @@ namespace Dimasyechka.Code.SkillsSystem.Interactions
 
             GlobalWindowsController.Instance.TryShowGlobalWindow(typeof(ObtainSkillGlobalWindow), new ObtainSkillGlobalWindowData()
             {
-                Profile = m_skillProfile,
+                SkillProfile = _skillProfile,
                 OnApply = Apply
             });
 
             void Apply()
             {
-                PlayerSkillsController.instance.TryObtainPlayerSkill(m_skillProfile);
+                _playerSkillsController.TryObtainPlayerSkill(_skillProfile);
             }
         }
 

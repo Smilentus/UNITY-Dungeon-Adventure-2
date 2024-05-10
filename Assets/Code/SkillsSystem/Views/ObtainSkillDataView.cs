@@ -1,61 +1,74 @@
-using System.Collections.Generic;
 using Dimasyechka.Code.SkillsSystem.Core;
-using TMPro;
+using Dimasyechka.Lubribrary.RxMV.Core;
+using Dimasyechka.Lubribrary.RxMV.UniRx.Attributes;
+using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Dimasyechka.Code.SkillsSystem.Views
 {
-    public class ObtainSkillDataView : MonoBehaviour
+    public class ObtainSkillDataView : MonoViewModel<ObtainSkillData>
     {
-        [SerializeField]
-        private Image m_skillPreview;
+        [RxAdaptableProperty]
+        public ReactiveProperty<Sprite> SkillIcon = new ReactiveProperty<Sprite>();
 
-        [SerializeField]
-        private TMP_Text m_skillLevel;
+        [RxAdaptableProperty]
+        public ReactiveProperty<string> SkillTitle = new ReactiveProperty<string>();
 
-        [SerializeField]
-        private TMP_Text m_skillTitle;
+        [RxAdaptableProperty]
+        public ReactiveProperty<int> SkillLevel = new ReactiveProperty<int>();
 
-        [SerializeField]
-        private TMP_Text m_skillDescription;
+        [RxAdaptableProperty]
+        public ReactiveProperty<string> SkillDescription = new ReactiveProperty<string>();
 
 
-        // Почему так некрасиво? =/
-        public void SetData(SkillLevelData skillLevelData, int skillLevel, List<string> deltaValues = null) 
+        [RxAdaptableProperty]
+        public ReactiveProperty<bool> IsSkillEnabled = new ReactiveProperty<bool>();
+
+
+
+        protected override void OnSetupModel()
         {
-            if (skillLevelData == null)
+            SetData();
+        }
+
+
+        public void SetData()
+        {
+            if (Model.SkillLevelData == null)
             {
-                if (m_skillPreview != null) m_skillPreview.enabled = false;
-                if (m_skillLevel != null) m_skillLevel.enabled = false;
-                if (m_skillTitle != null) m_skillTitle.enabled = false;
-                if (m_skillDescription != null) m_skillDescription.enabled = false;
+                IsSkillEnabled.Value = false;
             }
             else
             {
-                if (m_skillPreview != null) m_skillPreview.enabled = true;
-                if (m_skillLevel != null) m_skillLevel.enabled = true;
-                if (m_skillTitle != null) m_skillTitle.enabled = true;
-                if (m_skillDescription != null) m_skillDescription.enabled = true;
+                IsSkillEnabled.Value = true;
 
-                if (m_skillPreview != null) m_skillPreview.sprite = skillLevelData.skillLevelIcon;
-                if (m_skillLevel != null) m_skillLevel.text = $"{skillLevel}";
-                if (m_skillTitle != null) m_skillTitle.text = $"{skillLevelData.skillLevelTitle}";
-                if (m_skillDescription != null)
+                SkillLevel.Value = Model.SkillLevel;
+                SkillIcon.Value = Model.SkillLevelData.skillLevelIcon;
+                SkillTitle.Value = Model.SkillLevelData.skillLevelTitle;
+
+                string skillDescription = Model.SkillLevelData.skillLevelDescription;
+
+                if (Model.DeltaValues != null)
                 {
-                    m_skillDescription.text = $"{skillLevelData.skillLevelDescription}";
+                    skillDescription += "\n\n";
 
-                    if (deltaValues != null)
+                    foreach (string deltaValue in Model.DeltaValues)
                     {
-                        m_skillDescription.text += $"\n\n";
-
-                        foreach (string deltaValue in deltaValues)
-                        {
-                            m_skillDescription.text += $"{deltaValue}\n";
-                        }
+                        skillDescription += $"{deltaValue}\n";
                     }
                 }
+
+                SkillDescription.Value = skillDescription;
             }
         }
+    }
+
+    [System.Serializable]
+    public class ObtainSkillData
+    {
+        public SkillLevelData SkillLevelData;
+        public int SkillLevel;
+        public List<string> DeltaValues = null;
     }
 }

@@ -1,72 +1,68 @@
+using Dimasyechka.Lubribrary.RxMV.Core;
+using Dimasyechka.Lubribrary.RxMV.UniRx.Attributes;
 using System;
-using TMPro;
+using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace Dimasyechka.Code.InventorySystem.BaseInventoryContainer
 {
-    public class BaseInventoryContainerButtonView : MonoBehaviour, IPointerClickHandler
+    public class BaseInventoryContainerButtonView : MonoViewModel<BaseInventoryContainer>, IPointerClickHandler
     {
+        [RxAdaptableProperty]
+        public ReactiveProperty<Color> ActiveColor = new ReactiveProperty<Color>();
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<string> ContainerTitle = new ReactiveProperty<string>();
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<Sprite> ContainerIcon = new ReactiveProperty<Sprite>();
+
+
         [Header("Colorizer")]
         [SerializeField]
-        private Image m_containerHighlighter;
+        private Color _defaultColor;
 
         [SerializeField]
-        private Color m_defaultColor;
-
-        [SerializeField]
-        private Color m_selectedColor;
+        private Color _selectedColor;
 
 
-        [Header("Inner References")]
-        [SerializeField]
-        protected Image m_containerIcon;
-
-        [SerializeField]
-        protected TMP_Text m_containerTitle;
+        private bool _isOpened;
+        public bool IsOpened => _isOpened;
 
 
-        protected BaseInventoryContainer container;
-        public BaseInventoryContainer Container => container;
+        private Action<BaseInventoryContainer> _pressedCallback;
 
 
-        private bool isOpened;
-        public bool IsOpened => isOpened;
-
-
-        private Action<BaseInventoryContainer> pressedCallback;
-
-
-        public void SetData(BaseInventoryContainer _container, Action<BaseInventoryContainer> _pressedCallback)
+        protected override void OnSetupModel()
         {
-            if (_container == null) return;
-
-            pressedCallback = _pressedCallback;
-
-            container = _container;
-
-            m_containerIcon.sprite = _container.InventoryContainerProfile.ContainerSprite;
-            m_containerTitle.text = _container.InventoryContainerProfile.ContainerName;
+            ContainerTitle.Value = Model.InventoryContainerProfile.ContainerName;
+            ContainerIcon.Value = Model.InventoryContainerProfile.ContainerSprite;
         }
 
-        public void SetOpenStatus(bool _isOpened)
-        {
-            isOpened = _isOpened;
 
-            if (isOpened)
+        public void SetPressCallback(Action<BaseInventoryContainer> pressedCallback)
+        {
+            _pressedCallback = pressedCallback;
+        }
+
+        public void SetOpenStatus(bool isOpened)
+        {
+            _isOpened = isOpened;
+
+            if (_isOpened)
             {
-                m_containerHighlighter.color = m_selectedColor;
+                ActiveColor.Value = _selectedColor;
             }
             else
             {
-                m_containerHighlighter.color = m_defaultColor;
+                ActiveColor.Value = _defaultColor;
             }
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            pressedCallback(container);
+            _pressedCallback(Model);
         }
     }
 }

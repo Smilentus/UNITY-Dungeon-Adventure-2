@@ -12,15 +12,15 @@ namespace Dimasyechka.Code.GlobalWindows.Base
         public T GetConvertedWindowData<T>() => (T)GlobalWindowData;
 
 
-        private bool isShown;
-        public bool IsShown => isShown;
+        private bool _isShown;
+        public bool IsShown => _isShown;
 
 
         public void Hide()
         {
             OnHide();
 
-            isShown = false;
+            _isShown = false;
             this.gameObject.SetActive(false);
         }
         protected virtual void OnHide() { }
@@ -38,7 +38,7 @@ namespace Dimasyechka.Code.GlobalWindows.Base
 
         public void Show()
         {
-            isShown = true;
+            _isShown = true;
             this.gameObject.SetActive(true);
 
             OnShow();

@@ -2,7 +2,8 @@ using UnityEngine;
 
 namespace Dimasyechka.Lubribrary.RxMV.UniRx.Adapters.Base
 {
-    public abstract class BaseComponentRxAdapter<T> : BaseRxAdapter where T : Component
+    public abstract class BaseComponentRxAdapter<T> : BaseRxAdapter
+        where T : Component
     {
         [SerializeField]
         protected T _component;

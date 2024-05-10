@@ -11,6 +11,10 @@ namespace Dimasyechka.Lubribrary.RxMV.UniRx.Adapters
 {
     public class TextMeshProUguiRxAdapter : BaseComponentRxAdapter<TextMeshProUGUI>
     {
+        [SerializeField]
+        private UniRxReflectionField _color = new UniRxReflectionField();
+
+
         [Header("Single Text Settings")]
         [SerializeField]
         private UniRxReflectionField _text = new UniRxReflectionField();
@@ -38,6 +42,14 @@ namespace Dimasyechka.Lubribrary.RxMV.UniRx.Adapters
             }
 
             ParseReflectionsToReflectionField(_text);
+
+
+            Dictionary<string, ReactiveProperty<Color>> propertyColor = _reflectionStorage.GetProperties<Color>();
+
+            _color.ReflectiveNames = _reflectionStorage.GetDictionaryNames(new List<string[]>()
+            {
+                propertyColor.Select(x => x.Key).ToArray()
+            });
         }
 
         protected override void OnConnectedToView()
@@ -54,6 +66,17 @@ namespace Dimasyechka.Lubribrary.RxMV.UniRx.Adapters
             else
             {
                 ConnectSingleOutputField(_text);
+            }
+
+            Dictionary<string, ReactiveProperty<Color>> propertyColor = _reflectionStorage.GetProperties<Color>();
+
+
+            if (propertyColor.ContainsKey(_color.SelectedName) && _color.SelectedIndex != -1)
+            {
+                _disposablesStorage.AddToDisposables(propertyColor[_color.SelectedName].Subscribe(x =>
+                {
+                    _component.color = x;
+                }));
             }
         }
 
@@ -217,7 +240,7 @@ namespace Dimasyechka.Lubribrary.RxMV.UniRx.Adapters
             {
                 _disposablesStorage.AddToDisposables(propertyInt[reflectionField.SelectedName].Subscribe(x =>
                 {
-                    _multipleTextOutput[outputIndex] = ((x != null) ? x.ToString("f0") : string.Empty);
+                    _multipleTextOutput[outputIndex] = ((x != null) ? x.ToString() : string.Empty);
                     UpdateComponentWithMultipleOutput();
                 }));
             }
@@ -226,7 +249,7 @@ namespace Dimasyechka.Lubribrary.RxMV.UniRx.Adapters
             {
                 _disposablesStorage.AddToDisposables(propertyFloat[reflectionField.SelectedName].Subscribe(x =>
                 {
-                    _multipleTextOutput[outputIndex] = ((x != null) ? x.ToString("f0") : string.Empty);
+                    _multipleTextOutput[outputIndex] = ((x != null) ? x.ToString() : string.Empty);
                     UpdateComponentWithMultipleOutput();
                 }));
             }
@@ -235,7 +258,7 @@ namespace Dimasyechka.Lubribrary.RxMV.UniRx.Adapters
             {
                 _disposablesStorage.AddToDisposables(propertyDouble[reflectionField.SelectedName].Subscribe(x =>
                 {
-                    _multipleTextOutput[outputIndex] = ((x != null) ? x.ToString("f0") : string.Empty);
+                    _multipleTextOutput[outputIndex] = ((x != null) ? x.ToString() : string.Empty);
                     UpdateComponentWithMultipleOutput();
                 }));
             }
@@ -244,7 +267,7 @@ namespace Dimasyechka.Lubribrary.RxMV.UniRx.Adapters
             {
                 _disposablesStorage.AddToDisposables(propertyLong[reflectionField.SelectedName].Subscribe(x =>
                 {
-                    _multipleTextOutput[outputIndex] = ((x != null) ? x.ToString("f0") : string.Empty);
+                    _multipleTextOutput[outputIndex] = ((x != null) ? x.ToString() : string.Empty);
                     UpdateComponentWithMultipleOutput();
                 }));
             }
@@ -253,7 +276,7 @@ namespace Dimasyechka.Lubribrary.RxMV.UniRx.Adapters
             {
                 _disposablesStorage.AddToDisposables(propertyUlong[reflectionField.SelectedName].Subscribe(x =>
                 {
-                    _multipleTextOutput[outputIndex] = ((x != null) ? x.ToString("f0") : string.Empty);
+                    _multipleTextOutput[outputIndex] = ((x != null) ? x.ToString() : string.Empty);
                     UpdateComponentWithMultipleOutput();
                 }));
             }
@@ -262,7 +285,7 @@ namespace Dimasyechka.Lubribrary.RxMV.UniRx.Adapters
             {
                 _disposablesStorage.AddToDisposables(propertyShort[reflectionField.SelectedName].Subscribe(x =>
                 {
-                    _multipleTextOutput[outputIndex] = ((x != null) ? x.ToString("f0") : string.Empty);
+                    _multipleTextOutput[outputIndex] = ((x != null) ? x.ToString() : string.Empty);
                     UpdateComponentWithMultipleOutput();
                 }));
             }
@@ -271,7 +294,7 @@ namespace Dimasyechka.Lubribrary.RxMV.UniRx.Adapters
             {
                 _disposablesStorage.AddToDisposables(propertyUshort[reflectionField.SelectedName].Subscribe(x =>
                 {
-                    _multipleTextOutput[outputIndex] = ((x != null) ? x.ToString("f0") : string.Empty);
+                    _multipleTextOutput[outputIndex] = ((x != null) ? x.ToString() : string.Empty);
                     UpdateComponentWithMultipleOutput();
                 }));
             }
@@ -280,7 +303,7 @@ namespace Dimasyechka.Lubribrary.RxMV.UniRx.Adapters
             {
                 _disposablesStorage.AddToDisposables(propertyByte[reflectionField.SelectedName].Subscribe(x =>
                 {
-                    _multipleTextOutput[outputIndex] = ((x != null) ? x.ToString("f0") : string.Empty);
+                    _multipleTextOutput[outputIndex] = ((x != null) ? x.ToString() : string.Empty);
                     UpdateComponentWithMultipleOutput();
                 }));
             }
@@ -289,7 +312,7 @@ namespace Dimasyechka.Lubribrary.RxMV.UniRx.Adapters
             {
                 _disposablesStorage.AddToDisposables(propertySbyte[reflectionField.SelectedName].Subscribe(x =>
                 {
-                    _multipleTextOutput[outputIndex] = ((x != null) ? x.ToString("f0") : string.Empty);
+                    _multipleTextOutput[outputIndex] = ((x != null) ? x.ToString() : string.Empty);
                     UpdateComponentWithMultipleOutput();
                 }));
             }

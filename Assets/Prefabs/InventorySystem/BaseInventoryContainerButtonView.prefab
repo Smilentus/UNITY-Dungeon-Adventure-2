@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3306891936362320630}
   - component: {fileID: 3306891936362320628}
   - component: {fileID: 3306891936362320631}
+  - component: {fileID: 5921795950620003762}
   m_Layer: 5
   m_Name: ContainerSprite
   m_TagString: Untagged
@@ -31,7 +32,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3306891936853958040}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -76,6 +76,44 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5921795950620003762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3306891936362320625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976878bb7690eea44bd40d8409ed5552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 3306891936853958045}
+  _component: {fileID: 3306891936362320631}
+  _sprite:
+    ReflectiveNames:
+    - ContainerIcon (Sprite)
+    SelectedIndex: 0
+    SelectedName: ContainerIcon (Sprite)
+  _color:
+    ReflectiveNames:
+    - ActiveColor (Color)
+    SelectedIndex: -1
+    SelectedName: 
+  _material:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _fillAmount:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _raycastTarget:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
 --- !u!1 &3306891936409295151
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,6 +125,7 @@ GameObject:
   - component: {fileID: 3306891936409295148}
   - component: {fileID: 3306891936409295154}
   - component: {fileID: 3306891936409295149}
+  - component: {fileID: 1117674753774445330}
   m_Layer: 5
   m_Name: ContainerHighlighter
   m_TagString: Untagged
@@ -107,7 +146,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3306891936853958040}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -152,6 +190,44 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1117674753774445330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3306891936409295151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976878bb7690eea44bd40d8409ed5552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 3306891936853958045}
+  _component: {fileID: 3306891936409295149}
+  _sprite:
+    ReflectiveNames:
+    - ContainerIcon (Sprite)
+    SelectedIndex: -1
+    SelectedName: 
+  _color:
+    ReflectiveNames:
+    - ActiveColor (Color)
+    SelectedIndex: 0
+    SelectedName: ActiveColor (Color)
+  _material:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _fillAmount:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _raycastTarget:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
 --- !u!1 &3306891936853958043
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,7 +265,6 @@ RectTransform:
   - {fileID: 3306891936362320630}
   - {fileID: 3306891937444180508}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -310,11 +385,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85617b0543483734d964151b1c0b0a96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_containerHighlighter: {fileID: 3306891936409295149}
-  m_defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  m_selectedColor: {r: 0, g: 1, b: 0.44655704, a: 1}
-  m_containerIcon: {fileID: 3306891936362320631}
-  m_containerTitle: {fileID: 3306891937444180509}
+  ActiveColor:
+    value: {r: 0, g: 0, b: 0, a: 0}
+  ContainerTitle:
+    value: 
+  ContainerIcon:
+    value: {fileID: 0}
+  _defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  _selectedColor: {r: 0, g: 0.9056604, b: 0.11850724, a: 1}
 --- !u!1 &3306891937444180511
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,6 +404,7 @@ GameObject:
   - component: {fileID: 3306891937444180508}
   - component: {fileID: 3306891937444180706}
   - component: {fileID: 3306891937444180509}
+  - component: {fileID: 8457367589285736624}
   m_Layer: 5
   m_Name: ContainerTitle
   m_TagString: Untagged
@@ -346,7 +425,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3306891936853958040}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -451,3 +529,32 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8457367589285736624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3306891937444180511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 3306891936853958045}
+  _component: {fileID: 3306891937444180509}
+  _color:
+    ReflectiveNames:
+    - ActiveColor (Color)
+    SelectedIndex: -1
+    SelectedName: 
+  _text:
+    ReflectiveNames:
+    - ContainerTitle (String)
+    SelectedIndex: 0
+    SelectedName: ContainerTitle (String)
+  _useMultipleText: 0
+  _multipleTextFormat: 
+  _multipleText: []

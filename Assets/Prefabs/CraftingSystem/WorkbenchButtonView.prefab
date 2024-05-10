@@ -111,11 +111,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a9c162d4e8e0bf488280477949ad462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_containerHighlighter: {fileID: 6264997040928155503}
-  m_defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  m_selectedColor: {r: 0, g: 1, b: 0.44705883, a: 1}
-  m_containerIcon: {fileID: 3291550129820558857}
-  m_containerTitle: {fileID: 0}
+  ContainerIcon:
+    value: {fileID: 0}
+  ActiveColor:
+    value: {r: 0, g: 0, b: 0, a: 0}
+  ContainerTitle:
+    value: 
+  _highlightedColor: {r: 0, g: 1, b: 0.043137312, a: 1}
+  _defaultColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &8920473967669982855
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,6 +130,7 @@ GameObject:
   - component: {fileID: 5535184173572203591}
   - component: {fileID: 4923549398015922836}
   - component: {fileID: 3291550129820558857}
+  - component: {fileID: 1244504224768563695}
   m_Layer: 5
   m_Name: ContainerSprite
   m_TagString: Untagged
@@ -191,6 +195,44 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1244504224768563695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8920473967669982855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976878bb7690eea44bd40d8409ed5552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 5363306428582250303}
+  _component: {fileID: 3291550129820558857}
+  _sprite:
+    ReflectiveNames:
+    - ContainerIcon (Sprite)
+    SelectedIndex: 0
+    SelectedName: ContainerIcon (Sprite)
+  _color:
+    ReflectiveNames:
+    - ActiveColor (Color)
+    SelectedIndex: -1
+    SelectedName: 
+  _material:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _fillAmount:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _raycastTarget:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
 --- !u!1 &9137870349020438540
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,6 +244,7 @@ GameObject:
   - component: {fileID: 4967599201831116217}
   - component: {fileID: 7809828936320265162}
   - component: {fileID: 6264997040928155503}
+  - component: {fileID: 5076230580811280266}
   m_Layer: 5
   m_Name: ContainerHighlighter
   m_TagString: Untagged
@@ -266,3 +309,41 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5076230580811280266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9137870349020438540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976878bb7690eea44bd40d8409ed5552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 5363306428582250303}
+  _component: {fileID: 6264997040928155503}
+  _sprite:
+    ReflectiveNames:
+    - ContainerIcon (Sprite)
+    SelectedIndex: -1
+    SelectedName: 
+  _color:
+    ReflectiveNames:
+    - ActiveColor (Color)
+    SelectedIndex: 0
+    SelectedName: ActiveColor (Color)
+  _material:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _fillAmount:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _raycastTarget:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 

@@ -11,9 +11,9 @@ namespace Dimasyechka.Code.SkillsSystem.Core
         public List<SkillProfile> SkillProfiles => m_skillProfiles;
 
 
-        public SkillProfile GetSkillProfileByGUID(string skillGUID)
+        public SkillProfile GetSkillProfileByGuid(string skillGuid)
         {
-            return m_skillProfiles.Find(x => x.skillGUID == skillGUID);
+            return m_skillProfiles.Find(x => x.skillGUID == skillGuid);
         }
     }
 }

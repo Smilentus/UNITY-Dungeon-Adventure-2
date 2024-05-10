@@ -1,6 +1,7 @@
 using Dimasyechka.Code.CraftingSystem.Recipes;
 using Dimasyechka.Code.CraftingSystem.Workbenches.Profiles;
 using Dimasyechka.Code.CraftingSystem.Workbenches.Views;
+using Dimasyechka.Code.ZenjectFactories;
 using UnityEngine;
 using Zenject;
 
@@ -27,11 +28,18 @@ namespace Dimasyechka.Code.CraftingSystem.Workbenches.Containers
 
 
         private CraftSystem _craftSystem;
+        private WorkbenchButtonViewFactory _workbenchButtonViewFactory;
+        private BaseWorkbenchRecipeViewFactory _baseWorkbenchRecipeViewFactory;
 
         [Inject]
-        public void Construct(CraftSystem craftSystem)
+        public void Construct(
+            CraftSystem craftSystem, 
+            BaseWorkbenchRecipeViewFactory baseWorkbenchRecipeViewFactory,
+            WorkbenchButtonViewFactory workbenchButtonViewFactory)
         {
             _craftSystem = craftSystem;
+            _workbenchButtonViewFactory = workbenchButtonViewFactory;
+            _baseWorkbenchRecipeViewFactory = baseWorkbenchRecipeViewFactory;
         }
 
 
@@ -62,9 +70,10 @@ namespace Dimasyechka.Code.CraftingSystem.Workbenches.Containers
         {
             for (int i = 0; i < WorkbenchesContainer.AvailableCraftingWorkbenches.Count; i++)
             {
-                WorkbenchButtonView buttonView = Instantiate(_buttonViewPrefab, _workbenchesContentParent);
+                WorkbenchButtonView buttonView = _workbenchButtonViewFactory.InstantiateForComponent(_buttonViewPrefab.gameObject, _workbenchesContentParent);
 
-                buttonView.SetData(WorkbenchesContainer.AvailableCraftingWorkbenches[i], OpenWorkbench);
+                buttonView.SetupModel(WorkbenchesContainer.AvailableCraftingWorkbenches[i]);
+                buttonView.SetPressCallback(OpenWorkbench);
             }
         }
 
@@ -93,9 +102,10 @@ namespace Dimasyechka.Code.CraftingSystem.Workbenches.Containers
         {
             foreach (CraftingRecipe recipe in profile.GetAllCraftingRecipes())
             {
-                BaseWorkbenchRecipeView recipeView = Instantiate(_baseRecipeViewPrefab, _recipesContentParent);
-
-                recipeView.SetData(recipe, OnCraftRecipeButtonPressed);
+                BaseWorkbenchRecipeView recipeView = _baseWorkbenchRecipeViewFactory.InstantiateForComponent(_baseRecipeViewPrefab.gameObject, _recipesContentParent);
+                
+                recipeView.SetupModel(recipe);
+                recipeView.SetPressCallback(OnCraftRecipeButtonPressed);
             }
         }
 
@@ -113,4 +123,9 @@ namespace Dimasyechka.Code.CraftingSystem.Workbenches.Containers
             _craftSystem.TryCraftRecipe(recipe);
         }
     }
+
+
+    public class WorkbenchButtonViewFactory : DiContainerCreationFactory<WorkbenchButtonView> { }
+
+    public class BaseWorkbenchRecipeViewFactory : DiContainerCreationFactory<BaseWorkbenchRecipeView> { }
 }

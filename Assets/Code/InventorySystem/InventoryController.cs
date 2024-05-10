@@ -1,8 +1,8 @@
-using System;
-using System.Collections.Generic;
 using Dimasyechka.Code.InventorySystem.BaseInventoryContainer;
 using Dimasyechka.Code.InventorySystem.BaseItem;
 using Dimasyechka.Code.InventorySystem.BaseMouse;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Dimasyechka.Code.InventorySystem
@@ -15,8 +15,8 @@ namespace Dimasyechka.Code.InventorySystem
 
 
         [SerializeField]
-        private BaseInventoryContainerProfile _quickSlotsContainer;
-   
+        private BaseInventoryContainerProfile _quickSlotsContainerProfile;
+
         [Tooltip("Уникальный контейнер, который будет динамически расширяться для мусора и предметов, которые не смогли поместиться в контейнере")]
         [SerializeField]
         private BaseInventoryContainerProfile _dynamicTimelyContainerProfile;
@@ -29,26 +29,27 @@ namespace Dimasyechka.Code.InventorySystem
         public List<BaseInventoryContainer.BaseInventoryContainer> InventoryContainers => _inventoryContainers;
 
 
+        [HideInInspector]
         public List<BaseInventoryContainer.BaseInventoryContainer> OpenedContainers = new List<BaseInventoryContainer.BaseInventoryContainer>();
 
 
-        private BaseInventoryContainer.BaseInventoryContainer quickSlotsContainer;
-        public BaseInventoryContainer.BaseInventoryContainer QuickSlotsContainer => quickSlotsContainer;
+        private BaseInventoryContainer.BaseInventoryContainer _quickSlotsContainer;
+        public BaseInventoryContainer.BaseInventoryContainer QuickSlotsContainer => _quickSlotsContainer;
 
 
-        private BaseInventoryContainer.BaseInventoryContainer dynamicTimelyContainer;
+        private BaseInventoryContainer.BaseInventoryContainer _dynamicTimelyContainer;
 
 
-        private BaseMouseItemController mouseItemController;
-        public BaseMouseItemController MouseItemController => mouseItemController;
+        private BaseMouseItemController _mouseItemController;
+        public BaseMouseItemController MouseItemController => _mouseItemController;
 
 
         private void Awake()
         {
-            mouseItemController = new BaseMouseItemController();
+            _mouseItemController = new BaseMouseItemController();
 
-            quickSlotsContainer = new BaseInventoryContainer.BaseInventoryContainer(_quickSlotsContainer);
-            dynamicTimelyContainer = new BaseInventoryContainer.BaseInventoryContainer(_dynamicTimelyContainerProfile);
+            _quickSlotsContainer = new BaseInventoryContainer.BaseInventoryContainer(_quickSlotsContainerProfile);
+            _dynamicTimelyContainer = new BaseInventoryContainer.BaseInventoryContainer(_dynamicTimelyContainerProfile);
         }
 
 
@@ -56,19 +57,19 @@ namespace Dimasyechka.Code.InventorySystem
         {
             // Управление с ПК:
             // 2) Если слот ПУСТОЙ и мышка ЗАНЯТА - помещаем из мышки в слот
-            if (_slot.IsSlotEmpty && !mouseItemController.MouseSlot.IsSlotEmpty)
+            if (_slot.IsSlotEmpty && !_mouseItemController.MouseSlot.IsSlotEmpty)
             {
-                _slot.SetItem(mouseItemController.MouseSlot.SlotItem, mouseItemController.MouseSlot.CurrentStack);
-            
-                mouseItemController.MouseSlot.ClearSlot();
+                _slot.SetItem(_mouseItemController.MouseSlot.SlotItem, _mouseItemController.MouseSlot.CurrentStack);
+
+                _mouseItemController.MouseSlot.ClearSlot();
                 _container.ForceUpdateStoredItems();
                 return;
             }
 
             // 3) Если слот ЗАНЯТ и мышка ПУСТАЯ - показываем информацию о предмете и возможные действия
-            if (!_slot.IsSlotEmpty && mouseItemController.MouseSlot.IsSlotEmpty)
+            if (!_slot.IsSlotEmpty && _mouseItemController.MouseSlot.IsSlotEmpty)
             {
-                mouseItemController.MouseSlot.SetItem(_slot.SlotItem, _slot.CurrentStack);
+                _mouseItemController.MouseSlot.SetItem(_slot.SlotItem, _slot.CurrentStack);
 
                 _slot.ClearSlot();
                 _container.ForceUpdateStoredItems();
@@ -79,18 +80,18 @@ namespace Dimasyechka.Code.InventorySystem
             // * на самом деле тут надо проверять какой предмет мы помещаем, если предметы одинаковые - дополняем стаки того предмета, который в контейнере
             // * всё что не влезло - остаётся в мышке
             // * если предметы разные - свапаем их
-            if (!_slot.IsSlotEmpty && !mouseItemController.MouseSlot.IsSlotEmpty)
+            if (!_slot.IsSlotEmpty && !_mouseItemController.MouseSlot.IsSlotEmpty)
             {
-                if (_slot.SlotItem.BaseItemProfile == mouseItemController.MouseSlot.SlotItem.BaseItemProfile)
+                if (_slot.SlotItem.BaseItemProfile == _mouseItemController.MouseSlot.SlotItem.BaseItemProfile)
                 {
-                    int unplacedStack = _slot.AddItemStack(mouseItemController.MouseSlot.CurrentStack);
+                    int unplacedStack = _slot.AddItemStack(_mouseItemController.MouseSlot.CurrentStack);
                     if (unplacedStack > 0)
                     {
-                        mouseItemController.MouseSlot.CurrentStack = unplacedStack;
+                        _mouseItemController.MouseSlot.CurrentStack = unplacedStack;
                     }
                     else
                     {
-                        mouseItemController.MouseSlot.ClearSlot();
+                        _mouseItemController.MouseSlot.ClearSlot();
                     }
                 }
                 else
@@ -98,8 +99,8 @@ namespace Dimasyechka.Code.InventorySystem
                     BaseItem.BaseItem tempItem = _slot.SlotItem;
                     int tempStack = _slot.CurrentStack;
 
-                    _slot.SetItem(mouseItemController.MouseSlot.SlotItem, mouseItemController.MouseSlot.CurrentStack);
-                    mouseItemController.MouseSlot.SetItem(tempItem, tempStack);
+                    _slot.SetItem(_mouseItemController.MouseSlot.SlotItem, _mouseItemController.MouseSlot.CurrentStack);
+                    _mouseItemController.MouseSlot.SetItem(tempItem, tempStack);
                     tempItem = null;
                 }
                 _container.ForceUpdateStoredItems();
@@ -178,44 +179,44 @@ namespace Dimasyechka.Code.InventorySystem
         }
 
 
-        public void AddInventoryContainer(BaseInventoryContainerProfile _baseInventoryContainerProfile)
+        public void AddInventoryContainer(BaseInventoryContainerProfile baseInventoryContainerProfile)
         {
-            _inventoryContainers.Add(new BaseInventoryContainer.BaseInventoryContainer(_baseInventoryContainerProfile));
+            _inventoryContainers.Add(new BaseInventoryContainer.BaseInventoryContainer(baseInventoryContainerProfile));
 
             onInventoryContainersUpdated?.Invoke();
         }
 
 
-        public void ToggleContainer(BaseInventoryContainer.BaseInventoryContainer _container)
+        public void ToggleContainer(BaseInventoryContainer.BaseInventoryContainer container)
         {
-            if (OpenedContainers.Contains(_container))
+            if (OpenedContainers.Contains(container))
             {
-                CloseContainer(_container);
+                CloseContainer(container);
             }
             else
             {
-                OpenContainer(_container);
+                OpenContainer(container);
             }
         }
 
 
-        public void OpenContainer(BaseInventoryContainer.BaseInventoryContainer _container)
+        public void OpenContainer(BaseInventoryContainer.BaseInventoryContainer container)
         {
-            if (!OpenedContainers.Contains(_container))
+            if (!OpenedContainers.Contains(container))
             {
-                OpenedContainers.Add(_container);
+                OpenedContainers.Add(container);
 
-                onInventoryContainerOpened?.Invoke(_container);
+                onInventoryContainerOpened?.Invoke(container);
             }
         }
 
-        public void CloseContainer(BaseInventoryContainer.BaseInventoryContainer _container)
+        public void CloseContainer(BaseInventoryContainer.BaseInventoryContainer container)
         {
-            if (OpenedContainers.Contains(_container))
+            if (OpenedContainers.Contains(container))
             {
-                OpenedContainers.Remove(_container);
+                OpenedContainers.Remove(container);
 
-                onInventoryContainerClosed?.Invoke(_container);
+                onInventoryContainerClosed?.Invoke(container);
             }
         }
 

@@ -1,74 +1,57 @@
+using Dimasyechka.Lubribrary.RxMV.Core;
+using Dimasyechka.Lubribrary.RxMV.UniRx.Attributes;
 using System;
-using TMPro;
+using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace Dimasyechka.Code.InventorySystem.BaseInventoryContainer
 {
-    public class BaseInventoryContainerSlotView : MonoBehaviour, IPointerClickHandler
+    public class BaseInventoryContainerSlotView : MonoViewModel<BaseInventoryContainerSlot>, IPointerClickHandler
     {
-        [SerializeField]
-        protected Image m_itemImage;
+        [RxAdaptableProperty]
+        public ReactiveProperty<string> ItemName = new ReactiveProperty<string>();
 
-        [SerializeField]
-        protected TMP_Text m_itemName;
+        [RxAdaptableProperty]
+        public ReactiveProperty<Sprite> ItemIcon = new ReactiveProperty<Sprite>();
 
-        [SerializeField]
-        protected TMP_Text m_itemStack;
+        [RxAdaptableProperty]
+        public ReactiveProperty<bool> IsIconAvailable = new ReactiveProperty<bool>();
 
-
-        private Action<BaseInventoryContainerSlot> pressedCallback;
-
-        private BaseInventoryContainerSlot containerSlot;
+        [RxAdaptableProperty]
+        public ReactiveProperty<int> ItemStack = new ReactiveProperty<int>();
 
 
-        public void SetData(BaseInventoryContainerSlot _slot, Action<BaseInventoryContainerSlot> _callback)
+        private Action<BaseInventoryContainerSlot> _pressedCallback;
+
+
+        protected override void OnSetupModel()
         {
-            containerSlot = _slot;
-            pressedCallback = _callback;
-
-            if (_slot == null || _slot.IsSlotEmpty)
+            if (Model == null || Model.IsSlotEmpty)
             {
-                if (m_itemImage != null)
-                {
-                    m_itemImage.gameObject.SetActive(false);
-                    m_itemImage.sprite = null;
-                }
-
-                if (m_itemName != null)
-                {
-                    m_itemName.text = "";
-                }
-
-                if (m_itemStack != null)
-                {
-                    m_itemStack.text = "";
-                }
+                IsIconAvailable.Value = false;
+                ItemIcon.Value = null;
+                ItemName.Value = "";
+                ItemStack.Value = 0;
             }
             else
             {
-                if (m_itemImage != null)
-                {
-                    m_itemImage.gameObject.SetActive(true);
-                    m_itemImage.sprite = _slot.SlotItem.BaseItemProfile.ItemSprite;
-                }
-
-                if (m_itemName != null)
-                {
-                    m_itemName.text = _slot.SlotItem.BaseItemProfile.ItemName;
-                }
-
-                if (m_itemStack != null)
-                {
-                    m_itemStack.text = _slot.CurrentStack.ToString();
-                }
+                IsIconAvailable.Value = true;
+                ItemIcon.Value = Model.SlotItem.BaseItemProfile.ItemSprite;
+                ItemName.Value = Model.SlotItem.BaseItemProfile.ItemName;
+                ItemStack.Value = Model.CurrentStack;
             }
+        }
+
+
+        public void SetPressCallback(Action<BaseInventoryContainerSlot> callback)
+        {
+            _pressedCallback = callback;
         }
 
         public void OnSlotPressed()
         {
-            pressedCallback(containerSlot);
+            _pressedCallback(Model);
         }
 
         public void OnPointerClick(PointerEventData eventData)

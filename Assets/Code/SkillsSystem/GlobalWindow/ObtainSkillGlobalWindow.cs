@@ -1,49 +1,44 @@
-using System;
-using System.Collections.Generic;
 using Dimasyechka.Code.GlobalWindows.Base;
 using Dimasyechka.Code.SkillsSystem.Controllers;
 using Dimasyechka.Code.SkillsSystem.Core;
 using Dimasyechka.Code.SkillsSystem.Views;
 using Dimasyechka.Code.UpgradeableSystem;
+using Dimasyechka.Lubribrary.RxMV.UniRx.Attributes;
+using System;
+using System.Collections.Generic;
+using Dimasyechka.Lubribrary.RxMV.UniRx.RxLink;
+using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
+using Zenject;
 
 namespace Dimasyechka.Code.SkillsSystem.GlobalWindow
 {
-    public class ObtainSkillGlobalWindow : BaseGameGlobalWindow
+    public class ObtainSkillGlobalWindow : BaseGameGlobalWindow, IRxLinkable
     {
         [SerializeField]
-        private ObtainSkillDataView m_currentSkillView;
+        private ObtainSkillDataView _currentSkillView;
 
         [SerializeField]
-        private ObtainSkillDataView m_nextSkillView;
-
-
-
-        [SerializeField]
-        private SkillUpgradeDescriptionView m_neededUpgradePrefab;
-
-        [SerializeField]
-        private Transform m_neededUpgradesContentParent;
+        private ObtainSkillDataView _nextSkillView;
 
 
         [SerializeField]
-        private Button m_closeButton;
+        private SkillUpgradeDescriptionView _neededUpgradePrefab;
 
         [SerializeField]
-        private Button m_upgradeButton;
+        private Transform _neededUpgradesContentParent;
 
 
-        private void OnEnable()
+        [RxAdaptableProperty]
+        public ReactiveProperty<bool> IsUpgradeButtonAvailable = new ReactiveProperty<bool>();
+
+
+        private PlayerSkillsController _playerSkillsController;
+
+        [Inject]
+        public void Construct(PlayerSkillsController playerSkillsController)
         {
-            m_closeButton.onClick.AddListener(Hide);
-            m_upgradeButton.onClick.AddListener(OnApplyButtonPressed);
-        }
-
-        private void OnDisable()
-        {
-            m_closeButton.onClick.RemoveListener(Hide);
-            m_upgradeButton.onClick.RemoveListener(OnApplyButtonPressed);
+            _playerSkillsController = playerSkillsController;
         }
 
 
@@ -56,38 +51,49 @@ namespace Dimasyechka.Code.SkillsSystem.GlobalWindow
         {
             ObtainSkillGlobalWindowData data = GetConvertedWindowData<ObtainSkillGlobalWindowData>();
 
-            PlayerSkill playerSkill = PlayerSkillsController.instance.GetPlayerSkillByGuid(data.Profile.skillGUID);
-
+            SkillCore upgradeableSkillCore = _playerSkillsController.GetUpgradeableSkillCore(data.SkillProfile);
+            
             int currentSkillLevel = -1;
             bool isMaxUpgraded = false;
             List<string> deltaValues = new List<string>();
 
-            if (playerSkill != null)
+            if (upgradeableSkillCore != null)
             {
-                currentSkillLevel = playerSkill.RuntimeSkillCore.UpgradeableComponent.currentLevel;
-                deltaValues = playerSkill.RuntimeSkillCore.GetSkillDeltaValues(currentSkillLevel + 1);
-                isMaxUpgraded = playerSkill.RuntimeSkillCore.UpgradeableComponent.reachedMaxUpgrades;
+                currentSkillLevel = upgradeableSkillCore.UpgradeableComponent.currentLevel;
+                deltaValues = upgradeableSkillCore.GetSkillDeltaValues(currentSkillLevel + 1);
+                isMaxUpgraded = upgradeableSkillCore.UpgradeableComponent.reachedMaxUpgrades;
             }
             else
             {
                 isMaxUpgraded = false;
-                deltaValues = data.Profile.skillCorePrefab.GetSkillDeltaValues(1);
+                deltaValues = upgradeableSkillCore.GetSkillDeltaValues(1);
             }
 
-            SkillLevelData currentLevelData = currentSkillLevel == -1 ? null : data.Profile.GetLevelData(currentSkillLevel);
-            SkillLevelData nextLevelData = data.Profile.GetLevelData(currentSkillLevel + 1);
+            SkillLevelData currentLevelData = currentSkillLevel == -1 ? null : upgradeableSkillCore.SkillProfile.GetLevelData(currentSkillLevel);
+            SkillLevelData nextLevelData = upgradeableSkillCore.SkillProfile.GetLevelData(currentSkillLevel + 1);
 
             ClearUpgradesDescription();
 
             if (isMaxUpgraded)
             {
-                m_upgradeButton.gameObject.SetActive(false);
+                IsUpgradeButtonAvailable.Value = false;
 
-                m_currentSkillView.SetData(currentLevelData, currentSkillLevel);
-                m_nextSkillView.SetData(null, 0, null);
+                _currentSkillView.SetupModel(new ObtainSkillData()
+                {
+                    SkillLevelData = currentLevelData,
+                    SkillLevel = currentSkillLevel
+                });
 
-                SkillUpgradeDescriptionView view = Instantiate(m_neededUpgradePrefab, m_neededUpgradesContentParent);
-                view.SetData(new SkillUpgradeDescriptionData() 
+
+                _nextSkillView.SetupModel(new ObtainSkillData()
+                {
+                    SkillLevelData = null,
+                    SkillLevel = 0,
+                    DeltaValues = null
+                });
+
+                SkillUpgradeDescriptionView view = Instantiate(_neededUpgradePrefab, _neededUpgradesContentParent);
+                view.SetupModel(new SkillUpgradeDescriptionData()
                 {
                     Description = "Достигнут макс. уровень!",
                     IsAccomplished = true
@@ -95,49 +101,60 @@ namespace Dimasyechka.Code.SkillsSystem.GlobalWindow
             }
             else
             {
-                m_upgradeButton.gameObject.SetActive(true);
+                IsUpgradeButtonAvailable.Value = true;
 
-                m_currentSkillView.SetData(currentLevelData, currentSkillLevel);
-                m_nextSkillView.SetData(nextLevelData, currentSkillLevel + 1, deltaValues);
+                _currentSkillView.SetupModel(new ObtainSkillData()
+                {
+                    SkillLevelData = currentLevelData,
+                    SkillLevel = currentSkillLevel
+                });
 
-                DrawUpgradesDescription(playerSkill);
+                _nextSkillView.SetupModel(new ObtainSkillData()
+                {
+                    SkillLevelData = nextLevelData,
+                    SkillLevel = currentSkillLevel + 1,
+                    DeltaValues = deltaValues
+                });
+
+                DrawUpgradesDescription(upgradeableSkillCore);
             }
         }
 
         private void ClearUpgradesDescription()
         {
-            m_neededUpgradesContentParent.gameObject.SetActive(true);
+            _neededUpgradesContentParent.gameObject.SetActive(true);
 
-            for (int i = m_neededUpgradesContentParent.childCount - 1; i >= 0; i--)
+            for (int i = _neededUpgradesContentParent.childCount - 1; i >= 0; i--)
             {
-                Destroy(m_neededUpgradesContentParent.GetChild(i).gameObject);
+                Destroy(_neededUpgradesContentParent.GetChild(i).gameObject);
             }
         }
 
-        private void DrawUpgradesDescription(PlayerSkill playerSkill)
+        private void DrawUpgradesDescription(SkillCore skillCore)
         {
             List<SkillUpgradeDescriptionData> skillUpgrades = new List<SkillUpgradeDescriptionData>();
 
-            if (playerSkill == null)
+            if (skillCore == null)
             {
                 ObtainSkillGlobalWindowData data = GetConvertedWindowData<ObtainSkillGlobalWindowData>();
-                skillUpgrades = data.Profile.skillCorePrefab.UpgradeableComponent.GetUpgradeDescriptions();
+                skillUpgrades = skillCore.UpgradeableComponent.GetUpgradeDescriptions();
             }
             else
             {
-                skillUpgrades = playerSkill.RuntimeSkillCore.UpgradeableComponent.GetUpgradeDescriptions();
+                skillUpgrades = skillCore.UpgradeableComponent.GetUpgradeDescriptions();
             }
 
             foreach (SkillUpgradeDescriptionData upgradeDescription in skillUpgrades)
             {
-                SkillUpgradeDescriptionView view = Instantiate(m_neededUpgradePrefab, m_neededUpgradesContentParent);
+                SkillUpgradeDescriptionView view = Instantiate(_neededUpgradePrefab, _neededUpgradesContentParent);
 
-                view.SetData(upgradeDescription);
+                view.SetupModel(upgradeDescription);
             }
         }
 
 
-        private void OnApplyButtonPressed()
+        [RxAdaptableMethod]
+        public void OnApplyButtonPressed()
         {
             ObtainSkillGlobalWindowData data = GetConvertedWindowData<ObtainSkillGlobalWindowData>();
 
@@ -145,13 +162,24 @@ namespace Dimasyechka.Code.SkillsSystem.GlobalWindow
 
             DrawSkillData();
         }
+
+        [RxAdaptableMethod]
+        public void OnHidePressed()
+        {
+            Hide();
+        }
+
+        protected override void OnHide()
+        {
+            _playerSkillsController.DestroyTemporalUpgradeable();
+        }
     }
 
     [System.Serializable]
     public class ObtainSkillGlobalWindowData : BaseGameGlobalWindowData
     {
-        public SkillProfile Profile;
-
+        public SkillProfile SkillProfile;
+        
         public Action OnApply;
     }
 }

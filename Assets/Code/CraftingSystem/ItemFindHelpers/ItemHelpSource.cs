@@ -40,7 +40,7 @@ namespace Dimasyechka.Code.CraftingSystem.ItemFindHelpers
                     itemHelpData.Add(new ItemHelpData() 
                     {
                         WhereToFindPreviewIcon = locationProfile.LocationPreviewSprite,
-                        WhereToFindExplanation = $"Найти на '{locationProfile.LocationTitle.ToLower()}'"
+                        WhereToFindExplanation = $"Где найти: {locationProfile.LocationTitle.ToLower()}"
                     });
                 }
             }
@@ -55,7 +55,7 @@ namespace Dimasyechka.Code.CraftingSystem.ItemFindHelpers
                         itemHelpData.Add(new ItemHelpData()
                         {
                             WhereToFindPreviewIcon = workbenchProfile.WorkbenchMiniSprite,
-                            WhereToFindExplanation = $"Создать на '{workbenchProfile.WorkbenchName.ToLower()}'"
+                            WhereToFindExplanation = $"Где создать: {workbenchProfile.WorkbenchName.ToLower()}"
                         });
                     }
                 }

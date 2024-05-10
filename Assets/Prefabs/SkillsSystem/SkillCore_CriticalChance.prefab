@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4363657517461616544}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5562409851931198469}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7095174416353193268
 MonoBehaviour:
@@ -44,11 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a11fe9ba27afc489b16d45361b26da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_checkLevel: 1
-  m_autoRaiseCheckLevel: 1
-  m_skillPointsCost: 1
-  m_skillPointsCostRaiseValue: 1
-  m_everyLevelRaiseSkillPoints: 3
+  _checkLevel: 1
+  _autoRaiseCheckLevel: 1
+  _skillPointsCost: 4
+  _skillPointsCostRaiseValue: 4
+  _everyLevelRaiseSkillPoints: 4
 --- !u!1 &5562409851931198468
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,6 +76,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5562409851931198468}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -83,7 +84,6 @@ Transform:
   m_Children:
   - {fileID: 701868300152379458}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5562409851931198464
 MonoBehaviour:
@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1d58bf32c81cc428aab113428feb8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_skillProfile: {fileID: 11400000, guid: 61474db1fdfab2c468f5e2219cdbc73f, type: 2}
-  m_upgradeableComponent: {fileID: 5562409851931198471}
+  _skillProfile: {fileID: 11400000, guid: 61474db1fdfab2c468f5e2219cdbc73f, type: 2}
+  _upgradeableComponent: {fileID: 5562409851931198471}
 --- !u!114 &5562409851931198471
 MonoBehaviour:
   m_ObjectHideFlags: 0

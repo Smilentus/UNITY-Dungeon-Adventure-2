@@ -1,16 +1,26 @@
 using Dimasyechka.Code.SaveLoadSystem.Controllers;
 using Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters.Base;
 using Dimasyechka.Code.SkillsSystem.Controllers;
+using Zenject;
 
 namespace Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters
 {
     public class PlayerSkillsSaveLoadConverter : SaveLoadBaseConverter<PlayerSkillSaveLoadData>
     {
+        private PlayerSkillsController _playerSkillsController;
+
+        [Inject]
+        public void Construct(PlayerSkillsController playerSkillsController)
+        {
+            _playerSkillsController = playerSkillsController;
+        }
+
+
         public override PlayerSkillSaveLoadData GetConverterData(string saveFileName)
         {
             PlayerSkillSaveLoadData saveLoadData = new PlayerSkillSaveLoadData();
 
-            PlayerSkill[] playerSkills = PlayerSkillsController.instance.GetPlayerSkills();
+            PlayerSkill[] playerSkills = _playerSkillsController.GetPlayerSkills();
 
             SaveableSkillData[] saveableSkillData = ConvertToSaveableSkillData(playerSkills);
 
@@ -44,7 +54,7 @@ namespace Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters
             {
                 foreach (SaveableSkillData saveableSkillData in playerSkillSaveLoadData.saveableSkills)
                 {
-                    PlayerSkillsController.instance.LoadSkill(saveableSkillData.skillGUID, saveableSkillData.obtainedSkillLevel);
+                    _playerSkillsController.LoadSkill(saveableSkillData.skillGUID, saveableSkillData.obtainedSkillLevel);
                 }
             }
             else

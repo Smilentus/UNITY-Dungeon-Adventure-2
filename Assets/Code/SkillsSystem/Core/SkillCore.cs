@@ -9,30 +9,30 @@ namespace Dimasyechka.Code.SkillsSystem.Core
     public class SkillCore : CoreComponentSystem.Core.Core
     {
         [SerializeField]
-        protected SkillProfile m_skillProfile;
-        public SkillProfile SkillProfile => m_skillProfile;
+        protected SkillProfile _skillProfile;
+        public SkillProfile SkillProfile => _skillProfile;
 
 
         [SerializeField] 
-        protected UpgradeableComponent m_upgradeableComponent;
-        public UpgradeableComponent UpgradeableComponent => m_upgradeableComponent;
+        protected UpgradeableComponent _upgradeableComponent;
+        public UpgradeableComponent UpgradeableComponent => _upgradeableComponent;
 
 
-        public bool isSkillReachedMax => m_upgradeableComponent.reachedMaxUpgrades;
+        public bool isSkillReachedMax => _upgradeableComponent.reachedMaxUpgrades;
 
 
-        private List<BaseSkillComponent> skillComponents = new List<BaseSkillComponent>();
+        private List<BaseSkillComponent> _skillComponents = new List<BaseSkillComponent>();
 
     
         // Переделай, дружище =(
         public List<string> GetSkillDeltaValues(int level)
         {
-            if (skillComponents.Count == 0)
-                skillComponents = GetComponentsInChildren<BaseSkillComponent>().ToList();
+            if (_skillComponents.Count == 0)
+                _skillComponents = GetComponentsInChildren<BaseSkillComponent>().ToList();
         
             List<string> output = new List<string>();
 
-            foreach (BaseSkillComponent baseSkillComponent in skillComponents)
+            foreach (BaseSkillComponent baseSkillComponent in _skillComponents)
             {
                 output.AddRange(baseSkillComponent.GetDeltaValues(level));
             }
@@ -49,15 +49,13 @@ namespace Dimasyechka.Code.SkillsSystem.Core
 
         public void LoadLevel(int level)
         {
-            m_upgradeableComponent.LoadLevel(level);
+            _upgradeableComponent.LoadLevel(level);
         }
 
 
         public bool TryUpgradeSkill()
         {
-            // Тут добавляем проверки на то можем ли мы апнуть уровень навыка и т.п.
-
-            return m_upgradeableComponent.TryAddLevel();
+            return _upgradeableComponent.TryAddLevel();
         }
     }
 }

@@ -1,55 +1,60 @@
 using Dimasyechka.Code.SkillsSystem.Controllers;
 using Dimasyechka.Code.SkillsSystem.Core;
 using Dimasyechka.Code.SkillsSystem.Interactions;
-using TMPro;
+using Dimasyechka.Lubribrary.RxMV.Core;
+using Dimasyechka.Lubribrary.RxMV.UniRx.Attributes;
+using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
+using Zenject;
 
 namespace Dimasyechka.Code.SkillsSystem.Views
 {
-    public class ObtainSkillInteractionView : MonoBehaviour
+    public class ObtainSkillInteractionView : MonoViewModel<PlayerSkillsController>
     {
         [SerializeField]
-        private ObtainSkillInteraction m_obtainSkillInteraction;
+        private ObtainSkillInteraction _obtainSkillInteraction;
 
 
-        [SerializeField]
-        private TMP_Text m_skillTitle;
+        [RxAdaptableProperty]
+        public ReactiveProperty<string> SkillTitle = new ReactiveProperty<string>();
 
-        [SerializeField]
-        private Image m_skillIcon;
+        [RxAdaptableProperty]
+        public ReactiveProperty<Sprite> SkillIcon = new ReactiveProperty<Sprite>();
 
 
-        private void Awake()
+        [Inject]
+        public void Construct(PlayerSkillsController playerSkillsController)
         {
-            if (m_obtainSkillInteraction == null)
-            {
-                m_obtainSkillInteraction = GetComponent<ObtainSkillInteraction>();
-            }
+            ZenjectModel(playerSkillsController);
         }
 
 
-        private void Start()
+        protected override void OnSetupModel()
         {
-            PlayerSkillsController.instance.onSkillUpgraded += OnSkillUpgraded;
+            if (_obtainSkillInteraction == null)
+            {
+                _obtainSkillInteraction = GetComponent<ObtainSkillInteraction>();
+            }
 
-            PlayerSkill playerSkill = PlayerSkillsController.instance.GetPlayerSkillByGuid(m_obtainSkillInteraction.SkillProfile.skillGUID);
+            Model.onSkillUpgraded += OnSkillUpgraded;
+
+            PlayerSkill playerSkill = Model.GetPlayerSkillByGuid(_obtainSkillInteraction.SkillProfile.skillGUID);
 
             if (playerSkill == null)
             {
-                UpdateSkillData(m_obtainSkillInteraction.SkillProfile, 0);
+                UpdateSkillData(_obtainSkillInteraction.SkillProfile, 0);
             }
             else
             {
-                UpdateSkillData(m_obtainSkillInteraction.SkillProfile, playerSkill.RuntimeSkillCore.UpgradeableComponent.currentLevel);
+                UpdateSkillData(_obtainSkillInteraction.SkillProfile, playerSkill.RuntimeSkillCore.UpgradeableComponent.currentLevel);
             }
         }
 
-        private void OnDestroy()
+        protected override void OnRemoveModel()
         {
-            if (PlayerSkillsController.instance != null)
+            if (Model != null)
             {
-                PlayerSkillsController.instance.onSkillUpgraded -= OnSkillUpgraded;
+                Model.onSkillUpgraded -= OnSkillUpgraded;
             }
         }
 
@@ -57,7 +62,7 @@ namespace Dimasyechka.Code.SkillsSystem.Views
         // TODO: Переделать по другой архитектуре
         private void OnSkillUpgraded(PlayerSkill upgradedSkill)
         {
-            if (upgradedSkill.SkillProfile.skillGUID == m_obtainSkillInteraction.SkillProfile.skillGUID)
+            if (upgradedSkill.SkillProfile.skillGUID == _obtainSkillInteraction.SkillProfile.skillGUID)
             {
                 UpdateSkillData(upgradedSkill.SkillProfile, upgradedSkill.RuntimeSkillCore.UpgradeableComponent.currentLevel);
             }
@@ -69,8 +74,8 @@ namespace Dimasyechka.Code.SkillsSystem.Views
 
             if (levelData != null)
             {
-                m_skillTitle.text = skillLevel.ToString();
-                m_skillIcon.sprite = levelData.skillLevelIcon;
+                SkillTitle.Value = skillLevel.ToString();
+                SkillIcon.Value = levelData.skillLevelIcon;
             }
         }
     }

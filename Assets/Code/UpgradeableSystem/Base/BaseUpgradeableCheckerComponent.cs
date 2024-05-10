@@ -7,7 +7,7 @@ namespace Dimasyechka.Code.UpgradeableSystem.Base
     public class BaseUpgradeableCheckerComponent : CoreComponent, IUpgradeableChecker
     {
         [SerializeField]
-        protected int _checkLevel = 0;
+        protected int _checkLevel = 1;
         public int CheckLevel => _checkLevel;
 
 

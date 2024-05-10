@@ -98,6 +98,7 @@
     <Compile Include="Assets\Code\LocationSystem\RuntimeLocationObject.cs" />
     <Compile Include="Assets\Code\VoiceSystem\Subtitles\SubtitlesPresenter.cs" />
     <Compile Include="Assets\Code\CraftingSystem\ItemFindHelpers\Views\ItemFindHelperView.cs" />
+    <Compile Include="Assets\Code\InventorySystem\QuickSlotsCoordinator.cs" />
     <Compile Include="Assets\Code\CraftingSystem\Workbenches\Containers\WorkbenchesContainerPresenter.cs" />
     <Compile Include="Assets\Code\SkillsSystem\Implementations\PlayerDodgeChanceSkillComponent.cs" />
     <Compile Include="Assets\Code\LocationSystem\Profiles\LocationProfile.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Assets\Code\SkillsSystem\Interactions\ObtainSkillInteraction.cs" />
     <Compile Include="Assets\Code\CinematicSystem\Observers\BaseCinematicsObserver.cs" />
     <Compile Include="Assets\Code\MagicSystem\RuntimeMagicObjects\RuntimeMagicObject_SmallFireball.cs" />
+    <Compile Include="Assets\Code\SkillsSystem\Views\SkillPointsView.cs" />
     <Compile Include="Assets\Code\CinematicSystem\Views\ArtCinematicsView.cs" />
     <Compile Include="Assets\Code\ShortDescriptionObject\ShortDescriptionObject.cs" />
     <Compile Include="Assets\Code\UpgradeableSystem\UpgradeableComponent.cs" />
@@ -233,6 +235,7 @@
     <Compile Include="Assets\Code\BattleSystem\EnemiesSystem\RuntimeBattleCharacter.cs" />
     <Compile Include="Assets\Code\SkillsSystem\Core\SkillProfile.cs" />
     <Compile Include="Assets\Code\GameTimeFlowSystem\Controllers\GameTimeFlowController.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\UniRx\Adapters\GameObjectRxAdapter.cs" />
     <Compile Include="Assets\Code\GameEventSystem\Controllers\GameEventsController.cs" />
     <Compile Include="Assets\Code\SaveLoadSystem\Controllers\SaveLoadSystemController.cs" />
     <Compile Include="Assets\Code\CraftingSystem\ItemFindHelpers\ItemHelpSourceData.cs" />

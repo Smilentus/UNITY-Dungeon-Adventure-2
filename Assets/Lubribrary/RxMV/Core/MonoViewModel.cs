@@ -9,7 +9,7 @@ namespace Dimasyechka.Lubribrary.RxMV.Core
         public T Model { get; private set; }
 
 
-        private T _zenjectedModel;
+        private T _preZenjectedModel;
 
 
         protected readonly IDisposablesStorage _disposablesStorage = new DisposablesStorage();
@@ -18,9 +18,9 @@ namespace Dimasyechka.Lubribrary.RxMV.Core
 
         protected virtual void Start()
         {
-            if (_zenjectedModel != null && Model == null)
+            if (_preZenjectedModel != null && Model == null)
             {
-                SetupModel(_zenjectedModel);
+                SetupModel(_preZenjectedModel);
             }
         }
 
@@ -35,9 +35,10 @@ namespace Dimasyechka.Lubribrary.RxMV.Core
             _disposablesStorage.Dispose();
         }
 
+
         public void ZenjectModel(T model)
         {
-            _zenjectedModel = model;
+            _preZenjectedModel = model;
         }
 
         public void SetupModel(T model)

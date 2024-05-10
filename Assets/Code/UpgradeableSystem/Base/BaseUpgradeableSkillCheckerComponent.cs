@@ -43,7 +43,14 @@ namespace Dimasyechka.Code.UpgradeableSystem.Base
 
         public override bool CanUpgrade()
         {
-            return _skillPointsCost <= _runtimePlayer.RuntimePlayerStats.SkillPoints.Value;
+            if (_runtimePlayer == null)
+            {
+                return false;
+            }
+            else
+            {
+                return _skillPointsCost <= _runtimePlayer.RuntimePlayerStats.SkillPoints.Value;
+            }
         }
 
         public override void PostUpgrade()
@@ -51,7 +58,10 @@ namespace Dimasyechka.Code.UpgradeableSystem.Base
             base.PostUpgrade();
 
             SkillCore skillCore = attachedCore as SkillCore;
-            CalculateSkillCost(skillCore.UpgradeableComponent.currentLevel);
+            if (skillCore != null)
+            {
+                CalculateSkillCost(skillCore.UpgradeableComponent.currentLevel);
+            }
         }
 
         protected override void ProcessUpgrade()

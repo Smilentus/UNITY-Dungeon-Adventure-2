@@ -1,35 +1,45 @@
 using System.Collections.Generic;
 using Dimasyechka.Code.InventorySystem.BaseInventoryContainer;
+using Dimasyechka.Code.ZenjectFactories;
 using UnityEngine;
+using Zenject;
 
 namespace Dimasyechka.Code.InventorySystem
 {
     public class InventoryControllerPresenter : MonoBehaviour
     {
-        [Header("Inventory Container References")]
         [SerializeField]
-        private BaseInventoryContainerButtonView m_buttonViewPrefab;
+        private BaseInventoryContainerButtonView _buttonViewPrefab;
 
         [SerializeField]
-        private Transform m_containerButtonsParent;
-
-
-        [SerializeField]
-        private BaseInventoryContainerView m_containerViewPrefab;
-
-        [SerializeField]
-        private Transform m_containerViewsParent;
+        private Transform _containerButtonsParent;
 
 
         [SerializeField]
-        private BaseInventoryContainerView m_quickSlotsContainer;
+        private BaseInventoryContainerView _containerViewPrefab;
+
+        [SerializeField]
+        private Transform _containerViewsParent;
 
 
-        private InventoryController controller;
+        private List<BaseInventoryContainerButtonView> _containerButtonViews = new List<BaseInventoryContainerButtonView>();
+        private List<BaseInventoryContainerView> _openedContainers = new List<BaseInventoryContainerView>();
 
 
-        private List<BaseInventoryContainerButtonView> containerButtonViews = new List<BaseInventoryContainerButtonView>();
-        private List<BaseInventoryContainerView> openedContainers = new List<BaseInventoryContainerView>();
+        private InventoryController _inventoryController;
+        private BaseInventoryContainerButtonViewFactory _buttonFactory;
+        private BaseInventoryContainerViewFactory _containerFactory;
+
+        [Inject]
+        public void Construct(
+            InventoryController inventoryController, 
+            BaseInventoryContainerButtonViewFactory buttonFactory,
+            BaseInventoryContainerViewFactory containerFactory)
+        {
+            _inventoryController = inventoryController;
+            _buttonFactory = buttonFactory;
+            _containerFactory = containerFactory;
+        }
 
 
         private void Start()
@@ -39,102 +49,100 @@ namespace Dimasyechka.Code.InventorySystem
 
         private void OnDestroy()
         {
-            if (controller != null)
+            if (_inventoryController != null)
             {
-                controller.onInventoryContainersUpdated -= OnInventoryContainersUpdated;
-                controller.onInventoryContainerOpened -= OnInventoryContainerOpened;
-                controller.onInventoryContainerClosed -= OnInventoryContainerClosed;
+                _inventoryController.onInventoryContainersUpdated -= OnInventoryContainersUpdated;
+                _inventoryController.onInventoryContainerOpened -= OnInventoryContainerOpened;
+                _inventoryController.onInventoryContainerClosed -= OnInventoryContainerClosed;
             }
         }
 
 
         private void InitializeController()
         {
-            controller = FindObjectOfType<InventoryController>();
+            _inventoryController.onInventoryContainersUpdated += OnInventoryContainersUpdated;
+            _inventoryController.onInventoryContainerOpened += OnInventoryContainerOpened;
+            _inventoryController.onInventoryContainerClosed += OnInventoryContainerClosed;
 
-            if (controller == null) return;
-
-            controller.onInventoryContainersUpdated += OnInventoryContainersUpdated;
-            controller.onInventoryContainerOpened += OnInventoryContainerOpened;
-            controller.onInventoryContainerClosed += OnInventoryContainerClosed;
-
-            m_quickSlotsContainer.OpenContainer(controller.QuickSlotsContainer);
-
-            containerButtonViews = new List<BaseInventoryContainerButtonView>();
+            _containerButtonViews = new List<BaseInventoryContainerButtonView>();
 
             OnInventoryContainersUpdated();
         }
 
-        private void OnInventoryContainerClosed(BaseInventoryContainer.BaseInventoryContainer _container)
+        private void OnInventoryContainerClosed(BaseInventoryContainer.BaseInventoryContainer container)
         {
-            HighlightSelectedContainerButton(_container, false);
+            HighlightSelectedContainerButton(container, false);
 
-            DestroyContainerView(_container);
+            DestroyContainerView(container);
         }
 
-        private void OnInventoryContainerOpened(BaseInventoryContainer.BaseInventoryContainer _container)
+        private void OnInventoryContainerOpened(BaseInventoryContainer.BaseInventoryContainer container)
         {
-            HighlightSelectedContainerButton(_container, true);
+            HighlightSelectedContainerButton(container, true);
 
-            InstantiateContainerView(_container);
+            InstantiateContainerView(container);
         }
 
 
-        private void InstantiateContainerView(BaseInventoryContainer.BaseInventoryContainer _container)
+        private void InstantiateContainerView(BaseInventoryContainer.BaseInventoryContainer container)
         {
-            BaseInventoryContainerView containerView = Instantiate(m_containerViewPrefab, m_containerViewsParent);
-            containerView.OpenContainer(_container);
+            BaseInventoryContainerView containerView = _containerFactory.InstantiateForComponent(_containerViewPrefab.gameObject, _containerViewsParent);
+            containerView.OpenContainer(container);
 
-            openedContainers.Add(containerView);
+            _openedContainers.Add(containerView);
         }
 
-        private void DestroyContainerView(BaseInventoryContainer.BaseInventoryContainer _container)
+        private void DestroyContainerView(BaseInventoryContainer.BaseInventoryContainer container)
         {
-            BaseInventoryContainerView containerView = openedContainers.Find(x => x.InventoryContainer == _container);
+            BaseInventoryContainerView containerView = _openedContainers.Find(x => x.InventoryContainer == container);
             if (containerView != null)
             {
                 containerView.HideContainer();
                 Destroy(containerView.gameObject);
 
-                openedContainers.Remove(containerView); 
+                _openedContainers.Remove(containerView); 
             }
         }
 
 
-        private void HighlightSelectedContainerButton(BaseInventoryContainer.BaseInventoryContainer _container, bool _toggle)
+        private void HighlightSelectedContainerButton(BaseInventoryContainer.BaseInventoryContainer container, bool toggle)
         {
-            BaseInventoryContainerButtonView buttonView = containerButtonViews.Find(x => x.Container == _container);
+            BaseInventoryContainerButtonView buttonView = _containerButtonViews.Find(x => x.Model == container);
             if (buttonView != null)
             {
-                buttonView.SetOpenStatus(_toggle);
+                buttonView.SetOpenStatus(toggle);
             }
         }
 
 
         private void OnInventoryContainersUpdated()
         {
-            // Удаляем старые кнопки с контейнерами
-            for (int i = containerButtonViews.Count - 1; i >= 0; i--)
+            for (int i = _containerButtonViews.Count - 1; i >= 0; i--)
             {
-                Destroy(containerButtonViews[i].gameObject);
+                Destroy(_containerButtonViews[i].gameObject);
             }
-            containerButtonViews.Clear();
+            _containerButtonViews.Clear();
 
 
-            // Заполняем новые кнопки с контейнерами
-            foreach (BaseInventoryContainer.BaseInventoryContainer baseInventoryContainer in controller.InventoryContainers)
+            foreach (BaseInventoryContainer.BaseInventoryContainer baseInventoryContainer in _inventoryController.InventoryContainers)
             {
-                BaseInventoryContainerButtonView containerButtonView = Instantiate(m_buttonViewPrefab, m_containerButtonsParent);
-                containerButtonView.SetData(baseInventoryContainer, OnBaseInventoryContainerButtonViewPressed);
-                containerButtonView.SetOpenStatus(controller.OpenedContainers.Contains(baseInventoryContainer));
+                BaseInventoryContainerButtonView containerButtonView = _buttonFactory.InstantiateForComponent(_buttonViewPrefab.gameObject, _containerButtonsParent);
+                containerButtonView.SetupModel(baseInventoryContainer);
+                containerButtonView.SetPressCallback(OnBaseInventoryContainerButtonViewPressed);
+                containerButtonView.SetOpenStatus(_inventoryController.OpenedContainers.Contains(baseInventoryContainer));
 
-                containerButtonViews.Add(containerButtonView);
+                _containerButtonViews.Add(containerButtonView);
             }
         }
 
-        private void OnBaseInventoryContainerButtonViewPressed(BaseInventoryContainer.BaseInventoryContainer _container)
+        private void OnBaseInventoryContainerButtonViewPressed(BaseInventoryContainer.BaseInventoryContainer container)
         {
-            controller.ToggleContainer(_container);
+            _inventoryController.ToggleContainer(container);
         }
     }
+
+
+    public class BaseInventoryContainerButtonViewFactory : DiContainerCreationFactory<BaseInventoryContainerButtonView> { }
+
+    public class BaseInventoryContainerViewFactory : DiContainerCreationFactory<BaseInventoryContainerView> { }
 }

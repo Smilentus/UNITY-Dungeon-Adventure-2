@@ -47,35 +47,35 @@ namespace Dimasyechka.Code.SkillsSystem.Core
     public class SkillLevelData
     {
         [SerializeField] 
-        private int m_passSkillLevel;
+        private int _passSkillLevel;
         /// <summary>
         ///     Тот уровень, после которого основной навык заменит своё описание на этот навык
         /// </summary>
-        public int PassSkillLevel => m_passSkillLevel;
+        public int PassSkillLevel => _passSkillLevel;
 
 
         [SerializeField] 
-        private string m_skillLevelTitle;
+        private string _skillLevelTitle;
         /// <summary>
         ///     Наименование улучшения 
         /// </summary>
-        public string skillLevelTitle { get => m_skillLevelTitle; }
+        public string skillLevelTitle => _skillLevelTitle; 
 
 
         [TextArea(5, 10)]
         [SerializeField] 
-        private string m_skillLevelDescription;
+        private string _skillLevelDescription;
         /// <summary>
         ///     Подробное описание улучшения навыка
         /// </summary>
-        public string skillLevelDescription { get => m_skillLevelDescription; }
+        public string skillLevelDescription => _skillLevelDescription; 
 
 
         [SerializeField] 
-        private Sprite m_skillLevelIcon;
+        private Sprite _skillLevelIcon;
         /// <summary>
         ///     Главная иконка улучшения (если её нет используется иконка навыка)
         /// </summary>
-        public Sprite skillLevelIcon { get => m_skillLevelIcon; }
+        public Sprite skillLevelIcon => _skillLevelIcon;
     }
 }

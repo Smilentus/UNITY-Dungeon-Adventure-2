@@ -35,9 +35,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6053850214903974181}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 150, y: -75}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 150, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6053850214486299651
@@ -148,6 +148,7 @@ GameObject:
   - component: {fileID: 6053850214834085544}
   - component: {fileID: 6053850214834085547}
   - component: {fileID: 7125800974470093674}
+  - component: {fileID: 3380492796662989671}
   m_Layer: 5
   m_Name: ContainerTitle
   m_TagString: Untagged
@@ -292,6 +293,34 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &3380492796662989671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6053850214834085549}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 6053850214903974178}
+  _component: {fileID: 6053850214834085547}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _text:
+    ReflectiveNames:
+    - ContainerTitle (String)
+    SelectedIndex: 0
+    SelectedName: ContainerTitle (String)
+  _useMultipleText: 0
+  _multipleTextFormat: 
+  _multipleText: []
 --- !u!1 &6053850214903974180
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,11 +414,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb54c193cd83184383c293fed61e218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_viewGameObject: {fileID: 6053850214903974180}
-  m_containerNameTMP: {fileID: 6053850214834085547}
-  m_baseInventoryContainerSlotViewPrefab: {fileID: 4148479547740217397, guid: afe6253f2335e6d4799ef36fff0b17cd,
+  IsContainerActive:
+    value: 0
+  ContainerTitle:
+    value: 
+  _baseInventoryContainerSlotViewPrefab: {fileID: 4148479547740217397, guid: afe6253f2335e6d4799ef36fff0b17cd,
     type: 3}
-  m_contentParent: {fileID: 6053850214486299653}
+  _contentParent: {fileID: 6053850214486299653}
 --- !u!114 &7488568538070371190
 MonoBehaviour:
   m_ObjectHideFlags: 0
