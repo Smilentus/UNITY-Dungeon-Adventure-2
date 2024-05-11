@@ -13,62 +13,57 @@ namespace Dimasyechka.Code.BuffSystem
         public event Action<int> onBuffDurationChanged;
 
 
-        protected BuffProfile buffProfile;
-        public BuffProfile BuffProfile => buffProfile;
+        protected BuffProfile _buffProfile;
+        public BuffProfile BuffProfile => _buffProfile;
 
 
-        protected bool isBuffEnabled;
-        public bool IsBuffEnabled => isBuffEnabled;
+        protected bool _isBuffEnabled;
+        public bool IsBuffEnabled => _isBuffEnabled;
 
 
-        protected int durationHours;
-        public int DurationHours => durationHours;
+        protected int _durationHours;
+        public int DurationHours => _durationHours;
 
 
-        protected bool isBuffEnded;
-        public bool IsBuffEnded => isBuffEnded;
+        protected bool _isBuffEnded;
+        public bool IsBuffEnded => _isBuffEnded;
 
 
-        public virtual void SetBuff(BuffProfile _buffProfile)
+        public virtual void SetBuff(BuffProfile buffProfile)
         {
-            buffProfile = _buffProfile;
+            _buffProfile = buffProfile;
 
-            durationHours = buffProfile.BuffDurationHours;
+            _durationHours = _buffProfile.BuffDurationHours;
         }
 
 
         public virtual RuntimeBuffSaveData GetSaveBuffData()
         {
             return new RuntimeBuffSaveData() {
-                BuffUID = buffProfile.BuffUID,
+                BuffUID = _buffProfile.BuffUID,
                 BuffDurationHours = DurationHours
             };
         }
 
-        /// <summary>
-        ///     Метод в основном используемый для загрузки
-        /// </summary>
-        /// <param name="durationHours">
-        ///     Оставшееся время действия баффа в часах
-        /// </param>
-        public virtual void ForceSetDurationHours(int _durationHours)
+
+        public virtual void ForceSetDurationHours(int durationHours)
         {
-            durationHours = _durationHours;
+            _durationHours = durationHours;
         }
 
         // Каждый тик баффа происходит каждый час - изменяется оставшееся время действия баффа
         // А также может выполниться какое-то действие баффа
         public virtual void UpdateBuffHourTick()
         {
-            durationHours--;
+            _durationHours--;
 
-            onBuffDurationChanged?.Invoke(durationHours);
+            onBuffDurationChanged?.Invoke(_durationHours);
 
             OnTickAction();
 
-            if (durationHours <= 0)
+            if (_durationHours <= 0)
             {
-                isBuffEnded = true;
+                _isBuffEnded = true;
 
                 OnPreBuffEnded();
 
@@ -83,17 +78,17 @@ namespace Dimasyechka.Code.BuffSystem
 
         public virtual void EnableBuff()
         {
-            if (isBuffEnabled) return;
+            if (_isBuffEnabled) return;
 
-            isBuffEnabled = true;
-            onBuffEnabledStateChanged?.Invoke(isBuffEnabled);
+            _isBuffEnabled = true;
+            onBuffEnabledStateChanged?.Invoke(_isBuffEnabled);
         }
         public virtual void DisableBuff()
         {
-            if (!isBuffEnabled) return;
+            if (!_isBuffEnabled) return;
 
-            isBuffEnabled = false;
-            onBuffEnabledStateChanged?.Invoke(isBuffEnabled);
+            _isBuffEnabled = false;
+            onBuffEnabledStateChanged?.Invoke(_isBuffEnabled);
         }
     }
 

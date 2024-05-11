@@ -197,6 +197,7 @@
     <Compile Include="Assets\Code\InventorySystem\BaseInventoryContainer\BaseInventoryContainerButtonView.cs" />
     <Compile Include="Assets\Lubribrary\RxMV\UniRx\Adapters\TextMeshProUguiRxAdapter.cs" />
     <Compile Include="Assets\Lubribrary\RxMV\UniRx\Adapters\Base\BaseComponentRxAdapter.cs" />
+    <Compile Include="Assets\Code\BuffSystem\Containers\BuffsContainerViewModel.cs" />
     <Compile Include="Assets\Code\GameEventSystem\Interfaces\IGameEventsExecuter.cs" />
     <Compile Include="Assets\Code\BattleSystem\BattleActions\Implementations\BattleActionExecuterBaseActionExecuter.cs" />
     <Compile Include="Assets\Code\BattleSystem\EnemiesSystem\RuntimeBattleCharacterSimple.cs" />
@@ -217,7 +218,6 @@
     <Compile Include="Assets\Code\GlobalWindows\Invokers\GameGlobalWindowInvoker.cs" />
     <Compile Include="Assets\Code\SaveLoadSystem\SaveLoadConverters\SaveLoadSlotDataConverter.cs" />
     <Compile Include="Assets\Code\SkillsSystem\Views\ObtainSkillInteractionView.cs" />
-    <Compile Include="Assets\Code\BuffSystem\Containers\BuffsContainerPresenter.cs" />
     <Compile Include="Assets\Code\MagicSystem\Profiles\BaseMagicProfile.cs" />
     <Compile Include="Assets\Lubribrary\RxMV\Utilities\UniRxViewConnectorField.cs" />
     <Compile Include="Assets\Code\BattleSystem\BattleActions\Profiles\BattleActionProfile.cs" />

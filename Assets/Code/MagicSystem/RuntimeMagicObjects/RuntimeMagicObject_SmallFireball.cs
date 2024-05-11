@@ -13,7 +13,7 @@ namespace Dimasyechka.Code.MagicSystem.RuntimeMagicObjects
             base.ExecuteAction();
 
             _battleController.EnemiesInBattle[_battleController.EnemiesInBattle.Count - 1].Health -= damage;
-            GameController.Instance.AddEventText(_battleController.CurrentBattleStep + " - Вы нанесли урон магией '" + _magicProfile.InteractionTitle + "' " + damage + " ед.");
+            //GameController.Instance.AddEventText(_battleController.CurrentBattleStep + " - Вы нанесли урон магией '" + _magicProfile.InteractionTitle + "' " + damage + " ед.");
         }
     }
 }

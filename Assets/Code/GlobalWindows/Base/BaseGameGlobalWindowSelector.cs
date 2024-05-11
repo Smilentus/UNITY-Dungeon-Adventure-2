@@ -9,6 +9,15 @@ namespace Dimasyechka.Code.GlobalWindows.Base
 {
     public class BaseGameGlobalWindowSelector : MonoBehaviour
     {
+        private Type[] _windowTypes = new Type[]
+        {
+            typeof(InventoryGlobalWindow),
+            typeof(WorldMapGlobalWindow),
+            typeof(PlayerSkillsGlobalWindow),
+            typeof(CraftingGlobalWindow)
+        };
+
+
         [SerializeField]
         private GameGlobalWindowInvoker inventoryButton;
 
@@ -63,7 +72,7 @@ namespace Dimasyechka.Code.GlobalWindows.Base
             playerSkillsButton.SetHighlighted(false);
             craftingButton.SetHighlighted(false);
 
-            GlobalWindowsController.Instance.CloseEveryBaseGameGlobalWindowExceptOne(baseGameGlobalWindowType);
+            GlobalWindowsController.Instance.CloseEveryWindowAmongThoseTypesExceptOne(_windowTypes, baseGameGlobalWindowType);
             GlobalWindowsController.Instance.TryToggleGlobalWindow(baseGameGlobalWindowType);
         
             return GlobalWindowsController.Instance.IsWindowShown(baseGameGlobalWindowType);

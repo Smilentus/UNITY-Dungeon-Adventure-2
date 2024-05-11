@@ -2,8 +2,6 @@
 using Dimasyechka.Code.GameTimeFlowSystem.Controllers;
 using Dimasyechka.Code.GlobalWindows;
 using Dimasyechka.Code.GlobalWindows.Controllers;
-using Dimasyechka.Code.LocationSystem.Controllers;
-using Dimasyechka.Code.LocationSystem.Profiles;
 using Dimasyechka.Code.SaveLoadSystem.BetweenScenes;
 using Dimasyechka.Code.SaveLoadSystem.Controllers;
 using Dimasyechka.Code.Utilities;
@@ -18,58 +16,42 @@ namespace Dimasyechka.Code
 {
     public class GameController : MonoBehaviour
     {
-        private static GameController instance;
+        private static GameController _instance;
         public static GameController Instance
-        { 
-            get 
-            { 
-                if (instance == null)
+        {
+            get
+            {
+                if (_instance == null)
                 {
-                    instance = FindObjectOfType<GameController>();
+                    _instance = FindObjectOfType<GameController>();
                 }
 
-                return instance; 
+                return _instance;
             }
         }
 
 
-        [Header("Префаб информационного текста")]
-        public GameObject EventText;
-        [Header("Родитель для евентов")]
-        public Transform EventParent;
-        [Header("Панель скролов")]
-        public ScrollRect eventScroll;
-
-
-        [Header("Окно информации")]
-        public GameObject Blocker;
         public GameObject DeathBox;
 
 
-        private RuntimePlayer _runtimePlayer;
         private BattleController _battleController;
-        private LocationsController _locationsController;
         private GameTimeFlowController _gameTimeFlowController;
 
 
         [Inject]
         public void Construct(
-            BattleController battleController, 
-            RuntimePlayer runtimePlayer, 
-            GameTimeFlowController gameTimeFlowController,
-            LocationsController locationsController)
+            BattleController battleController,
+            GameTimeFlowController gameTimeFlowController)
         {
             _battleController = battleController;
-            _runtimePlayer = runtimePlayer;
             _gameTimeFlowController = gameTimeFlowController;
-            _locationsController = locationsController;
         }
 
 
         // Куда-то вынести отсюдАВА
         private void Awake()
         {
-            instance = this;
+            _instance = this;
 
 
             BetweenScenesLoadableData data = BetweenScenesLoaderAdapter.Instance.LoadableData;
@@ -94,13 +76,12 @@ namespace Dimasyechka.Code
             {
                 if (GlobalWindowsController.Instance.IsWindowShown(typeof(AcceptGlobalWindow)))
                 {
-                    Blocker.SetActive(false);
                     GlobalWindowsController.Instance.TryHideGlobalWindow(typeof(AcceptGlobalWindow));
                 }
                 else
                 {
-                    Blocker.SetActive(true);
-                    GlobalWindowsController.Instance.TryShowGlobalWindow(typeof(AcceptGlobalWindow), new AcceptGlobalWindowData() {
+                    GlobalWindowsController.Instance.TryShowGlobalWindow(typeof(AcceptGlobalWindow), new AcceptGlobalWindowData()
+                    {
                         GlobalWindowTitle = "Информация",
                         GlobalWindowDescription = "Вы действительно хотите выйти в меню?",
                         ApplyButtonText = "Принять",
@@ -112,47 +93,22 @@ namespace Dimasyechka.Code
         }
 
 
-        // Добавление текста в панель ивентов
-        public void AddEventText(string text)
-        {
-            // Если текстовых полей >= Х, то удаляем
-            if (EventParent.childCount >= 512)
-            {
-                for (int i = 512; i < EventParent.childCount; i++)
-                {
-                    Destroy(EventParent.GetChild(i).gameObject);
-                }
-            }
-
-            GameObject newText = Instantiate(EventText, EventParent);
-            newText.GetComponent<Text>().text = "[" + _gameTimeFlowController.DateNow() + "]\n" + text + "\n";
-            newText.transform.SetAsFirstSibling();
-
-            eventScroll.normalizedPosition = new Vector2(eventScroll.normalizedPosition.x, 1);
-        }
-
-        // Отображение информационного окна
-        /// <summary>
-        /// 0 - Событие. 1 - Информация.
-        /// </summary>
         public void ShowMessageText(string message, string title = "[Информация]")
         {
-            Blocker.SetActive(true);
-
-            GlobalWindowsController.Instance.TryShowGlobalWindow(typeof(InfoGlobalWindow), new InfoGlobalWindowData() { 
+            GlobalWindowsController.Instance.TryShowGlobalWindow(typeof(InfoGlobalWindow), new InfoGlobalWindowData()
+            {
                 GlobalWindowTitle = title,
                 InfoMessage = message,
                 ApplyButtonText = "Принять",
                 OnApply = HideMessageText
             });
         }
-        // Закрытие информационного окна
+
         public void HideMessageText()
         {
-            Blocker.SetActive(false);
+            // ...
         }
 
-        // DeathBox открытие
         public void ShowDeathBox(string deathText)
         {
             DeathBox.SetActive(true);
@@ -194,13 +150,6 @@ namespace Dimasyechka.Code
             SceneManager.LoadScene("GameScene");
         }
 
-        // Действие при нажатии на кнопку локации
-        public void PressDirectionButton(LocationProfile locationToTravel)
-        {
-            _locationsController.TravelToLocation(locationToTravel, 0);
-        }
-
-        // Ожидание X часов
         public void WaitSomeTime(int timeToWait)
         {
             if (!_battleController.IsBattle)
@@ -215,6 +164,5 @@ namespace Dimasyechka.Code
                 _gameTimeFlowController.AddTime(timeToWait);
             }
         }
-        // --------------
     }
 }

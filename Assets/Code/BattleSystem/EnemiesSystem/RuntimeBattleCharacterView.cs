@@ -1,35 +1,38 @@
-using TMPro;
+using Dimasyechka.Lubribrary.RxMV.Core;
+using Dimasyechka.Lubribrary.RxMV.UniRx.Attributes;
+using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Dimasyechka.Code.BattleSystem.EnemiesSystem
 {
-    public class RuntimeBattleCharacterView : MonoBehaviour
+    public class RuntimeBattleCharacterView : MonoViewModel<CharacterDrawerData>
     {
-        [Header("Base References")]
-        [SerializeField]
-        protected RawImage _characterImage;
+        [RxAdaptableProperty]
+        public ReactiveProperty<Texture> CharacterTexture = new ReactiveProperty<Texture>();
 
-        [SerializeField]
-        protected TMP_Text _characterName;
-
-
-        [SerializeField]
-        protected TMP_Text _characterHealthText;
-
-        [SerializeField]
-        protected Image _characterHealthBar;
+        [RxAdaptableProperty]
+        public ReactiveProperty<string> CharacterName = new ReactiveProperty<string>();
 
 
-        public virtual void DrawCharacterInfo(CharacterDrawerData drawerData)
+        [RxAdaptableProperty]
+        public ReactiveProperty<double> CharacterHealth = new ReactiveProperty<double>();
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<double> CharacterMaxHealth = new ReactiveProperty<double>();
+
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<float> CharacterHealthRatio = new ReactiveProperty<float>();
+
+
+        protected override void OnSetupModel()
         {
-            _characterImage.texture = drawerData.RuntimeBattleCharacter.CharacterProfile.CharacterImage;
-            _characterName.text = $"{drawerData.RuntimeBattleCharacter.CharacterProfile.Name}";
+            CharacterTexture.Value = Model.RuntimeBattleCharacter.CharacterProfile.CharacterImage;
+            CharacterName.Value = Model.RuntimeBattleCharacter.CharacterProfile.Name;
+            CharacterHealthRatio.Value = (float)Model.RuntimeBattleCharacter.Health / (float)Model.RuntimeBattleCharacter.MaxHealth;
 
-            double healthRatio = (drawerData.RuntimeBattleCharacter.Health / drawerData.RuntimeBattleCharacter.MaxHealth);
-
-            _characterHealthText.text = $"{drawerData.RuntimeBattleCharacter.Health.ToString("f0")}/{drawerData.RuntimeBattleCharacter.MaxHealth.ToString("f0")}  ({(healthRatio * 100f).ToString("f2")})%";
-            _characterHealthBar.fillAmount = (float)healthRatio;
+            CharacterHealth.Value = Model.RuntimeBattleCharacter.Health;
+            CharacterMaxHealth.Value = Model.RuntimeBattleCharacter.MaxHealth;
         }
     }
 

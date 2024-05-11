@@ -25,7 +25,7 @@ namespace Dimasyechka.Code.BuffSystem
         public List<BuffProfile> AvailableBuffProfiles => m_availableBuffProfiles;
 
 
-        public BuffProfile GetBuffProfileByUID(string uid)
+        public BuffProfile GetBuffProfileByUid(string uid)
         {
             return m_availableBuffProfiles.Find(x => x.BuffUID == uid);
         }

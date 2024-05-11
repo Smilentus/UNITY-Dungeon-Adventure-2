@@ -53,19 +53,19 @@ namespace Dimasyechka.Code.BuffSystem
         {
             foreach (RuntimeBuffSaveData buffSaveData in saveData.RuntimeBuffsSaveData)
             {
-                _playerBuffsContainer.LoadBuff(BuffsWarehouse.Instance.GetBuffProfileByUID(buffSaveData.BuffUID), buffSaveData.BuffDurationHours);
+                _playerBuffsContainer.LoadBuff(BuffsWarehouse.Instance.GetBuffProfileByUid(buffSaveData.BuffUID), buffSaveData.BuffDurationHours);
             }
         }
 
 
-        public void AddPlayerBuff(BuffProfile _profile)
+        public void AddPlayerBuff(BuffProfile profile)
         {
-            _playerBuffsContainer.AddBuff(_profile);
+            _playerBuffsContainer.AddBuff(profile);
         }
 
-        public void RemovePlayerBuff(BuffProfile _profile)
+        public void RemovePlayerBuff(BuffProfile profile)
         {
-            _playerBuffsContainer.RemoveBuff(_profile);
+            _playerBuffsContainer.RemoveBuff(profile);
         }
 
         public void UpdatePlayerBuffs()

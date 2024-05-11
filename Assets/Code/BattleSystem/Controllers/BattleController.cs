@@ -116,8 +116,6 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
 
         public void EndPlayerTurn()
         {
-            _gameController.AddEventText("Вы закончили свой ход.");
-
             StartEnemiesTurn();
         }
 
@@ -180,7 +178,6 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
             {
                 //Debug.Log("Противники закончились, мы выйграли!");
                 IsWin = true;
-                _gameController.Blocker.SetActive(true);
                 EndBattle();
                 return true;
             }
@@ -211,8 +208,6 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
 
         public void EndBattle()
         {
-            GameController.Instance.Blocker.SetActive(false);
-
             if (IsWin)
             {
                 WinCondition();

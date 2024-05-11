@@ -56,7 +56,7 @@ namespace Dimasyechka.Code.BattleSystem.EnemiesSystem
 
             ActionPoints = profile.DefaultActionPoints;
 
-            _characterView.DrawCharacterInfo(new CharacterDrawerData()
+            _characterView.SetupModel(new CharacterDrawerData()
             {
                 RuntimeBattleCharacter = this
             });
@@ -73,7 +73,8 @@ namespace Dimasyechka.Code.BattleSystem.EnemiesSystem
 
         public virtual void UpdateCharacterView()
         {
-            _characterView.DrawCharacterInfo(new CharacterDrawerData()
+            // TODO: На реактивках будет, это уберём
+            _characterView.SetupModel(new CharacterDrawerData()
             {
                 RuntimeBattleCharacter = this
             });

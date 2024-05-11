@@ -118,17 +118,19 @@ namespace Dimasyechka.Code
             if (ignoreArmor)
             {
                 _runtimePlayer.RuntimePlayerStats.Health.Value -= damage;
-                GameController.Instance.AddEventText("Вы получили урон через броню: " + damage.ToString("f2"));
+                //GameController.Instance.AddEventText("Вы получили урон через броню: " + damage.ToString("f2"));
             }
             else
             {
                 if (damage > _runtimePlayer.RuntimePlayerStats.Armor.Value)
                 {
                     _runtimePlayer.RuntimePlayerStats.Health.Value -= (damage - _runtimePlayer.RuntimePlayerStats.Armor.Value);
-                    GameController.Instance.AddEventText("Вы получили урон: " + (damage - _runtimePlayer.RuntimePlayerStats.Armor.Value).ToString("f2"));
+                    //GameController.Instance.AddEventText("Вы получили урон: " + (damage - _runtimePlayer.RuntimePlayerStats.Armor.Value).ToString("f2"));
                 }
                 else
-                    GameController.Instance.AddEventText("Броня заблокировала урон.");
+                {
+                    //GameController.Instance.AddEventText("Броня заблокировала урон.");
+                }
             }
         }
 
@@ -147,7 +149,7 @@ namespace Dimasyechka.Code
                 info = "Получено: " + experience.ToString("f2") + " + (" + extraExp.ToString("f2") + ") ед. опыта.";
             }
 
-            GameController.Instance.AddEventText(info);
+            //GameController.Instance.AddEventText(info);
 
             while (_runtimePlayer.RuntimePlayerStats.Exp.Value >= _runtimePlayer.RuntimePlayerStats.MaxExp.Value)
             {
@@ -156,7 +158,7 @@ namespace Dimasyechka.Code
                 _runtimePlayer.RuntimePlayerStats.Exp.Value -= _runtimePlayer.RuntimePlayerStats.MaxExp.Value;
                 _runtimePlayer.RuntimePlayerStats.MaxExp.Value += _runtimePlayer.RuntimePlayerStats.ExpMulty.Value;
                 _runtimePlayer.RuntimePlayerStats.ExpMulty.Value += 1;
-                GameController.Instance.AddEventText("Новый уровень - " + _runtimePlayer.RuntimePlayerStats.Lvl.Value + "!");
+                //GameController.Instance.AddEventText("Новый уровень - " + _runtimePlayer.RuntimePlayerStats.Lvl.Value + "!");
             }
         }
 
@@ -173,7 +175,7 @@ namespace Dimasyechka.Code
                 info = "Получено: " + money.ToString("f2") + " + (" + extraMoney.ToString("f2") + ") ед. золота.";
             }
 
-            GameController.Instance.AddEventText(info);
+            //GameController.Instance.AddEventText(info);
         }
 
 

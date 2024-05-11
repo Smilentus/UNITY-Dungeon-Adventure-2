@@ -22,7 +22,7 @@ namespace Dimasyechka.Code.BattleSystem.BattleActions.Implementations
                             {
                                 _battleController.EnemiesInBattle[_battleController.EnemiesInBattle.Count - 1].Health -= dmg;
                                 // Анимируем удар
-                                GameController.Instance.AddEventText(_battleController.CurrentBattleStep + " - Вы нанесли урон сильным ударом: " + dmg + " ед.");
+                                //GameController.Instance.AddEventText(_battleController.CurrentBattleStep + " - Вы нанесли урон сильным ударом: " + dmg + " ед.");
 
                                 if (_battleController.EnemiesInBattle[_battleController.EnemiesInBattle.Count - 1].Health <= 0)
                                 {
@@ -31,14 +31,18 @@ namespace Dimasyechka.Code.BattleSystem.BattleActions.Implementations
                             }
                             else
                             {
-                                GameController.Instance.AddEventText(_battleController.CurrentBattleStep + " - Броня защитила противника.");
+                                //GameController.Instance.AddEventText(_battleController.CurrentBattleStep + " - Броня защитила противника.");
                             }
                         }
                         else
-                            GameController.Instance.AddEventText(_battleController.CurrentBattleStep + " - Вы промахнулись.");
+                        {
+                            //GameController.Instance.AddEventText(_battleController.CurrentBattleStep + " - Вы промахнулись.");
+                        }
                     }
                     else
-                        GameController.Instance.AddEventText(_battleController.CurrentBattleStep + " - Противник увернулся.");
+                    {
+                        //GameController.Instance.AddEventText(_battleController.CurrentBattleStep + " - Противник увернулся.");
+                    }
                 }
             }
         }

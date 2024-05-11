@@ -1,48 +1,32 @@
-using TMPro;
+using Dimasyechka.Lubribrary.RxMV.Core;
+using Dimasyechka.Lubribrary.RxMV.UniRx.Attributes;
+using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Dimasyechka.Code.BuffSystem.Views
 {
-    public class RuntimeBuffView : MonoBehaviour
+    public class RuntimeBuffView : MonoViewModel<RuntimeBuff>
     {
-        [SerializeField]
-        private TMP_Text m_buffTitleTMP;
+        [RxAdaptableProperty]
+        public ReactiveProperty<string> BuffTitle = new ReactiveProperty<string>();
 
-        [SerializeField]
-        private Image m_buffIcon;
+        [RxAdaptableProperty]
+        public ReactiveProperty<Sprite> BuffIcon = new ReactiveProperty<Sprite>();
 
-        [SerializeField]
-        private TMP_Text m_buffDurationTMP;
+        [RxAdaptableProperty]
+        public ReactiveProperty<int> BuffDuration = new ReactiveProperty<int>();
+
+        [RxAdaptableProperty]
+        public ReactiveProperty<int> MaxBuffDuration = new ReactiveProperty<int>();
 
 
-        private int maxDurationHours;
-
-
-        public void SetTitleAndIcon(string _title, Sprite _icon)
+        protected override void OnSetupModel()
         {
-            if (m_buffTitleTMP != null)
-            {
-                m_buffTitleTMP.text = $"{_title}";
-            }
-
-            if (m_buffIcon != null)
-            {
-                m_buffIcon.sprite = _icon;
-            }
-        }
-
-        public void SetDuration(int _durationHours)
-        {
-            if (m_buffDurationTMP != null)
-            {
-                m_buffDurationTMP.text = $"{_durationHours}";
-            }
-        }
-
-        public void SetMaxDuration(int _maxDurationHours)
-        {
-            maxDurationHours = _maxDurationHours;
+            BuffTitle.Value = Model.BuffProfile.BuffName;
+            BuffIcon.Value = Model.BuffProfile.BuffIcon;
+            MaxBuffDuration.Value = Model.BuffProfile.MaxDuration;
+            
+            BuffDuration.Value = Model.DurationHours;
         }
     }
 }

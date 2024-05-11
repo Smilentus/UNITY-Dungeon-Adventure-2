@@ -1,5 +1,3 @@
-using Dimasyechka.Code.BattleSystem.Controllers;
-
 namespace Dimasyechka.Code.BattleSystem.BattleActions.Implementations
 {
     public class BattleActionExecuterMediumStrike : BattleActionExecuterBaseActionExecuter
@@ -15,32 +13,46 @@ namespace Dimasyechka.Code.BattleSystem.BattleActions.Implementations
                 {
                     double dmg = _runtimePlayer.RuntimePlayerStats.Damage.Value;
 
-                    if (UnityEngine.Random.Range(0, 101) + _runtimePlayer.RuntimePlayerStats.Luck.Value > _battleController.EnemiesInBattle[_battleController.EnemiesInBattle.Count - 1].DodgeChance)
+                    if (UnityEngine.Random.Range(0, 101) + _runtimePlayer.RuntimePlayerStats.Luck.Value >
+                        _battleController.EnemiesInBattle[_battleController.EnemiesInBattle.Count - 1].DodgeChance)
                     {
                         // Проверка уклонения противника
-                        if (UnityEngine.Random.Range(0, 101) <= _runtimePlayer.RuntimePlayerStats.MediumStrikeChance.Value + _runtimePlayer.RuntimePlayerStats.Luck.Value)
+                        if (UnityEngine.Random.Range(0, 101) <=
+                            _runtimePlayer.RuntimePlayerStats.MediumStrikeChance.Value +
+                            _runtimePlayer.RuntimePlayerStats.Luck.Value)
                         {
-                            if (dmg > _battleController.EnemiesInBattle[_battleController.EnemiesInBattle.Count - 1].Armor)
+                            if (dmg > _battleController.EnemiesInBattle[_battleController.EnemiesInBattle.Count - 1]
+                                    .Armor)
                             {
-                                _battleController.EnemiesInBattle[_battleController.EnemiesInBattle.Count - 1].Health -= dmg;
+                                _battleController.EnemiesInBattle[_battleController.EnemiesInBattle.Count - 1].Health -=
+                                    dmg;
                                 // Анимируем удар
-                                GameController.Instance.AddEventText(_battleController.CurrentBattleStep + " - Вы нанесли урон нормальным ударом: " + dmg + " ед.");
+                                //GameController.Instance.AddEventText(_battleController.CurrentBattleStep +
+                                //                                     " - Вы нанесли урон нормальным ударом: " + dmg +
+                                //                                     " ед.");
 
-                                if (_battleController.EnemiesInBattle[_battleController.EnemiesInBattle.Count - 1].Health <= 0)
+                                if (_battleController.EnemiesInBattle[_battleController.EnemiesInBattle.Count - 1]
+                                        .Health <= 0)
                                 {
                                     break;
                                 }
                             }
                             else
                             {
-                                GameController.Instance.AddEventText(_battleController.CurrentBattleStep + " - Броня защитила противника.");
+                                //GameController.Instance.AddEventText(_battleController.CurrentBattleStep +
+                                //                                     " - Броня защитила противника.");
                             }
                         }
                         else
-                            GameController.Instance.AddEventText(_battleController.CurrentBattleStep + " - Вы промахнулись.");
+                        {
+                            //GameController.Instance.AddEventText(_battleController.CurrentBattleStep +
+                            //                                     " - Вы промахнулись.");
+                        }
                     }
                     else
-                        GameController.Instance.AddEventText(_battleController.CurrentBattleStep + " - Противник увернулся.");
+                    {
+                        //GameController.Instance.AddEventText(_battleController.CurrentBattleStep + " - Противник увернулся.");
+                    }
                 }
             }
         }

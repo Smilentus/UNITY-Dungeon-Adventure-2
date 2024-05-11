@@ -1,6 +1,7 @@
 using Dimasyechka.Code.BattleSystem.Controllers;
 using Dimasyechka.Code.BattleSystem.PlayerSystem;
 using Dimasyechka.Code.BuffSystem;
+using Dimasyechka.Code.BuffSystem.Containers;
 using Dimasyechka.Code.CinematicSystem;
 using Dimasyechka.Code.CraftingSystem.Recipes;
 using Dimasyechka.Code.CraftingSystem.Workbenches.Containers;
@@ -113,6 +114,7 @@ namespace Dimasyechka.Code.MonoInstallers
         private void BindPlayerBuffsController()
         {
             Container.Bind<PlayerBuffsController>().FromInstance(_playerBuffsController).AsSingle();
+            Container.Bind<RuntimeBuffViewFactory>().FromNew().AsSingle();
         }
 
         private void BindCinematics()

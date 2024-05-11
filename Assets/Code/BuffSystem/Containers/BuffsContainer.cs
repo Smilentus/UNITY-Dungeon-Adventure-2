@@ -11,18 +11,18 @@ namespace Dimasyechka.Code.BuffSystem.Containers
         public event Action onRuntimeBuffsChanged;
 
 
-        protected List<RuntimeBuff> runtimeBuffs = new List<RuntimeBuff>();
-        public List<RuntimeBuff> RuntimeBuffs => runtimeBuffs;
+        protected List<RuntimeBuff> _runtimeBuffs = new List<RuntimeBuff>();
+        public List<RuntimeBuff> RuntimeBuffs => _runtimeBuffs;
 
 
         public void DisableAndRemoveAllBuffs()
         {
-            foreach (RuntimeBuff runtimeBuff in runtimeBuffs)
+            foreach (RuntimeBuff runtimeBuff in _runtimeBuffs)
             {
                 runtimeBuff.DisableBuff();
             }
 
-            runtimeBuffs.Clear();
+            _runtimeBuffs.Clear();
 
             onRuntimeBuffsChanged?.Invoke();
         }
@@ -30,7 +30,7 @@ namespace Dimasyechka.Code.BuffSystem.Containers
 
         public void UpdateContainedBuffs()
         {
-            foreach (RuntimeBuff runtimeBuff in runtimeBuffs)
+            foreach (RuntimeBuff runtimeBuff in _runtimeBuffs)
             {
                 runtimeBuff.UpdateBuffHourTick();
             }
@@ -41,11 +41,11 @@ namespace Dimasyechka.Code.BuffSystem.Containers
         }
         private void CheckEndedBuffs()
         {
-            for (int i = runtimeBuffs.Count - 1; i >= 0; i--)
+            for (int i = _runtimeBuffs.Count - 1; i >= 0; i--)
             {
-                if (runtimeBuffs[i].IsBuffEnded)
+                if (_runtimeBuffs[i].IsBuffEnded)
                 {
-                    RemoveBuff(runtimeBuffs[i]);
+                    RemoveBuff(_runtimeBuffs[i]);
                 }
             }
         }
@@ -56,16 +56,16 @@ namespace Dimasyechka.Code.BuffSystem.Containers
             newRuntimeBuff.SetBuff(buffProfile);
             newRuntimeBuff.ForceSetDurationHours(duration);
 
-            runtimeBuffs.Add(newRuntimeBuff);
+            _runtimeBuffs.Add(newRuntimeBuff);
 
             onRuntimeBuffsChanged?.Invoke();
         }
 
         public void AddBuff(BuffProfile buffProfile)
         {
-            runtimeBuffs = runtimeBuffs.Where(x => x != null).ToList();
+            _runtimeBuffs = _runtimeBuffs.Where(x => x != null).ToList();
 
-            RuntimeBuff founded = runtimeBuffs.Find(x => x.BuffProfile == buffProfile);
+            RuntimeBuff founded = _runtimeBuffs.Find(x => x.BuffProfile == buffProfile);
 
             if (founded == null)
             {
@@ -73,16 +73,16 @@ namespace Dimasyechka.Code.BuffSystem.Containers
                 newRuntimeBuff.SetBuff(buffProfile);
                 newRuntimeBuff.EnableBuff();
 
-                runtimeBuffs.Add(newRuntimeBuff);
+                _runtimeBuffs.Add(newRuntimeBuff);
 
                 onRuntimeBuffsChanged?.Invoke();
             }
         }
         public void RemoveBuff(BuffProfile buffProfile)
         {
-            runtimeBuffs = runtimeBuffs.Where(x => x != null).ToList();
+            _runtimeBuffs = _runtimeBuffs.Where(x => x != null).ToList();
 
-            RuntimeBuff founded = runtimeBuffs.Find(x => x.BuffProfile == buffProfile);
+            RuntimeBuff founded = _runtimeBuffs.Find(x => x.BuffProfile == buffProfile);
 
             if (founded != null)
             {
@@ -92,7 +92,7 @@ namespace Dimasyechka.Code.BuffSystem.Containers
         public void RemoveBuff(RuntimeBuff runtimeBuff)
         {
             runtimeBuff.DisableBuff();
-            runtimeBuffs.Remove(runtimeBuff);
+            _runtimeBuffs.Remove(runtimeBuff);
 
             Destroy(runtimeBuff.gameObject);
 

@@ -285,7 +285,7 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
             if (rndChance <= _runtimePlayer.RuntimePlayerStats.CriticalStrikeChance.Value)
             {
                 _battleController.EnemiesInBattle[_battleController.EnemiesInBattle.Count - 1].Health -= dmg;
-                GameController.Instance.AddEventText(_battleController.CurrentBattleStep + " - Вы нанесли урон критическим ударом: " + dmg + " ед.");
+                //GameController.Instance.AddEventText(_battleController.CurrentBattleStep + " - Вы нанесли урон критическим ударом: " + dmg + " ед.");
                 return true;
             }
             return false;
@@ -297,12 +297,12 @@ namespace Dimasyechka.Code.BattleSystem.PlayerSystem
             {
                 _battleController.IsBattle = false;
                 _battleController.IsWin = false;
-                GameController.Instance.AddEventText("Вы сбежали.");
+                //GameController.Instance.AddEventText("Вы сбежали.");
                 _battleController.EndBattle();
             }
             else
             {
-                GameController.Instance.AddEventText("Вы не смогли избежать боя.");
+                //GameController.Instance.AddEventText("Вы не смогли избежать боя.");
             }
         }
     }

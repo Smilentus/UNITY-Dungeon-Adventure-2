@@ -35,7 +35,7 @@ namespace Dimasyechka.Code.GameEventSystem.GameEventsExecuters
                     _inventoryController.TryAddItemToAnyContainer(harvestableProfile, randomAmount);
                 }
 
-                GameController.Instance.AddEventText($"{profile.EventTitle}");
+                //GameController.Instance.AddEventText($"{profile.EventTitle}");
             }
         }
     }

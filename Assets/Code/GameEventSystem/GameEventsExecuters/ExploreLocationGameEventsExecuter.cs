@@ -29,7 +29,7 @@ namespace Dimasyechka.Code.GameEventSystem.GameEventsExecuters
 
                 _locationsController.ExploreLocation(profile.ExplorableLocationProfile);
 
-                GameController.Instance.AddEventText($"{profile.EventTitle}");
+                //GameController.Instance.AddEventText($"{profile.EventTitle}");
             }
         }
     }

@@ -118,7 +118,10 @@ namespace Dimasyechka.Code.SkillsSystem.Controllers
         // ¬торой костыль, ноги же две у нас
         public void DestroyTemporalUpgradeable()
         {
-            Destroy(_temporalUpgradeable.gameObject);
+            if (_temporalUpgradeable != null)
+            {
+                Destroy(_temporalUpgradeable.gameObject);
+            }
         }
 
 

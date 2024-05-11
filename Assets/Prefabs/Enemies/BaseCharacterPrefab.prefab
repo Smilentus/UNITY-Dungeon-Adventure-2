@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 101411498282242382}
   - component: {fileID: 3704651055230830668}
   - component: {fileID: 8119416752649700222}
+  - component: {fileID: 4222744218108721305}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -75,6 +76,43 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4222744218108721305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412279916625406152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 976878bb7690eea44bd40d8409ed5552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 7599934001978210214}
+  _component: {fileID: 8119416752649700222}
+  _sprite:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _material:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _fillAmount:
+    ReflectiveNames:
+    - CharacterHealthRatio (Single)
+    SelectedIndex: 0
+    SelectedName: CharacterHealthRatio (Single)
+  _raycastTarget:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
 --- !u!1 &4832460535419730181
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,6 +201,7 @@ GameObject:
   - component: {fileID: 3808522293597106766}
   - component: {fileID: 6381898627050338890}
   - component: {fileID: 8173825482074443289}
+  - component: {fileID: 8146250729874506711}
   m_Layer: 5
   m_Name: HealthText
   m_TagString: Untagged
@@ -287,6 +326,51 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &8146250729874506711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7068652256599231713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 7599934001978210214}
+  _component: {fileID: 8173825482074443289}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _text:
+    ReflectiveNames:
+    - CharacterName (String)
+    - CharacterHealthRatio (Single)
+    - CharacterMaxHealth (Double)
+    - CharacterHealth (Double)
+    SelectedIndex: -1
+    SelectedName: 
+  _useMultipleText: 1
+  _multipleTextFormat: '{0}/{1}%'
+  _multipleText:
+  - ReflectiveNames:
+    - CharacterName (String)
+    - CharacterHealthRatio (Single)
+    - CharacterMaxHealth (Double)
+    - CharacterHealth (Double)
+    SelectedIndex: 3
+    SelectedName: CharacterHealth (Double)
+  - ReflectiveNames:
+    - CharacterName (String)
+    - CharacterHealthRatio (Single)
+    - CharacterMaxHealth (Double)
+    - CharacterHealth (Double)
+    SelectedIndex: 2
+    SelectedName: CharacterMaxHealth (Double)
 --- !u!1 &7599934000372042979
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,10 +630,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dae17f228305ee42b8218a6edc3a5fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterImage: {fileID: 7599934002126588211}
-  _characterName: {fileID: 7599934002022935526}
-  _characterHealthText: {fileID: 8173825482074443289}
-  _characterHealthBar: {fileID: 8119416752649700222}
+  CharacterTexture:
+    value: {fileID: 0}
+  CharacterName:
+    value: 
+  CharacterHealth:
+    value: 0
+  CharacterMaxHealth:
+    value: 0
+  CharacterHealthRatio:
+    value: 0
 --- !u!114 &3577424941674110224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -586,6 +676,7 @@ GameObject:
   - component: {fileID: 7599934002022935527}
   - component: {fileID: 7599934002022935525}
   - component: {fileID: 7599934002022935526}
+  - component: {fileID: 1028036483764244408}
   m_Layer: 5
   m_Name: CharacterNameLabel
   m_TagString: Untagged
@@ -710,6 +801,37 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1028036483764244408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7599934002022935520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 7599934001978210214}
+  _component: {fileID: 7599934002022935526}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _text:
+    ReflectiveNames:
+    - CharacterName (String)
+    - CharacterHealthRatio (Single)
+    - CharacterMaxHealth (Double)
+    - CharacterHealth (Double)
+    SelectedIndex: 0
+    SelectedName: CharacterName (String)
+  _useMultipleText: 0
+  _multipleTextFormat: 
+  _multipleText: []
 --- !u!1 &7599934002126588221
 GameObject:
   m_ObjectHideFlags: 0
@@ -721,6 +843,7 @@ GameObject:
   - component: {fileID: 7599934002126588220}
   - component: {fileID: 7599934002126588210}
   - component: {fileID: 7599934002126588211}
+  - component: {fileID: 7292840315501194654}
   m_Layer: 5
   m_Name: CharacterImage
   m_TagString: Untagged
@@ -782,3 +905,36 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &7292840315501194654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7599934002126588221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c462625d95c7b4a40acd6527a4d186a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 7599934001978210214}
+  _component: {fileID: 7599934002126588211}
+  _texture:
+    ReflectiveNames:
+    - CharacterTexture (Texture)
+    SelectedIndex: 0
+    SelectedName: CharacterTexture (Texture)
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _material:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _raycastTarget:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 

@@ -104,7 +104,7 @@ namespace Dimasyechka.Code.GlobalWindows.Controllers
         }
 
 
-        public void CloseEveryBaseGameGlobalWindow()
+        public void CloseEveryWindow()
         {
             foreach (BaseGameGlobalWindow window in _baseGameGlobalWindows)
             {
@@ -112,7 +112,37 @@ namespace Dimasyechka.Code.GlobalWindows.Controllers
             }
         }
 
-        public void CloseEveryBaseGameGlobalWindowExceptOne(Type globalWindowType)
+        public void CloseEveryWindowAmongThoseTypes(Type[] globalWindowTypes)
+        {
+            foreach (BaseGameGlobalWindow window in _baseGameGlobalWindows)
+            {
+                foreach (Type windowType in globalWindowTypes)
+                {
+                    if (IsWindowShown(windowType))
+                    {
+                        TryHideGlobalWindow(windowType);
+                    }
+                }
+            }
+        }
+
+        public void CloseEveryWindowAmongThoseTypesExceptOne(Type[] globalWindowTypes, Type exceptWindowType)
+        {
+            foreach (BaseGameGlobalWindow window in _baseGameGlobalWindows)
+            {
+                foreach (Type windowType in globalWindowTypes)
+                {
+                    if (windowType == exceptWindowType) continue;
+
+                    if (IsWindowShown(windowType))
+                    {
+                        TryHideGlobalWindow(windowType);
+                    }
+                }
+            }
+        }
+
+        public void CloseEveryWindowExceptOne(Type globalWindowType)
         {
             foreach (BaseGameGlobalWindow window in _baseGameGlobalWindows)
             {
