@@ -9,13 +9,13 @@ namespace Dimasyechka.Code.SkillsSystem.Implementations
         {
             return new List<string>()
             {
-                $"Восстановление здоровья +{level * 0.5f} ед."
+                $"Восстановление здоровья +{level * 1} ед."
             };
         }
 
         public override void OnUpgraded(int level)
         {
-            double delta = _skillCore.UpgradeableComponent.currentLevel * 0.5f;
+            double delta = _skillCore.UpgradeableComponent.currentLevel * 1;
 
             _runtimePlayer.RuntimePlayerStats.HealthRegen.Value += delta;
         }

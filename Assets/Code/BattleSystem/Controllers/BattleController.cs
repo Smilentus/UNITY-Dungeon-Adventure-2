@@ -60,7 +60,7 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
         private GameController _gameController;
         private GameTimeFlowController _gameTimeFlowController;
         private RuntimeBattlePlayerController _runtimeBattlePlayerController;
-
+        private SaveLoadSystemController _saveLoadSystemController;
 
         private RuntimeBattleCharacterFactory _runtimeBattleCharacterFactory;
 
@@ -71,12 +71,14 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
             RuntimeBattlePlayerController runtimeBattlePlayerController,
             GameTimeFlowController gameTimeFlowController,
             GameController gameController,
-            RuntimeBattleCharacterFactory runtimeBattleCharacterFactory)
+            RuntimeBattleCharacterFactory runtimeBattleCharacterFactory,
+            SaveLoadSystemController saveLoadSystemController)
         {
             _runtimeBattlePlayerController = runtimeBattlePlayerController;
             _gameTimeFlowController = gameTimeFlowController;
             _runtimePlayer = runtimePlayer;
             _gameController = gameController;
+            _saveLoadSystemController = saveLoadSystemController;
 
             _runtimeBattleCharacterFactory = runtimeBattleCharacterFactory;
         }
@@ -211,7 +213,7 @@ namespace Dimasyechka.Code.BattleSystem.Controllers
             if (IsWin)
             {
                 WinCondition();
-                SaveLoadSystemController.Instance.TrySaveGameState("AutoSave");
+                _saveLoadSystemController.TrySaveGameState("AutoSave");
             }
 
             IsWin = false;

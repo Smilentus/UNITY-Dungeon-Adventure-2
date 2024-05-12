@@ -4,31 +4,26 @@ using System.IO;
 using System.Linq;
 using Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters;
 using UnityEngine;
+using Zenject;
 
 namespace Dimasyechka.Code.SaveLoadSystem.Controllers
 {
     public class SaveLoadSlotsController : MonoBehaviour
     {
-        private static SaveLoadSlotsController instance;
-        public static SaveLoadSlotsController Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = FindObjectOfType<SaveLoadSlotsController>();
-                }
-
-                return instance;
-            }
-        }
-
-
         public event Action onSavedSlotsUpdated;
 
 
         private List<RuntimeSaveLoadSlotData> savedSlots = new List<RuntimeSaveLoadSlotData>();
         public List<RuntimeSaveLoadSlotData> SavedSlots => savedSlots;
+
+
+        private SaveLoadSystemController _saveLoadSystemController;
+
+        [Inject]
+        public void Construct(SaveLoadSystemController saveLoadSystemController)
+        {
+            _saveLoadSystemController = saveLoadSystemController;
+        }
 
 
         public bool TryGetSaveFiles(out string[] saveFiles)
@@ -37,9 +32,9 @@ namespace Dimasyechka.Code.SaveLoadSystem.Controllers
 
             try
             {
-                if (Directory.Exists(SaveLoadSystemController.Instance.SaveFolderPath))
+                if (Directory.Exists(_saveLoadSystemController.SaveFolderPath))
                 {
-                    saveFiles = Directory.GetFiles(SaveLoadSystemController.Instance.SaveFolderPath);
+                    saveFiles = Directory.GetFiles(_saveLoadSystemController.SaveFolderPath);
                 }
             }
             catch (Exception ex)
@@ -68,13 +63,13 @@ namespace Dimasyechka.Code.SaveLoadSystem.Controllers
 
             foreach (string filePath in saveFiles)
             {
-                if (SaveLoadSystemController.Instance.TryReadFileJSON(filePath, out string fileJsonData))
+                if (_saveLoadSystemController.TryReadFileJSON(filePath, out string fileJsonData))
                 {
-                    GeneralSaveData saveData = SaveLoadSystemController.Instance.DeserializeJSON(fileJsonData);
+                    GeneralSaveData saveData = _saveLoadSystemController.DeserializeJSON(fileJsonData);
 
                     if (saveData != null)
                     {
-                        foreach (object obj in saveData.savedObjects)
+                        foreach (object obj in saveData.SavedObjects)
                         {
                             if (obj is SaveLoadSlotData)
                             {
@@ -99,7 +94,7 @@ namespace Dimasyechka.Code.SaveLoadSystem.Controllers
 
         public void CreateNewSaveSlot()
         {
-            SaveLoadSystemController.Instance.TrySaveGameState();
+            _saveLoadSystemController.TrySaveGameState();
         }
 
     

@@ -1,14 +1,24 @@
 using Dimasyechka.Code.SaveLoadSystem.Controllers;
 using Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters.Interfaces;
 using UnityEngine;
+using Zenject;
 
 namespace Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters.Base
 {
     public abstract class SaveLoadBaseConverter<T> : MonoBehaviour, ISaveLoadConverter
     {
+        private SaveLoadSystemController _saveLoadSystemController;
+
+        [Inject]
+        public void Construct(SaveLoadSystemController saveLoadSystemController)
+        {
+            _saveLoadSystemController = saveLoadSystemController;
+        }
+
+
         public virtual void Awake()
         {
-            SaveLoadSystemController.Instance.AddSaveLoadConverter(this);
+            _saveLoadSystemController.AddSaveLoadConverter(this);
 
             SetDefaultData();
         }
@@ -23,7 +33,7 @@ namespace Dimasyechka.Code.SaveLoadSystem.SaveLoadConverters.Base
 
         public T ExtractDataType(GeneralSaveData generalSaveData)
         {
-            foreach (object savedObject in generalSaveData.savedObjects)
+            foreach (object savedObject in generalSaveData.SavedObjects)
             {
                 if (savedObject.GetType().Equals(typeof(T)))
                 {

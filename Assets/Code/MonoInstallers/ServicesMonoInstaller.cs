@@ -1,7 +1,7 @@
 using Dimasyechka.Code.BattleSystem.Controllers;
 using Dimasyechka.Code.BattleSystem.PlayerSystem;
 using Dimasyechka.Code.BuffSystem;
-using Dimasyechka.Code.BuffSystem.Containers;
+using Dimasyechka.Code.BuffSystem.Views;
 using Dimasyechka.Code.CinematicSystem;
 using Dimasyechka.Code.CraftingSystem.Recipes;
 using Dimasyechka.Code.CraftingSystem.Workbenches.Containers;
@@ -10,7 +10,6 @@ using Dimasyechka.Code.GameTimeFlowSystem.Controllers;
 using Dimasyechka.Code.InventorySystem;
 using Dimasyechka.Code.InventorySystem.BaseInventoryContainer;
 using Dimasyechka.Code.LocationSystem.Controllers;
-using Dimasyechka.Code.SaveLoadSystem.Controllers;
 using Dimasyechka.Code.SkillsSystem.Controllers;
 using UnityEngine;
 using Zenject;
@@ -47,8 +46,6 @@ namespace Dimasyechka.Code.MonoInstallers
         [SerializeField]
         private CraftSystem _craftSystem;
 
-        [SerializeField]
-        private SaveLoadSystemController _saveLoadSystemController;
 
         [SerializeField]
         private LocationsController _locationsController;
@@ -59,7 +56,6 @@ namespace Dimasyechka.Code.MonoInstallers
 
         public override void InstallBindings()
         {
-            BindSaveLoadSystem();
             BindCraftSystem();
             BindInventoryController();
             BindCinematics();
@@ -136,11 +132,6 @@ namespace Dimasyechka.Code.MonoInstallers
             Container.Bind<CraftInputItemViewFactory>().FromNew().AsSingle();
             Container.Bind<WorkbenchButtonViewFactory>().FromNew().AsSingle();
             Container.Bind<BaseWorkbenchRecipeViewFactory>().FromNew().AsSingle();
-        }
-
-        private void BindSaveLoadSystem()
-        {
-            Container.Bind<SaveLoadSystemController>().FromInstance(_saveLoadSystemController).AsSingle();
         }
     }
 }

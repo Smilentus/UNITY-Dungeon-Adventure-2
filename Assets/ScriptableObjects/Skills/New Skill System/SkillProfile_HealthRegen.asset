@@ -17,7 +17,7 @@ MonoBehaviour:
     type: 3}
   m_skillLevelDatas:
   - _passSkillLevel: 0
-    _skillLevelTitle: "\u0412\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u0438\u043D\u0435
+    _skillLevelTitle: "\u0412\u043E\u0441\u0441\u0442\u0430\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435
       \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F"
     _skillLevelDescription: 
     _skillLevelIcon: {fileID: 21300000, guid: 08eae71b02e09764cb5ca6ddcddb5ec5, type: 3}

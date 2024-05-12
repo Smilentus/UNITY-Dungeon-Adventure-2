@@ -10,33 +10,18 @@ namespace Dimasyechka.Code.SaveLoadSystem.Controllers
 {
     public class SaveLoadSystemController : MonoBehaviour
     {
-        private static SaveLoadSystemController instance;
-        public static SaveLoadSystemController Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = FindObjectOfType<SaveLoadSystemController>();    
-                }
-
-                return instance;
-            }
-        }
+        private readonly string _generatorReferenceAbc = "abcdefghijklmnopqrstuvwxyz";
 
 
-        private string generatorReferenceABC = "abcdefghijklmnopqrstuvwxyz";
-
-
-        private string saveFolderPath;
-        public string SaveFolderPath => saveFolderPath;
+        private string _saveFolderPath;
+        public string SaveFolderPath => _saveFolderPath;
 
 
         [SerializeField]
-        private List<string> PermittedExtensions = new List<string>() { ".savedata", ".json" };
+        private List<string> _permittedExtensions = new List<string>() { ".savedata", ".json" };
 
 
-        private JsonSerializerSettings serializerSettings = new JsonSerializerSettings()
+        private JsonSerializerSettings _serializerSettings = new JsonSerializerSettings()
         {
             TypeNameHandling = TypeNameHandling.All,
             NullValueHandling = NullValueHandling.Ignore
@@ -48,9 +33,7 @@ namespace Dimasyechka.Code.SaveLoadSystem.Controllers
 
         private void Awake()
         {
-            saveFolderPath = Path.Combine(Application.persistentDataPath, "Saves");
-
-            instance = this;
+            _saveFolderPath = Path.Combine(Application.persistentDataPath, "Saves");
         }
 
 
@@ -64,11 +47,11 @@ namespace Dimasyechka.Code.SaveLoadSystem.Controllers
 
         private bool IsExtensionPermitted(string fileName)
         {
-            return PermittedExtensions.Contains(Path.GetExtension(fileName));
+            return _permittedExtensions.Contains(Path.GetExtension(fileName));
         }
         private string ConvertFileExtension(string fileName)
         {
-            return Path.ChangeExtension(fileName, PermittedExtensions[0]);
+            return Path.ChangeExtension(fileName, _permittedExtensions[0]);
         }
         private string CheckExtensions(string filePath)
         {
@@ -89,7 +72,7 @@ namespace Dimasyechka.Code.SaveLoadSystem.Controllers
 
             for (int i = 0; i < 16; i++)
             {
-                fileName.Append(generatorReferenceABC[UnityEngine.Random.Range(0, generatorReferenceABC.Length)]);
+                fileName.Append(_generatorReferenceAbc[UnityEngine.Random.Range(0, _generatorReferenceAbc.Length)]);
             }
 
             return fileName.ToString();
@@ -102,18 +85,18 @@ namespace Dimasyechka.Code.SaveLoadSystem.Controllers
 
             if (saveFileName == "")
             {
-                fullFilePath = Path.Combine(saveFolderPath, GenerateRandomSaveFileName());
+                fullFilePath = Path.Combine(_saveFolderPath, GenerateRandomSaveFileName());
             }
             else
             {
-                fullFilePath = Path.Combine(saveFolderPath, saveFileName);
+                fullFilePath = Path.Combine(_saveFolderPath, saveFileName);
             }
 
             return TryCollectAndSaveDataToFile(fullFilePath);
         }
         public bool TryLoadGameState(string loadFileName)
         {
-            string fullFilePath = Path.Combine(saveFolderPath, loadFileName);
+            string fullFilePath = Path.Combine(_saveFolderPath, loadFileName);
 
             return TryLoadAndParseDataFromFile(fullFilePath);
         }
@@ -123,11 +106,11 @@ namespace Dimasyechka.Code.SaveLoadSystem.Controllers
             // Ќабрасываем все данные со всех контроллеров
             GeneralSaveData saveData = new GeneralSaveData();
 
-            saveData.savedObjects = new List<object>();
+            saveData.SavedObjects = new List<object>();
 
             foreach (ISaveLoadConverter converter in SaveLoadConverters)
             {
-                saveData.savedObjects.Add(converter.GetConverterData(saveFileName));
+                saveData.SavedObjects.Add(converter.GetConverterData(saveFileName));
             }
 
             return saveData;
@@ -145,7 +128,7 @@ namespace Dimasyechka.Code.SaveLoadSystem.Controllers
         {
             try
             {
-                string outputJSON = JsonConvert.SerializeObject(saveData, serializerSettings);
+                string outputJSON = JsonConvert.SerializeObject(saveData, _serializerSettings);
                 return outputJSON;
             }
             catch (Exception ex)
@@ -161,7 +144,7 @@ namespace Dimasyechka.Code.SaveLoadSystem.Controllers
 
             try
             {
-                generalSaveData = JsonConvert.DeserializeObject<GeneralSaveData>(json, serializerSettings);
+                generalSaveData = JsonConvert.DeserializeObject<GeneralSaveData>(json, _serializerSettings);
             }
             catch (Exception ex)
             {
@@ -204,9 +187,9 @@ namespace Dimasyechka.Code.SaveLoadSystem.Controllers
         {
             try
             {
-                if (!Directory.Exists(saveFolderPath))
+                if (!Directory.Exists(_saveFolderPath))
                 {
-                    Directory.CreateDirectory(saveFolderPath);
+                    Directory.CreateDirectory(_saveFolderPath);
                 }
 
                 File.WriteAllText(fullFilePath, json, Encoding.UTF8);
@@ -269,6 +252,6 @@ namespace Dimasyechka.Code.SaveLoadSystem.Controllers
     [System.Serializable]
     public class GeneralSaveData
     {
-        public List<object> savedObjects = new List<object>();
+        public List<object> SavedObjects = new List<object>();
     }
 }

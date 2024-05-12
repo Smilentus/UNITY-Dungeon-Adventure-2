@@ -1,97 +1,83 @@
-using System;
 using Dimasyechka.Code.SaveLoadSystem.BetweenScenes;
 using Dimasyechka.Code.SaveLoadSystem.Controllers;
-using TMPro;
-using UnityEngine;
+using Dimasyechka.Lubribrary.RxMV.Core;
+using Dimasyechka.Lubribrary.RxMV.UniRx.Attributes;
+using System;
+using UniRx;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using Zenject;
 
 namespace Dimasyechka.Code.SaveLoadSystem.Views
 {
-    public class SaveLoadSlotView : MonoBehaviour
+    public class SaveLoadSlotView : MonoViewModel<RuntimeSaveLoadSlotData>
     {
         public event Action onSlotInteraction;
 
 
-        [SerializeField]
-        private TMP_Text m_slotName;
+        [RxAdaptableProperty]
+        public ReactiveProperty<string> SlotName = new ReactiveProperty<string>();
 
-        [SerializeField]
-        private TMP_Text m_saveDateTime;
+        [RxAdaptableProperty]
+        public ReactiveProperty<string> SaveDateTime = new ReactiveProperty<string>();
 
-        [SerializeField]
-        private TMP_Text m_gameSaveDateTime;
+        [RxAdaptableProperty]
+        public ReactiveProperty<string> GameDateTime = new ReactiveProperty<string>();
 
-        [SerializeField]
-        private TMP_Text m_gameVersion;
+        [RxAdaptableProperty]
+        public ReactiveProperty<string> GameVersion = new ReactiveProperty<string>();
 
-
-        [SerializeField]
-        private Button m_loadButton;
-
-        [SerializeField]
-        private Button m_reWriteButton;
-
-        [SerializeField]
-        private Button m_deleteButton;
+        [RxAdaptableProperty]
+        public ReactiveProperty<bool> IsReWriteButtonEnabled = new ReactiveProperty<bool>();
 
 
-        private RuntimeSaveLoadSlotData _slotData;
         private int _slotIndex;
 
 
-        private void OnEnable()
+        private SaveLoadSystemController _saveLoadSystemController;
+
+        [Inject]
+        public void Construct(SaveLoadSystemController saveLoadSystemController)
         {
-            m_loadButton?.onClick.AddListener(LoadThisSave);
-            m_reWriteButton?.onClick.AddListener(ReWriteThisSave);
-            m_deleteButton?.onClick.AddListener(DeleteThisSave);
+            _saveLoadSystemController = saveLoadSystemController;
         }
 
-        private void OnDisable()
-        {
-            m_loadButton?.onClick.RemoveListener(LoadThisSave);
-            m_reWriteButton?.onClick.RemoveListener(ReWriteThisSave);
-            m_deleteButton?.onClick.RemoveListener(DeleteThisSave);
-        }
-
-
-        public void SetData(int index, RuntimeSaveLoadSlotData runtimeSaveLoadSlotData, bool isReWriteButtonEnabled = true)
+        public void SetData(int index)
         {
             _slotIndex = index;
-            _slotData = runtimeSaveLoadSlotData;
 
-            DateTime converted = new DateTime(_slotData.SlotData.SaveDateTimeStamp);
+            DateTime converted = new DateTime(Model.SlotData.SaveDateTimeStamp);
 
-            m_slotName.text = $"{_slotData.SlotData.VisibleSaveFileName}";
-            m_saveDateTime.text = $"{converted.ToString("g")}";
-            m_gameSaveDateTime.text = $"{_slotData.SlotData.GameSaveDateTimeStamp}";
-            m_gameVersion.text = $"{_slotData.SlotData.GameVersion}";
-
-            SetSaveButtonVisibility(isReWriteButtonEnabled);
+            SlotName.Value = $"{Model.SlotData.VisibleSaveFileName}";
+            SaveDateTime.Value = $"{converted.ToString("g")}";
+            GameDateTime.Value = $"{Model.SlotData.GameSaveDateTimeStamp}";
+            GameVersion.Value = $"{Model.SlotData.GameVersion}";
         }
 
         public void SetSaveButtonVisibility(bool value)
         {
-            m_reWriteButton?.gameObject.SetActive(value);
+            IsReWriteButtonEnabled.Value = value;
         }
 
-        private void LoadThisSave()
+        [RxAdaptableMethod]
+        public void LoadThisSave()
         {
-            BetweenScenesLoaderAdapter.Instance.SetLoadablePath(_slotData.SaveFilePath);
+            BetweenScenesLoaderAdapter.Instance.SetLoadablePath(Model.SaveFilePath);
 
             SceneManager.LoadScene("GameScene");
         }
 
-        private void ReWriteThisSave()
+        [RxAdaptableMethod]
+        public void ReWriteThisSave()
         {
-            SaveLoadSystemController.Instance.TrySaveGameState(_slotData.SaveFilePath);
+            _saveLoadSystemController.TrySaveGameState(Model.SaveFilePath);
 
             onSlotInteraction?.Invoke();
         }
 
-        private void DeleteThisSave()
+        [RxAdaptableMethod]
+        public void DeleteThisSave()
         {
-            SaveLoadSystemController.Instance.TryDeleteSaveFile(_slotData.SaveFilePath);
+            _saveLoadSystemController.TryDeleteSaveFile(Model.SaveFilePath);
 
             onSlotInteraction?.Invoke();
         }

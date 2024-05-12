@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4652410472967224805}
   - component: {fileID: 3693649109523085426}
   - component: {fileID: 6894870640111085012}
+  - component: {fileID: 4696850227594105692}
   m_Layer: 5
   m_Name: LoadButton
   m_TagString: Untagged
@@ -142,6 +143,34 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &4696850227594105692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1054109294578756420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab53b914a300b94ea3c2c180924fe37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 1487362904120371277}
+  _component: {fileID: 3693649109523085426}
+  _interactable:
+    ReflectiveNames:
+    - IsReWriteButtonEnabled (Boolean)
+    SelectedIndex: -1
+    SelectedName: 
+  _onClickHandler:
+    ReflectiveNames:
+    - ReWriteThisSave (void)
+    - DeleteThisSave (void)
+    - LoadThisSave (void)
+    SelectedIndex: 2
+    SelectedName: LoadThisSave (void)
 --- !u!1 &3097096690080351066
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,6 +414,7 @@ GameObject:
   - component: {fileID: 5573735707034803344}
   - component: {fileID: 5801741049661060148}
   - component: {fileID: 3938600362298443097}
+  - component: {fileID: 9109355204655635819}
   m_Layer: 5
   m_Name: SaveTime (GT)
   m_TagString: Untagged
@@ -544,6 +574,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 0
+--- !u!114 &9109355204655635819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3927500839962554879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 1487362904120371277}
+  _component: {fileID: 5573735707034803344}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _text:
+    ReflectiveNames:
+    - SaveDateTime (String)
+    - GameDateTime (String)
+    - GameVersion (String)
+    - SlotName (String)
+    SelectedIndex: 1
+    SelectedName: GameDateTime (String)
+  _useMultipleText: 0
+  _multipleTextFormat: 
+  _multipleText: []
 --- !u!1 &4480104856639941932
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,6 +618,7 @@ GameObject:
   - component: {fileID: 5446145088031297184}
   - component: {fileID: 5603537700494809000}
   - component: {fileID: 413921706343244422}
+  - component: {fileID: 931159754360584956}
   m_Layer: 5
   m_Name: GameVersion
   m_TagString: Untagged
@@ -715,6 +777,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 0
+--- !u!114 &931159754360584956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4480104856639941932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 1487362904120371277}
+  _component: {fileID: 5446145088031297184}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _text:
+    ReflectiveNames:
+    - SaveDateTime (String)
+    - GameDateTime (String)
+    - GameVersion (String)
+    - SlotName (String)
+    SelectedIndex: 2
+    SelectedName: GameVersion (String)
+  _useMultipleText: 0
+  _multipleTextFormat: 
+  _multipleText: []
 --- !u!1 &4755653122804003775
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,13 +948,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56bf22f92f0cfaf4b9d03e881a7d0282, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_slotName: {fileID: 4755653124258462991}
-  m_saveDateTime: {fileID: 7373652745824829584}
-  m_gameSaveDateTime: {fileID: 5573735707034803344}
-  m_gameVersion: {fileID: 5446145088031297184}
-  m_loadButton: {fileID: 3693649109523085426}
-  m_reWriteButton: {fileID: 4755653124262658461}
-  m_deleteButton: {fileID: 4755653123969358362}
+  SlotName:
+    value: 
+  SaveDateTime:
+    value: 
+  GameDateTime:
+    value: 
+  GameVersion:
+    value: 
+  IsReWriteButtonEnabled:
+    value: 0
 --- !u!1 &4755653123969358359
 GameObject:
   m_ObjectHideFlags: 0
@@ -875,6 +971,7 @@ GameObject:
   - component: {fileID: 4755653123969358363}
   - component: {fileID: 4755653123969358362}
   - component: {fileID: 4755653123969358361}
+  - component: {fileID: 7896398676757045693}
   m_Layer: 5
   m_Name: DeleteButton
   m_TagString: Untagged
@@ -1004,6 +1101,34 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &7896398676757045693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4755653123969358359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab53b914a300b94ea3c2c180924fe37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 1487362904120371277}
+  _component: {fileID: 4755653123969358362}
+  _interactable:
+    ReflectiveNames:
+    - IsReWriteButtonEnabled (Boolean)
+    SelectedIndex: -1
+    SelectedName: 
+  _onClickHandler:
+    ReflectiveNames:
+    - ReWriteThisSave (void)
+    - DeleteThisSave (void)
+    - LoadThisSave (void)
+    SelectedIndex: 1
+    SelectedName: DeleteThisSave (void)
 --- !u!1 &4755653124258462989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,6 +1142,7 @@ GameObject:
   - component: {fileID: 4755653124258462991}
   - component: {fileID: 4755653124258462993}
   - component: {fileID: 5929029951052411126}
+  - component: {fileID: 6868345508256060084}
   m_Layer: 5
   m_Name: SlotName
   m_TagString: Untagged
@@ -1175,6 +1301,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 0
+--- !u!114 &6868345508256060084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4755653124258462989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 1487362904120371277}
+  _component: {fileID: 4755653124258462991}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _text:
+    ReflectiveNames:
+    - SaveDateTime (String)
+    - GameDateTime (String)
+    - GameVersion (String)
+    - SlotName (String)
+    SelectedIndex: 3
+    SelectedName: SlotName (String)
+  _useMultipleText: 0
+  _multipleTextFormat: 
+  _multipleText: []
 --- !u!1 &4755653124262658458
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,6 +1345,8 @@ GameObject:
   - component: {fileID: 4755653124262658462}
   - component: {fileID: 4755653124262658461}
   - component: {fileID: 4755653124262658460}
+  - component: {fileID: 8927368143520583765}
+  - component: {fileID: 8374239799837749814}
   m_Layer: 5
   m_Name: SaveButton
   m_TagString: Untagged
@@ -1317,6 +1476,66 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &8927368143520583765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4755653124262658458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e273533e0cfb64a81ba65709806d04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 1487362904120371277}
+  _activeState:
+    ReflectiveNames:
+    - IsReWriteButtonEnabled (Boolean)
+    SelectedIndex: 0
+    SelectedName: IsReWriteButtonEnabled (Boolean)
+  _tag:
+    ReflectiveNames:
+    - SaveDateTime (String)
+    - GameDateTime (String)
+    - GameVersion (String)
+    - SlotName (String)
+    SelectedIndex: -1
+    SelectedName: 
+  _layer:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+--- !u!114 &8374239799837749814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4755653124262658458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab53b914a300b94ea3c2c180924fe37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 1487362904120371277}
+  _component: {fileID: 4755653124262658461}
+  _interactable:
+    ReflectiveNames:
+    - IsReWriteButtonEnabled (Boolean)
+    SelectedIndex: -1
+    SelectedName: 
+  _onClickHandler:
+    ReflectiveNames:
+    - ReWriteThisSave (void)
+    - DeleteThisSave (void)
+    - LoadThisSave (void)
+    SelectedIndex: 0
+    SelectedName: ReWriteThisSave (void)
 --- !u!1 &4755653124391177455
 GameObject:
   m_ObjectHideFlags: 0
@@ -1598,6 +1817,7 @@ GameObject:
   - component: {fileID: 7373652745824829584}
   - component: {fileID: 8460760606478067684}
   - component: {fileID: 6987287368196009727}
+  - component: {fileID: 6128176998034450756}
   m_Layer: 5
   m_Name: SaveTime (RT)
   m_TagString: Untagged
@@ -1756,3 +1976,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 0
+--- !u!114 &6128176998034450756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7079314767697756601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b317a3bbdabe2c4eb40292d499e00b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 1487362904120371277}
+  _component: {fileID: 7373652745824829584}
+  _color:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _text:
+    ReflectiveNames:
+    - SaveDateTime (String)
+    - GameDateTime (String)
+    - GameVersion (String)
+    - SlotName (String)
+    SelectedIndex: 0
+    SelectedName: SaveDateTime (String)
+  _useMultipleText: 0
+  _multipleTextFormat: 
+  _multipleText: []

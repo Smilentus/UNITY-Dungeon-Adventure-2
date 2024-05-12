@@ -83,7 +83,10 @@
     <Compile Include="Assets\Lubribrary\RxMV\Core\IViewModel.cs" />
     <Compile Include="Assets\Code\GameTimeFlowSystem\Profiles\GameTimeFlowEventProfile.cs" />
     <Compile Include="Assets\Code\SaveLoadSystem\SaveLoadConverters\Interfaces\ISaveLoadConverter.cs" />
+    <Compile Include="Assets\Code\MainMenu\MainMenuBootstrapperViewModel.cs" />
+    <Compile Include="Assets\Code\BuffSystem\Views\BuffsContainerViewModel.cs" />
     <Compile Include="Assets\Code\VoiceSystem\Voice\BaseVoiceClipData.cs" />
+    <Compile Include="Assets\Code\MonoInstallers\MainMenuMonoInstaller.cs" />
     <Compile Include="Assets\Code\GameEventSystem\GameEventsExecuters\ExploreLocationGameEventsExecuter.cs" />
     <Compile Include="Assets\Code\Utilities\FadeEffectController.cs" />
     <Compile Include="Assets\Lubribrary\RxMV\UniRx\RxLink\IRxLinkable.cs" />
@@ -162,7 +165,6 @@
     <Compile Include="Assets\Code\CinematicSystem\Profiles\ArtCinematicProfile.cs" />
     <Compile Include="Assets\Code\CoreComponentSystem\Core\CoreComponent.cs" />
     <Compile Include="Assets\Code\GlobalWindows\WorldMapGlobalWindow.cs" />
-    <Compile Include="Assets\Code\MainMenu\MainMenuPresenter.cs" />
     <Compile Include="Assets\Code\MagicSystem\Views\RuntimeMagicObjectView.cs" />
     <Compile Include="Assets\Lubribrary\RxMV\Utilities\ParentComponentsExtractor.cs" />
     <Compile Include="Assets\Code\SkillsSystem\Implementations\PlayerHealthRegenSkillComponent.cs" />
@@ -189,6 +191,7 @@
     <Compile Include="Assets\Lubribrary\RxMV\UniRx\ReflectionCollectors\Base\ReflectiveCollector.cs" />
     <Compile Include="Assets\Code\InventorySystem\BaseMouse\BaseMouseControllerPresenter.cs" />
     <Compile Include="Assets\Code\CinematicSystem\Cinematics.cs" />
+    <Compile Include="Assets\Code\MonoInstallers\SaveSystemMonoInstaller.cs" />
     <Compile Include="Assets\Code\GlobalWindows\InfoGlobalWindow.cs" />
     <Compile Include="Assets\Code\CraftingSystem\GlobalWindow\CraftingGlobalWindow.cs" />
     <Compile Include="Assets\Code\BattleSystem\EnemiesSystem\RuntimeBattleCharacterView.cs" />
@@ -197,7 +200,6 @@
     <Compile Include="Assets\Code\InventorySystem\BaseInventoryContainer\BaseInventoryContainerButtonView.cs" />
     <Compile Include="Assets\Lubribrary\RxMV\UniRx\Adapters\TextMeshProUguiRxAdapter.cs" />
     <Compile Include="Assets\Lubribrary\RxMV\UniRx\Adapters\Base\BaseComponentRxAdapter.cs" />
-    <Compile Include="Assets\Code\BuffSystem\Containers\BuffsContainerViewModel.cs" />
     <Compile Include="Assets\Code\GameEventSystem\Interfaces\IGameEventsExecuter.cs" />
     <Compile Include="Assets\Code\BattleSystem\BattleActions\Implementations\BattleActionExecuterBaseActionExecuter.cs" />
     <Compile Include="Assets\Code\BattleSystem\EnemiesSystem\RuntimeBattleCharacterSimple.cs" />
@@ -229,6 +231,7 @@
     <Compile Include="Assets\Code\Utilities\ScreenFader.cs" />
     <Compile Include="Assets\Code\CraftingSystem\Recipes\Views\CraftInputItemView.cs" />
     <Compile Include="Assets\Code\SkillsSystem\Implementations\PlayerLuckSkillComponent.cs" />
+    <Compile Include="Assets\Code\BuffSystem\Views\BuffsContainerCoordinator.cs" />
     <Compile Include="Assets\Code\VoiceSystem\Voice\VoiceAuthor.cs" />
     <Compile Include="Assets\Code\InventorySystem\BaseInventoryContainer\BaseInventoryContainerSlotView.cs" />
     <Compile Include="Assets\Code\SkillsSystem\Implementations\PlayerHealthSkillComponent.cs" />

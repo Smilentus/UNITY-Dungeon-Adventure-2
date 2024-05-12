@@ -58,6 +58,15 @@ namespace Dimasyechka.Code.BuffSystem
         }
 
 
+        public BuffProfile _buffProfile;
+
+        [ContextMenu("Debug Add Buff")]
+        public void DebugAddBuff()
+        {
+            AddPlayerBuff(_buffProfile);
+        }
+
+
         public void AddPlayerBuff(BuffProfile profile)
         {
             _playerBuffsContainer.AddBuff(profile);

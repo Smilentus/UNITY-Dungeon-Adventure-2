@@ -1,11 +1,11 @@
 using System.Collections.Generic;
-using Dimasyechka.Code.BuffSystem.Views;
+using Dimasyechka.Code.BuffSystem.Containers;
 using Dimasyechka.Code.ZenjectFactories;
 using Dimasyechka.Lubribrary.RxMV.Core;
 using UnityEngine;
 using Zenject;
 
-namespace Dimasyechka.Code.BuffSystem.Containers
+namespace Dimasyechka.Code.BuffSystem.Views
 {
     public class BuffsContainerViewModel : MonoViewModel<BuffsContainer>
     {

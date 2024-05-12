@@ -113,10 +113,15 @@ PrefabInstance:
       propertyPath: m_isReWriteButtonEnabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2456657803832072345, guid: fe2c2a6cac04e5d40bd4f0a4cd0064ce,
+        type: 3}
+      propertyPath: IsReWriteButtonEnabled.value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3403029521886627520, guid: fe2c2a6cac04e5d40bd4f0a4cd0064ce,
         type: 3}
       propertyPath: m_Name
-      value: SaveLoadSlotsGlobalWindow Variant
+      value: SaveLoadSlotsGlobalWindow [MainMenu]
       objectReference: {fileID: 0}
     - target: {fileID: 3403029521886627520, guid: fe2c2a6cac04e5d40bd4f0a4cd0064ce,
         type: 3}
@@ -137,6 +142,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4070259785274951858, guid: fe2c2a6cac04e5d40bd4f0a4cd0064ce,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: 5215154040913836141, guid: fe2c2a6cac04e5d40bd4f0a4cd0064ce,
+        type: 3}
+      propertyPath: m_Value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6380589171752709642, guid: fe2c2a6cac04e5d40bd4f0a4cd0064ce,
         type: 3}
@@ -166,6 +181,11 @@ PrefabInstance:
     - target: {fileID: 8246824891568800289, guid: fe2c2a6cac04e5d40bd4f0a4cd0064ce,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246824891568800289, guid: fe2c2a6cac04e5d40bd4f0a4cd0064ce,
+        type: 3}
+      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

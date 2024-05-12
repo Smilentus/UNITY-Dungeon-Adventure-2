@@ -24,4 +24,4 @@ MonoBehaviour:
   m_Description: "\u041E\u043D\u0438 \u0441\u043B\u0435\u0434\u044F\u0442 \u0437\u0430
     \u0442\u043E\u0431\u043E\u0439..."
   m_Icon: {fileID: 21300000, guid: a3e1dc5925032834687fbb019c704d1a, type: 3}
-  m_durationHours: 10
+  m_durationHours: 120

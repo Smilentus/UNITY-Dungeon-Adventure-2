@@ -36,15 +36,21 @@ namespace Dimasyechka.Code
 
         private BattleController _battleController;
         private GameTimeFlowController _gameTimeFlowController;
+        private SaveLoadSlotsController _saveLoadSlotsController;
+        private SaveLoadSystemController _saveLoadSystemController;
 
 
         [Inject]
         public void Construct(
             BattleController battleController,
-            GameTimeFlowController gameTimeFlowController)
+            GameTimeFlowController gameTimeFlowController,
+            SaveLoadSlotsController saveLoadSlotsController,
+            SaveLoadSystemController saveLoadSystemController)
         {
             _battleController = battleController;
             _gameTimeFlowController = gameTimeFlowController;
+            _saveLoadSlotsController = saveLoadSlotsController;
+            _saveLoadSystemController = saveLoadSystemController;
         }
 
 
@@ -62,7 +68,7 @@ namespace Dimasyechka.Code
 
             Debug.Log($"[BetweenScenesLoaderAdapter] --> Попытка загрузить сохранение: '{data.SelectedSaveFileFullPath}'");
 
-            SaveLoadSystemController.Instance.TryLoadAndParseDataFromFile(data.SelectedSaveFileFullPath);
+            _saveLoadSystemController.TryLoadAndParseDataFromFile(data.SelectedSaveFileFullPath);
         }
 
         private void Start()
@@ -128,7 +134,7 @@ namespace Dimasyechka.Code
 
             void OnExitApplied()
             {
-                SaveLoadSystemController.Instance.TrySaveGameState("AutoSave");
+                _saveLoadSystemController.TrySaveGameState("AutoSave");
                 ScreenFader.Instance.FadeInScreen();
 
                 ScreenFader.Instance.FadeEffectController.onFadeIn += OnFadeIn;
@@ -145,7 +151,7 @@ namespace Dimasyechka.Code
 
         public void LoadAutoSave()
         {
-            BetweenScenesLoaderAdapter.Instance.LoadableData.SelectedSaveFileFullPath = SaveLoadSlotsController.Instance.GetAutoSaveFullFilePath();
+            BetweenScenesLoaderAdapter.Instance.LoadableData.SelectedSaveFileFullPath = _saveLoadSlotsController.GetAutoSaveFullFilePath();
 
             SceneManager.LoadScene("GameScene");
         }

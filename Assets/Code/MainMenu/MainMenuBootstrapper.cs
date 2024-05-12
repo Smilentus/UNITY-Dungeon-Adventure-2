@@ -6,29 +6,24 @@ using Dimasyechka.Code.SaveLoadSystem.GlobalWindow;
 using Dimasyechka.Code.Utilities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace Dimasyechka.Code.MainMenu
 {
     public class MainMenuBootstrapper : MonoBehaviour
     {
-        private static MainMenuBootstrapper _instance;
-        public static MainMenuBootstrapper Instance
-        {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = FindObjectOfType<MainMenuBootstrapper>();
-                }
+        private SaveLoadSlotsController _saveLoadSlotsController;
 
-                return _instance;
-            }
+        [Inject]
+        public void Construct(SaveLoadSlotsController saveLoadSlotsController)
+        {
+            _saveLoadSlotsController = saveLoadSlotsController;
         }
 
 
         private void Awake()
         {
-            SaveLoadSlotsController.Instance.LoadSaveSlots();
+            _saveLoadSlotsController.LoadSaveSlots();
             ScreenFader.Instance.FadeOutScreen();
         }
 
@@ -44,7 +39,7 @@ namespace Dimasyechka.Code.MainMenu
         {
             // TODO: ...
             // Тут надо получать последнее сделанное сохранение и загружать его 
-            BetweenScenesLoaderAdapter.Instance.LoadableData.SelectedSaveFileFullPath = SaveLoadSlotsController.Instance.GetAutoSaveFullFilePath();
+            BetweenScenesLoaderAdapter.Instance.LoadableData.SelectedSaveFileFullPath = _saveLoadSlotsController.GetAutoSaveFullFilePath();
 
             SceneManager.LoadScene("GameScene");
         }

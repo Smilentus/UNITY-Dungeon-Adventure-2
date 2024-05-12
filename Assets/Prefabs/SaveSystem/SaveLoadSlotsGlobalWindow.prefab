@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 7460619766268041505}
   - component: {fileID: 1781092603130820829}
   - component: {fileID: 2126935491273757967}
-  - component: {fileID: 6065188203892923393}
+  - component: {fileID: 4282286384505188857}
   m_Layer: 5
   m_Name: CloseSavingMenuButton
   m_TagString: Untagged
@@ -300,7 +300,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &6065188203892923393
+--- !u!114 &4282286384505188857
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -309,12 +309,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 1080791683744356329}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ab53b914a300b94ea3c2c180924fe37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 2, y: 2}
-  m_UseGraphicAlpha: 1
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 2456657803832072345}
+  _component: {fileID: 2126935491273757967}
+  _interactable:
+    ReflectiveNames:
+    - IsReWriteButtonEnabled (Boolean)
+    SelectedIndex: -1
+    SelectedName: 
+  _onClickHandler:
+    ReflectiveNames:
+    - OnCreateSaveClicked (void)
+    - OnHideClicked (void)
+    SelectedIndex: 1
+    SelectedName: OnHideClicked (void)
 --- !u!1 &1198935258680481919
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,13 +557,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c044c714f8ccf534aadf6946657fe802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_isReWriteButtonEnabled: 1
-  m_createNewSaveButton: {fileID: 6513131726943811664}
-  m_closeButton: {fileID: 2126935491273757967}
-  m_contentParent: {fileID: 1619841764763644478}
-  m_saveLoadSlotViewPrefab: {fileID: 1487362904120371277, guid: 90a0c606d8fe0dd4a903af9420f19ef1,
+  IsReWriteButtonEnabled:
+    value: 1
+  _contentParent: {fileID: 1619841764763644478}
+  _saveLoadSlotViewPrefab: {fileID: 1487362904120371277, guid: 90a0c606d8fe0dd4a903af9420f19ef1,
     type: 3}
-  m_autoSaveSlotViewPrefab: {fileID: 392073218370051704, guid: 1824e6ede3306604a8e2d7285ba221ac,
+  _autoSaveSlotViewPrefab: {fileID: 1487362904120371277, guid: 90a0c606d8fe0dd4a903af9420f19ef1,
     type: 3}
 --- !u!1 &4208937058715899494
 GameObject:
@@ -1118,6 +1129,8 @@ GameObject:
   - component: {fileID: 6224940067289096368}
   - component: {fileID: 8516756647542859095}
   - component: {fileID: 6513131726943811664}
+  - component: {fileID: 6387233860577053387}
+  - component: {fileID: 4326430384439133578}
   m_Layer: 5
   m_Name: CreateNewSave
   m_TagString: Untagged
@@ -1247,6 +1260,61 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6387233860577053387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7440586164331054867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ab53b914a300b94ea3c2c180924fe37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 2456657803832072345}
+  _component: {fileID: 6513131726943811664}
+  _interactable:
+    ReflectiveNames:
+    - IsReWriteButtonEnabled (Boolean)
+    SelectedIndex: -1
+    SelectedName: 
+  _onClickHandler:
+    ReflectiveNames:
+    - OnCreateSaveClicked (void)
+    - OnHideClicked (void)
+    SelectedIndex: 0
+    SelectedName: OnCreateSaveClicked (void)
+--- !u!114 &4326430384439133578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7440586164331054867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e273533e0cfb64a81ba65709806d04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentComponentsExtractor:
+    _useAutoCollectionMode: 1
+    _extractedComponent: {fileID: 2456657803832072345}
+  _activeState:
+    ReflectiveNames:
+    - IsReWriteButtonEnabled (Boolean)
+    SelectedIndex: 0
+    SelectedName: IsReWriteButtonEnabled (Boolean)
+  _tag:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
+  _layer:
+    ReflectiveNames: []
+    SelectedIndex: -1
+    SelectedName: 
 --- !u!1 &7864545407732866477
 GameObject:
   m_ObjectHideFlags: 0

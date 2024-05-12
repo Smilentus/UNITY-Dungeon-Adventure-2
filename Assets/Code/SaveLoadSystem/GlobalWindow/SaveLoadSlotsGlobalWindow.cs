@@ -1,59 +1,62 @@
-using System.IO;
 using Dimasyechka.Code.GlobalWindows.Base;
 using Dimasyechka.Code.SaveLoadSystem.Controllers;
 using Dimasyechka.Code.SaveLoadSystem.Views;
+using Dimasyechka.Code.ZenjectFactories;
+using Dimasyechka.Lubribrary.RxMV.UniRx.Attributes;
+using Dimasyechka.Lubribrary.RxMV.UniRx.RxLink;
+using System.IO;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Dimasyechka.Code.SaveLoadSystem.GlobalWindow
 {
-    public class SaveLoadSlotsGlobalWindow : BaseGameGlobalWindow
+    public class SaveLoadSlotsGlobalWindow : BaseGameGlobalWindow, IRxLinkable
     {
-        [SerializeField]
-        private bool m_isReWriteButtonEnabled = true;
+        [RxAdaptableProperty]
+        public ReactiveProperty<bool> IsReWriteButtonEnabled = new ReactiveProperty<bool>();
 
 
         [SerializeField]
-        private Button m_createNewSaveButton;
+        private LayoutGroup _contentParent;
 
         [SerializeField]
-        private Button m_closeButton;
-
-
-        [SerializeField]
-        private LayoutGroup m_contentParent;
-
-        [SerializeField]
-        private SaveLoadSlotView m_saveLoadSlotViewPrefab;
-
-        [SerializeField]
-        private SaveLoadSlotView m_autoSaveSlotViewPrefab;
+        private SaveLoadSlotView _saveLoadSlotViewPrefab;
 
 
         private SaveLoadSlotsController _saveLoadSlotsController;
+        private SaveLoadSystemController _saveLoadSystemController;
+        private SaveLoadSlotViewFactory _factory;
 
-
-        private void Awake()
+        [Inject]
+        public void Construct(
+            SaveLoadSlotsController saveLoadSlotsController,
+            SaveLoadSystemController saveLoadSystemController,
+            SaveLoadSlotViewFactory factory)
         {
-            _saveLoadSlotsController = SaveLoadSlotsController.Instance;
-
-            m_closeButton?.onClick.AddListener(Hide);
-            m_createNewSaveButton?.onClick.AddListener(() => 
-            {
-                SaveLoadSystemController.Instance.TrySaveGameState();
-                UpdateSaveSlotsData();
-            });
-        }
-
-        private void OnDestroy()
-        {
-            m_closeButton?.onClick.RemoveAllListeners();
-            m_createNewSaveButton?.onClick.RemoveAllListeners();
+            _saveLoadSystemController = saveLoadSystemController;
+            _saveLoadSlotsController = saveLoadSlotsController;
+            _factory = factory;
         }
 
 
         protected override void OnShow()
         {
+            UpdateSaveSlotsData();
+        }
+
+
+        [RxAdaptableMethod]
+        public void OnHideClicked()
+        {
+            this.Hide();
+        }
+
+        [RxAdaptableMethod]
+        public void OnCreateSaveClicked()
+        {
+            _saveLoadSystemController.TrySaveGameState();
             UpdateSaveSlotsData();
         }
 
@@ -70,9 +73,9 @@ namespace Dimasyechka.Code.SaveLoadSystem.GlobalWindow
 
         private void ClearPanelChildren()
         {
-            for (int i = m_contentParent.transform.childCount - 1; i >= 0; i--)
+            for (int i = _contentParent.transform.childCount - 1; i >= 0; i--)
             {
-                Destroy(m_contentParent.transform.GetChild(i).gameObject);
+                Destroy(_contentParent.transform.GetChild(i).gameObject);
             }
         }
 
@@ -82,20 +85,23 @@ namespace Dimasyechka.Code.SaveLoadSystem.GlobalWindow
             {
                 SaveLoadSlotView saveLoadSlotView = null;
 
+                saveLoadSlotView = _factory.InstantiateForComponent(_saveLoadSlotViewPrefab.gameObject, _contentParent.transform);
+
                 if (Path.GetFileNameWithoutExtension(_saveLoadSlotsController.SavedSlots[i].SaveFilePath).Equals("AutoSave"))
                 {
-                    saveLoadSlotView = Instantiate(m_autoSaveSlotViewPrefab, m_contentParent.transform);
+                    saveLoadSlotView.SetSaveButtonVisibility(false);
                 }
                 else
                 {
-                    saveLoadSlotView = Instantiate(m_saveLoadSlotViewPrefab, m_contentParent.transform);
+                    saveLoadSlotView.SetSaveButtonVisibility(IsReWriteButtonEnabled.Value);
                 }
 
-                saveLoadSlotView.SetData(i, _saveLoadSlotsController.SavedSlots[i], m_isReWriteButtonEnabled);
+                saveLoadSlotView.SetupModel(_saveLoadSlotsController.SavedSlots[i]);
+                saveLoadSlotView.SetData(i);
                 saveLoadSlotView.onSlotInteraction += OnSlotInteraction;
             }
 
-            LayoutRebuilder.ForceRebuildLayoutImmediate(m_contentParent.GetComponent<RectTransform>());
+            LayoutRebuilder.ForceRebuildLayoutImmediate(_contentParent.GetComponent<RectTransform>());
         }
 
         private void OnSlotInteraction()
@@ -103,4 +109,7 @@ namespace Dimasyechka.Code.SaveLoadSystem.GlobalWindow
             UpdateSaveSlotsData();
         }
     }
+
+
+    public class SaveLoadSlotViewFactory : DiContainerCreationFactory<SaveLoadSlotView> { }
 }
