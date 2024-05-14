@@ -4,6 +4,7 @@ using Dimasyechka.Code.InventorySystem.BaseMouse;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Dimasyechka.Code.InventorySystem
 {
@@ -44,35 +45,40 @@ namespace Dimasyechka.Code.InventorySystem
         public BaseMouseItemController MouseItemController => _mouseItemController;
 
 
+        [Inject]
+        public void Construct(BaseMouseItemController mouseItemController)
+        {
+            _mouseItemController = mouseItemController;
+        }
+
+
         private void Awake()
         {
-            _mouseItemController = new BaseMouseItemController();
-
             _quickSlotsContainer = new BaseInventoryContainer.BaseInventoryContainer(_quickSlotsContainerProfile);
             _dynamicTimelyContainer = new BaseInventoryContainer.BaseInventoryContainer(_dynamicTimelyContainerProfile);
         }
 
 
-        public void OnAnyContainerSlotPressed(BaseInventoryContainer.BaseInventoryContainer _container, BaseInventoryContainerSlot _slot)
+        public void OnAnyContainerSlotPressed(BaseInventoryContainer.BaseInventoryContainer container, BaseInventoryContainerSlot slot)
         {
             // Управление с ПК:
             // 2) Если слот ПУСТОЙ и мышка ЗАНЯТА - помещаем из мышки в слот
-            if (_slot.IsSlotEmpty && !_mouseItemController.MouseSlot.IsSlotEmpty)
+            if (slot.IsSlotEmpty && !_mouseItemController.MouseSlot.IsSlotEmpty)
             {
-                _slot.SetItem(_mouseItemController.MouseSlot.SlotItem, _mouseItemController.MouseSlot.CurrentStack);
+                slot.SetItem(_mouseItemController.MouseSlot.SlotItem, _mouseItemController.MouseSlot.CurrentStack);
 
                 _mouseItemController.MouseSlot.ClearSlot();
-                _container.ForceUpdateStoredItems();
+                container.ForceUpdateStoredItems();
                 return;
             }
 
             // 3) Если слот ЗАНЯТ и мышка ПУСТАЯ - показываем информацию о предмете и возможные действия
-            if (!_slot.IsSlotEmpty && _mouseItemController.MouseSlot.IsSlotEmpty)
+            if (!slot.IsSlotEmpty && _mouseItemController.MouseSlot.IsSlotEmpty)
             {
-                _mouseItemController.MouseSlot.SetItem(_slot.SlotItem, _slot.CurrentStack);
+                _mouseItemController.MouseSlot.SetItem(slot.SlotItem, slot.CurrentStack);
 
-                _slot.ClearSlot();
-                _container.ForceUpdateStoredItems();
+                slot.ClearSlot();
+                container.ForceUpdateStoredItems();
                 return;
             }
 
@@ -80,11 +86,11 @@ namespace Dimasyechka.Code.InventorySystem
             // * на самом деле тут надо проверять какой предмет мы помещаем, если предметы одинаковые - дополняем стаки того предмета, который в контейнере
             // * всё что не влезло - остаётся в мышке
             // * если предметы разные - свапаем их
-            if (!_slot.IsSlotEmpty && !_mouseItemController.MouseSlot.IsSlotEmpty)
+            if (!slot.IsSlotEmpty && !_mouseItemController.MouseSlot.IsSlotEmpty)
             {
-                if (_slot.SlotItem.BaseItemProfile == _mouseItemController.MouseSlot.SlotItem.BaseItemProfile)
+                if (slot.SlotItem.BaseItemProfile == _mouseItemController.MouseSlot.SlotItem.BaseItemProfile)
                 {
-                    int unplacedStack = _slot.AddItemStack(_mouseItemController.MouseSlot.CurrentStack);
+                    int unplacedStack = slot.AddItemStack(_mouseItemController.MouseSlot.CurrentStack);
                     if (unplacedStack > 0)
                     {
                         _mouseItemController.MouseSlot.CurrentStack = unplacedStack;
@@ -96,14 +102,14 @@ namespace Dimasyechka.Code.InventorySystem
                 }
                 else
                 {
-                    BaseItem.BaseItem tempItem = _slot.SlotItem;
-                    int tempStack = _slot.CurrentStack;
+                    BaseItem.BaseItem tempItem = slot.SlotItem;
+                    int tempStack = slot.CurrentStack;
 
-                    _slot.SetItem(_mouseItemController.MouseSlot.SlotItem, _mouseItemController.MouseSlot.CurrentStack);
+                    slot.SetItem(_mouseItemController.MouseSlot.SlotItem, _mouseItemController.MouseSlot.CurrentStack);
                     _mouseItemController.MouseSlot.SetItem(tempItem, tempStack);
                     tempItem = null;
                 }
-                _container.ForceUpdateStoredItems();
+                container.ForceUpdateStoredItems();
                 return;
             }
 
@@ -156,11 +162,11 @@ namespace Dimasyechka.Code.InventorySystem
         }
 
 
-        public void TryAddItemToAnyContainer(BaseItemProfile _baseItemProfile, int _stack)
+        public void TryAddItemToAnyContainer(BaseItemProfile baseItemProfile, int stack)
         {
             if (_inventoryContainers.Count == 0) { return; }
 
-            BaseInventoryAdditionData additionData = new BaseInventoryAdditionData(new BaseItem.BaseItem(_baseItemProfile), _stack);
+            BaseInventoryAdditionData additionData = new BaseInventoryAdditionData(new BaseItem.BaseItem(baseItemProfile), stack);
 
             for (int i = 0; i < _inventoryContainers.Count; i++)
             {

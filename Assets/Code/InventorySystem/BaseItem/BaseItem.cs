@@ -3,13 +3,13 @@ namespace Dimasyechka.Code.InventorySystem.BaseItem
     [System.Serializable]
     public class BaseItem
     {
-        protected BaseItemProfile baseItemProfile;
-        public BaseItemProfile BaseItemProfile => baseItemProfile;
+        protected BaseItemProfile _baseItemProfile;
+        public BaseItemProfile BaseItemProfile => _baseItemProfile;
 
 
-        public BaseItem(BaseItemProfile _baseItemProfile)
+        public BaseItem(BaseItemProfile baseItemProfile)
         {
-            baseItemProfile = _baseItemProfile;
+            _baseItemProfile = baseItemProfile;
         }
     }
 }

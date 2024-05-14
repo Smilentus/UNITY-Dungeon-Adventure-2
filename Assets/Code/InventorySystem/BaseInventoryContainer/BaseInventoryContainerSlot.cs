@@ -3,12 +3,12 @@ namespace Dimasyechka.Code.InventorySystem.BaseInventoryContainer
     [System.Serializable]
     public class BaseInventoryContainerSlot
     {
-        protected BaseItem.BaseItem slotItem;
-        public BaseItem.BaseItem SlotItem { get => slotItem; }
+        protected BaseItem.BaseItem _slotItem;
+        public BaseItem.BaseItem SlotItem { get => _slotItem; }
 
 
-        protected int currentStack;
-        public int CurrentStack { get => currentStack; set => currentStack = value; }
+        protected int _currentStack;
+        public int CurrentStack { get => _currentStack; set => _currentStack = value; }
     
         public int MaximumStack
         {
@@ -20,7 +20,7 @@ namespace Dimasyechka.Code.InventorySystem.BaseInventoryContainer
                 }
                 else
                 {
-                    return slotItem.BaseItemProfile.MaximumStack;
+                    return _slotItem.BaseItemProfile.MaximumStack;
                 }
             }
         }
@@ -41,25 +41,25 @@ namespace Dimasyechka.Code.InventorySystem.BaseInventoryContainer
         }
 
      
-        public bool IsSlotEmpty => slotItem == null || slotItem.BaseItemProfile == null;
+        public bool IsSlotEmpty => _slotItem == null || _slotItem.BaseItemProfile == null;
 
 
         public BaseInventoryContainerSlot()
         {
-            slotItem = null;
-            currentStack = 0;
+            _slotItem = null;
+            _currentStack = 0;
         }
 
 
         public void SetItem(BaseItem.BaseItem _item)
         {
-            slotItem = _item;
+            _slotItem = _item;
         }
 
         public void SetItem(BaseItem.BaseItem _item, int _stack)
         {
-            slotItem = _item;
-            currentStack = _stack;
+            _slotItem = _item;
+            _currentStack = _stack;
         }
 
         /// <summary>
@@ -73,18 +73,18 @@ namespace Dimasyechka.Code.InventorySystem.BaseInventoryContainer
         /// </returns>
         public int AddItemStack(int _stack)
         {
-            if (slotItem != null)
+            if (_slotItem != null)
             {
                 if (_stack <= DeltaStack)
                 {
-                    currentStack += _stack;
+                    _currentStack += _stack;
                     return 0;
                 }    
                 else
                 {
                     int unplacedStack = _stack - DeltaStack;
 
-                    currentStack = MaximumStack;
+                    _currentStack = MaximumStack;
 
                     return unplacedStack;
                 }
@@ -97,8 +97,8 @@ namespace Dimasyechka.Code.InventorySystem.BaseInventoryContainer
 
         public void ClearSlot()
         {
-            slotItem = null;
-            currentStack = 0;
+            _slotItem = null;
+            _currentStack = 0;
         }
     }
 }

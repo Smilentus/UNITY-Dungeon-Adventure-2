@@ -65,6 +65,7 @@
     <Compile Include="Assets\Lubribrary\RxMV\Utilities\DisposablesStorage.cs" />
     <Compile Include="Assets\Code\GlobalWindows\PlayerSkillsGlobalWindow.cs" />
     <Compile Include="Assets\Code\BattleSystem\BattleActions\Interfaces\IBattleActionExecuter.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\UniRx\Adapters\RectTransformRxAdapter.cs" />
     <Compile Include="Assets\Code\SkillsSystem\Implementations\Base\BaseSkillComponent.cs" />
     <Compile Include="Assets\Code\UISystems\RuntimePlayerStatsView.cs" />
     <Compile Include="Assets\Code\BattleSystem\BattleActions\Views\BaseBattleInteractionView.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Assets\Lubribrary\RxMV\Utilities\IDisposablesStorage.cs" />
     <Compile Include="Assets\Code\GameEventSystem\GameEventsExecuters\BattleGameEventsExecuter.cs" />
     <Compile Include="Assets\Code\GlobalWindows\Interfaces\IGlobalWindow.cs" />
+    <Compile Include="Assets\Code\InventorySystem\BaseMouse\BaseMouseViewModel.cs" />
     <Compile Include="Assets\Code\InventorySystem\BaseInventoryContainer\BaseInventoryContainerProfile.cs" />
     <Compile Include="Assets\Code\LocationSystem\RuntimeLocationObject.cs" />
     <Compile Include="Assets\Code\VoiceSystem\Subtitles\SubtitlesPresenter.cs" />
@@ -169,6 +171,7 @@
     <Compile Include="Assets\Lubribrary\RxMV\Utilities\ParentComponentsExtractor.cs" />
     <Compile Include="Assets\Code\SkillsSystem\Implementations\PlayerHealthRegenSkillComponent.cs" />
     <Compile Include="Assets\Code\BattleSystem\CharacterProfile.cs" />
+    <Compile Include="Assets\Lubribrary\RxMV\UniRx\Adapters\TransformRxAdapter.cs" />
     <Compile Include="Assets\Code\SkillsSystem\Implementations\PlayerCriticalDamageComponent.cs" />
     <Compile Include="Assets\Code\GameEventSystem\LocationInteractableButton.cs" />
     <Compile Include="Assets\Code\CraftingSystem\GlobalWindow\ItemDescriptionGlobalWindow.cs" />
@@ -189,7 +192,6 @@
     <Compile Include="Assets\Code\SkillsSystem\Core\SkillsWarehouse.cs" />
     <Compile Include="Assets\Code\SkillsSystem\Views\ObtainSkillDataView.cs" />
     <Compile Include="Assets\Lubribrary\RxMV\UniRx\ReflectionCollectors\Base\ReflectiveCollector.cs" />
-    <Compile Include="Assets\Code\InventorySystem\BaseMouse\BaseMouseControllerPresenter.cs" />
     <Compile Include="Assets\Code\CinematicSystem\Cinematics.cs" />
     <Compile Include="Assets\Code\MonoInstallers\SaveSystemMonoInstaller.cs" />
     <Compile Include="Assets\Code\GlobalWindows\InfoGlobalWindow.cs" />

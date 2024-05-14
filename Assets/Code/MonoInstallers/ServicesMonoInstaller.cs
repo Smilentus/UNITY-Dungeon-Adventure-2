@@ -9,6 +9,7 @@ using Dimasyechka.Code.CraftingSystem.Workbenches.Views;
 using Dimasyechka.Code.GameTimeFlowSystem.Controllers;
 using Dimasyechka.Code.InventorySystem;
 using Dimasyechka.Code.InventorySystem.BaseInventoryContainer;
+using Dimasyechka.Code.InventorySystem.BaseMouse;
 using Dimasyechka.Code.LocationSystem.Controllers;
 using Dimasyechka.Code.SkillsSystem.Controllers;
 using UnityEngine;
@@ -121,6 +122,8 @@ namespace Dimasyechka.Code.MonoInstallers
         private void BindInventoryController()
         {
             Container.Bind<InventoryController>().FromInstance(_inventoryController).AsSingle();
+            Container.Bind<BaseMouseItemController>().FromNew().AsSingle();
+
             Container.Bind<BaseInventoryContainerViewFactory>().FromNew().AsSingle();
             Container.Bind<BaseInventoryContainerSlotViewFactory>().FromNew().AsSingle();
             Container.Bind<BaseInventoryContainerButtonViewFactory>().FromNew().AsSingle();
