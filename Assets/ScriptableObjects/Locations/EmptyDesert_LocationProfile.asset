@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef21fca07247b543af5aa3ab789639a, type: 3}
   m_Name: EmptyDesert_LocationProfile
   m_EditorClassIdentifier: 
+  _locationGuid: empty_desert
+  m_locationPreviewSprite: {fileID: 0}
   m_locationTitle: "\u041F\u0443\u0441\u0442\u0430\u044F \u043F\u0443\u0441\u0442\u044B\u043D\u044F"
   m_locationDescription: 
   m_locationEvents: []
+  m_droppableItems: []

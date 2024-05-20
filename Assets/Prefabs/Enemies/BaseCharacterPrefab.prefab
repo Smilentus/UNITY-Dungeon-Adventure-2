@@ -106,6 +106,7 @@ MonoBehaviour:
     SelectedName: 
   _fillAmount:
     ReflectiveNames:
+    - CharacterHealthPercentRatio (Single)
     - CharacterHealthRatio (Single)
     SelectedIndex: 0
     SelectedName: CharacterHealthRatio (Single)
@@ -349,16 +350,18 @@ MonoBehaviour:
   _text:
     ReflectiveNames:
     - CharacterName (String)
+    - CharacterHealthPercentRatio (Single)
     - CharacterHealthRatio (Single)
     - CharacterMaxHealth (Double)
     - CharacterHealth (Double)
     SelectedIndex: -1
     SelectedName: 
   _useMultipleText: 1
-  _multipleTextFormat: '{0}/{1}%'
+  _multipleTextFormat: '{0}/{1} ({2}%)'
   _multipleText:
   - ReflectiveNames:
     - CharacterName (String)
+    - CharacterHealthPercentRatio (Single)
     - CharacterHealthRatio (Single)
     - CharacterMaxHealth (Double)
     - CharacterHealth (Double)
@@ -366,11 +369,20 @@ MonoBehaviour:
     SelectedName: CharacterHealth (Double)
   - ReflectiveNames:
     - CharacterName (String)
+    - CharacterHealthPercentRatio (Single)
     - CharacterHealthRatio (Single)
     - CharacterMaxHealth (Double)
     - CharacterHealth (Double)
     SelectedIndex: 2
     SelectedName: CharacterMaxHealth (Double)
+  - ReflectiveNames:
+    - CharacterName (String)
+    - CharacterHealthPercentRatio (Single)
+    - CharacterHealthRatio (Single)
+    - CharacterMaxHealth (Double)
+    - CharacterHealth (Double)
+    SelectedIndex: 1
+    SelectedName: CharacterHealthPercentRatio (Single)
 --- !u!1 &7599934000372042979
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,6 +652,8 @@ MonoBehaviour:
     value: 0
   CharacterHealthRatio:
     value: 0
+  CharacterHealthPercentRatio:
+    value: 0
 --- !u!114 &3577424941674110224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -824,6 +838,7 @@ MonoBehaviour:
   _text:
     ReflectiveNames:
     - CharacterName (String)
+    - CharacterHealthPercentRatio (Single)
     - CharacterHealthRatio (Single)
     - CharacterMaxHealth (Double)
     - CharacterHealth (Double)

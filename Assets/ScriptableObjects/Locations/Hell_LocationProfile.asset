@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef21fca07247b543af5aa3ab789639a, type: 3}
   m_Name: Hell_LocationProfile
   m_EditorClassIdentifier: 
+  _locationGuid: hell
   m_locationPreviewSprite: {fileID: 21300000, guid: 06281d5b39b58ad4990f5cf8b6ee8547,
     type: 3}
   m_locationTitle: "\u0410\u0434"

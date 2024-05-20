@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef21fca07247b543af5aa3ab789639a, type: 3}
   m_Name: VillageRedForest_LocationProfile
   m_EditorClassIdentifier: 
+  _locationGuid: red_forest_village
+  m_locationPreviewSprite: {fileID: 0}
   m_locationTitle: "\u0414\u0435\u0440\u0435\u0432\u043D\u044F \u0432 \u043A\u0440\u0430\u0441\u043D\u043E\u043C
     \u043B\u0435\u0441\u0443"
   m_locationDescription: 
   m_locationEvents: []
+  m_droppableItems: []

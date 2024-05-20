@@ -13,5 +13,10 @@ namespace Dimasyechka.Lubribrary.RxMV.UniRx.Extensions
 
             return new List<IDisposable>() { thisPropertyDisposable, targetPropertyDisposable };
         }
+
+        public static IDisposable SubscribeOneWayTo<T>(this ReactiveProperty<T> thisProperty, ReactiveProperty<T> targetProperty)
+        {
+            return targetProperty.Subscribe(x => { thisProperty.Value = x; });
+        }
     }
 }

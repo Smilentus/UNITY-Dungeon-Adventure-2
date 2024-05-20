@@ -24,12 +24,17 @@ namespace Dimasyechka.Code.BattleSystem.EnemiesSystem
         [RxAdaptableProperty]
         public ReactiveProperty<float> CharacterHealthRatio = new ReactiveProperty<float>();
 
+        [RxAdaptableProperty]
+        public ReactiveProperty<float> CharacterHealthPercentRatio = new ReactiveProperty<float>();
+
 
         protected override void OnSetupModel()
         {
             CharacterTexture.Value = Model.RuntimeBattleCharacter.CharacterProfile.CharacterImage;
             CharacterName.Value = Model.RuntimeBattleCharacter.CharacterProfile.Name;
             CharacterHealthRatio.Value = (float)Model.RuntimeBattleCharacter.Health / (float)Model.RuntimeBattleCharacter.MaxHealth;
+
+            CharacterHealthPercentRatio.Value = Mathf.Clamp(CharacterHealthRatio.Value * 100f, 0, 100);
 
             CharacterHealth.Value = Model.RuntimeBattleCharacter.Health;
             CharacterMaxHealth.Value = Model.RuntimeBattleCharacter.MaxHealth;

@@ -99,6 +99,8 @@ namespace Dimasyechka.Code.SkillsSystem.Controllers
             {
                 PlayerSkill playerSkill = AddNewSkill(skillProfile);
 
+                TryUpgradeSkill(skillProfile);
+
                 return playerSkill != null;
             }
         }
@@ -178,8 +180,6 @@ namespace Dimasyechka.Code.SkillsSystem.Controllers
 
             _runtimePlayerSkills.Add(playerSkill);
             onSkillObtained?.Invoke(playerSkill);
-
-            TryUpgradeSkill(skillProfile);
 
             return playerSkill;
         }

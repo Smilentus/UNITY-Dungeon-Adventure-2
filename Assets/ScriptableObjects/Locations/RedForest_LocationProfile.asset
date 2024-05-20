@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef21fca07247b543af5aa3ab789639a, type: 3}
   m_Name: RedForest_LocationProfile
   m_EditorClassIdentifier: 
+  _locationGuid: red_forest
   m_locationPreviewSprite: {fileID: 21300000, guid: c88bb02912cb254409591863febd91fa,
     type: 3}
   m_locationTitle: "\u041A\u0440\u0430\u0441\u043D\u044B\u0439 \u043B\u0435\u0441"

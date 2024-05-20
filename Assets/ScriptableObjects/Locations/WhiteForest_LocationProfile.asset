@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef21fca07247b543af5aa3ab789639a, type: 3}
   m_Name: WhiteForest_LocationProfile
   m_EditorClassIdentifier: 
+  _locationGuid: white_forest
   m_locationPreviewSprite: {fileID: 21300000, guid: 26e14627530f7604ca77b326a1989a82,
     type: 3}
   m_locationTitle: "\u0411\u0435\u043B\u044B\u0439 \u043B\u0435\u0441"

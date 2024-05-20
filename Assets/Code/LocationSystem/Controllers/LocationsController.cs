@@ -62,19 +62,18 @@ namespace Dimasyechka.Code.LocationSystem.Controllers
         }
 
 
-        public void SetLocationAfterLoading(LocationProfile loadingProfile)
+        public void SetLocationAfterLoading(string locationGuid)
         {
-            RuntimeLocationObject tempLocationObject = _locationObjects.Find(x => x.LocationProfileReference.Equals(loadingProfile));
+            GetAllRuntimeLocations();
+
+            RuntimeLocationObject tempLocationObject = _locationObjects
+                .Where(x => x.LocationProfileReference != null)
+                .Where(x => x.LocationProfileReference.LocationGuid == locationGuid)
+                .First();
 
             if (tempLocationObject != null)
             {
-                _currentLocation = loadingProfile;
-
-                _currentRuntimeLocationObject = tempLocationObject;
-
-                HideAllLocationObjects();
-
-                _currentRuntimeLocationObject.gameObject.SetActive(true);
+                SetCurrentLocation(tempLocationObject);
             }
         }
 
@@ -90,16 +89,9 @@ namespace Dimasyechka.Code.LocationSystem.Controllers
             {
                 if (_currentLocation != locationToChange)
                 {
-                    _currentLocation = locationToChange;
-
-                    _currentRuntimeLocationObject = tempLocationObject;
-
-                    HideAllLocationObjects();
-
-                    _currentRuntimeLocationObject.gameObject.SetActive(true);
+                    SetCurrentLocation(tempLocationObject);
 
                     _gameTimeFlowController.AddTime(travelTimeHours);
-
                     onTravelToLocation?.Invoke(_currentLocation);
                 }
                 else
@@ -128,6 +120,30 @@ namespace Dimasyechka.Code.LocationSystem.Controllers
             //Debug.Log($"LocationsController => Было найдено {_locationObjects.Count} готовых локаций на сцене!");
         }
 
+
+        private void SetCurrentLocation(RuntimeLocationObject runtimeLocationObject)
+        {
+            _currentLocation = runtimeLocationObject.LocationProfileReference;
+            _currentRuntimeLocationObject = runtimeLocationObject;
+
+            HideAllLocationObjects();
+
+            _currentRuntimeLocationObject.gameObject.SetActive(true);
+        }
+
+
+        public void LoadExploredLocations(List<string> exploredLocationsGuids)
+        {
+            foreach (string locationGuid in exploredLocationsGuids)
+            {
+                LocationProfile profile = _allLocations.Find(x => x.LocationGuid == locationGuid);
+
+                if (profile != null)
+                {
+                    _exploredLocations.Add(profile);
+                }
+            }
+        }
 
         public void ExploreLocation(LocationProfile exploredLocation)
         {

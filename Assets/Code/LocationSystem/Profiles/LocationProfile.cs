@@ -9,6 +9,11 @@ namespace Dimasyechka.Code.LocationSystem.Profiles
     public class LocationProfile : ScriptableObject
     {
         [SerializeField]
+        private string _locationGuid;
+        public string LocationGuid => _locationGuid;
+
+
+        [SerializeField]
         private Sprite m_locationPreviewSprite;
         /// <summary>
         ///     Основное превью локации в виде спрайта

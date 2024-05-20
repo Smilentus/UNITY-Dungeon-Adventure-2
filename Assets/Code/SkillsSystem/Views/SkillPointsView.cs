@@ -21,7 +21,7 @@ namespace Dimasyechka.Code.SkillsSystem.Views
 
         protected override void OnSetupModel()
         {
-            _disposablesStorage.AddToDisposables(Model.RuntimePlayerStats.SkillPoints.SubscribeToEachOther(SkillPoints));
+            _disposablesStorage.AddToDisposables(SkillPoints.SubscribeOneWayTo(Model.RuntimePlayerStats.SkillPoints));
         }
     }
 }

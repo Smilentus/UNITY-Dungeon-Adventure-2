@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef21fca07247b543af5aa3ab789639a, type: 3}
   m_Name: DungeonMines_Upper_LocationProfile
   m_EditorClassIdentifier: 
+  _locationGuid: dungeon_mines
   m_locationPreviewSprite: {fileID: 21300000, guid: 34c28102e5b018145a39f009365adb7e,
     type: 3}
   m_locationTitle: "\u0428\u0430\u0445\u0442\u044B \u043F\u043E\u0434\u0437\u0435\u043C\u0435\u043B\u0438\u0439
